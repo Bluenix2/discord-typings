@@ -1,0 +1,38 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "discord_typing"
+dynamic = ["version", "description"]
+readme = "README.md"
+
+license = {file = "LICENSE"}
+authors = [{name = "Bluenix", email = "bluenixdev@gmail.com"}]
+
+keywords = ["discord", "discord-api", "typing"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development",
+    "Typing :: Typed"
+]
+
+requires-python = ">3.6"
+
+dependencies = [
+    "typing_extensions >=4,<5; python_version < '3.11'"
+]
+
+[project.urls]
+Home = "https://github.com/Bluenix2/discord-typing"
