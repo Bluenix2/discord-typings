@@ -43,3 +43,24 @@ class IdentifyData(TypedDict):
     large_threshold: NotRequired[int]
     shard: NotRequired[Tuple[int, int]]
     intents: int
+
+
+class IdentifyCommand(TypedDict):
+    op: Literal[2]
+    d: IdentifyData
+
+
+class UpdatePresenceCommand(TypedDict):
+    op: Literal[4]
+    d: PresenceData
+
+
+class ReconnectEvent(TypedDict):
+    op: Literal[7]
+    d: None
+
+
+class InvalidSessionEvent(TypedDict):
+    op: Literal[9]
+    d: bool
+
