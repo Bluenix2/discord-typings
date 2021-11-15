@@ -3,7 +3,7 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "discord_typing"
+name = "discord_typings"
 dynamic = ["version", "description"]
 readme = "README.md"
 
@@ -35,4 +35,4 @@ dependencies = [
 ]
 
 [project.urls]
-Home = "https://github.com/Bluenix2/discord-typing"
+Home = "https://github.com/Bluenix2/discord-typings"
