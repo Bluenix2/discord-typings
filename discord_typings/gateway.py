@@ -31,7 +31,7 @@ class ActivityData(TypedDict):
 
 class PresenceData(TypedDict):
     since: Optional[int]
-    status: Literal['online', 'dnd', 'idle', 'invisible', 'offline']
+    status: Literal['online', 'dnd', 'idle', 'invisible']
     activites: Iterable[ActivityData]
     afk: bool
 
