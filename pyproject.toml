@@ -1,38 +1,44 @@
-[build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
-
 [project]
-name = "discord_typings"
-dynamic = ["version", "description"]
-readme = "README.md"
-
+name = "discord-typings"
+version = "0.1.0"
+description = "Maintained typings of all objects Discord sends"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.7"
 license = {file = "LICENSE"}
 authors = [{name = "Bluenix", email = "bluenixdev@gmail.com"}]
 
-keywords = ["discord", "discord-api", "typing"]
+keywords = [
+    "discord", "discord-api", "discord-api-wrapper", "python-3", "typing"
+]
 classifiers = [
     "Development Status :: 1 - Planning",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
+    "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "Topic :: Software Development",
-    "Typing :: Typed"
+    "Topic :: Internet",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 
-requires-python = ">3.6"
-
-dependencies = [
-    "typing_extensions >=4,<5; python_version < '3.11'"
-]
+dependencies = ["typing_extensions >= 4, <5"]
 
 [project.urls]
-Home = "https://github.com/Bluenix2/discord-typings"
+homepage = "https://github.com/Bluenix2/discord-typings/"
+repository = "https://github.com/Bluenix2/discord-typings/"
+
+[build-system]
+requires = ["flit_core >=3.5<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit]
+module = {name = "discord_typings"}
