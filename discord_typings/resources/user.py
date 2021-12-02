@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from typing_extensions import NotRequired, TypedDict, Literal
+from typing_extensions import Literal, NotRequired, TypedDict
 
 __all__ = ('UserData',)
 

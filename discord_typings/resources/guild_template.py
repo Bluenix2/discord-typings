@@ -1,7 +1,9 @@
-from typing import Optional, TypedDict
+from typing import Optional
+
+from typing_extensions import TypedDict
 
 from ..shared import Snowflake
-
+from .guild import GuildData
 from .user import UserData
 
 __all__ = ('GuildTemplateData',)

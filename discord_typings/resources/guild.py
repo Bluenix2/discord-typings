@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Optional, List
+from typing import List, Optional
 
-from typing_extensions import TypedDict, NotRequired, Literal
+from typing_extensions import Literal, NotRequired, TypedDict
 
 from ..shared import Snowflake
 from .emoji import EmojiData
