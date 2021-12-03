@@ -10,9 +10,10 @@ from .sticker import StickerData
 from .user import UserData
 
 __all__ = (
-    'GuildData', 'GuildPreviewData', 'StreamingIntegrationData',
-    'DiscordIntegrationData', 'IntegrationAccountData',
-    'IntegrationApplicationData', 'BanData', 'WelcomeScreenData', 'RoleData'
+    'GuildData', 'UnavailableGuildData', 'GuildPreviewData',
+    'StreamingIntegrationData', 'DiscordIntegrationData',
+    'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
+    'WelcomeScreenData', 'RoleData'
 )
 
 
@@ -66,6 +67,11 @@ GuildFeatures = Literal[
     'TICKETED_EVENTS_ENABLED', 'VANITY_URL', 'VERIFIED',
     'VIP_REGIONS', 'WELCOME_SCREEN_ENABLED'
 ]
+
+
+class UnavailableGuildData(TypedDict):
+    id: str
+    unavailable: bool
 
 
 class GuildPreviewData(TypedDict):
