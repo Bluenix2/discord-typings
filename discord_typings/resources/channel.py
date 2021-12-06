@@ -12,13 +12,13 @@ from .sticker import StickerItemData
 from .user import UserData
 
 __all__ = (
-    'PartialChannelData', 'TextChannelData', 'NewsChannelData',
-    'DMChannelData', 'GroupDMChannelData', 'VoiceChannelData', 'MessageData',
+    'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',
+    'GroupDMChannelData', 'VoiceChannelData', 'ChannelData', 'MessageData',
     'PermissionOverwriteData', 'ThreadChannelData', 'MessageReferenceData',
-    'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData',
-    'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData',
-    'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData',
-    'EmbedFooterData', 'AttachmentData', 'AllowedMentionsData',
+    'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData', 'EmbedData',
+    'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData', 'EmbedProviderData',
+    'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData', 'AttachmentData',
+    'AllowedMentionsData',
 )
 
 class PartialChannelData(TypedDict):
@@ -120,6 +120,13 @@ class CategoryChannelData(TypedDict):
     name: str
     nsfw: bool
     parent_id: Optional[Snowflake]
+
+
+ChannelData = Union[
+    TextChannelData, NewsChannelData, DMChannelData, GroupDMChannelData,
+    ThreadChannelData, VoiceChannelData, CategoryChannelData
+]
+
 
 
 class MessageData(TypedDict):
