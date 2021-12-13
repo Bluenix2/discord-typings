@@ -11,7 +11,7 @@ __all__ = (
     'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',
     'RequestGuildMembersCommand', 'VoiceUpdateCommand',
     'UpdatePresenceCommand', 'HelloEvent', 'ReadyEvent', 'DispatchEvent',
-    'ReconnectEvent', 'InvalidSessionEvent'
+    'ReconnectEvent', 'InvalidSessionEvent', 'GetGatewayBotData'
 )
 
 
@@ -176,3 +176,16 @@ class ActivityData(TypedDict):
     name: str
     type: Literal[0, 1, 2, 3, 4, 5]
     url: NotRequired[str]
+
+
+class GetGatewayBotData(TypedDict):
+    url: str
+    shard: int
+    session_start_limit: SessionStartLimitData
+
+
+class SessionStartLimitData(TypedDict):
+    total: int
+    remaining: int
+    reset_after: int
+    max_concurrency: int
