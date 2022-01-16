@@ -303,3 +303,9 @@ class AllowedMentionsData(TypedDict):
     roles: List[Snowflake]
     users: List[Snowflake]
     replied_user: bool
+
+
+class ListThreadsData(TypedDict):
+    threads: List[ThreadChannelData]
+    members: List[ThreadMemberData]
+    has_more: bool
