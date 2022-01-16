@@ -15,11 +15,12 @@ __all__ = (
     'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',
     'GroupDMChannelData', 'VoiceChannelData', 'ChannelData', 'MessageData',
     'PermissionOverwriteData', 'ThreadChannelData', 'MessageReferenceData',
-    'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData', 'EmbedData',
-    'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData', 'EmbedProviderData',
-    'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData', 'AttachmentData',
-    'AllowedMentionsData',
+    'FollowedChannelData', 'PermissionOverwriteData', 'ThreadMetadata',
+    'ThreadMemberData', 'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData',
+    'EmbedImageData', 'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData',
+    'EmbedFooterData', 'AttachmentData', 'AllowedMentionsData', 'ListThreadsData'
 )
+
 
 class PartialChannelData(TypedDict):
     id: Snowflake
