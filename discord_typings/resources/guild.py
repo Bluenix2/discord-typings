@@ -10,7 +10,7 @@ from .sticker import StickerData
 from .user import UserData
 
 __all__ = (
-    'GuildData', 'UnavailableGuildData', 'GuildPreviewData',
+    'GuildData', 'UnavailableGuildData', 'GuildPreviewData', 'GuildMemberData',
     'StreamingIntegrationData', 'DiscordIntegrationData',
     'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
     'WelcomeScreenData', 'RoleData'
