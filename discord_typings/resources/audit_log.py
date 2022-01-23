@@ -10,6 +10,13 @@ from .guild import IntegrationAccountData
 from .user import UserData
 from .webhook import WebhookData
 
+__all__ = (
+    'AuditLogData', 'AuditLogEntryData', 'OptionalAuditLogEntryData', 'AuditLogChangeData'
+)
+
+
+# https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure
+
 
 class AuditLogData(TypedDict):
     audit_log_entries: List[AuditLogEntryData]
@@ -26,6 +33,9 @@ class PartialIntegrationData(TypedDict):
     account: IntegrationAccountData
 
 
+# https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure
+
+
 class AuditLogEntryData(TypedDict):
     target_id: Optional[str]
     changes: NotRequired[List[AuditLogChangeData]]
@@ -34,6 +44,9 @@ class AuditLogEntryData(TypedDict):
     action_type: AuditLogEvents
     options: NotRequired[OptionalAuditLogEntryData]
     reason: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
 
 
 AuditLogEvents = Literal[
@@ -52,6 +65,9 @@ AuditLogEvents = Literal[
 ]
 
 
+# https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info
+
+
 class OptionalAuditLogEntryData(TypedDict, total=False):
     channel_id: Snowflake
     count: str
@@ -61,6 +77,9 @@ class OptionalAuditLogEntryData(TypedDict, total=False):
     message_id: str
     role_name: str
     type: str
+
+
+# https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
 
 
 class AuditLogChangeData(TypedDict):

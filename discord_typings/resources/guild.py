@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
@@ -11,10 +11,13 @@ from .user import UserData
 
 __all__ = (
     'GuildData', 'UnavailableGuildData', 'GuildPreviewData', 'GuildMemberData',
-    'StreamingIntegrationData', 'DiscordIntegrationData',
+    'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
     'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
     'WelcomeScreenData', 'RoleData'
 )
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-guild-structure
 
 
 class GuildData(TypedDict):
@@ -58,6 +61,9 @@ class GuildData(TypedDict):
     stickers: List[StickerData]
 
 
+# https://discord.com/developers/docs/resources/guild#guild-object-guild-features
+
+
 GuildFeatures = Literal[
     'ANIMATED_ICON', 'BANNER', 'COMMERCE', 'COMMUNITY', 'DISCOVERABLE',
     'FEATUREABLE', 'INVITE_SPLASH', 'MEMBER_VERIFICATION_GATE_ENABLED',
@@ -69,9 +75,15 @@ GuildFeatures = Literal[
 ]
 
 
+# https://discord.com/developers/docs/resources/guild#unavailable-guild-object-example-unavailable-guild
+
+
 class UnavailableGuildData(TypedDict):
     id: str
     unavailable: bool
+
+
+# https://discord.com/developers/docs/resources/guild#guild-preview-object-guild-preview-structure
 
 
 class GuildPreviewData(TypedDict):
@@ -87,9 +99,15 @@ class GuildPreviewData(TypedDict):
     description: Optional[str]
 
 
+# https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure
+
+
 class GuildWidgetData(TypedDict):
     enabled: bool
     channel_id: Optional[Snowflake]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
 
 
 class GuildMemberData(TypedDict):
@@ -103,6 +121,9 @@ class GuildMemberData(TypedDict):
     mute: bool
     pending: NotRequired[bool]
     permissions: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
 
 
 class StreamingIntegrationData(TypedDict):
@@ -132,9 +153,18 @@ class DiscordIntegrationData(TypedDict):
     application: NotRequired[IntegrationApplicationData]
 
 
+IntegrationData = Union[StreamingIntegrationData, DiscordIntegrationData]
+
+
+# https://discord.com/developers/docs/resources/guild#integration-account-object-integration-account-structure
+
+
 class IntegrationAccountData(TypedDict):
     id: Snowflake
     name: str
+
+
+# https://discord.com/developers/docs/resources/guild#integration-application-object-integration-application-structure
 
 
 class IntegrationApplicationData(TypedDict):
@@ -146,9 +176,15 @@ class IntegrationApplicationData(TypedDict):
     bot: Optional[UserData]
 
 
+# https://discord.com/developers/docs/resources/guild#ban-object-ban-structure
+
+
 class BanData(TypedDict):
     reason: Optional[str]
     user: UserData
+
+
+# https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-structure
 
 
 class WelcomeScreenData(TypedDict):
@@ -156,11 +192,17 @@ class WelcomeScreenData(TypedDict):
     welcome_channels: List[WelcomeChannelData]
 
 
+# https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-channel-structure
+
+
 class WelcomeChannelData(TypedDict):
     channel_id: Snowflake
     description: str
     emoji_id: Optional[Snowflake]
     emoji_name: Optional[str]
+
+
+# https://discord.com/developers/docs/topics/permissions#role-object-role-structure
 
 
 class RoleData(TypedDict):
@@ -175,6 +217,9 @@ class RoleData(TypedDict):
     managed: bool
     mentionable: bool
     tags: NotRequired[RoleTagsData]
+
+
+# https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure
 
 
 class RoleTagsData(TypedDict):

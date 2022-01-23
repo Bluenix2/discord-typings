@@ -13,6 +13,9 @@ from .user import UserData
 __all__ = ('InviteData', 'InviteMetadata')
 
 
+# https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
+
+
 class InviteData(TypedDict):
     code: str
     guild: NotRequired[GuildData]
@@ -28,12 +31,18 @@ class InviteData(TypedDict):
     guild_scheduled_event: NotRequired[GuildScheduledEventData]
 
 
+# https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure
+
+
 class InviteMetadata(InviteData):
     uses: int
     max_uses: int
     max_age: int
     temporary: bool
     created_at: str
+
+
+# https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure
 
 
 class InviteStageInstanceData(TypedDict):

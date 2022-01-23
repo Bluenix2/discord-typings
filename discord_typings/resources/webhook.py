@@ -10,6 +10,9 @@ from .user import UserData
 __all__ = ('WebhookData',)
 
 
+# https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure
+
+
 class WebhookData(TypedDict):
     id: Snowflake
     type: Literal[1, 2, 3]

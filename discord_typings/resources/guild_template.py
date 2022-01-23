@@ -8,6 +8,10 @@ from .user import UserData
 
 __all__ = ('GuildTemplateData',)
 
+
+# https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure
+
+
 class GuildTemplateData(TypedDict):
     code: str
     name: str

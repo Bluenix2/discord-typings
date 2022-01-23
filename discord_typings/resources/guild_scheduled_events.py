@@ -6,8 +6,15 @@ from typing_extensions import Literal, NotRequired, TypedDict
 
 from ..shared import Snowflake
 from .user import UserData
+from .guild import GuildMemberData
 
-__all__ = ('GuildScheduledEventData', 'GuildScheduledEventEntityMetadata')
+__all__ = (
+    'GuildScheduledEventData', 'GuildScheduledEventEntityMetadata',
+    'GuildScheduledEventUserData'
+)
+
+
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-structure
 
 
 class GuildScheduledEventBase(TypedDict):
@@ -50,5 +57,17 @@ GuildScheduledEventData = Union[
 ]
 
 
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata
+
+
 class GuildScheduledEventEntityMetadata(TypedDict):
     location: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure
+
+
+class GuildScheduledEventUserData(TypedDict):
+    guild_scheduled_event_id: Snowflake
+    user: UserData
+    memer: NotRequired[GuildMemberData]

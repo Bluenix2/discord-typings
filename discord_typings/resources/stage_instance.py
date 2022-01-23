@@ -5,6 +5,9 @@ from ..shared import Snowflake
 __all__ = ('StageInstanceData',)
 
 
+# https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-stage-instance-structure
+
+
 class StageInstanceData(TypedDict):
     id: Snowflake
     guild_id: Snowflake

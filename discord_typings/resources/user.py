@@ -7,11 +7,7 @@ from typing_extensions import Literal, NotRequired, TypedDict
 __all__ = ('UserData',)
 
 
-class UserConnection(TypedDict):
-    id: str
-    name: str
-    type: Literal['twitch', 'youtube']
-    revoked: NotRequired[bool]
+# https://discord.com/developers/docs/resources/user#user-object-user-structure
 
 
 class UserData(TypedDict):

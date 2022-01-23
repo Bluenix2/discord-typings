@@ -8,6 +8,9 @@ from .user import UserData
 __all__ = ('EmojiData',)
 
 
+# https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure
+
+
 class EmojiData(TypedDict):
     id: Optional[Snowflake]
     name: Optional[str]

@@ -18,8 +18,12 @@ __all__ = (
     'FollowedChannelData', 'PermissionOverwriteData', 'ThreadMetadata',
     'ThreadMemberData', 'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData',
     'EmbedImageData', 'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData',
-    'EmbedFooterData', 'AttachmentData', 'AllowedMentionsData', 'ListThreadsData'
+    'EmbedFooterData', 'PartialAttachmentData', 'AttachmentData',
+    'AllowedMentionsData', 'ListThreadsData'
 )
+
+
+# https://discord.com/developers/docs/resources/channel#channel-object-channel-structure
 
 
 class PartialChannelData(TypedDict):
@@ -129,6 +133,9 @@ ChannelData = Union[
 ]
 
 
+# https://discord.com/developers/docs/resources/channel#message-object-message-structure
+
+
 class MessageData(TypedDict):
     id: Snowflake
     channel_id: Snowflake
@@ -166,15 +173,24 @@ class UserMentionData(UserData):
     member: GuildMemberData
 
 
+# https://discord.com/developers/docs/resources/channel#message-object-message-types
+
+
 MessageTypes = Literal[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23
 ]
 
 
+# https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
+
+
 class MessageActivityData(TypedDict):
     type: Literal[1, 2, 3, 5]
     party_id: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
 
 
 class MessageReferenceData(TypedDict):
@@ -185,9 +201,15 @@ class MessageReferenceData(TypedDict):
     fail_if_not_exists: NotRequired[bool]
 
 
+# https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure
+
+
 class FollowedChannelData(TypedDict):
     channel_id: Snowflake
     webhook_id: Snowflake
+
+
+# https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure
 
 
 class MessageReactionData(TypedDict):
@@ -196,11 +218,17 @@ class MessageReactionData(TypedDict):
     emoji: EmojiData
 
 
+# https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure
+
+
 class PermissionOverwriteData(TypedDict):
     id: Snowflake
     type: Literal[0, 1]
     allow: str
     deny: str
+
+
+# https://discord.com/developers/docs/resources/channel#thread-metadata-object-thread-metadata-structure
 
 
 class ThreadMetadata(TypedDict):
@@ -211,11 +239,17 @@ class ThreadMetadata(TypedDict):
     invitable: NotRequired[bool]
 
 
+# https://discord.com/developers/docs/resources/channel#thread-member-object-thread-member-structure
+
+
 class ThreadMemberData(TypedDict):
     id: NotRequired[Snowflake]
     user_id: NotRequired[Snowflake]
     join_timestamp: str
     flags: int
+
+
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-structure
 
 
 class EmbedData(TypedDict):
@@ -234,11 +268,17 @@ class EmbedData(TypedDict):
     fields: NotRequired[List[EmbedFieldData]]
 
 
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
+
+
 class EmbedThumbnailData(TypedDict):
     url: str
     proxy_url: NotRequired[str]
     height: NotRequired[int]
     width: NotRequired[int]
+
+
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
 
 
 class EmbedVideoData(TypedDict):
@@ -248,6 +288,9 @@ class EmbedVideoData(TypedDict):
     width: NotRequired[int]
 
 
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
+
+
 class EmbedImageData(TypedDict):
     url: str
     proxy_url: NotRequired[str]
@@ -255,9 +298,15 @@ class EmbedImageData(TypedDict):
     width: NotRequired[int]
 
 
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
+
+
 class EmbedProviderData(TypedDict):
     name: NotRequired[str]
     url: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
 
 
 class EmbedAuthorData(TypedDict):
@@ -267,16 +316,31 @@ class EmbedAuthorData(TypedDict):
     proxy_icon_url: NotRequired[str]
 
 
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
+
+
 class EmbedFooterData(TypedDict):
     text: str
     icon_url: NotRequired[str]
     proxy_icon_url: NotRequired[str]
 
 
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
+
+
 class EmbedFieldData(TypedDict):
     name: str
     value: str
     inline: NotRequired[bool]
+
+
+# https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure
+
+
+class PartialAttachmentData(TypedDict):
+    id: Snowflake
+    filename: NotRequired[str]
+    description: NotRequired[str]
 
 
 class AttachmentData(TypedDict):
@@ -292,6 +356,9 @@ class AttachmentData(TypedDict):
     ephemeral: NotRequired[bool]
 
 
+# https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure
+
+
 class ChannelMentionData(TypedDict):
     id: Snowflake
     guild_id: Snowflake
@@ -299,11 +366,17 @@ class ChannelMentionData(TypedDict):
     name: str
 
 
+# https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure
+
+
 class AllowedMentionsData(TypedDict):
     parse: List[Literal['roles', 'users', 'everyone']]
     roles: List[Snowflake]
     users: List[Snowflake]
     replied_user: bool
+
+
+# https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body
 
 
 class ListThreadsData(TypedDict):

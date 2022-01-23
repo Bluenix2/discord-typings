@@ -15,6 +15,9 @@ __all__ = (
 )
 
 
+# https://discord.com/developers/docs/topics/gateway#identify
+
+
 class IdentifyData(TypedDict):
     token: str
     properties: IdentifyConnectionProperties
@@ -44,6 +47,9 @@ class IdentifyCommand(TypedDict):
     t: None
 
 
+# https://discord.com/developers/docs/topics/gateway#resume
+
+
 class ResumeData(TypedDict):
     token: str
     session_id: str
@@ -57,11 +63,17 @@ class ResumeCommand(TypedDict):
     t: None
 
 
+# https://discord.com/developers/docs/topics/gateway#heartbeat
+
+
 class HeartbeatCommand(TypedDict):
     op: Literal[1]
     d: Optional[int]
     s: None
     t: None
+
+
+# https://discord.com/developers/docs/topics/gateway#request-guild-members
 
 
 class _QueryRequestMembersCommand(TypedDict):
@@ -73,7 +85,7 @@ class _QueryRequestMembersCommand(TypedDict):
     nonce: NotRequired[str]
 
 
-class _UserIDsRequstMembersCommand(TypedDict):
+class _UserIDsRequestMembersCommand(TypedDict):
     guild_id: Snowflake
     presences: NotRequired[bool]
     user_ids: Sequence[Snowflake]
@@ -83,9 +95,12 @@ class _UserIDsRequstMembersCommand(TypedDict):
 class RequestGuildMembersCommand(TypedDict):
     op: Literal[8]
     # This enforces the fact that 'limit' is required when 'query' is set.
-    d: Union[_QueryRequestMembersCommand, _UserIDsRequstMembersCommand]
+    d: Union[_QueryRequestMembersCommand, _UserIDsRequestMembersCommand]
     s: None
     t: None
+
+
+# https://discord.com/developers/docs/topics/gateway#update-voice-state
 
 
 class VoiceUpdateData(TypedDict):
@@ -102,6 +117,15 @@ class VoiceUpdateCommand(TypedDict):
     t: None
 
 
+# https://discord.com/developers/docs/topics/gateway#update-presence
+
+
+class ActivityData(TypedDict):
+    name: str
+    type: Literal[0, 1, 2, 3, 4, 5]
+    url: NotRequired[str]
+
+
 class UpdatePresenceData(TypedDict):
     since: Optional[int]
     activities: Sequence[ActivityData]
@@ -116,6 +140,7 @@ class UpdatePresenceCommand(TypedDict):
     t: None
 
 
+# https://discord.com/developers/docs/topics/gateway#hello
 class HelloData(TypedDict):
     heartbeat_interval: int
 
@@ -125,6 +150,14 @@ class HelloEvent(TypedDict):
     d: HelloData
     s: None
     t: None
+
+
+# https://discord.com/developers/docs/topics/gateway#ready
+
+
+class PartialApplicationData(TypedDict):
+    id: Snowflake
+    flags: int
 
 
 class ReadyData(TypedDict):
@@ -143,19 +176,17 @@ class ReadyEvent(TypedDict):
     t: Literal['READY']
 
 
-class _GenericDispatch(TypedDict):
+class GenericDispatchData(TypedDict):
     op: Literal[0]
     d: Dict[str, Any]
     s: int
     t: str
 
 
-DispatchEvent = Union[ReadyEvent, _GenericDispatch]
+DispatchEvent = Union[ReadyEvent, GenericDispatchData]
 
 
-class PartialApplicationData(TypedDict):
-    id: Snowflake
-    flags: int
+# https://discord.com/developers/docs/topics/gateway#reconnect
 
 
 class ReconnectEvent(TypedDict):
@@ -165,6 +196,9 @@ class ReconnectEvent(TypedDict):
     t: None
 
 
+# https://discord.com/developers/docs/topics/gateway#invalid-session
+
+
 class InvalidSessionEvent(TypedDict):
     op: Literal[9]
     d: bool
@@ -172,16 +206,16 @@ class InvalidSessionEvent(TypedDict):
     t: None
 
 
-class ActivityData(TypedDict):
-    name: str
-    type: Literal[0, 1, 2, 3, 4, 5]
-    url: NotRequired[str]
+# https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response
 
 
 class GetGatewayBotData(TypedDict):
     url: str
     shard: int
     session_start_limit: SessionStartLimitData
+
+
+# https://discord.com/developers/docs/topics/gateway#session-start-limit-object-session-start-limit-structure
 
 
 class SessionStartLimitData(TypedDict):

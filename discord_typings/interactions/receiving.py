@@ -158,7 +158,7 @@ InteractionDataData = Union[
 ]
 
 
-# https://discord.dev/interactions/receiving-and-responding#interaction-object-resolved-data-structure
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure
 
 
 class ResolvedInteractionData(TypedDict):
@@ -169,7 +169,7 @@ class ResolvedInteractionData(TypedDict):
     messages: Dict[Snowflake, MessageData]
 
 
-# https://discord.dev/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
+# https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
 
 
 class MessageInteractionData(TypedDict):

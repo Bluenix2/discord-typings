@@ -8,6 +8,9 @@ from .guild import GuildMemberData
 __all__ = ('VoiceStateData', 'VoiceRegionData')
 
 
+# https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure
+
+
 class VoiceStateData(TypedDict):
     guild_id: NotRequired[Snowflake]
     channel_id: Optional[Snowflake]
@@ -22,6 +25,9 @@ class VoiceStateData(TypedDict):
     self_video: bool
     seppress: bool
     request_to_speak_timestamp: Optional[str]
+
+
+# https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure
 
 
 class VoiceRegionData(TypedDict):

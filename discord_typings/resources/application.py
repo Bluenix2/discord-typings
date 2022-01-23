@@ -10,6 +10,9 @@ from .user import UserData
 __all__ = ('ApplicationData', 'TeamData', 'TeamMemberData')
 
 
+# https://discord.com/developers/docs/resources/application#application-object-application-structure
+
+
 class ApplicationData(TypedDict):
     id: Snowflake
     name: str
@@ -31,12 +34,18 @@ class ApplicationData(TypedDict):
     flags: NotRequired[int]
 
 
+# https://discord.com/developers/docs/topics/teams#data-models-team-object
+
+
 class TeamData(TypedDict):
     icon: Optional[str]
     id: Snowflake
     members: List[TeamMemberData]
     name: str
     owner_user_id: Snowflake
+
+
+# https://discord.com/developers/docs/topics/teams#data-models-team-member-object
 
 
 class TeamMemberData(TypedDict):

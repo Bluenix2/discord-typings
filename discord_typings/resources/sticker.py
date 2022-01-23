@@ -8,10 +8,19 @@ from .user import UserData
 __all__ = ('StickerItemData', 'StickerData', 'StickerPackData')
 
 
+
+# https://discord.com/developers/docs/resources/sticker#sticker-item-object-sticker-item-structure
+
+
+# Because of inheritance, this class comes first even though that is not the
+# order in the documentation.
 class StickerItemData(TypedDict):
     id: Snowflake
     name: str
     format_type: Literal[1, 2, 3]
+
+
+# https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure
 
 
 class StickerData(StickerItemData):
@@ -23,6 +32,9 @@ class StickerData(StickerItemData):
     guild_id: NotRequired[Snowflake]
     user: NotRequired[UserData]
     sort_value: NotRequired[int]
+
+
+# https://discord.com/developers/docs/resources/sticker#sticker-pack-object-sticker-pack-structure
 
 
 class StickerPackData(TypedDict):
