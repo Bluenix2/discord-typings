@@ -13,7 +13,7 @@ __all__ = (
     'GuildData', 'UnavailableGuildData', 'GuildPreviewData', 'GuildMemberData',
     'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
     'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
-    'WelcomeScreenData', 'RoleData'
+    'WelcomeScreenData', 'ChannelPositionData', 'RoleData'
 )
 
 
@@ -200,6 +200,16 @@ class WelcomeChannelData(TypedDict):
     description: str
     emoji_id: Optional[Snowflake]
     emoji_name: Optional[str]
+
+
+# https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions-json-params
+
+
+class ChannelPositionData(TypedDict):
+    id: Snowflake
+    position: Optional[int]
+    lock_permissions: Optional[bool]
+    parent_id: Optional[Snowflake]
 
 
 # https://discord.com/developers/docs/topics/permissions#role-object-role-structure
