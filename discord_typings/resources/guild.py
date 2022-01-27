@@ -5,15 +5,18 @@ from typing import List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict
 
 from ..shared import Snowflake
+from .channel import ChannelData, ThreadChannelData, ThreadMemberData
 from .emoji import EmojiData
 from .sticker import StickerData
 from .user import UserData
 
 __all__ = (
-    'GuildData', 'UnavailableGuildData', 'GuildPreviewData', 'GuildMemberData',
+    'GuildData', 'UnavailableGuildData', 'GuildPreviewData',
+    'GuildWidgetSettingsData', 'GuildWidgetData', 'GuildMemberData',
     'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
     'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
-    'WelcomeScreenData', 'ChannelPositionData', 'RoleData'
+    'WelcomeScreenData', 'WelcomeChannelData', 'ChannelPositionData',
+    'ListThreadsData', 'RolePositionData', 'RoleData'
 )
 
 
@@ -102,9 +105,21 @@ class GuildPreviewData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure
 
 
-class GuildWidgetData(TypedDict):
+class GuildWidgetSettingsData(TypedDict):
     enabled: bool
     channel_id: Optional[Snowflake]
+
+
+# https://discord.com/developers/docs/resources/guild#get-guild-widget-object-get-guild-widget-structure
+
+
+class GuildWidgetData(TypedDict):
+    id: Snowflake
+    name: str
+    instant_invite: Optional[str]
+    channels: List[ChannelData]
+    members: List[UserData]
+    presence_count: int
 
 
 # https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
@@ -210,6 +225,23 @@ class ChannelPositionData(TypedDict):
     position: Optional[int]
     lock_permissions: Optional[bool]
     parent_id: Optional[Snowflake]
+
+
+# https://discord.com/developers/docs/resources/guild#list-active-threads-response-body
+
+
+class ListThreadsData(TypedDict):
+    threads: List[ThreadChannelData]
+    members: List[ThreadMemberData]
+    has_more: bool
+
+
+# https://discord.com/developers/docs/resources/guild#modify-guild-role-positions-json-params
+
+
+class RolePositionData(TypedDict):
+    id: Snowflake
+    position: NotRequired[Optional[int]]
 
 
 # https://discord.com/developers/docs/topics/permissions#role-object-role-structure

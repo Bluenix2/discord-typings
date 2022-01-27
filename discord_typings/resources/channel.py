@@ -19,7 +19,7 @@ __all__ = (
     'ThreadMemberData', 'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData',
     'EmbedImageData', 'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData',
     'EmbedFooterData', 'PartialAttachmentData', 'AttachmentData',
-    'AllowedMentionsData', 'ListThreadsData'
+    'AllowedMentionsData', 'HasMoreListThreadsData'
 )
 
 
@@ -379,7 +379,7 @@ class AllowedMentionsData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body
 
 
-class ListThreadsData(TypedDict):
+class HasMoreListThreadsData(TypedDict):
     threads: List[ThreadChannelData]
     members: List[ThreadMemberData]
     has_more: bool
