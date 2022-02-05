@@ -1,4 +1,5 @@
 from __future__ import annotations
+from ast import Not
 
 from typing import Dict, List, Literal, TypedDict, Union
 
@@ -182,11 +183,21 @@ class MessageInteractionData(TypedDict):
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure
 
 
+class InteractionMessageResponseInnerData(TypedDict):
+    tts: NotRequired[bool]
+    content: NotRequired[str]
+    embeds: NotRequired[List[EmbedData]]
+    allowed_mentions: NotRequired[AllowedMentionsData]
+    flags: NotRequired[int]
+    components: NotRequired[List[ComponentData]]
+    attachments: NotRequired[List[AttachmentData]]
+
+
 class InteractionMessageResponseData(TypedDict):
     type: Literal[4, 7]
-    data: InteractionMessageResponseData
+    data: InteractionMessageResponseInnerData
 
-
+    
 class InteractionAutocompleteResponseData(TypedDict):
     type: Literal[8]
     data: InteractionAutocompleteCallbackData
