@@ -16,3 +16,9 @@ for any general top-level payloads like `UserData`.
 The benefit of using `Data` as a suffix is that in your code you can use
 `from discord_typings import UserData` even if you define a `User` object (as
 is expected to be rather common).
+
+### Exceptions
+
+To differentiate between the data for complete application commands, and the
+data Discord expects to receive to create an application command, there is
+a special-cased `ApplicationCommandPayload`.

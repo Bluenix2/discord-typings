@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, TypedDict, TypeVar, Union
+from typing import List, Literal, TypedDict, Union
 
 from typing_extensions import NotRequired
 
@@ -9,11 +9,13 @@ from ..shared import Snowflake
 __all__ = (
     'ApplicationCommandData', 'SubcommandOptionData', 'SubcommandGroupOptionData',
     'AutocompleteOptionData', 'ApplicationCommandOptionData',
-    'ApplicationCommandOptionInteractionData'
+    'ApplicationCommandOptionInteractionData', 'GuildApplicationCommandPermissionData',
+    'ApplicationCommandPermissionsData', 'ApplicationCommandPayload',
+    'BatchEditApplicationCommandPermissionsData'
 )
 
 
-T = TypeVar('T')
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
 
 
 class ChatInputCommandData(TypedDict):
@@ -42,6 +44,7 @@ class ContextMenuCommandData(TypedDict):
 ApplicationCommandData = Union[ChatInputCommandData, ContextMenuCommandData]
 
 
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure
 # The variations and overloads of options are huge, but we want to provide
 # extremely accurate typing - this is gonna be a huge Union with a lot of
 # TypedDict subclasses...
@@ -261,3 +264,39 @@ ApplicationCommandOptionInteractionData = Union[
     UserOptionInteractionData, ChannelOptionInteractionData, RoleOptionInteractionData,
     MentionableInteractionData, NumberInteractionData,
 ]
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-guild-application-command-permissions-structure
+
+
+class GuildApplicationCommandPermissionData(TypedDict):
+    id: Snowflake
+    application_id: Snowflake
+    guild_id: Snowflake
+    permissions: ApplicationCommandPermissionsData
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure
+
+
+class ApplicationCommandPermissionsData(TypedDict):
+    id: Snowflake
+    type: Literal[1, 2]
+    permission: bool
+
+
+# https://discord.com/developers/docs/interactions/application-commands#create-global-application-command-json-params
+
+
+class ApplicationCommandPayload(TypedDict):
+    name: str
+    description: str
+    options: NotRequired[List[ApplicationCommandOptionData]]
+    default_permission: NotRequired[bool]
+    type: NotRequired[Literal[1, 2, 3]]
+
+# https://discord.com/developers/docs/interactions/application-commands#batch-edit-application-command-permissions-example
+
+
+class BatchEditApplicationCommandPermissionsData(TypedDict):
+    id: Snowflake
+    permissions: ApplicationCommandPermissionsData
