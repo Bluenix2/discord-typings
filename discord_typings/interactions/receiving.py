@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Dict, List, Literal, TypedDict, Union
+from typing import Dict, List, Union
 
-from typing_extensions import NotRequired
+from typing_extensions import NotRequired, Literal, TypedDict
 
 from discord_typings.resources.channel import (
     AllowedMentionsData, AttachmentData, EmbedData

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import List, Literal, TypedDict, Union
+from typing import List, Union
 
-from typing_extensions import NotRequired
+from typing_extensions import NotRequired, Literal, TypedDict
 
 from ..resources import EmojiData
 
