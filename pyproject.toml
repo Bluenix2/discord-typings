@@ -1,7 +1,7 @@
 [project]
 name = "discord-typings"
 version = "0.1.0"
-description = "Maintained typings of all objects Discord sends"
+description = "Maintained typings of payloads that Discord sends"
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.7"
 license = {file = "LICENSE"}
@@ -11,8 +11,9 @@ keywords = [
     "discord", "discord-api", "discord-api-wrapper", "python-3", "typing"
 ]
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    "License :: OSI Approved",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
@@ -23,8 +24,6 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "Topic :: Internet",
-    "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
@@ -37,7 +36,7 @@ Homepage = "https://github.com/Bluenix2/discord-typings/"
 Repository = "https://github.com/Bluenix2/discord-typings/"
 
 [build-system]
-requires = ["flit_core >=3.5<4"]
+requires = ["flit_core >=3.5, <4"]
 build-backend = "flit_core.buildapi"
 
 [tool.flit]

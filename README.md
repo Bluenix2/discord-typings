@@ -1,6 +1,6 @@
 # discord-typings
 
-Maintained typings of all objects Discord sends as `TypedDict`s.
+Maintained typings of all payloads that Discord sends as `TypedDict`s.
 
 ## Naming and usage
 
