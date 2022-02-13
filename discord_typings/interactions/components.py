@@ -6,12 +6,21 @@ from typing_extensions import NotRequired
 
 from ..resources import EmojiData
 
-__all__ = ('ActionRowData', 'ButtonComponentData', 'SelectMenuComponentData', 'ComponentData')
+__all__ = (
+    'ActionRowData', 'ButtonComponentData', 'SelectMenuComponentData',
+    'TextInputComponentData', 'ComponentData'
+)
+
+
+# https://discord.com/developers/docs/interactions/message-components#action-rows
 
 
 class ActionRowData(TypedDict):
     type: Literal[1]
     components: NotRequired[List[Union[ButtonComponentData, SelectMenuComponentData]]]
+
+
+# https://discord.com/developers/docs/interactions/message-components#button-object-button-structure
 
 
 # The whole button object itself is split into NonLinkButtonComponent and
@@ -37,6 +46,9 @@ class LinkButtonComponentData(TypedDict):
 ButtonComponentData = Union[NonLinkButtonComponentData, LinkButtonComponentData]
 
 
+# https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-menu-structure
+
+
 class SelectMenuComponentData(TypedDict):
     type: Literal[3]
     custom_id: str
@@ -47,6 +59,9 @@ class SelectMenuComponentData(TypedDict):
     disabled: NotRequired[bool]
 
 
+# https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-option-structure
+
+
 class SelectMenuOptionData(TypedDict):
     label: str
     value: str
@@ -55,4 +70,21 @@ class SelectMenuOptionData(TypedDict):
     default: NotRequired[bool]
 
 
-ComponentData = Union[ActionRowData, ButtonComponentData, SelectMenuComponentData]
+# https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-structure
+
+
+class TextInputComponentData(TypedDict):
+    type: Literal[4]
+    custom_id: str
+    style: Literal[1, 2]
+    label: str
+    min_length: NotRequired[int]
+    max_length: NotRequired[int]
+    required: NotRequired[bool]
+    value: NotRequired[str]
+    placeholder: NotRequired[str]
+
+
+ComponentData = Union[
+    ActionRowData, ButtonComponentData, SelectMenuComponentData, TextInputComponentData
+]

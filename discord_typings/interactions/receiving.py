@@ -1,5 +1,4 @@
 from __future__ import annotations
-from ast import Not
 
 from typing import Dict, List, Literal, TypedDict, Union
 
@@ -21,7 +20,7 @@ from .components import ComponentData, SelectMenuOptionData
 
 __all__ = (
     'InteractionData', 'ResolvedInteractionData', 'MessageInteractionData',
-    'InteractionResponseData'
+    'InteractionResponseData', 'InteractionCallbackData'
 )
 
 
@@ -183,24 +182,19 @@ class MessageInteractionData(TypedDict):
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure
 
 
-class InteractionMessageResponseInnerData(TypedDict):
-    tts: NotRequired[bool]
-    content: NotRequired[str]
-    embeds: NotRequired[List[EmbedData]]
-    allowed_mentions: NotRequired[AllowedMentionsData]
-    flags: NotRequired[int]
-    components: NotRequired[List[ComponentData]]
-    attachments: NotRequired[List[AttachmentData]]
-
-
 class InteractionMessageResponseData(TypedDict):
     type: Literal[4, 7]
-    data: InteractionMessageResponseInnerData
+    data: InteractionMessageCallbackData
 
-    
+
 class InteractionAutocompleteResponseData(TypedDict):
     type: Literal[8]
     data: InteractionAutocompleteCallbackData
+
+
+class InteractionModalResponseData(TypedDict):
+    type: Literal[9]
+    data: InteractionModalCallbackData
 
 
 class InteractionNodataResponseData(TypedDict):
@@ -216,16 +210,27 @@ InteractionResponseData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure
 
 
-
 class InteractionMessageCallbackData(TypedDict):
     tts: NotRequired[bool]
     content: NotRequired[str]
     embeds: NotRequired[List[EmbedData]]
     allowed_mentions: NotRequired[AllowedMentionsData]
     flags: NotRequired[int]
-    components: NotRequired[ComponentData]
-    attachments: NotRequired[AttachmentData]
+    components: NotRequired[List[ComponentData]]
+    attachments: NotRequired[List[AttachmentData]]
 
 
 class InteractionAutocompleteCallbackData(TypedDict):
     choices: List[AutocompleteOptionData]
+
+
+class InteractionModalCallbackData(TypedDict):
+    custom_id: str
+    title: str
+    components: List[ComponentData]
+
+
+InteractionCallbackData = Union[
+    InteractionMessageCallbackData, InteractionAutocompleteCallbackData,
+    InteractionModalCallbackData
+]
