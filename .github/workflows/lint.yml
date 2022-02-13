@@ -1,0 +1,64 @@
+name: Lint codebase
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install Flake8
+        run: pip install flake8
+
+      - name: Lint codebase with Flake8
+        run: flake8 discord_typings/
+
+  isort:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+  
+      - name: Install Isort
+        run: pip install isort
+
+      - name: Verify import order
+        run: isort discord_typings/ --check-only
+
+  pyright:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Attempt to access cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: 'lint/pyright'
+
+      - name: Install Pyright and Flit
+        run: pip install pyright flit
+
+      - name: Install the package
+        run: flit install
+
+      - name: Verify package types
+        run: pyright --verifytypes discord_typings

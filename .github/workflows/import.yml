@@ -1,0 +1,26 @@
+name: Import the library
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install Flit
+        run: pip install flit
+
+      - name: Install the package
+        run: flit install
+
+      - name: Import library
+        run: python -c 'import discord_typings'
