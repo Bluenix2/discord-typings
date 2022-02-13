@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, List, Optional, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
 from .user import UserData  # Subclassed for UserMentionData
 
-
 if TYPE_CHECKING:
+    from ..interactions import ComponentData, MessageInteractionData
     from ..shared import Snowflake
     from .application import ApplicationData
     from .emoji import EmojiData
@@ -166,9 +166,9 @@ class MessageData(TypedDict):
     message_reference: NotRequired[MessageReferenceData]
     flags: NotRequired[int]
     references_message: NotRequired[Optional[MessageData]]
-    interaction: NotRequired[Any]  # TODO: Interactions
+    interaction: NotRequired[MessageInteractionData]
     thread: NotRequired[ThreadChannelData]
-    components: NotRequired[List]  # TODO: Interactions
+    components: NotRequired[List[ComponentData]]
     sticker_items: NotRequired[List[StickerItemData]]
 
 
