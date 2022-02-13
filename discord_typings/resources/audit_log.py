@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
-from ..shared import Snowflake
-from .channel import ThreadChannelData
-from .guild import IntegrationAccountData
-from .user import UserData
-from .webhook import WebhookData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .channel import ThreadChannelData
+    from .guild import IntegrationAccountData
+    from .user import UserData
+    from .webhook import WebhookData
 
 __all__ = (
     'AuditLogData', 'AuditLogEntryData', 'OptionalAuditLogEntryData', 'AuditLogChangeData'

@@ -1,22 +1,20 @@
 from __future__ import annotations
 
-from typing import Dict, List, Union
+from typing import TYPE_CHECKING, Dict, List, Union
 
-from typing_extensions import NotRequired, Literal, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from discord_typings.resources.channel import (
-    AllowedMentionsData, AttachmentData, EmbedData
-)
-
-from ..resources import (
-    ChannelData, GuildMemberData, MessageData, RoleData, UserData
-)
-from ..shared import Snowflake
-from .commands import (
-    ApplicationCommandOptionInteractionData, AutocompleteOptionData,
-    SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
-)
-from .components import ComponentData, SelectMenuOptionData
+if TYPE_CHECKING:
+    from ..resources import (
+        AllowedMentionsData, AttachmentData, ChannelData, EmbedData,
+        GuildMemberData, MessageData, RoleData, UserData
+    )
+    from ..shared import Snowflake
+    from .commands import (
+        ApplicationCommandOptionInteractionData, AutocompleteOptionData,
+        SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
+    )
+    from .components import ComponentData, SelectMenuOptionData
 
 __all__ = (
     'InteractionData', 'ResolvedInteractionData', 'MessageInteractionData',

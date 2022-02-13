@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Union
+from typing import TYPE_CHECKING, List, Union
 
-from typing_extensions import NotRequired, Literal, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from ..resources import EmojiData
+if TYPE_CHECKING:
+    from ..resources import EmojiData
 
 __all__ = (
     'ActionRowData', 'ButtonComponentData', 'SelectMenuComponentData',

@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import NotRequired, TypedDict
 
-from ..shared import Snowflake
-from .user import UserData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .user import UserData
 
 __all__ = ('ApplicationData', 'TeamData', 'TeamMemberData')
 

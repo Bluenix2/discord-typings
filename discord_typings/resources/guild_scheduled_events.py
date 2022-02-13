@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from typing import Optional, Union
+from typing import TYPE_CHECKING, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
-from ..shared import Snowflake
-from .user import UserData
-from .guild import GuildMemberData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .guild import GuildMemberData
+    from .user import UserData
 
 __all__ = (
     'GuildScheduledEventData', 'GuildScheduledEventEntityMetadata',

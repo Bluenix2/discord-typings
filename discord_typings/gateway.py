@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+from typing import (
+    TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Tuple, Union
+)
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
-from .resources import UnavailableGuildData, UserData
-from .shared import Snowflake
+if TYPE_CHECKING:
+    from .resources import UnavailableGuildData, UserData
+    from .shared import Snowflake
 
 __all__ = (
     'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',

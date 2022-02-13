@@ -1,10 +1,11 @@
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from typing_extensions import TypedDict
 
-from ..shared import Snowflake
-from .guild import GuildData
-from .user import UserData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .guild import GuildData
+    from .user import UserData
 
 __all__ = ('GuildTemplateData',)
 

@@ -1,6 +1,9 @@
+from typing import TYPE_CHECKING
+
 from typing_extensions import Literal, TypedDict
 
-from ..shared import Snowflake
+if TYPE_CHECKING:
+    from ..shared import Snowflake
 
 __all__ = ('StageInstanceData',)
 

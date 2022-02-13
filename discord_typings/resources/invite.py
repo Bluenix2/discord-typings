@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
-from .application import ApplicationData
-from .channel import PartialChannelData
-from .guild import GuildData, GuildMemberData
-from .guild_scheduled_events import GuildScheduledEventData
-from .user import UserData
+if TYPE_CHECKING:
+    from .application import ApplicationData
+    from .channel import PartialChannelData
+    from .guild import GuildData, GuildMemberData
+    from .guild_scheduled_events import GuildScheduledEventData
+    from .user import UserData
 
 __all__ = ('InviteData', 'InviteMetadata')
 

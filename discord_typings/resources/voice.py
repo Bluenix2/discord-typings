@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from typing_extensions import NotRequired, TypedDict
 
-from ..shared import Snowflake
-from .guild import GuildMemberData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .guild import GuildMemberData
 
 __all__ = ('VoiceStateData', 'VoiceRegionData')
 

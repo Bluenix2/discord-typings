@@ -1,15 +1,16 @@
 from __future__ import annotations
 
-from typing import Any, List, Optional, Union
+from typing import TYPE_CHECKING, Any, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
-from ..shared import Snowflake
-from .application import ApplicationData
-from .emoji import EmojiData
-from .guild import GuildMemberData
-from .sticker import StickerItemData
-from .user import UserData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .application import ApplicationData
+    from .emoji import EmojiData
+    from .guild import GuildMemberData
+    from .sticker import StickerItemData
+    from .user import UserData
 
 __all__ = (
     'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',

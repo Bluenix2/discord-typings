@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
-from ..shared import Snowflake
-from .channel import ChannelData, ThreadChannelData, ThreadMemberData
-from .emoji import EmojiData
-from .sticker import StickerData
-from .user import UserData
+if TYPE_CHECKING:
+    from ..shared import Snowflake
+    from .channel import ChannelData, ThreadChannelData, ThreadMemberData
+    from .emoji import EmojiData
+    from .sticker import StickerData
+    from .user import UserData
 
 __all__ = (
     'GuildData', 'UnavailableGuildData', 'GuildPreviewData',

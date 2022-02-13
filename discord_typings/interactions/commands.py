@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Union
+from typing import TYPE_CHECKING, List, Union
 
-from typing_extensions import NotRequired, Literal, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from ..shared import Snowflake
+if TYPE_CHECKING:
+    from ..shared import Snowflake
 
 __all__ = (
     'ApplicationCommandData', 'SubcommandOptionData', 'SubcommandGroupOptionData',
