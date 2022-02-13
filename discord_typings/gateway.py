@@ -11,8 +11,15 @@ __all__ = (
     'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',
     'RequestGuildMembersCommand', 'VoiceUpdateCommand',
     'UpdatePresenceCommand', 'HelloEvent', 'ReadyEvent', 'DispatchEvent',
-    'ReconnectEvent', 'InvalidSessionEvent', 'GetGatewayBotData'
+    'ReconnectEvent', 'InvalidSessionEvent', 'GetGatewayBotData', 'GatewayEvent'
 )
+
+
+# https://discord.com/developers/docs/topics/gateway#heartbeating-example-gateway-heartbeat-ack
+
+
+class HeartbeatACKData(TypedDict):
+    op: Literal[11]
 
 
 # https://discord.com/developers/docs/topics/gateway#identify
@@ -43,8 +50,8 @@ IdentifyConnectionProperties = TypedDict(
 class IdentifyCommand(TypedDict):
     op: Literal[2]
     d: IdentifyData
-    s: None
-    t: None
+    s: NotRequired[None]
+    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#resume
@@ -59,8 +66,8 @@ class ResumeData(TypedDict):
 class ResumeCommand(TypedDict):
     op: Literal[6]
     d: ResumeData
-    s: None
-    t: None
+    s: NotRequired[None]
+    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#heartbeat
@@ -69,8 +76,8 @@ class ResumeCommand(TypedDict):
 class HeartbeatCommand(TypedDict):
     op: Literal[1]
     d: Optional[int]
-    s: None
-    t: None
+    s: NotRequired[None]
+    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#request-guild-members
@@ -96,8 +103,8 @@ class RequestGuildMembersCommand(TypedDict):
     op: Literal[8]
     # This enforces the fact that 'limit' is required when 'query' is set.
     d: Union[_QueryRequestMembersCommand, _UserIDsRequestMembersCommand]
-    s: None
-    t: None
+    s: NotRequired[None]
+    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#update-voice-state
@@ -113,8 +120,8 @@ class VoiceUpdateData(TypedDict):
 class VoiceUpdateCommand(TypedDict):
     op: Literal[4]
     d: VoiceUpdateData
-    s: None
-    t: None
+    s: NotRequired[None]
+    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#update-presence
@@ -136,8 +143,8 @@ class UpdatePresenceData(TypedDict):
 class UpdatePresenceCommand(TypedDict):
     op: Literal[3]
     d: UpdatePresenceData
-    s: None
-    t: None
+    s: NotRequired[None]
+    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#hello
@@ -148,8 +155,8 @@ class HelloData(TypedDict):
 class HelloEvent(TypedDict):
     op: Literal[10]
     d: HelloData
-    s: None
-    t: None
+    s: Optional[int]
+    t: Optional[str]
 
 
 # https://discord.com/developers/docs/topics/gateway#ready
@@ -192,8 +199,8 @@ DispatchEvent = Union[ReadyEvent, GenericDispatchData]
 class ReconnectEvent(TypedDict):
     op: Literal[7]
     d: None
-    s: None
-    t: None
+    s: Optional[int]
+    t: Optional[str]
 
 
 # https://discord.com/developers/docs/topics/gateway#invalid-session
@@ -202,8 +209,8 @@ class ReconnectEvent(TypedDict):
 class InvalidSessionEvent(TypedDict):
     op: Literal[9]
     d: bool
-    s: None
-    t: None
+    s: Optional[int]
+    t: Optional[str]
 
 
 # https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response
@@ -223,3 +230,9 @@ class SessionStartLimitData(TypedDict):
     remaining: int
     reset_after: int
     max_concurrency: int
+
+
+GatewayEvent = Union[
+    HeartbeatACKData, HelloEvent, ReadyEvent, DispatchEvent,
+    ReconnectEvent, InvalidSessionEvent,
+]
