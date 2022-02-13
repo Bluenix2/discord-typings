@@ -68,15 +68,15 @@ AuditLogEvents = Literal[
 # https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info
 
 
-class OptionalAuditLogEntryData(TypedDict, total=False):
-    channel_id: Snowflake
-    count: str
-    delete_member_days: str
-    id: Snowflake
-    members_removed: str
-    message_id: str
-    role_name: str
-    type: str
+class OptionalAuditLogEntryData(TypedDict):
+    channel_id: NotRequired[Snowflake]
+    count: NotRequired[str]
+    delete_member_days: NotRequired[str]
+    id: NotRequired[Snowflake]
+    members_removed: NotRequired[str]
+    message_id: NotRequired[str]
+    role_name: NotRequired[str]
+    type: NotRequired[str]
 
 
 # https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure

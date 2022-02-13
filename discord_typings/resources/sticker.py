@@ -8,7 +8,6 @@ from .user import UserData
 __all__ = ('StickerItemData', 'StickerData', 'StickerPackData')
 
 
-
 # https://discord.com/developers/docs/resources/sticker#sticker-item-object-sticker-item-structure
 
 

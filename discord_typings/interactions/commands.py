@@ -195,6 +195,7 @@ class NumberCommandOptionChoiceData(TypedDict):
     name: str
     value: Union[int, float]
 
+
 class SubcommandOptionInteractionData(TypedDict):
     name: str
     type: Literal[1]
@@ -265,6 +266,7 @@ ApplicationCommandOptionInteractionData = Union[
     MentionableInteractionData, NumberInteractionData,
 ]
 
+
 # https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-guild-application-command-permissions-structure
 
 
@@ -293,6 +295,7 @@ class ApplicationCommandPayload(TypedDict):
     options: NotRequired[List[ApplicationCommandOptionData]]
     default_permission: NotRequired[bool]
     type: NotRequired[Literal[1, 2, 3]]
+
 
 # https://discord.com/developers/docs/interactions/application-commands#batch-edit-application-command-permissions-example
 
