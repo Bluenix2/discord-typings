@@ -28,14 +28,11 @@ __all__ = (
 class GuildInteractionData(TypedDict):
     id: Snowflake
     application_id: Snowflake
-    # type: Literal[2, 3, 4]
-    # data: InteractionDataData
     guild_id: Snowflake
     channel_id: Snowflake
     member: GuildMemberData
     token: str
     version: int
-    # message: NotRequired[MessageData]
     locale: str
     guild_locale: str
 
@@ -58,13 +55,10 @@ class AutocompleteGuildInteractionData(GuildInteractionData):
 class ChannelInteractionData(TypedDict):
     id: Snowflake
     application_id: Snowflake
-    # type: Literal[2, 3, 4]
-    # data: InteractionDataData
     channel_id: Snowflake
     user: UserData
     token: str
     version: int
-    # message: NotRequired[MessageData]
     locale: str
 
 
@@ -88,12 +82,9 @@ class UserCommandInteractionData(TypedDict):
     application_id: Snowflake
     type: Literal[2]
     data: ApplicationCommandInteractionDataData
-    # member: NotRequired[GuildMemberData]
-    # user: NotRequired[UserData]
     token: str
     version: int
     locale: str
-    # guild_locale: NotRequired[str]
 
 
 class GuildUserCommandInteractionData(UserCommandInteractionData):
