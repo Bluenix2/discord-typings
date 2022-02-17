@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional, Union
+from typing import TYPE_CHECKING, List, Optional, Sequence, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
@@ -373,10 +373,10 @@ class ChannelMentionData(TypedDict):
 
 
 class AllowedMentionsData(TypedDict):
-    parse: List[Literal['roles', 'users', 'everyone']]
-    roles: List[Snowflake]
-    users: List[Snowflake]
-    replied_user: bool
+    parse: NotRequired[Sequence[Literal['roles', 'users', 'everyone']]]
+    roles: NotRequired[Sequence[Snowflake]]
+    users: NotRequired[Sequence[Snowflake]]
+    replied_user: NotRequired[bool]
 
 
 # https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body
