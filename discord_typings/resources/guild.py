@@ -176,7 +176,7 @@ IntegrationData = Union[StreamingIntegrationData, DiscordIntegrationData]
 
 
 class IntegrationAccountData(TypedDict):
-    id: Snowflake
+    id: str
     name: str
 
 
