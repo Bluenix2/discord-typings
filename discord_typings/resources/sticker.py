@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -16,16 +16,22 @@ __all__ = ('StickerItemData', 'StickerData', 'StickerPackData')
 
 # Because of inheritance, this class comes first even though that is not the
 # order in the documentation.
-class StickerItemData(TypedDict):
+class StickerItemBase(TypedDict):
     id: Snowflake
     name: str
     format_type: Literal[1, 2, 3]
 
 
+@final
+class StickerItemData(TypedDict):
+    pass
+
+
 # https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure
 
 
-class StickerData(StickerItemData):
+@final
+class StickerData(StickerItemBase):
     pack_id: NotRequired[Snowflake]
     description: Optional[str]
     tags: str
@@ -39,6 +45,7 @@ class StickerData(StickerItemData):
 # https://discord.com/developers/docs/resources/sticker#sticker-pack-object-sticker-pack-structure
 
 
+@final
 class StickerPackData(TypedDict):
     id: Snowflake
     stickers: List[StickerData]

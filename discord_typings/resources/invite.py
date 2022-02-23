@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from .application import ApplicationData
@@ -17,7 +17,7 @@ __all__ = ('InviteData', 'InviteMetadata')
 # https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
 
 
-class InviteData(TypedDict):
+class InviteBase(TypedDict):
     code: str
     guild: NotRequired[GuildData]
     channel: PartialChannelData
@@ -32,10 +32,16 @@ class InviteData(TypedDict):
     guild_scheduled_event: NotRequired[GuildScheduledEventData]
 
 
+@final
+class InviteData(InviteBase):
+    pass
+
+
 # https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure
 
 
-class InviteMetadata(InviteData):
+@final
+class InviteMetadata(InviteBase):
     uses: int
     max_uses: int
     max_age: int
@@ -46,6 +52,7 @@ class InviteMetadata(InviteData):
 # https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure
 
 
+@final
 class InviteStageInstanceData(TypedDict):
     members: List[GuildMemberData]
     participant_count: int

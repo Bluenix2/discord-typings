@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
 
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -14,6 +14,7 @@ __all__ = ('EmojiData',)
 # https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure
 
 
+@final
 class EmojiData(TypedDict):
     id: Optional[Snowflake]
     name: Optional[str]

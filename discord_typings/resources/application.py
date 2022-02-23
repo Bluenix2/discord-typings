@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
 
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -14,6 +14,7 @@ __all__ = ('ApplicationData', 'TeamData', 'TeamMemberData')
 # https://discord.com/developers/docs/resources/application#application-object-application-structure
 
 
+@final
 class ApplicationData(TypedDict):
     id: Snowflake
     name: str
@@ -38,6 +39,7 @@ class ApplicationData(TypedDict):
 # https://discord.com/developers/docs/topics/teams#data-models-team-object
 
 
+@final
 class TeamData(TypedDict):
     icon: Optional[str]
     id: Snowflake
@@ -49,6 +51,7 @@ class TeamData(TypedDict):
 # https://discord.com/developers/docs/topics/teams#data-models-team-member-object
 
 
+@final
 class TeamMemberData(TypedDict):
     membership_state: int
     permissions: List[str]

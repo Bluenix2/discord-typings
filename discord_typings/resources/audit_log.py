@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, List, Optional
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -19,6 +19,7 @@ __all__ = (
 # https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure
 
 
+@final
 class AuditLogData(TypedDict):
     audit_log_entries: List[AuditLogEntryData]
     integrations: List[PartialIntegrationData]
@@ -27,6 +28,7 @@ class AuditLogData(TypedDict):
     webhooks: List[WebhookData]
 
 
+@final
 class PartialIntegrationData(TypedDict):
     id: Snowflake
     name: str
@@ -37,6 +39,7 @@ class PartialIntegrationData(TypedDict):
 # https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure
 
 
+@final
 class AuditLogEntryData(TypedDict):
     target_id: Optional[str]
     changes: NotRequired[List[AuditLogChangeData]]
@@ -69,6 +72,7 @@ AuditLogEvents = Literal[
 # https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info
 
 
+@final
 class OptionalAuditLogEntryData(TypedDict):
     channel_id: NotRequired[Snowflake]
     count: NotRequired[str]
@@ -83,6 +87,7 @@ class OptionalAuditLogEntryData(TypedDict):
 # https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
 
 
+@final
 class AuditLogChangeData(TypedDict):
     new_value: NotRequired[Any]
     old_value: NotRequired[Any]

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -16,6 +16,7 @@ __all__ = ('WebhookData',)
 # https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure
 
 
+@final
 class WebhookData(TypedDict):
     id: Snowflake
     type: Literal[1, 2, 3]

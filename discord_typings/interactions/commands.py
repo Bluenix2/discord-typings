@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Union
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -19,6 +19,7 @@ __all__ = (
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
 
 
+@final
 class ChatInputCommandData(TypedDict):
     id: Snowflake
     type: NotRequired[Literal[1]]
@@ -31,6 +32,7 @@ class ChatInputCommandData(TypedDict):
     version: Snowflake
 
 
+@final
 class ContextMenuCommandData(TypedDict):
     id: Snowflake
     type: NotRequired[Literal[2, 3]]
@@ -51,6 +53,7 @@ ApplicationCommandData = Union[ChatInputCommandData, ContextMenuCommandData]
 # TypedDict subclasses...
 
 
+@final
 class SubcommandOptionData(TypedDict):
     type: Literal[1]
     name: str
@@ -58,6 +61,7 @@ class SubcommandOptionData(TypedDict):
     options: NotRequired[List[ApplicationCommandOptionData]]
 
 
+@final
 class SubcommandGroupOptionData(TypedDict):
     type: Literal[2]
     name: str
@@ -65,6 +69,7 @@ class SubcommandGroupOptionData(TypedDict):
     options: List[SubcommandOptionData]
 
 
+@final
 class ChoicesStringOptionData(TypedDict):
     type: Literal[3]
     name: str
@@ -73,6 +78,7 @@ class ChoicesStringOptionData(TypedDict):
     choices: NotRequired[List[StrCommandOptionChoiceData]]
 
 
+@final
 class AutocompleteStringOptionData(TypedDict):
     type: Literal[3]
     name: str
@@ -81,6 +87,7 @@ class AutocompleteStringOptionData(TypedDict):
     autocomplete: NotRequired[bool]
 
 
+@final
 class ChoicesIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -89,6 +96,7 @@ class ChoicesIntegerCommandOptionData(TypedDict):
     choices: NotRequired[List[IntCommandOptionChoiceData]]
 
 
+@final
 class MinMaxIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -98,6 +106,7 @@ class MinMaxIntegerCommandOptionData(TypedDict):
     max_value: NotRequired[int]
 
 
+@final
 class AutocompleteIntegerOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -106,6 +115,7 @@ class AutocompleteIntegerOptionData(TypedDict):
     autocomplete: NotRequired[bool]
 
 
+@final
 class BooleanOptionData(TypedDict):
     type: Literal[5]
     name: str
@@ -113,6 +123,7 @@ class BooleanOptionData(TypedDict):
     required: NotRequired[bool]
 
 
+@final
 class UserOptionData(TypedDict):
     type: Literal[6]
     name: str
@@ -120,6 +131,7 @@ class UserOptionData(TypedDict):
     required: NotRequired[bool]
 
 
+@final
 class ChannelOptionData(TypedDict):
     type: Literal[7]
     name: str
@@ -128,6 +140,7 @@ class ChannelOptionData(TypedDict):
     channel_types: NotRequired[List[Literal[0, 2, 4, 5, 6, 13]]]
 
 
+@final
 class RoleOptionData(TypedDict):
     type: Literal[8]
     name: str
@@ -135,6 +148,7 @@ class RoleOptionData(TypedDict):
     required: NotRequired[bool]
 
 
+@final
 class MentionableOptionData(TypedDict):
     type: Literal[9]
     name: str
@@ -142,6 +156,7 @@ class MentionableOptionData(TypedDict):
     required: NotRequired[bool]
 
 
+@final
 class ChoicesNumberCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -150,6 +165,7 @@ class ChoicesNumberCommandOptionData(TypedDict):
     choices: NotRequired[List[NumberCommandOptionChoiceData]]
 
 
+@final
 class MinMaxNumberCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -159,6 +175,7 @@ class MinMaxNumberCommandOptionData(TypedDict):
     max_value: NotRequired[Union[int, float]]
 
 
+@final
 class AutocompleteNumberOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -182,33 +199,39 @@ ApplicationCommandOptionData = Union[
 ]
 
 
+@final
 class StrCommandOptionChoiceData(TypedDict):
     name: str
     value: str
 
 
+@final
 class IntCommandOptionChoiceData(TypedDict):
     name: str
     value: int
 
 
+@final
 class NumberCommandOptionChoiceData(TypedDict):
     name: str
     value: Union[int, float]
 
 
+@final
 class SubcommandOptionInteractionData(TypedDict):
     name: str
     type: Literal[1]
     options: List[ApplicationCommandOptionInteractionData]
 
 
+@final
 class SubcommandGroupOptionInteractionData(TypedDict):
     name: str
     type: Literal[2]
     options: List[SubcommandOptionInteractionData]
 
 
+@final
 class StringOptionInteractionData(TypedDict):
     name: str
     type: Literal[3]
@@ -216,6 +239,7 @@ class StringOptionInteractionData(TypedDict):
     focused: NotRequired[bool]
 
 
+@final
 class IntegerOptionInteractionData(TypedDict):
     name: str
     type: Literal[4]
@@ -223,36 +247,42 @@ class IntegerOptionInteractionData(TypedDict):
     focused: NotRequired[bool]
 
 
+@final
 class BooleanOptionInteractionData(TypedDict):
     name: str
     type: Literal[5]
     value: bool
 
 
+@final
 class UserOptionInteractionData(TypedDict):
     name: str
     type: Literal[6]
     value: Snowflake
 
 
+@final
 class ChannelOptionInteractionData(TypedDict):
     name: str
     type: Literal[7]
     value: Snowflake
 
 
+@final
 class RoleOptionInteractionData(TypedDict):
     name: str
     type: Literal[8]
     value: Snowflake
 
 
+@final
 class MentionableInteractionData(TypedDict):
     name: str
     type: Literal[9]
     value: Snowflake
 
 
+@final
 class NumberInteractionData(TypedDict):
     name: str
     type: Literal[10]
@@ -271,6 +301,7 @@ ApplicationCommandOptionInteractionData = Union[
 # https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-guild-application-command-permissions-structure
 
 
+@final
 class GuildApplicationCommandPermissionData(TypedDict):
     id: Snowflake
     application_id: Snowflake
@@ -281,6 +312,7 @@ class GuildApplicationCommandPermissionData(TypedDict):
 # https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure
 
 
+@final
 class ApplicationCommandPermissionsData(TypedDict):
     id: Snowflake
     type: Literal[1, 2]
@@ -290,6 +322,7 @@ class ApplicationCommandPermissionsData(TypedDict):
 # https://discord.com/developers/docs/interactions/application-commands#create-global-application-command-json-params
 
 
+@final
 class ApplicationCommandPayload(TypedDict):
     name: str
     description: str
@@ -301,6 +334,7 @@ class ApplicationCommandPayload(TypedDict):
 # https://discord.com/developers/docs/interactions/application-commands#batch-edit-application-command-permissions-example
 
 
+@final
 class BatchEditApplicationCommandPermissionsData(TypedDict):
     id: Snowflake
     permissions: ApplicationCommandPermissionsData

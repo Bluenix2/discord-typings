@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from typing_extensions import TypedDict
+from typing_extensions import TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -15,6 +15,7 @@ __all__ = ('GuildTemplateData',)
 # https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure
 
 
+@final
 class GuildTemplateData(TypedDict):
     code: str
     name: str

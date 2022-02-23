@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional, Union
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..shared import Snowflake
@@ -17,13 +17,14 @@ __all__ = (
     'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
     'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
     'WelcomeScreenData', 'WelcomeChannelData', 'ChannelPositionData',
-    'ListThreadsData', 'RolePositionData', 'RoleData'
+    'ListThreadsData', 'RolePositionData', 'RoleData', 'RoleTagsData'
 )
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object-guild-structure
 
 
+@final
 class GuildData(TypedDict):
     id: str
     name: str
@@ -82,6 +83,7 @@ GuildFeatures = Literal[
 # https://discord.com/developers/docs/resources/guild#unavailable-guild-object-example-unavailable-guild
 
 
+@final
 class UnavailableGuildData(TypedDict):
     id: str
     unavailable: bool
@@ -90,6 +92,7 @@ class UnavailableGuildData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#guild-preview-object-guild-preview-structure
 
 
+@final
 class GuildPreviewData(TypedDict):
     id: Snowflake
     name: str
@@ -106,6 +109,7 @@ class GuildPreviewData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure
 
 
+@final
 class GuildWidgetSettingsData(TypedDict):
     enabled: bool
     channel_id: Optional[Snowflake]
@@ -114,6 +118,7 @@ class GuildWidgetSettingsData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#get-guild-widget-object-get-guild-widget-structure
 
 
+@final
 class GuildWidgetData(TypedDict):
     id: Snowflake
     name: str
@@ -126,6 +131,7 @@ class GuildWidgetData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
 
 
+@final
 class GuildMemberData(TypedDict):
     user: NotRequired[UserData]
     nick: NotRequired[Optional[str]]
@@ -142,6 +148,7 @@ class GuildMemberData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
 
 
+@final
 class StreamingIntegrationData(TypedDict):
     id: Snowflake
     name: str
@@ -160,6 +167,7 @@ class StreamingIntegrationData(TypedDict):
     application: IntegrationApplicationData
 
 
+@final
 class DiscordIntegrationData(TypedDict):
     id: Snowflake
     name: str
@@ -175,6 +183,7 @@ IntegrationData = Union[StreamingIntegrationData, DiscordIntegrationData]
 # https://discord.com/developers/docs/resources/guild#integration-account-object-integration-account-structure
 
 
+@final
 class IntegrationAccountData(TypedDict):
     id: str
     name: str
@@ -183,6 +192,7 @@ class IntegrationAccountData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#integration-application-object-integration-application-structure
 
 
+@final
 class IntegrationApplicationData(TypedDict):
     id: Snowflake
     name: str
@@ -195,6 +205,7 @@ class IntegrationApplicationData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#ban-object-ban-structure
 
 
+@final
 class BanData(TypedDict):
     reason: Optional[str]
     user: UserData
@@ -203,6 +214,7 @@ class BanData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-structure
 
 
+@final
 class WelcomeScreenData(TypedDict):
     description: Optional[str]
     welcome_channels: List[WelcomeChannelData]
@@ -211,6 +223,7 @@ class WelcomeScreenData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-channel-structure
 
 
+@final
 class WelcomeChannelData(TypedDict):
     channel_id: Snowflake
     description: str
@@ -221,6 +234,7 @@ class WelcomeChannelData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions-json-params
 
 
+@final
 class ChannelPositionData(TypedDict):
     id: Snowflake
     position: Optional[int]
@@ -231,6 +245,7 @@ class ChannelPositionData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#list-active-threads-response-body
 
 
+@final
 class ListThreadsData(TypedDict):
     threads: List[ThreadChannelData]
     members: List[ThreadMemberData]
@@ -240,6 +255,7 @@ class ListThreadsData(TypedDict):
 # https://discord.com/developers/docs/resources/guild#modify-guild-role-positions-json-params
 
 
+@final
 class RolePositionData(TypedDict):
     id: Snowflake
     position: NotRequired[Optional[int]]
@@ -248,6 +264,7 @@ class RolePositionData(TypedDict):
 # https://discord.com/developers/docs/topics/permissions#role-object-role-structure
 
 
+@final
 class RoleData(TypedDict):
     id: Snowflake
     name: str
@@ -265,6 +282,7 @@ class RoleData(TypedDict):
 # https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure
 
 
+@final
 class RoleTagsData(TypedDict):
     bot_id: NotRequired[Snowflake]
     integration_id: NotRequired[Snowflake]

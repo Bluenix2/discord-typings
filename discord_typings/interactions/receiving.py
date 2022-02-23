@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict, List, Union
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..resources import (
@@ -37,17 +37,20 @@ class GuildInteractionData(TypedDict):
     guild_locale: str
 
 
+@final
 class ApplicationCommandGuildInteractionData(GuildInteractionData):
     type: Literal[2]
     data: ApplicationCommandInteractionDataData
 
 
+@final
 class ComponentGuildInteractionData(GuildInteractionData):
     type: Literal[3]
     data: ComponentInteractionDataData
     message: MessageData
 
 
+@final
 class AutocompleteGuildInteractionData(GuildInteractionData):
     type: Literal[4]
 
@@ -62,17 +65,20 @@ class ChannelInteractionData(TypedDict):
     locale: str
 
 
+@final
 class ApplicationCommandChannelInteractionData(ChannelInteractionData):
     type: Literal[2]
     data: ApplicationCommandInteractionDataData
 
 
+@final
 class ComponentChannelInteractionData(ChannelInteractionData):
     type: Literal[3]
     data: ComponentInteractionDataData
     message: MessageData
 
 
+@final
 class AutocompleteChannelInteractionData(ChannelInteractionData):
     type: Literal[4]
 
@@ -87,11 +93,13 @@ class UserCommandInteractionData(TypedDict):
     locale: str
 
 
+@final
 class GuildUserCommandInteractionData(UserCommandInteractionData):
     member: GuildMemberData
     guild_locale: str
 
 
+@final
 class ChanneluserCommandInteractionData(UserCommandInteractionData):
     user: UserData
 
@@ -107,7 +115,7 @@ InteractionData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure
 
 
-class ApplicationCommandInteractionDataData(TypedDict):
+class ApplicationCommandInteractionDataBase(TypedDict):
     id: Snowflake
     name: str
     type: Literal[1, 2, 3]
@@ -121,11 +129,18 @@ class ApplicationCommandInteractionDataData(TypedDict):
     ]
 
 
+@final
+class ApplicationCommandInteractionDataData(ApplicationCommandInteractionDataBase):
+    pass
+
+
+@final
 class ButtonComponentInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[2]
 
 
+@final
 class SelectComponentInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[3]
@@ -137,7 +152,8 @@ ComponentInteractionDataData = Union[
 ]
 
 
-class ContextMenuInteractionDataData(ApplicationCommandInteractionDataData):
+@final
+class ContextMenuInteractionDataData(ApplicationCommandInteractionDataBase):
     target_id: Snowflake
 
 
@@ -150,6 +166,7 @@ InteractionDataData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure
 
 
+@final
 class ResolvedInteractionData(TypedDict):
     users: Dict[Snowflake, UserData]
     members: Dict[Snowflake, GuildMemberData]
@@ -161,6 +178,7 @@ class ResolvedInteractionData(TypedDict):
 # https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
 
 
+@final
 class MessageInteractionData(TypedDict):
     id: Snowflake
     type: Literal[2, 3, 4]
@@ -171,16 +189,19 @@ class MessageInteractionData(TypedDict):
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure
 
 
+@final
 class InteractionMessageResponseData(TypedDict):
     type: Literal[4, 7]
     data: InteractionMessageCallbackData
 
 
+@final
 class InteractionAutocompleteResponseData(TypedDict):
     type: Literal[8]
     data: InteractionAutocompleteCallbackData
 
 
+@final
 class InteractionModalResponseData(TypedDict):
     type: Literal[9]
     data: InteractionModalCallbackData
@@ -199,6 +220,7 @@ InteractionResponseData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure
 
 
+@final
 class InteractionMessageCallbackData(TypedDict):
     tts: NotRequired[bool]
     content: NotRequired[str]
@@ -209,10 +231,12 @@ class InteractionMessageCallbackData(TypedDict):
     attachments: NotRequired[List[AttachmentData]]
 
 
+@final
 class InteractionAutocompleteCallbackData(TypedDict):
     choices: List[AutocompleteOptionData]
 
 
+@final
 class InteractionModalCallbackData(TypedDict):
     custom_id: str
     title: str

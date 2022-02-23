@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from typing_extensions import Literal, NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 __all__ = ('UserData',)
 
@@ -10,7 +10,7 @@ __all__ = ('UserData',)
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
 
 
-class UserData(TypedDict):
+class UserBase(TypedDict):
     id: str
     username: str
     discriminator: str
@@ -26,3 +26,8 @@ class UserData(TypedDict):
     flags: NotRequired[int]
     premium_type: NotRequired[Literal[0, 1, 2]]
     public_flags: NotRequired[int]
+
+
+@final
+class UserData(UserBase):
+    pass
