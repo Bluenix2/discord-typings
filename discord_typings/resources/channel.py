@@ -108,7 +108,7 @@ class ThreadChannelData(TypedDict):
     message_count: int
     member_count: int
     thread_metadata: ThreadMetadata
-    member: NotRequired[GuildMemberData]
+    member: NotRequired[ThreadMemberData]
 
 
 @final
