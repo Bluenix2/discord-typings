@@ -17,13 +17,14 @@ if TYPE_CHECKING:
 
 __all__ = (
     'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',
-    'GroupDMChannelData', 'VoiceChannelData', 'ChannelData', 'MessageData',
+    'GroupDMChannelData', 'VoiceChannelData', 'CategoryChannelData',
+    'ChannelData', 'ChannelMessageData', 'GuildMessageData', 'MessageData',
     'PermissionOverwriteData', 'ThreadChannelData', 'MessageReferenceData',
-    'FollowedChannelData', 'PermissionOverwriteData', 'ThreadMetadata',
-    'ThreadMemberData', 'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData',
-    'EmbedImageData', 'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData',
-    'EmbedFooterData', 'PartialAttachmentData', 'AttachmentData',
-    'AllowedMentionsData', 'HasMoreListThreadsData'
+    'FollowedChannelData', 'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData',
+    'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData', 'EmbedProviderData',
+    'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData', 'PartialAttachmentData',
+    'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData', 'ChannelMentionData',
+    'MessageReactionData',
 )
 
 
@@ -151,9 +152,7 @@ ChannelData = Union[
 class MessageBase(TypedDict):
     id: Snowflake
     channel_id: Snowflake
-    guild_id: NotRequired[Snowflake]
     author: UserData
-    member: NotRequired[GuildMemberData]
     content: str
     timestamp: str
     edited_timestamp: Optional[str]
@@ -179,6 +178,20 @@ class MessageBase(TypedDict):
     thread: NotRequired[ThreadChannelData]
     components: NotRequired[List[ComponentData]]
     sticker_items: NotRequired[List[StickerItemData]]
+
+
+@final
+class ChannelMessageData(MessageBase):
+    pass
+
+
+@final
+class GuildMessageData(MessageBase):
+    guild_id: Snowflake
+    member: GuildMemberData
+
+
+MessageData = Union[ChannelMessageData, GuildMessageData]
 
 
 @final
