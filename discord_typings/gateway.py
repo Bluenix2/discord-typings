@@ -4,7 +4,7 @@ from typing import (
     TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Tuple, Union
 )
 
-from typing_extensions import Final, Literal, NotRequired, TypedDict, final
+from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from .resources import UnavailableGuildData, UserData
