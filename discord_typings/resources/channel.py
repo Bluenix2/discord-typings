@@ -158,7 +158,7 @@ class MessageBase(TypedDict):
     edited_timestamp: Optional[str]
     tts: bool
     mention_everyone: bool
-    mentions: List[UserMentionData]
+    mentions: Union[List[UserData], List[UserMentionData]]
     mention_roles: List[Snowflake]
     mention_channels: List[ChannelMentionData]
     attachments: List[AttachmentData]
