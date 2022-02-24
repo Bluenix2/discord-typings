@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .shared import Snowflake
 
 __all__ = (
-    'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',
+    'HeartbeatACKData', 'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',
     'RequestGuildMembersCommand', 'VoiceUpdateCommand',
     'UpdatePresenceCommand', 'HelloEvent', 'ReadyEvent', 'DispatchEvent',
     'ReconnectEvent', 'InvalidSessionEvent', 'GetGatewayBotData', 'GatewayEvent'
