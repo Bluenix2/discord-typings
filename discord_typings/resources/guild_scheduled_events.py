@@ -76,4 +76,4 @@ class GuildScheduledEventEntityMetadata(TypedDict):
 class GuildScheduledEventUserData(TypedDict):
     guild_scheduled_event_id: Snowflake
     user: UserData
-    memer: NotRequired[GuildMemberData]
+    member: NotRequired[GuildMemberData]
