@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional, Sequence, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
@@ -415,9 +415,9 @@ class ChannelMentionData(TypedDict):
 
 @final
 class AllowedMentionsData(TypedDict):
-    parse: NotRequired[Sequence[Literal['roles', 'users', 'everyone']]]
-    roles: NotRequired[Sequence[Snowflake]]
-    users: NotRequired[Sequence[Snowflake]]
+    parse: NotRequired[List[Literal['roles', 'users', 'everyone']]]
+    roles: NotRequired[List[Snowflake]]
+    users: NotRequired[List[Snowflake]]
     replied_user: NotRequired[bool]
 
 
