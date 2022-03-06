@@ -23,7 +23,7 @@ class StickerItemBase(TypedDict):
 
 
 @final
-class StickerItemData(TypedDict):
+class StickerItemData(StickerItemBase):
     pass
 
 
