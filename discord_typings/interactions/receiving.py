@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from .components import ComponentData, SelectMenuOptionData
 
 __all__ = (
-    'InteractionData', 'ResolvedInteractionData', 'MessageInteractionData',
+    'InteractionData', 'ResolvedInteractionDataData', 'MessageInteractionData',
     'InteractionResponseData', 'InteractionCallbackData'
 )
 
@@ -119,7 +119,7 @@ class ApplicationCommandInteractionDataBase(TypedDict):
     id: Snowflake
     name: str
     type: Literal[1, 2, 3]
-    resolved: NotRequired[ResolvedInteractionData]
+    resolved: NotRequired[ResolvedInteractionDataData]
     options: NotRequired[
         Union[
             SubcommandOptionInteractionData,
@@ -167,7 +167,7 @@ InteractionDataData = Union[
 
 
 @final
-class ResolvedInteractionData(TypedDict):
+class ResolvedInteractionDataData(TypedDict):
     users: Dict[Snowflake, UserData]
     members: Dict[Snowflake, GuildMemberData]
     roles: Dict[Snowflake, RoleData]
