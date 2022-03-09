@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from ..resources import EmojiData
 
 __all__ = (
-    'ActionRowData', 'ButtonComponentData', 'SelectMenuComponentData',
+    'ActionRowData', 'ButtonComponentData', 'SelectMenuComponentData', 'SelectMenuOptionData',
     'TextInputComponentData', 'ComponentData'
 )
 
