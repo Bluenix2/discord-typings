@@ -18,7 +18,9 @@ if TYPE_CHECKING:
 
 __all__ = (
     'InteractionData', 'ResolvedInteractionDataData', 'MessageInteractionData',
-    'InteractionResponseData', 'InteractionCallbackData'
+    'InteractionResponseData', 'InteractionCallbackData', 'ApplicationCommandInteractionData',
+    'ComponentInteractionData', 'AutocompleteInteractionData', 'UserCommandInteractionData',
+    'InteractionData'
 )
 
 
@@ -83,32 +85,50 @@ class AutocompleteChannelInteractionData(ChannelInteractionData):
     type: Literal[4]
 
 
-class UserCommandInteractionData(TypedDict):
+class UserCommandInteractionBase(TypedDict):
     id: Snowflake
     application_id: Snowflake
     type: Literal[2]
-    data: ApplicationCommandInteractionDataData
+    data: ContextMenuInteractionDataData
     token: str
     version: int
     locale: str
 
 
 @final
-class GuildUserCommandInteractionData(UserCommandInteractionData):
+class GuildUserCommandInteractionData(UserCommandInteractionBase):
     member: GuildMemberData
     guild_locale: str
 
 
 @final
-class ChanneluserCommandInteractionData(UserCommandInteractionData):
+class ChannelUserCommandInteractionData(UserCommandInteractionBase):
     user: UserData
 
 
+ApplicationCommandInteractionData = Union[
+    ApplicationCommandGuildInteractionData, ApplicationCommandChannelInteractionData
+]
+
+
+ComponentInteractionData = Union[
+    ComponentGuildInteractionData, ComponentChannelInteractionData
+]
+
+
+AutocompleteInteractionData = Union[
+    AutocompleteGuildInteractionData, AutocompleteChannelInteractionData
+]
+
+
+UserCommandInteractionData = Union[
+    GuildUserCommandInteractionData, ChannelUserCommandInteractionData
+]
+
+
 InteractionData = Union[
-    ApplicationCommandGuildInteractionData, ComponentGuildInteractionData,
-    AutocompleteGuildInteractionData, ApplicationCommandChannelInteractionData,
-    ComponentChannelInteractionData, AutocompleteChannelInteractionData,
-    GuildUserCommandInteractionData, ChanneluserCommandInteractionData
+    ApplicationCommandInteractionData, ComponentInteractionData, AutocompleteInteractionData,
+    UserCommandInteractionData
 ]
 
 
