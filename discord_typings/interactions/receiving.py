@@ -141,11 +141,11 @@ class ApplicationCommandInteractionDataBase(TypedDict):
     type: Literal[1, 2, 3]
     resolved: NotRequired[ResolvedInteractionDataData]
     options: NotRequired[
-        Union[
+        List[Union[
             SubcommandOptionInteractionData,
             SubcommandGroupOptionInteractionData,
             ApplicationCommandOptionInteractionData
-        ]
+        ]]
     ]
 
 
