@@ -6,7 +6,7 @@ from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..resources import (
-        AllowedMentionsData, AttachmentData, ChannelData, EmbedData,
+        AllowedMentionsData, AttachmentData, PartialChannelData, EmbedData,
         GuildMemberData, MessageData, RoleData, UserData
     )
     from ..shared import Snowflake
@@ -191,7 +191,7 @@ class ResolvedInteractionDataData(TypedDict):
     users: NotRequired[Dict[Snowflake, UserData]]
     members: NotRequired[Dict[Snowflake, GuildMemberData]]
     roles: NotRequired[Dict[Snowflake, RoleData]]
-    channels: NotRequired[Dict[Snowflake, ChannelData]]
+    channels: NotRequired[Dict[Snowflake, PartialChannelData]]
     messages: NotRequired[Dict[Snowflake, MessageData]]
 
 
