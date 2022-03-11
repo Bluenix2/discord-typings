@@ -188,11 +188,11 @@ InteractionDataData = Union[
 
 @final
 class ResolvedInteractionDataData(TypedDict):
-    users: Dict[Snowflake, UserData]
-    members: Dict[Snowflake, GuildMemberData]
-    roles: Dict[Snowflake, RoleData]
-    channels: Dict[Snowflake, ChannelData]
-    messages: Dict[Snowflake, MessageData]
+    users: NotRequired[Dict[Snowflake, UserData]]
+    members: NotRequired[Dict[Snowflake, GuildMemberData]]
+    roles: NotRequired[Dict[Snowflake, RoleData]]
+    channels: NotRequired[Dict[Snowflake, ChannelData]]
+    messages: NotRequired[Dict[Snowflake, MessageData]]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
