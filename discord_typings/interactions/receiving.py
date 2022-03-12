@@ -6,8 +6,8 @@ from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..resources import (
-        AllowedMentionsData, AttachmentData, PartialChannelData, EmbedData,
-        GuildMemberData, MessageData, RoleData, UserData
+        AllowedMentionsData, AttachmentData, EmbedData, GuildMemberData,
+        MessageData, PartialChannelData, RoleData, UserData
     )
     from ..shared import Snowflake
     from .commands import (
