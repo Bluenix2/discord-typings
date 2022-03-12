@@ -19,8 +19,7 @@ if TYPE_CHECKING:
 __all__ = (
     'InteractionData', 'ResolvedInteractionDataData', 'MessageInteractionData',
     'InteractionResponseData', 'InteractionCallbackData', 'ApplicationCommandInteractionData',
-    'ComponentInteractionData', 'AutocompleteInteractionData', 'UserCommandInteractionData',
-    'InteractionData'
+    'ComponentInteractionData', 'AutocompleteInteractionData', 'InteractionData'
 )
 
 
@@ -107,7 +106,8 @@ class ChannelUserCommandInteractionData(UserCommandInteractionBase):
 
 
 ApplicationCommandInteractionData = Union[
-    ApplicationCommandGuildInteractionData, ApplicationCommandChannelInteractionData
+    ApplicationCommandGuildInteractionData, ApplicationCommandChannelInteractionData,
+    GuildUserCommandInteractionData, ChannelUserCommandInteractionData
 ]
 
 
@@ -121,14 +121,8 @@ AutocompleteInteractionData = Union[
 ]
 
 
-UserCommandInteractionData = Union[
-    GuildUserCommandInteractionData, ChannelUserCommandInteractionData
-]
-
-
 InteractionData = Union[
     ApplicationCommandInteractionData, ComponentInteractionData, AutocompleteInteractionData,
-    UserCommandInteractionData
 ]
 
 
