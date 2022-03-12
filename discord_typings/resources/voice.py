@@ -41,3 +41,13 @@ class VoiceRegionData(TypedDict):
     optimal: bool
     deprecated: bool
     custom: bool
+        
+        
+# https://discord.com/developers/docs/topics/gateway#voice-server-update-voice-server-update-event-fields
+
+
+@final
+class VoiceServerData(TypedDict)
+    token: str
+    guild_id: Snowflake
+    endpoint: Optional[str]
