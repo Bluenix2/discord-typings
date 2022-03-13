@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from ..shared import Snowflake
     from .guild import GuildMemberData
 
-__all__ = ('VoiceStateData', 'VoiceRegionData')
+__all__ = ('VoiceStateData', 'VoiceRegionData', 'VoiceServerData')
 
 
 # https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure
@@ -47,7 +47,7 @@ class VoiceRegionData(TypedDict):
 
 
 @final
-class VoiceServerData(TypedDict)
+class VoiceServerData(TypedDict):
     token: str
     guild_id: Snowflake
     endpoint: Optional[str]
