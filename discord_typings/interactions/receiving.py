@@ -14,7 +14,9 @@ if TYPE_CHECKING:
         ApplicationCommandOptionInteractionData, AutocompleteOptionData,
         SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
     )
-    from .components import ComponentData, SelectMenuOptionData, TextInputComponentData
+    from .components import (
+        ComponentData, SelectMenuOptionData, TextInputComponentData
+    )
 
 __all__ = (
     'InteractionData', 'ResolvedInteractionDataData', 'MessageInteractionData',
