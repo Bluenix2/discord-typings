@@ -14,12 +14,16 @@ if TYPE_CHECKING:
         ApplicationCommandOptionInteractionData, AutocompleteOptionData,
         SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
     )
-    from .components import ComponentData, SelectMenuOptionData
+    from .components import ComponentData, SelectMenuOptionData, TextInputComponentData
 
 __all__ = (
     'InteractionData', 'ResolvedInteractionDataData', 'MessageInteractionData',
     'InteractionResponseData', 'InteractionCallbackData', 'ApplicationCommandInteractionData',
-    'ComponentInteractionData', 'AutocompleteInteractionData', 'InteractionData'
+    'ComponentInteractionData', 'AutocompleteInteractionData', 'InteractionData',
+    'InteractionMessageCallbackData', 'InteractionAutocompleteCallbackData',
+    'InteractionModalCallbackData', 'InteractionMessageResponseData',
+    'InteractionAutocompleteResponseData', 'InteractionModalResponseData',
+    'InteractionNodataResponseData', 'ModalInteractionData'
 )
 
 
@@ -52,6 +56,13 @@ class ComponentGuildInteractionData(GuildInteractionData):
 
 
 @final
+class ModalGuildInteractionData(GuildInteractionData):
+    type: Literal[5]
+    data: ModalComponentInteractionDataData
+    message: MessageData
+
+
+@final
 class AutocompleteGuildInteractionData(GuildInteractionData):
     type: Literal[4]
 
@@ -76,6 +87,13 @@ class ApplicationCommandChannelInteractionData(ChannelInteractionData):
 class ComponentChannelInteractionData(ChannelInteractionData):
     type: Literal[3]
     data: ComponentInteractionDataData
+    message: MessageData
+
+
+@final
+class ModalChannelInteractionData(ChannelInteractionData):
+    type: Literal[5]
+    data: ModalComponentInteractionDataData
     message: MessageData
 
 
@@ -116,6 +134,10 @@ ComponentInteractionData = Union[
 ]
 
 
+ModalInteractionData = Union[
+    ModalGuildInteractionData, ModalChannelInteractionData
+]
+
 AutocompleteInteractionData = Union[
     AutocompleteGuildInteractionData, AutocompleteChannelInteractionData
 ]
@@ -123,6 +145,7 @@ AutocompleteInteractionData = Union[
 
 InteractionData = Union[
     ApplicationCommandInteractionData, ComponentInteractionData, AutocompleteInteractionData,
+    ModalInteractionData,
 ]
 
 
@@ -161,8 +184,15 @@ class SelectComponentInteractionDataData(TypedDict):
     values: List[SelectMenuOptionData]
 
 
+@final
+class ModalComponentInteractionDataData(TypedDict):
+    custom_id: str
+    components: List[TextInputComponentData]
+
+
 ComponentInteractionDataData = Union[
-    ButtonComponentInteractionDataData, SelectComponentInteractionDataData
+    ButtonComponentInteractionDataData, SelectComponentInteractionDataData,
+    ModalComponentInteractionDataData
 ]
 
 
@@ -221,13 +251,14 @@ class InteractionModalResponseData(TypedDict):
     data: InteractionModalCallbackData
 
 
+@final
 class InteractionNodataResponseData(TypedDict):
     type: Literal[1, 5, 6]
 
 
 InteractionResponseData = Union[
     InteractionMessageResponseData, InteractionAutocompleteResponseData,
-    InteractionNodataResponseData
+    InteractionModalResponseData, InteractionNodataResponseData
 ]
 
 
