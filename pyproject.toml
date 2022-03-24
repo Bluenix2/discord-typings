@@ -1,6 +1,6 @@
 [project]
 name = "discord-typings"
-version = "0.3.1"
+version = "0.4.0"
 description = "Maintained typings of payloads that Discord sends"
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.7"
