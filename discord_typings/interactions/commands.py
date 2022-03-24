@@ -195,7 +195,7 @@ ApplicationCommandOptionData = Union[
     MinMaxIntegerCommandOptionData, BooleanOptionData,
     UserOptionData, ChannelOptionData, RoleOptionData, MentionableOptionData,
     ChoicesNumberCommandOptionData, MinMaxNumberCommandOptionData,
-    AutocompleteOptionData,
+    AutocompleteOptionData, SubcommandOptionData
 ]
 
 
