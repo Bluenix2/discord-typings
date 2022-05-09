@@ -164,8 +164,8 @@ class HelloData(TypedDict):
 class HelloEvent(TypedDict):
     op: Literal[10]
     d: HelloData
-    s: Optional[int]
-    t: Optional[str]
+    s: None
+    t: None
 
 
 # https://discord.com/developers/docs/topics/gateway#ready
@@ -213,8 +213,8 @@ DispatchEvent = Union[ReadyEvent, GenericDispatchData]
 class ReconnectEvent(TypedDict):
     op: Literal[7]
     d: None
-    s: Optional[int]
-    t: Optional[str]
+    s: None
+    t: None
 
 
 # https://discord.com/developers/docs/topics/gateway#invalid-session
@@ -224,8 +224,8 @@ class ReconnectEvent(TypedDict):
 class InvalidSessionEvent(TypedDict):
     op: Literal[9]
     d: bool
-    s: Optional[int]
-    t: Optional[str]
+    s: None
+    t: None
 
 
 # https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response
