@@ -56,8 +56,6 @@ IdentifyConnectionProperties = final(TypedDict(
 class IdentifyCommand(TypedDict):
     op: Literal[2]
     d: IdentifyData
-    s: NotRequired[None]
-    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#resume
@@ -74,8 +72,6 @@ class ResumeData(TypedDict):
 class ResumeCommand(TypedDict):
     op: Literal[6]
     d: ResumeData
-    s: NotRequired[None]
-    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#heartbeat
@@ -85,8 +81,6 @@ class ResumeCommand(TypedDict):
 class HeartbeatCommand(TypedDict):
     op: Literal[1]
     d: Optional[int]
-    s: NotRequired[None]
-    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#request-guild-members
@@ -115,8 +109,6 @@ class RequestGuildMembersCommand(TypedDict):
     op: Literal[8]
     # This enforces the fact that 'limit' is required when 'query' is set.
     d: Union[_QueryRequestMembersCommand, _UserIDsRequestMembersCommand]
-    s: NotRequired[None]
-    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#update-voice-state
@@ -134,8 +126,6 @@ class VoiceUpdateData(TypedDict):
 class VoiceUpdateCommand(TypedDict):
     op: Literal[4]
     d: VoiceUpdateData
-    s: NotRequired[None]
-    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#update-presence
@@ -160,8 +150,6 @@ class UpdatePresenceData(TypedDict):
 class UpdatePresenceCommand(TypedDict):
     op: Literal[3]
     d: UpdatePresenceData
-    s: NotRequired[None]
-    t: NotRequired[None]
 
 
 # https://discord.com/developers/docs/topics/gateway#hello
