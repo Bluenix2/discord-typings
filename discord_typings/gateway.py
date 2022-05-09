@@ -36,7 +36,7 @@ class IdentifyData(TypedDict):
     compress: NotRequired[bool]
     large_threshold: NotRequired[int]
     shard: NotRequired[Union[Tuple[int, int], List[int]]]
-    presence: UpdatePresenceData
+    presence: NotRequired[UpdatePresenceData]
     intents: int
 
 
