@@ -14,7 +14,8 @@ __all__ = (
     'HeartbeatACKData', 'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',
     'RequestGuildMembersCommand', 'VoiceUpdateCommand',
     'UpdatePresenceCommand', 'HelloEvent', 'ReadyEvent', 'DispatchEvent',
-    'ReconnectEvent', 'InvalidSessionEvent', 'GetGatewayBotData', 'GatewayEvent'
+    'ResumedEvent', 'ReconnectEvent', 'InvalidSessionEvent',
+    'GetGatewayBotData', 'GatewayEvent',
 )
 
 
@@ -203,7 +204,18 @@ class GenericDispatchData(TypedDict):
     t: str
 
 
-DispatchEvent = Union[ReadyEvent, GenericDispatchData]
+DispatchEvent = Union[ReadyEvent, 'ResumedEvent', GenericDispatchData]
+
+
+# https://discord.com/developers/docs/topics/gateway#resumed
+
+
+@final
+class ResumedEvent(TypedDict):
+    op: Literal[0]
+    d: Dict[str, Any]  # It only has an undocumented _trace field
+    s: int
+    t: Literal['RESUMED']
 
 
 # https://discord.com/developers/docs/topics/gateway#reconnect
@@ -250,6 +262,6 @@ class SessionStartLimitData(TypedDict):
 
 
 GatewayEvent = Union[
-    HeartbeatACKData, HelloEvent, ReadyEvent, DispatchEvent,
+    HeartbeatACKData, HelloEvent, ReadyEvent, ResumedEvent, DispatchEvent,
     ReconnectEvent, InvalidSessionEvent,
 ]
