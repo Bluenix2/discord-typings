@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import (
-    TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Tuple, Union
-)
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
@@ -88,7 +86,7 @@ class _QueryRequestMembersCommand(TypedDict):
     query: str
     limit: int
     presences: NotRequired[bool]
-    user_ids: NotRequired[Union[Snowflake, Sequence[Snowflake]]]
+    user_ids: NotRequired[Union[Snowflake, List[Snowflake]]]
     nonce: NotRequired[str]
 
 
@@ -96,7 +94,7 @@ class _QueryRequestMembersCommand(TypedDict):
 class _UserIDsRequestMembersCommand(TypedDict):
     guild_id: Snowflake
     presences: NotRequired[bool]
-    user_ids: Union[Snowflake, Sequence[Snowflake]]
+    user_ids: Union[Snowflake, List[Snowflake]]
     nonce: NotRequired[str]
 
 
@@ -137,7 +135,7 @@ class ActivityData(TypedDict):
 @final
 class UpdatePresenceData(TypedDict):
     since: Optional[int]
-    activities: Sequence[ActivityData]
+    activities: List[ActivityData]
     status: Literal['online', 'idle', 'dnd', 'invisible']
     afk: bool
 
@@ -177,7 +175,7 @@ class PartialApplicationData(TypedDict):
 class ReadyData(TypedDict):
     v: int
     user: UserData
-    guilds: Sequence[UnavailableGuildData]
+    guilds: List[UnavailableGuildData]
     session_id: str
     shard: NotRequired[Union[Tuple[int, int], List[int]]]
     application: PartialApplicationData
