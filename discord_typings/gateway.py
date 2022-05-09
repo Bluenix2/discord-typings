@@ -246,7 +246,7 @@ class InvalidSessionEvent(TypedDict):
 @final
 class GetGatewayBotData(TypedDict):
     url: str
-    shard: int
+    shards: int
     session_start_limit: SessionStartLimitData
 
 
