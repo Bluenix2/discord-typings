@@ -239,6 +239,160 @@ class InvalidSessionEvent(TypedDict):
 class GetGatewayData(TypedDict):
     url: str
 
+# https://discord.com/developers/docs/topics/gateway#application-command-permissions-update
+
+
+ApplicationCommandPermissionsUpdateData = ApplicationCommandPermissionsData
+
+
+ApplicationCommandPermissionsUpdateEvent = GenericDispatchEvent[
+    Literal['APPLICATION_COMMAND_PERMISSIONS_UPDATE'],
+    ApplicationCommandPermissionsUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#channels
+
+
+# Utility for the events below
+_GuildChannelData = Union[
+    TextChannelData, NewsChannelData, VoiceChannelData, CategoryChannelData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#channel-create
+
+
+ChannelCreateData = _GuildChannelData
+ChannelCreateEvent = GenericDispatchEvent[Literal['CHANNEL_CREATE'], ChannelCreateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#channel-update
+
+
+ChannelUpdateData = _GuildChannelData
+ChannelUpdateEvent = GenericDispatchEvent[Literal['CHANNEL_UPDATE'], ChannelUpdateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#channel-delete
+
+
+ChannelDeleteData = _GuildChannelData
+ChannelDeleteEvent = GenericDispatchEvent[Literal['CHANNEl_DELETE'], ChannelDeleteData]
+
+
+# https://discord.com/developers/docs/topics/gateway#thread-create
+
+
+@final
+class ThreadCreateData(TypedDict):
+    id: Snowflake
+    type: Literal[10, 11, 12]
+    guild_id: NotRequired[Snowflake]
+    name: str
+    last_message_id: Optional[Snowflake]
+    rate_limit_per_user: int
+    owner_id: Snowflake
+    parent_id: Optional[Snowflake]
+    last_pin_timestamp: NotRequired[Optional[str]]
+    message_count: int
+    member_count: int
+    thread_metadata: ThreadMetadata
+    member: NotRequired[ThreadMemberData]
+
+    newly_created: bool  # Extra THREAD_CREATE field
+
+
+ThreadCreateEvent = GenericDispatchEvent[Literal['THREAD_CREATE'], ThreadCreateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#thread-update
+
+
+ThreadUpdateData = ThreadChannelData
+ThreadUpdateEvent = GenericDispatchEvent[Literal['THREAD_UPDATE'], ThreadUpdateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#thread-delete
+
+
+@final
+class ThreadDeleteData(TypedDict):
+    id: Snowflake
+    guild_id: Snowflake
+    parent_id: Snowflake
+    type: Literal[10, 11, 12]
+
+
+ThreadDeleteEvent = GenericDispatchEvent[Literal['THREAD_DELETE'], ThreadDeleteData]
+
+
+# https://discord.com/developers/docs/topics/gateway#thread-list-sync
+
+
+@final
+class ThreadListSyncData(TypedDict):
+    guild_id: Snowflake
+    channel_ids: NotRequired[List[Snowflake]]
+    threads: List[ThreadChannelData]
+    members: List[ThreadMemberData]
+
+
+ThreadListSyncEvent = GenericDispatchEvent[Literal['THREAD_LIST_SYNC'], ThreadListSyncData]
+
+
+# https://discord.com/developers/docs/topics/gateway#thread-member-update
+
+
+@final
+class ThreadMemberUpdateData(TypedDict):
+    # 'id' and 'user_id' is only missing in the GUILD_CREATE event, so we know
+    # that they are present in this event (hence the missing NotRequired
+    # compared to ThreadMemberData).
+    id: Snowflake
+    user_id: Snowflake
+    guild_id: Snowflake
+    join_timestamp: str
+    flags: int
+
+
+ThreadMemberUpdateEvent = GenericDispatchEvent[
+    Literal['THREAD_MEMBER_UPDATE'], ThreadMemberData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#thread-members-update
+
+
+@final
+class ThreadMembersUpdateData(TypedDict):
+    id: Snowflake
+    guild_id: Snowflake
+    member_count: int
+    added_members: NotRequired[List[ThreadMemberData]]
+    removed_member_ids: NotRequired[List[Snowflake]]
+
+
+ThreadMembersUpdateEvent = GenericDispatchEvent[
+    Literal['THREAD_MEMBERS_UPDATE'], ThreadMembersUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#channel-pins-update
+
+
+@final
+class ChannelPinsUpdateData(TypedDict):
+    guild_id: NotRequired[Snowflake]
+    channel_id: Snowflake
+    last_pin_timestamp: NotRequired[Optional[str]]
+
+
+ChannelPinsUpdateEvent = GenericDispatchEvent[
+    Literal['CHANNEL_PINS_UPDATE'], ChannelPinsUpdateData
+]
+
+
 # https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response
 
 
@@ -260,7 +414,10 @@ class SessionStartLimitData(TypedDict):
     max_concurrency: int
 
 
+DispatchEvent = GenericDispatchEvent[str, Dict[str, Any]]
+
+
 GatewayEvent = Union[
-    HeartbeatACKData, HelloEvent, ReadyEvent, ResumedEvent, DispatchEvent,
+    HeartbeatACKEvent, HelloEvent, ReadyEvent, ResumedEvent, DispatchEvent,
     ReconnectEvent, InvalidSessionEvent,
 ]

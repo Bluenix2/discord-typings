@@ -29,7 +29,8 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-dependencies = ["typing_extensions >= 4, <5"]
+# Generic TypedDicts were (unknown at the time) added/possible first in 4.2
+dependencies = ["typing_extensions >= 4.2, <5"]
 
 [project.urls]
 Homepage = "https://github.com/Bluenix2/discord-typings/"
