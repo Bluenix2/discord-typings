@@ -241,7 +241,7 @@ class InvalidSessionEvent(TypedDict):
 
 # https://discord.com/developers/docs/topics/gateway#get-gateway-example-response
 
-
+@final
 class GetGatewayData(TypedDict):
     url: str
 
@@ -249,7 +249,8 @@ class GetGatewayData(TypedDict):
 
 
 @final
-class GetGatewayBotData(GetGatewayData):
+class GetGatewayBotData(TypedDict):
+    url: str
     shards: int
     session_start_limit: SessionStartLimitData
 
