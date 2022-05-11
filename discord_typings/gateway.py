@@ -1,20 +1,57 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
+from typing import (
+    TYPE_CHECKING, Any, Dict, Generic, List, Mapping, Optional, Tuple, TypeVar,
+    Union
+)
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
+from typing_extensions import Literal, NotRequired, TypedDict, final, TypeAlias
 
 if TYPE_CHECKING:
-    from .resources import UnavailableGuildData, UserData
+    from .interactions import ApplicationCommandPermissionsData
+    from .resources import (
+        CategoryChannelData, NewsChannelData, TextChannelData,
+        ThreadChannelData, ThreadMemberData, ThreadMetadata,
+        UnavailableGuildData, UserData, VoiceChannelData
+    )
     from .shared import Snowflake
 
 __all__ = (
-    'HeartbeatACKData', 'IdentifyCommand', 'ResumeCommand', 'HeartbeatCommand',
-    'RequestGuildMembersCommand', 'VoiceUpdateCommand',
-    'UpdatePresenceCommand', 'HelloEvent', 'ReadyEvent', 'DispatchEvent',
-    'ResumedEvent', 'ReconnectEvent', 'InvalidSessionEvent',
+    'HeartbeatACKEvent', 'IdentifyData', 'IdentifyConnectionProperties', 'IdentifyCommand',
+    'ResumeData', 'ResumeCommand', 'HeartbeatCommand', 'RequestGuildMembersData',
+    'RequestGuildMembersCommand', 'VoiceUpdateData', 'VoiceUpdateCommand', 'ActivityData',
+    'UpdatePresenceData', 'UpdatePresenceCommand', 'HelloData', 'HelloEvent',
+    'PartialApplicationData', 'ReadyData', 'ReadyEvent', 'ResumedData', 'ResumedEvent',
+    'ReconnectEvent', 'InvalidSessionEvent', 'ApplicationCommandPermissionsUpdateData',
+    'ApplicationCommandPermissionsUpdateEvent', 'ChannelCreateData', 'ChannelCreateEvent',
+    'ChannelUpdateData', 'ChannelUpdateEvent', 'ChannelDeleteData', 'ChannelDeleteEvent',
+    'ThreadCreateData', 'ThreadCreateEvent', 'ThreadUpdateData', 'ThreadUpdateEvent',
+    'ThreadDeleteData', 'ThreadDeleteEvent', 'ThreadListSyncData', 'ThreadListSyncEvent',
+    'ThreadMemberUpdateData', 'ThreadMemberUpdateEvent', 'ThreadMembersUpdateData',
+    'ThreadMembersUpdateEvent', 'ChannelPinsUpdateData', 'ChannelPinsUpdateEvent',
     'GetGatewayData', 'GetGatewayBotData', 'GatewayEvent',
 )
+
+
+_D = TypeVar('_D', bound='Mapping[str, Any]')
+_T = TypeVar('_T', bound='str')  # Literal
+
+
+@final
+class GenericDispatchEvent(TypedDict, Generic[_T, _D]):
+    """Helper generic TypedDict for annotating dispatch events.
+
+    This should generally not be used, and does not necessarily represent any
+    one payload from Discord. Consider this private as it is not exposed under
+    the `discord_typings` namespace; use the public non-generic versions.
+
+    The reason this doesn't have a leading underscore is to look nicer when
+    previewed in editors and IDEs.
+    """
+    op: Literal[0]
+    d: _D
+    s: int
+    t: _T
 
 
 # https://discord.com/developers/docs/topics/gateway#heartbeating-example-gateway-heartbeat-ack
