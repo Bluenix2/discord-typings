@@ -241,6 +241,7 @@ class InvalidSessionEvent(TypedDict):
 
 # https://discord.com/developers/docs/topics/gateway#get-gateway-example-response
 
+
 @final
 class GetGatewayData(TypedDict):
     url: str
