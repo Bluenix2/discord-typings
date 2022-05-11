@@ -15,7 +15,7 @@ __all__ = (
     'RequestGuildMembersCommand', 'VoiceUpdateCommand',
     'UpdatePresenceCommand', 'HelloEvent', 'ReadyEvent', 'DispatchEvent',
     'ResumedEvent', 'ReconnectEvent', 'InvalidSessionEvent',
-    'GetGatewayBotData', 'GatewayEvent',
+    'GetGatewayData', 'GetGatewayBotData', 'GatewayEvent',
 )
 
 
@@ -239,6 +239,12 @@ class InvalidSessionEvent(TypedDict):
     s: None
     t: None
 
+# https://discord.com/developers/docs/topics/gateway#get-gateway-example-response
+
+
+@final
+class GetGatewayData(TypedDict):
+    url: str
 
 # https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response
 
