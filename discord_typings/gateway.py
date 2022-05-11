@@ -58,7 +58,7 @@ class GenericDispatchEvent(TypedDict, Generic[_T, _D]):
 
 
 @final
-class HeartbeatACKData(TypedDict):
+class HeartbeatACKEvent(TypedDict):
     op: Literal[11]
 
 
@@ -135,11 +135,14 @@ class _UserIDsRequestMembersCommand(TypedDict):
     nonce: NotRequired[str]
 
 
+# This enforces the fact that 'limit' is required when 'query' is set.
+RequestGuildMembersData = Union[_QueryRequestMembersCommand, _UserIDsRequestMembersCommand]
+
+
 @final
 class RequestGuildMembersCommand(TypedDict):
     op: Literal[8]
-    # This enforces the fact that 'limit' is required when 'query' is set.
-    d: Union[_QueryRequestMembersCommand, _UserIDsRequestMembersCommand]
+    d: RequestGuildMembersData
 
 
 # https://discord.com/developers/docs/topics/gateway#update-voice-state
@@ -218,34 +221,18 @@ class ReadyData(TypedDict):
     application: PartialApplicationData
 
 
-@final
-class ReadyEvent(TypedDict):
-    op: Literal[0]
-    d: ReadyData
-    s: int
-    t: Literal['READY']
-
-
-@final
-class GenericDispatchData(TypedDict):
-    op: Literal[0]
-    d: Dict[str, Any]
-    s: int
-    t: str
-
-
-DispatchEvent = Union[ReadyEvent, 'ResumedEvent', GenericDispatchData]
+ReadyEvent = GenericDispatchEvent[Literal['READY'], ReadyData]
 
 
 # https://discord.com/developers/docs/topics/gateway#resumed
 
 
 @final
-class ResumedEvent(TypedDict):
-    op: Literal[0]
-    d: Dict[str, Any]  # It only has an undocumented _trace field
-    s: int
-    t: Literal['RESUMED']
+class ResumedData(TypedDict):
+    ...  # It only has an undocumented _trace field
+
+
+ResumedEvent = GenericDispatchEvent[Literal['RESUMED'], ResumedData]
 
 
 # https://discord.com/developers/docs/topics/gateway#reconnect
@@ -279,7 +266,7 @@ class GetGatewayData(TypedDict):
 # https://discord.com/developers/docs/topics/gateway#application-command-permissions-update
 
 
-ApplicationCommandPermissionsUpdateData = ApplicationCommandPermissionsData
+ApplicationCommandPermissionsUpdateData: TypeAlias = 'ApplicationCommandPermissionsData'
 
 
 ApplicationCommandPermissionsUpdateEvent = GenericDispatchEvent[
@@ -293,7 +280,7 @@ ApplicationCommandPermissionsUpdateEvent = GenericDispatchEvent[
 
 # Utility for the events below
 _GuildChannelData = Union[
-    TextChannelData, NewsChannelData, VoiceChannelData, CategoryChannelData
+    'TextChannelData', 'NewsChannelData', 'VoiceChannelData', 'CategoryChannelData'
 ]
 
 
@@ -346,7 +333,7 @@ ThreadCreateEvent = GenericDispatchEvent[Literal['THREAD_CREATE'], ThreadCreateD
 # https://discord.com/developers/docs/topics/gateway#thread-update
 
 
-ThreadUpdateData = ThreadChannelData
+ThreadUpdateData: TypeAlias = 'ThreadChannelData'
 ThreadUpdateEvent = GenericDispatchEvent[Literal['THREAD_UPDATE'], ThreadUpdateData]
 
 
@@ -394,7 +381,7 @@ class ThreadMemberUpdateData(TypedDict):
 
 
 ThreadMemberUpdateEvent = GenericDispatchEvent[
-    Literal['THREAD_MEMBER_UPDATE'], ThreadMemberData
+    Literal['THREAD_MEMBER_UPDATE'], ThreadMemberUpdateData
 ]
 
 
