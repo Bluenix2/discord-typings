@@ -5,13 +5,14 @@ from typing import (
     Union
 )
 
-from typing_extensions import Literal, NotRequired, TypedDict, final, TypeAlias
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict, final
 
 if TYPE_CHECKING:
     from .interactions import ApplicationCommandPermissionsData
     from .resources import (
-        CategoryChannelData, NewsChannelData, TextChannelData,
-        ThreadChannelData, ThreadMemberData, ThreadMetadata,
+        CategoryChannelData, EmojiData, GuildData, GuildMemberData,
+        GuildScheduledEventData, NewsChannelData, RoleData, StickerData,
+        TextChannelData, ThreadChannelData, ThreadMemberData, ThreadMetadata,
         UnavailableGuildData, UserData, VoiceChannelData
     )
     from .shared import Snowflake
@@ -414,6 +415,262 @@ class ChannelPinsUpdateData(TypedDict):
 
 ChannelPinsUpdateEvent = GenericDispatchEvent[
     Literal['CHANNEL_PINS_UPDATE'], ChannelPinsUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-create
+
+
+# TODO: ...
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-update
+
+
+GuildUpdateData: TypeAlias = 'GuildData'
+GuildUpdateEvent = GenericDispatchEvent[Literal['GUILD_UPDATE'], GuildUpdateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-delete
+
+
+GuildDeleteData: TypeAlias = 'UnavailableGuildData'
+GuildDeleteEvent = GenericDispatchEvent[Literal['GUILD_DELETE'], 'GuildDeleteData']
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-ban-add
+
+
+@final
+class GuildBanAddData(TypedDict):
+    guild_id: Snowflake
+    user: UserData
+
+
+GuildBanAddEvent = GenericDispatchEvent[Literal['GUILD_BAN_ADD'], GuildBanAddData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-ban-remove
+
+
+@final
+class GuildBanRemoveData(TypedDict):
+    guild_id: Snowflake
+    user: UserData
+
+
+GuildBanRemoveEvent = GenericDispatchEvent[Literal['GUILD_BAN_REMOVE'], GuildBanRemoveData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-emojis-update
+
+
+@final
+class GuildEmojisUpdateData(TypedDict):
+    guild_id: Snowflake
+    emojis: List[EmojiData]
+
+
+GuildEmojisUpdateEvent = GenericDispatchEvent[
+    Literal['GUILD_EMOJIS_UPDATE'], GuildEmojisUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-stickers-update
+
+
+@final
+class GuildStickersUpdateData(TypedDict):
+    guild_id: Snowflake
+    stickers: List[StickerData]
+
+
+GuildStickersUpdateEvent = GenericDispatchEvent[
+    Literal['GUILD_STICKERS_UPDATE'], GuildStickersUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-integrations-update
+
+
+@final
+class GuildIntergrationsUpdateData(TypedDict):
+    guild_id: Snowflake
+
+
+GuildIntergrationsUpdateEvent = GenericDispatchEvent[
+    Literal['GUILD_INTEGRATIONS_UPDATE'], GuildIntergrationsUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-member-add
+
+
+@final
+class GuildMemberAddData(TypedDict):
+    user: UserData  # Always present in GUILD_MEMBER_ADD events
+    nick: NotRequired[Optional[str]]
+    avatar: NotRequired[Optional[str]]
+    roles: List[Snowflake]
+    joined_at: str
+    premium_since: NotRequired[Optional[str]]
+    deaf: bool
+    mute: bool
+    pending: NotRequired[bool]
+    permissions: NotRequired[str]
+
+    guild_id: Snowflake  # Extra field
+
+
+GuildMemberAddEvent = GenericDispatchEvent[Literal['GUILD_MEMBER_ADD'], GuildMemberAddData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-member-remove
+
+
+@final
+class GuildMemberRemoveData(TypedDict):
+    user: UserData
+    guild_id: Snowflake
+
+
+GuildMemberRemoveEvent = GenericDispatchEvent[
+    Literal['GUILD_MEMBER_REMOVE'], GuildMemberRemoveData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-member-update
+
+
+@final
+class GuildMemberUpdateData(TypedDict):
+    guild_id: Snowflake
+    roles: List[Snowflake]
+    user: List[UserData]
+    nick: NotRequired[Optional[str]]
+    avatar: Optional[str]
+    joined_at: Optional[str]
+    premium_since: NotRequired[Optional[str]]
+    deaf: NotRequired[bool]
+    mute: NotRequired[bool]
+    pending: NotRequired[bool]
+    communication_disabled_until: NotRequired[Optional[str]]
+
+
+GuildmemberUpdateEvent = GenericDispatchEvent[
+    Literal['GUILD_MEMBER_UPDATE'], GuildMemberUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-members-chunk
+
+
+@final
+class GuildMembersChunkData(TypedDict):
+    guild_id: Snowflake
+    members: List[GuildMemberData]
+    chunk_index: int
+    chunk_count: int
+    not_found: NotRequired[List[Snowflake]]
+    presences: NotRequired[List[UpdatePresenceData]]
+    nonce: NotRequired[str]
+
+
+GuildMembersChunkEvent = GenericDispatchEvent[
+    Literal['GUILD_MEMBERS_CHUNK'], GuildMembersChunkData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-role-create
+
+
+@final
+class GuildRoleCreateData(TypedDict):
+    guild_id: Snowflake
+    role: RoleData
+
+
+GuildRoleCreateEvent = GenericDispatchEvent[Literal['GUILD_ROLE_CREATE'], GuildRoleCreateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-role-update
+
+
+@final
+class GuildRoleUpdateData(TypedDict):
+    guild_id: Snowflake
+    role: RoleData
+
+
+GuildRoleUpdateEvent = GenericDispatchEvent[Literal['GUILD_ROLE_UPDATE'], GuildRoleUpdateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-role-delete
+
+
+@final
+class GuildRoleDeleteData(TypedDict):
+    guild_id: Snowflake
+    role_id: Snowflake
+
+
+GuildRoleDeleteEvent = GenericDispatchEvent[Literal['GUILD_ROLE_DELETE'], GuildRoleDeleteData]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create
+
+
+GuildScheduledEventCreateData: TypeAlias = 'GuildScheduledEventData'
+GuildScheduledEventCreateEvent = GenericDispatchEvent[
+    Literal['GUILD_SCHEDULED_EVENT_CREATE'], GuildScheduledEventCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update
+
+
+GuildScheduledEventUpdateData: TypeAlias = 'GuildScheduledEventData'
+GuildScheduledEventUpdateEvent = GenericDispatchEvent[
+    Literal['GUILD_SCHEDULED_EVENT_UPDATE'], GuildScheduledEventUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete
+
+
+GuildScheduledEventDeleteData: TypeAlias = 'GuildScheduledEventData'
+GuildScheduledEventDeleteEvent = GenericDispatchEvent[
+    Literal['GUILD_SCHEDULED_EVENT_DELETE'], GuildScheduledEventDeleteData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add
+
+
+@final
+class GuildScheduledEventUserAddData(TypedDict):
+    guild_scheduled_event_id: Snowflake
+    user_id: Snowflake
+    guild_id: Snowflake
+
+
+GuildScheduledEventUserAddEvent = GenericDispatchEvent[
+    Literal['GUILD_SCHEDULED_EVENT_USER_ADD'], GuildScheduledEventUserAddData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove
+
+
+@final
+class GuildScheduledEventUserRemoveData(TypedDict):
+    guild_scheduled_event_id: Snowflake
+    user_id: Snowflake
+    guild_id: Snowflake
+
+
+GuildScheduledEventUserRemoveEvent = GenericDispatchEvent[
+    Literal['GUILD_SCHEDULED_EVENT_USER_REMOVE'], GuildScheduledEventUserRemoveData
 ]
 
 
