@@ -1101,10 +1101,19 @@ class SessionStartLimitData(TypedDict):
     max_concurrency: int
 
 
+# Generalized unions for the typings in this file
+
+
 DispatchEvent = GenericDispatchEvent[str, Dict[str, Any]]
 
 
 GatewayEvent = Union[
     HeartbeatACKEvent, HelloEvent, ReadyEvent, ResumedEvent, DispatchEvent,
     ReconnectEvent, InvalidSessionEvent,
+]
+
+
+GatewayCommand = Union[
+    IdentifyCommand, ResumeCommand, HeartbeatCommand, RequestGuildMembersCommand,
+    VoiceUpdateCommand
 ]
