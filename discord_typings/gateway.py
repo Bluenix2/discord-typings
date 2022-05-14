@@ -77,14 +77,15 @@ _T = TypeVar('_T', bound='str')  # Literal
 
 @final
 class GenericDispatchEvent(TypedDict, Generic[_T, _D]):
-    """Helper generic TypedDict for annotating dispatch events.
+    """Generic Discord dispatch event.
 
-    This should generally not be used, and does not necessarily represent any
-    one payload from Discord. Consider this private as it is not exposed under
-    the `discord_typings` namespace; use the public non-generic versions.
+    This is a generic TypedDict for creating typings for dispatch events. The
+    resulting TypedDict contains the `op`, `d`, `s` and `t` fields. To get the
+    typing for the inner `d` key, grab the second argument to the generic.
 
     The reason this doesn't have a leading underscore is to look nicer when
-    previewed in editors and IDEs.
+    previewed in editors and IDEs but the actual `GenericDispatchEvent()`
+    should be considered private - use the public, typed, versions.
     """
     op: Literal[0]
     d: _D
