@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 __all__ = (
     'GuildData', 'DefaultMessageNotificationLevels', 'ExplicitContentFilterLevels',
-    'MFALevels', 'VerificationLevels', 'GuildNSFWLevels', 'PremiumTiers',
+    'MFALevels', 'VerificationLevels', 'GuildNSFWLevels', 'PremiumTiers', 'GuildFeaturesData',
     'UnavailableGuildData', 'GuildPreviewData', 'GuildWidgetSettingsData', 'GuildWidgetData',
     'GuildMemberData', 'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
     'IntegrationExpireBehaviors', 'IntegrationAccountData', 'IntegrationApplicationData',
@@ -30,6 +30,7 @@ class GuildData(TypedDict):
     id: str
     name: str
     icon: Optional[str]
+    icon_hash: NotRequired[Optional[str]]
     splash: Optional[str]
     discovery_splash: Optional[str]
     owner: NotRequired[bool]
@@ -44,7 +45,7 @@ class GuildData(TypedDict):
     explicit_content_filter: ExplicitContentFilterLevels
     roles: List[RoleData]
     emojis: List[EmojiData]
-    features: List[GuildFeatures]
+    features: List[GuildFeaturesData]
     mfa_level: MFALevels
     application_id: Optional[str]
     system_channel_id: Optional[str]
@@ -64,7 +65,8 @@ class GuildData(TypedDict):
     approximate_presence_count: NotRequired[int]
     welcome_screen: NotRequired[WelcomeScreenData]
     nsfw_level: GuildNSFWLevels
-    stickers: List[StickerData]
+    stickers: NotRequired[List[StickerData]]
+    premium_progress_bar_enabled: bool
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
@@ -106,7 +108,7 @@ PremiumTiers = Literal[0, 1, 2, 3]
 # https://discord.com/developers/docs/resources/guild#guild-object-guild-features
 
 
-GuildFeatures = Literal[
+GuildFeaturesData = Literal[
     'ANIMATED_ICON', 'BANNER', 'COMMERCE', 'COMMUNITY', 'DISCOVERABLE',
     'FEATUREABLE', 'INVITE_SPLASH', 'MEMBER_VERIFICATION_GATE_ENABLED',
     'MONETIZATION_ENABLED', 'MORE_STICKERS', 'NEWS', 'PARTNERED',
@@ -137,7 +139,7 @@ class GuildPreviewData(TypedDict):
     splash: Optional[str]
     discovery_splash: Optional[str]
     emojis: List[EmojiData]
-    features: List[GuildFeatures]
+    features: List[GuildFeaturesData]
     approximate_member_count: int
     approximate_presence_count: int
     description: Optional[str]

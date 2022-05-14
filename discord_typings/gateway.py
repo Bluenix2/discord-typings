@@ -8,29 +8,66 @@ from typing import (
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict, final
 
 if TYPE_CHECKING:
-    from .interactions import ApplicationCommandPermissionsData
-    from .resources import (
-        CategoryChannelData, EmojiData, GuildData, GuildMemberData,
-        GuildScheduledEventData, NewsChannelData, RoleData, StickerData,
+    # Flake8 complains about some of these imports where they are only used
+    # inside of strings (not annotations) for the type aliases, so we have to
+    # disable the check.
+    from .interactions import (  # noqa: F401
+        ApplicationCommandPermissionsData, InteractionData
+    )
+    from .resources import (  # noqa: F401
+        ApplicationData, CategoryChannelData, EmojiData, GuildData,
+        GuildFeaturesData, GuildMemberData, GuildScheduledEventData,
+        MessageData, NewsChannelData, RoleData, StageInstanceData, StickerData,
         TextChannelData, ThreadChannelData, ThreadMemberData, ThreadMetadata,
-        UnavailableGuildData, UserData, VoiceChannelData
+        UnavailableGuildData, UserData, VoiceChannelData, VoiceStateData,
+        WelcomeScreenData
     )
     from .shared import Snowflake
 
 __all__ = (
     'HeartbeatACKEvent', 'IdentifyData', 'IdentifyConnectionProperties', 'IdentifyCommand',
     'ResumeData', 'ResumeCommand', 'HeartbeatCommand', 'RequestGuildMembersData',
-    'RequestGuildMembersCommand', 'VoiceUpdateData', 'VoiceUpdateCommand', 'ActivityData',
-    'UpdatePresenceData', 'UpdatePresenceCommand', 'HelloData', 'HelloEvent',
-    'PartialApplicationData', 'ReadyData', 'ReadyEvent', 'ResumedData', 'ResumedEvent',
-    'ReconnectEvent', 'InvalidSessionEvent', 'ApplicationCommandPermissionsUpdateData',
-    'ApplicationCommandPermissionsUpdateEvent', 'ChannelCreateData', 'ChannelCreateEvent',
-    'ChannelUpdateData', 'ChannelUpdateEvent', 'ChannelDeleteData', 'ChannelDeleteEvent',
-    'ThreadCreateData', 'ThreadCreateEvent', 'ThreadUpdateData', 'ThreadUpdateEvent',
-    'ThreadDeleteData', 'ThreadDeleteEvent', 'ThreadListSyncData', 'ThreadListSyncEvent',
-    'ThreadMemberUpdateData', 'ThreadMemberUpdateEvent', 'ThreadMembersUpdateData',
-    'ThreadMembersUpdateEvent', 'ChannelPinsUpdateData', 'ChannelPinsUpdateEvent',
-    'GetGatewayData', 'GetGatewayBotData', 'GatewayEvent',
+    'RequestGuildMembersCommand', 'VoiceUpdateData', 'VoiceUpdateCommand',
+    'PartialActivityData', 'UpdatePresenceData', 'UpdatePresenceCommand', 'HelloData',
+    'HelloEvent', 'PartialApplicationData', 'ReadyData', 'ReadyEvent', 'ResumedData',
+    'ResumedEvent', 'ReconnectEvent', 'InvalidSessionEvent',
+    'ApplicationCommandPermissionsUpdateData', 'ApplicationCommandPermissionsUpdateEvent',
+    'ChannelCreateData', 'ChannelCreateEvent', 'ChannelUpdateData', 'ChannelUpdateEvent',
+    'ChannelDeleteData', 'ChannelDeleteEvent', 'ThreadCreateData', 'ThreadCreateEvent',
+    'ThreadUpdateData', 'ThreadUpdateEvent', 'ThreadDeleteData', 'ThreadDeleteEvent',
+    'ThreadListSyncData', 'ThreadListSyncEvent', 'ThreadMemberUpdateData',
+    'ThreadMemberUpdateEvent', 'ThreadMembersUpdateData', 'ThreadMembersUpdateEvent',
+    'ChannelPinsUpdateData', 'ChannelPinsUpdateEvent', 'GuildCreateData', 'GuildCreateEvent',
+    'GuildUpdateData', 'GuildUpdateEvent', 'GuildDeleteData', 'GuildDeleteEvent',
+    'GuildBanAddData', 'GuildBanAddEvent', 'GuildBanRemoveData', 'GuildBanRemoveEvent',
+    'GuildEmojisUpdateData', 'GuildEmojisUpdateEvent', 'GuildStickersUpdateData',
+    'GuildStickersUpdateEvent', 'GuildIntergrationsUpdateData',
+    'GuildIntergrationsUpdateEvent', 'GuildMemberAddData', 'GuildMemberAddEvent',
+    'GuildMemberRemoveData', 'GuildMemberRemoveEvent', 'GuildMemberUpdateData',
+    'GuildMemberUpdateEvent', 'GuildMembersChunkData', 'GuildMembersChunkEvent',
+    'GuildRoleCreateData', 'GuildRoleCreateEvent', 'GuildRoleCreateEvent',
+    'GuildRoleUpdateData', 'GuildRoleUpdateEvent', 'GuildRoleDeleteData',
+    'GuildRoleDeleteEvent', 'GuildScheduledEventCreateData', 'GuildScheduledEventCreateEvent',
+    'GuildScheduledEventUpdateData', 'GuildScheduledEventUpdateEvent',
+    'GuildScheduledEventDeleteData', 'GuildScheduledEventDeleteEvent',
+    'GuildScheduledEventUserAddData', 'GuildScheduledEventUserAddEvent',
+    'GuildScheduledEventUserRemoveData', 'GuildScheduledEventUserRemoveEvent',
+    'InviteCreateData', 'InviteCreateEvent', 'InviteDeleteData', 'InviteDeleteEvent',
+    'MessageCreateData', 'MessageCreateEvent', 'MessageUpdateData', 'MessageUpdateEvent',
+    'MessageDeleteData', 'MessageDeleteEvent', 'MessageDeleteBulkData',
+    'MessageDeleteBulkEvent', 'MessageReactionAddData', 'MessageReactionAddEvent',
+    'MessageReactionRemoveData', 'MessageReactionRemoveEvent', 'MessageReactionRemoveAllData',
+    'MessageReactionRemoveAllEvent', 'MessageReactionRemoveEmojiData',
+    'MessageReactionRemoveEmojiEvent', 'PresenceUpdateData', 'ClientStatusData',
+    'ActivityData', 'ActivityTimestampsData', 'ActivityEmojiData', 'ActivityPartyData',
+    'ActivityAssetsData', 'ActivitySecretsData', 'ActivityButtonData', 'TypingStartData',
+    'TypingStartEvent', 'VoiceStateUpdateData', 'VoiceStateUpdateEvent',
+    'VoiceServerUpdateData', 'VoiceServerUpdateEvent', 'WebhooksUpdateData',
+    'WebhooksUpdateEvent', 'InteractionCreateData', 'InteractionCreateEvent',
+    'StageInstanceCreateData', 'StageInstanceCreateEvent', 'StageInstanceUpdateData',
+    'StageInstanceUpdateEvent', 'StageInstanceDeleteData', 'StageInstanceDeleteEvent',
+    'GetGatewayData', 'GetGatewayBotData', 'SessionStartLimitData', 'DispatchEvent',
+    'GatewayEvent'
 )
 
 
@@ -167,7 +204,7 @@ class VoiceUpdateCommand(TypedDict):
 
 
 @final
-class ActivityData(TypedDict):
+class PartialActivityData(TypedDict):
     name: str
     type: Literal[0, 1, 2, 3, 4, 5]
     url: NotRequired[str]
@@ -176,7 +213,7 @@ class ActivityData(TypedDict):
 @final
 class UpdatePresenceData(TypedDict):
     since: Optional[int]
-    activities: List[ActivityData]
+    activities: List[PartialActivityData]
     status: Literal['online', 'idle', 'dnd', 'invisible']
     afk: bool
 
@@ -421,7 +458,64 @@ ChannelPinsUpdateEvent = GenericDispatchEvent[
 # https://discord.com/developers/docs/topics/gateway#guild-create
 
 
-# TODO: ...
+@final
+class GuildCreateData(TypedDict):
+    id: str
+    name: str
+    icon: Optional[str]
+    icon_hash: NotRequired[Optional[str]]
+    splash: Optional[str]
+    discovery_splash: Optional[str]
+    owner: NotRequired[bool]
+    owner_id: str
+    permissions: NotRequired[str]
+    afk_channel_id: Optional[str]
+    afk_timeout: int
+    widget_enabled: NotRequired[bool]
+    widget_channel_id: NotRequired[Optional[str]]
+    verification_level: Literal[0, 1, 2, 3, 4]
+    default_message_notifications: Literal[0, 1]
+    explicit_content_filter: Literal[0, 1, 2]
+    roles: List[RoleData]
+    emojis: List[EmojiData]
+    features: List[GuildFeaturesData]
+    mfa_level: Literal[0, 1]
+    application_id: Optional[str]
+    system_channel_id: Optional[str]
+    system_channel_flags: int
+    rules_channel_id: Optional[str]
+    max_presences: NotRequired[Optional[int]]
+    max_members: NotRequired[int]
+    vanity_url_code: Optional[str]
+    description: Optional[str]
+    banner: Optional[str]
+    premium_tier: Literal[0, 1, 2, 3]
+    premium_subscription_count: NotRequired[int]
+    preferred_locale: str
+    public_updates_channel_id: Optional[str]
+    max_video_channel_users: NotRequired[int]
+    approximate_member_count: NotRequired[int]
+    approximate_presence_count: NotRequired[int]
+    welcome_screen: NotRequired[WelcomeScreenData]
+    nsfw_level: Literal[0, 1, 2, 3]
+    stickers: NotRequired[List[StickerData]]
+    premium_progress_bar_enabled: bool
+
+    # Extra GUILD_CREATE fields
+    joined_at: str
+    large: bool
+    unavailable: bool
+    member_count: int
+    voice_states: List[VoiceStateData]
+    members: List[GuildMemberData]
+    channels: List[_GuildChannelData]
+    threads: List[ThreadChannelData]
+    presences: List[UpdatePresenceData]
+    stage_instances: List[StageInstanceData]
+    guild_scheduled_events: List[GuildScheduledEventData]
+
+
+GuildCreateEvent = GenericDispatchEvent[Literal['GUILD_CREATE'], GuildCreateData]
 
 
 # https://discord.com/developers/docs/topics/gateway#guild-update
@@ -557,7 +651,7 @@ class GuildMemberUpdateData(TypedDict):
     communication_disabled_until: NotRequired[Optional[str]]
 
 
-GuildmemberUpdateEvent = GenericDispatchEvent[
+GuildMemberUpdateEvent = GenericDispatchEvent[
     Literal['GUILD_MEMBER_UPDATE'], GuildMemberUpdateData
 ]
 
@@ -572,7 +666,7 @@ class GuildMembersChunkData(TypedDict):
     chunk_index: int
     chunk_count: int
     not_found: NotRequired[List[Snowflake]]
-    presences: NotRequired[List[UpdatePresenceData]]
+    presences: NotRequired[List[PresenceUpdateData]]
     nonce: NotRequired[str]
 
 
@@ -671,6 +765,317 @@ class GuildScheduledEventUserRemoveData(TypedDict):
 
 GuildScheduledEventUserRemoveEvent = GenericDispatchEvent[
     Literal['GUILD_SCHEDULED_EVENT_USER_REMOVE'], GuildScheduledEventUserRemoveData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#invite-create
+
+
+@final
+class InviteCreateData(TypedDict):
+    channel_id: Snowflake
+    code: str
+    created_at: str
+    guild_id: NotRequired[Snowflake]
+    inviter: NotRequired[UserData]
+    max_age: int
+    max_uses: int
+    target_type: NotRequired[Literal[1, 2]]
+    target_user: NotRequired[UserData]
+    target_application: NotRequired[ApplicationData]
+    temporary: bool
+    uses: int
+
+
+InviteCreateEvent = GenericDispatchEvent[Literal['INVITE_CREATE'], InviteCreateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#invite-delete
+
+
+@final
+class InviteDeleteData(TypedDict):
+    channel_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+    code: str
+
+
+InviteDeleteEvent = GenericDispatchEvent[Literal['INVITE_DELETE'], InviteDeleteData]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-create
+
+
+MessageCreateData: TypeAlias = 'MessageData'
+MessageCreateEvent = GenericDispatchEvent[Literal['MESSAGE_CREATE'], MessageCreateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-update
+
+
+MessageUpdateData: TypeAlias = 'MessageData'
+MessageUpdateEvent = GenericDispatchEvent[Literal['MESSAGE_UPDATE'], MessageUpdateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-delete
+
+
+@final
+class MessageDeleteData(TypedDict):
+    id: Snowflake
+    channel_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+
+
+MessageDeleteEvent = GenericDispatchEvent[Literal['MESSAGE_DELETE'], MessageDeleteData]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-delete-bulk
+
+
+@final
+class MessageDeleteBulkData(TypedDict):
+    ids: List[Snowflake]
+    channel_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+
+
+MessageDeleteBulkEvent = GenericDispatchEvent[
+    Literal['MESSAGE_DELETE_BULK'], MessageDeleteBulkData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-reaction-add
+
+
+@final
+class MessageReactionAddData(TypedDict):
+    user_id: Snowflake
+    channel_id: Snowflake
+    message_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+    member: NotRequired[GuildMemberData]
+    emoji: EmojiData
+
+
+MessageReactionAddEvent = GenericDispatchEvent[
+    Literal['MESSAGE_REACTION_ADD'], MessageReactionAddData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-reaction-remove
+
+
+@final
+class MessageReactionRemoveData(TypedDict):
+    user_id: Snowflake
+    channel_id: Snowflake
+    message_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+    emoji: EmojiData
+
+
+MessageReactionRemoveEvent = GenericDispatchEvent[
+    Literal['MESSAGE_REACTION_REMOVE'], MessageReactionRemoveData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all
+
+
+@final
+class MessageReactionRemoveAllData(TypedDict):
+    channel_id: Snowflake
+    message_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+
+
+MessageReactionRemoveAllEvent = GenericDispatchEvent[
+    Literal['MESSAGE_REACTION_REMOVE_ALL'], MessageReactionRemoveAllData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji
+
+
+@final
+class MessageReactionRemoveEmojiData(TypedDict):
+    channel_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+    message_id: Snowflake
+    emoji: EmojiData
+
+
+MessageReactionRemoveEmojiEvent = GenericDispatchEvent[
+    Literal['MESSAGE_REACTION_REMOVE_EMOJI'], MessageReactionRemoveEmojiData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#presence-update
+
+
+@final
+class PresenceUpdateData(TypedDict):
+    user: UserData
+    guild_id: Snowflake
+    status: Literal['idle', 'dnd', 'online', 'offline']
+    activities: List[ActivityData]
+    client_status: ClientStatusData
+
+
+@final
+class ClientStatusData(TypedDict):
+    desktop: NotRequired[str]
+    mobile: NotRequired[str]
+    web: NotRequired[str]
+
+
+# https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure
+
+
+@final
+class ActivityData(TypedDict):
+    name: str
+    type: Literal[0, 1, 2, 3, 4, 5]
+    url: NotRequired[Optional[str]]
+    created_at: int
+    timestamps: NotRequired[ActivityTimestampsData]
+    application_id: NotRequired[Snowflake]
+    details: NotRequired[Optional[str]]
+    state: NotRequired[Optional[str]]
+    emoji: NotRequired[Optional[ActivityEmojiData]]
+    party: NotRequired[Optional[ActivityPartyData]]
+    assets: NotRequired[ActivityAssetsData]
+    secrets: NotRequired[ActivitySecretsData]
+    instance: NotRequired[bool]
+    flags: NotRequired[int]
+    buttons: NotRequired[List[ActivityButtonData]]
+
+
+@final
+class ActivityTimestampsData(TypedDict):
+    start: NotRequired[int]
+    end: NotRequired[int]
+
+
+@final
+class ActivityEmojiData(TypedDict):
+    name: str
+    id: NotRequired[Snowflake]
+    animated: NotRequired[bool]
+
+
+@final
+class ActivityPartyData(TypedDict):
+    id: NotRequired[str]
+    size: NotRequired[Union[Tuple[int, int], List[int]]]
+
+
+@final
+class ActivityAssetsData(TypedDict):
+    large_image: NotRequired[str]
+    large_text: NotRequired[str]
+    small_image: NotRequired[str]
+    small_test: NotRequired[str]
+
+
+@final
+class ActivitySecretsData(TypedDict):
+    join: NotRequired[str]
+    spectate: NotRequired[str]
+    match: NotRequired[str]
+
+
+@final
+class ActivityButtonData(TypedDict):
+    label: str
+    url: str
+
+
+# https://discord.com/developers/docs/topics/gateway#typing-start
+
+
+@final
+class TypingStartData(TypedDict):
+    channel_id: Snowflake
+    guild_id: NotRequired[Snowflake]
+    user_id: Snowflake
+    timestamp: int
+    member: NotRequired[GuildMemberData]
+
+
+TypingStartEvent = GenericDispatchEvent[Literal['TYPING_START'], TypingStartData]
+
+
+# https://discord.com/developers/docs/topics/gateway#voice-state-update
+
+
+VoiceStateUpdateData: TypeAlias = 'VoiceStateData'
+VoiceStateUpdateEvent = GenericDispatchEvent[
+    Literal['VOICE_STATUS_UPDATE'], VoiceStateUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#voice-server-update
+
+
+@final
+class VoiceServerUpdateData(TypedDict):
+    token: str
+    guild_id: Snowflake
+    endpoint: Optional[str]
+
+
+VoiceServerUpdateEvent = GenericDispatchEvent[
+    Literal['VOICE_SERVER_UPDATE'], VoiceServerUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#webhooks-update
+
+
+@final
+class WebhooksUpdateData(TypedDict):
+    guild_id: Snowflake
+    channel_id: Snowflake
+
+
+WebhooksUpdateEvent = GenericDispatchEvent[Literal['WEBHOOKS_UPDATE'], WebhooksUpdateData]
+
+
+# https://discord.com/developers/docs/topics/gateway#interaction-create
+
+
+InteractionCreateData: TypeAlias = 'InteractionData'
+InteractionCreateEvent = GenericDispatchEvent[
+    Literal['INTERACTION_CREATE'], InteractionCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#stage-instance-create
+
+
+StageInstanceCreateData: TypeAlias = 'StageInstanceData'
+StageInstanceCreateEvent = GenericDispatchEvent[
+    Literal['STAGE_INSTANCE_CREATE'], StageInstanceCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#stage-instance-update
+
+
+StageInstanceUpdateData: TypeAlias = 'StageInstanceData'
+StageInstanceUpdateEvent = GenericDispatchEvent[
+    Literal['STAGE_INSTANCE_UPDATE'], StageInstanceUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#stage-instance-delete
+
+
+StageInstanceDeleteData: TypeAlias = 'StageInstanceData'
+StageInstanceDeleteEvent = GenericDispatchEvent[
+    Literal['STAGE_INSTANCE_DELETE'], StageInstanceDeleteData
 ]
 
 
