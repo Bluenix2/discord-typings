@@ -93,7 +93,7 @@ class _QueryRequestMembersCommand(TypedDict):
     query: str
     limit: int
     presences: NotRequired[bool]
-    user_ids: NotRequired[Snowflake | Sequence[Snowflake]]
+    user_ids: NotRequired[Union[Snowflake, Sequence[Snowflake]]]
     nonce: NotRequired[str]
 
 
@@ -101,7 +101,7 @@ class _QueryRequestMembersCommand(TypedDict):
 class _UserIDsRequestMembersCommand(TypedDict):
     guild_id: Snowflake
     presences: NotRequired[bool]
-    user_ids: Snowflake | Sequence[Snowflake]
+    user_ids: Union[Snowflake, Sequence[Snowflake]]
     nonce: NotRequired[str]
 
 
