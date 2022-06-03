@@ -10,7 +10,8 @@ if TYPE_CHECKING:
     from .user import UserData
 
 __all__ = (
-    'GuildScheduledEventData', 'GuildScheduledEventEntityMetadata',
+    'GuildScheduledEventData', 'GuildScheduledEventPrivacyLevels', 'GuildScheduledEventStatus',
+    'GuildScheduledEventEntityTypes', 'GuildScheduledEventEntityMetadata',
     'GuildScheduledEventUserData'
 )
 
@@ -25,9 +26,9 @@ class GuildScheduledEventBase(TypedDict):
     name: str
     description: NotRequired[str]
     scheduled_start_time: str
-    privacy_level: Literal[2]
-    status: Literal[1, 2, 3, 4]
-    entity_type: Literal[1, 2, 3]
+    privacy_level: GuildScheduledEventPrivacyLevels
+    status: GuildScheduledEventStatus
+    entity_type: GuildScheduledEventEntityTypes
     entity_id: Optional[Snowflake]
     creator: UserData
     user_count: NotRequired[int]
@@ -59,6 +60,24 @@ GuildScheduledEventData = Union[
     VoiceGuildScheduledEventData,
     ExternalGuildScheduledEventData
 ]
+
+
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level
+
+
+GuildScheduledEventPrivacyLevels = Literal[2]
+
+
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types
+
+
+GuildScheduledEventEntityTypes = Literal[1, 2, 3]
+
+
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status
+
+
+GuildScheduledEventStatus = Literal[1, 2, 3, 4]
 
 
 # https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata

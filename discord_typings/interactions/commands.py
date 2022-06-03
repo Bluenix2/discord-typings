@@ -8,8 +8,8 @@ if TYPE_CHECKING:
     from ..shared import Snowflake
 
 __all__ = (
-    'ApplicationCommandData', 'SubcommandOptionData', 'SubcommandGroupOptionData',
-    'AutocompleteOptionData', 'ApplicationCommandOptionData',
+    'ApplicationCommandData', 'ApplicationCommandTypes', 'SubcommandOptionData',
+    'SubcommandGroupOptionData', 'AutocompleteOptionData', 'ApplicationCommandOptionData',
     'ApplicationCommandOptionInteractionData', 'GuildApplicationCommandPermissionData',
     'ApplicationCommandPermissionsData', 'ApplicationCommandPayload',
     'BatchEditApplicationCommandPermissionsData'
@@ -45,6 +45,12 @@ class ContextMenuCommandData(TypedDict):
 
 
 ApplicationCommandData = Union[ChatInputCommandData, ContextMenuCommandData]
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
+
+
+ApplicationCommandTypes = Literal[1, 2, 3]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure
@@ -199,6 +205,15 @@ ApplicationCommandOptionData = Union[
 ]
 
 
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type
+
+
+ApplicationCommandOptionTypes = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-choice-structure
+
+
 @final
 class StrCommandOptionChoiceData(TypedDict):
     name: str
@@ -315,8 +330,14 @@ class GuildApplicationCommandPermissionData(TypedDict):
 @final
 class ApplicationCommandPermissionsData(TypedDict):
     id: Snowflake
-    type: Literal[1, 2]
+    type: ApplicationCommandPermissionTypes
     permission: bool
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type
+
+
+ApplicationCommandPermissionTypes = Literal[1, 2, 3]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#create-global-application-command-json-params

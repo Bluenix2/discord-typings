@@ -7,7 +7,7 @@ from typing_extensions import Literal, TypedDict, final
 if TYPE_CHECKING:
     from ..shared import Snowflake
 
-__all__ = ('StageInstanceData',)
+__all__ = ('StageInstanceData', 'StageInstancePrivacyLevels')
 
 
 # https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-stage-instance-structure
@@ -19,5 +19,11 @@ class StageInstanceData(TypedDict):
     guild_id: Snowflake
     channel_id: Snowflake
     topic: str
-    privacy_level: Literal[1, 2]
+    privacy_level: StageInstancePrivacyLevels
     discoverable_disabled: bool
+
+
+# https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level
+
+
+StageInstancePrivacyLevels = Literal[1, 2]

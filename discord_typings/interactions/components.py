@@ -8,9 +8,16 @@ if TYPE_CHECKING:
     from ..resources import EmojiData
 
 __all__ = (
-    'ActionRowData', 'ButtonComponentData', 'SelectMenuComponentData', 'SelectMenuOptionData',
-    'TextInputComponentData', 'ComponentData'
+    'ComponentTypes', 'ActionRowData', 'ButtonComponentData', 'ButtonStyles',
+    'SelectMenuComponentData', 'SelectMenuOptionData', 'TextInputComponentData',
+    'ComponentData'
 )
+
+
+# https://discord.com/developers/docs/interactions/message-components#component-object-component-types
+
+
+ComponentTypes = Literal[1, 2, 3, 4]
 
 
 # https://discord.com/developers/docs/interactions/message-components#action-rows
@@ -49,6 +56,11 @@ class LinkButtonComponentData(TypedDict):
 
 ButtonComponentData = Union[NonLinkButtonComponentData, LinkButtonComponentData]
 
+# https://discord.com/developers/docs/interactions/message-components#button-object-button-styles
+
+
+ButtonStyles = Literal[1, 2, 3, 4, 5]
+
 
 # https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-menu-structure
 
@@ -83,13 +95,19 @@ class SelectMenuOptionData(TypedDict):
 class TextInputComponentData(TypedDict):
     type: Literal[4]
     custom_id: str
-    style: Literal[1, 2]
+    style: TextInputStyles
     label: str
     min_length: NotRequired[int]
     max_length: NotRequired[int]
     required: NotRequired[bool]
     value: NotRequired[str]
     placeholder: NotRequired[str]
+
+
+# https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-styles
+
+
+TextInputStyles = Literal[1, 2]
 
 
 ComponentData = Union[

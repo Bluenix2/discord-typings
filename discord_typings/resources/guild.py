@@ -12,11 +12,12 @@ if TYPE_CHECKING:
     from .user import UserData
 
 __all__ = (
-    'GuildData', 'UnavailableGuildData', 'GuildPreviewData',
-    'GuildWidgetSettingsData', 'GuildWidgetData', 'GuildMemberData',
-    'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
-    'IntegrationAccountData', 'IntegrationApplicationData', 'BanData',
-    'WelcomeScreenData', 'WelcomeChannelData', 'ChannelPositionData',
+    'GuildData', 'DefaultMessageNotificationLevels', 'ExplicitContentFilterLevels',
+    'MFALevels', 'VerificationLevels', 'GuildNSFWLevels', 'PremiumTiers',
+    'UnavailableGuildData', 'GuildPreviewData', 'GuildWidgetSettingsData', 'GuildWidgetData',
+    'GuildMemberData', 'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
+    'IntegrationExpireBehaviors', 'IntegrationAccountData', 'IntegrationApplicationData',
+    'BanData', 'WelcomeScreenData', 'WelcomeChannelData', 'ChannelPositionData',
     'ListThreadsData', 'RolePositionData', 'RoleData', 'RoleTagsData'
 )
 
@@ -38,13 +39,13 @@ class GuildData(TypedDict):
     afk_timeout: int
     widget_enabled: NotRequired[bool]
     widget_channel_id: NotRequired[Optional[str]]
-    verification_level: Literal[0, 1, 2, 3, 4]
-    default_message_notifications: Literal[0, 1]
-    explicit_content_filter: Literal[0, 1, 2]
+    verification_level: VerificationLevels
+    default_message_notifications: DefaultMessageNotificationLevels
+    explicit_content_filter: ExplicitContentFilterLevels
     roles: List[RoleData]
     emojis: List[EmojiData]
     features: List[GuildFeatures]
-    mfa_level: Literal[0, 1]
+    mfa_level: MFALevels
     application_id: Optional[str]
     system_channel_id: Optional[str]
     system_channel_flags: int
@@ -54,7 +55,7 @@ class GuildData(TypedDict):
     vanity_url_code: Optional[str]
     description: Optional[str]
     banner: Optional[str]
-    premium_tier: Literal[0, 1, 2, 3]
+    premium_tier: PremiumTiers
     premium_subscription_count: NotRequired[int]
     preferred_locale: str
     public_updates_channel_id: Optional[str]
@@ -62,8 +63,44 @@ class GuildData(TypedDict):
     approximate_member_count: NotRequired[int]
     approximate_presence_count: NotRequired[int]
     welcome_screen: NotRequired[WelcomeScreenData]
-    nsfw_level: Literal[0, 1, 2, 3]
+    nsfw_level: GuildNSFWLevels
     stickers: List[StickerData]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
+
+
+DefaultMessageNotificationLevels = Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
+
+
+ExplicitContentFilterLevels = Literal[0, 1, 2]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-mfa-level
+
+
+MFALevels = Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-verification-level
+
+
+VerificationLevels = Literal[0, 1, 2, 3, 4]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level
+
+
+GuildNSFWLevels = Literal[0, 1, 2, 3]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-object-premium-tier
+
+
+PremiumTiers = Literal[0, 1, 2, 3]
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object-guild-features
@@ -157,7 +194,7 @@ class StreamingIntegrationData(TypedDict):
     syncing: bool
     role_id: NotRequired[Snowflake]
     enable_emoticons: bool
-    expire_behavior: Literal[0, 1]
+    expire_behavior: IntegrationExpireBehaviors
     expire_grace_period: int
     user: UserData
     account: IntegrationAccountData
@@ -178,6 +215,12 @@ class DiscordIntegrationData(TypedDict):
 
 
 IntegrationData = Union[StreamingIntegrationData, DiscordIntegrationData]
+
+
+# https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors
+
+
+IntegrationExpireBehaviors = Literal[0, 1]
 
 
 # https://discord.com/developers/docs/resources/guild#integration-account-object-integration-account-structure

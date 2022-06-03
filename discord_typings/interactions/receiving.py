@@ -19,8 +19,9 @@ if TYPE_CHECKING:
     )
 
 __all__ = (
-    'InteractionData', 'ResolvedInteractionDataData', 'MessageInteractionData',
-    'InteractionResponseData', 'InteractionCallbackData', 'ApplicationCommandInteractionData',
+    'InteractionData', 'InteractionType', 'ResolvedInteractionDataData',
+    'MessageInteractionData', 'InteractionResponseData', 'InteractionCallbackTypes',
+    'InteractionCallbackData', 'ApplicationCommandInteractionData',
     'ComponentInteractionData', 'AutocompleteInteractionData', 'InteractionData',
     'InteractionMessageCallbackData', 'InteractionAutocompleteCallbackData',
     'InteractionModalCallbackData', 'InteractionMessageResponseData',
@@ -151,6 +152,12 @@ InteractionData = Union[
 ]
 
 
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type
+
+
+InteractionType = Literal[1, 2, 3, 4, 5]
+
+
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure
 
 
@@ -262,6 +269,12 @@ InteractionResponseData = Union[
     InteractionMessageResponseData, InteractionAutocompleteResponseData,
     InteractionModalResponseData, InteractionNodataResponseData
 ]
+
+
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
+
+
+InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure

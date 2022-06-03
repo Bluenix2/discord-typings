@@ -18,13 +18,15 @@ if TYPE_CHECKING:
 __all__ = (
     'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',
     'GroupDMChannelData', 'VoiceChannelData', 'CategoryChannelData',
-    'ChannelData', 'ChannelMessageData', 'GuildMessageData', 'MessageData',
-    'PermissionOverwriteData', 'ThreadChannelData', 'MessageReferenceData',
-    'FollowedChannelData', 'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData',
-    'EmbedData', 'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData', 'EmbedProviderData',
-    'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData', 'PartialAttachmentData',
-    'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData', 'ChannelMentionData',
-    'MessageReactionData',
+    'ChannelData', 'ChannelTypes', 'VideoQualityModes', 'ChannelMessageData',
+    'GuildMessageData', 'MessageData', 'UserMentionData', 'MessageTypes',
+    'MessageActivityData', 'MessageActivityTypes', 'PermissionOverwriteData',
+    'ThreadChannelData', 'MessageReferenceData', 'FollowedChannelData',
+    'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData', 'EmbedData',
+    'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData',
+    'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData',
+    'PartialAttachmentData', 'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData',
+    'ChannelMentionData', 'MessageReactionData',
 )
 
 
@@ -125,7 +127,7 @@ class VoiceChannelData(TypedDict):
     user_limit: int
     parent_id: Optional[Snowflake]
     rtc_region: Optional[str]
-    video_quality_mode: NotRequired[Literal[1, 2]]
+    video_quality_mode: NotRequired[VideoQualityModes]
 
 
 @final
@@ -144,6 +146,18 @@ ChannelData = Union[
     TextChannelData, NewsChannelData, DMChannelData, GroupDMChannelData,
     ThreadChannelData, VoiceChannelData, CategoryChannelData
 ]
+
+
+# https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+
+
+ChannelTypes = Literal[0, 1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 15]
+
+
+# https://discord.com/developers/docs/resources/channel#channel-object-video-quality-modes
+
+
+VideoQualityModes = Literal[1, 2]
 
 
 # https://discord.com/developers/docs/resources/channel#message-object-message-structure
@@ -213,8 +227,14 @@ MessageTypes = Literal[
 
 @final
 class MessageActivityData(TypedDict):
-    type: Literal[1, 2, 3, 5]
+    type: MessageActivityTypes
     party_id: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/channel#message-object-message-activity-types
+
+
+MessageActivityTypes = Literal[1, 2, 3, 5]
 
 
 # https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure

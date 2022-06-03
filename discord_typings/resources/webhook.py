@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from .guild import GuildData
     from .user import UserData
 
-__all__ = ('WebhookData',)
+__all__ = ('WebhookData', 'WebhookTypes')
 
 
 # https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure
@@ -19,7 +19,7 @@ __all__ = ('WebhookData',)
 @final
 class WebhookData(TypedDict):
     id: Snowflake
-    type: Literal[1, 2, 3]
+    type: WebhookTypes
     guild_id: NotRequired[Optional[Snowflake]]
     channel_id: Optional[Snowflake]
     user: NotRequired[UserData]
@@ -30,3 +30,9 @@ class WebhookData(TypedDict):
     source_guild: NotRequired[GuildData]
     source_channel: NotRequired[PartialChannelData]
     url: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types
+
+
+WebhookTypes = Literal[1, 2, 3]

@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .guild_scheduled_events import GuildScheduledEventData
     from .user import UserData
 
-__all__ = ('InviteData', 'InviteMetadata')
+__all__ = ('InviteData', 'InviteTargetTypes', 'InviteMetadata')
 
 
 # https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
@@ -22,7 +22,7 @@ class InviteBase(TypedDict):
     guild: NotRequired[GuildData]
     channel: PartialChannelData
     inviter: NotRequired[UserData]
-    target_type: Literal[1, 2]
+    target_type: InviteTargetTypes
     target_user: NotRequired[UserData]
     target_application: NotRequired[ApplicationData]
     approximate_presence_count: NotRequired[int]
@@ -35,6 +35,12 @@ class InviteBase(TypedDict):
 @final
 class InviteData(InviteBase):
     pass
+
+
+# https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types
+
+
+InviteTargetTypes = Literal[1, 2]
 
 
 # https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure

@@ -8,7 +8,10 @@ if TYPE_CHECKING:
     from ..shared import Snowflake
     from .user import UserData
 
-__all__ = ('StickerItemData', 'StickerData', 'StickerPackData')
+__all__ = [
+    'StickerItemData', 'StickerTypes', 'StickerFormatTypes', 'StickerData',
+    'StickerPackData',
+]
 
 
 # https://discord.com/developers/docs/resources/sticker#sticker-item-object-sticker-item-structure
@@ -19,12 +22,24 @@ __all__ = ('StickerItemData', 'StickerData', 'StickerPackData')
 class StickerItemBase(TypedDict):
     id: Snowflake
     name: str
-    format_type: Literal[1, 2, 3]
+    format_type: StickerFormatTypes
 
 
 @final
 class StickerItemData(StickerItemBase):
     pass
+
+
+# https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types
+
+
+StickerTypes = Literal[1, 2]
+
+
+# https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types
+
+
+StickerFormatTypes = Literal[1, 2, 3]
 
 
 # https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure
@@ -35,7 +50,7 @@ class StickerData(StickerItemBase):
     pack_id: NotRequired[Snowflake]
     description: Optional[str]
     tags: str
-    type: Literal[1, 2]
+    type: StickerTypes
     available: NotRequired[bool]
     guild_id: NotRequired[Snowflake]
     user: NotRequired[UserData]
