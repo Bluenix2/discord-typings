@@ -174,10 +174,10 @@ class MessageBase(TypedDict):
     mention_everyone: bool
     mentions: Union[List[UserData], List[UserMentionData]]
     mention_roles: List[Snowflake]
-    mention_channels: List[ChannelMentionData]
+    mention_channels: NotRequired[List[ChannelMentionData]]
     attachments: List[AttachmentData]
     embeds: List[EmbedData]
-    reactions: List[MessageReactionData]
+    reactions: NotRequired[List[MessageReactionData]]
     nonce: NotRequired[Union[int, str]]
     pinned: bool
     webhook_id: NotRequired[Snowflake]
