@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Union
+from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
@@ -16,6 +16,16 @@ __all__ = (
 )
 
 
+# https://discord.com/developers/docs/reference#locales
+
+
+Locales = Literal[
+    'da', 'de', 'en-GB', 'en-US', 'en-ES', 'fr', 'hr', 'it', 'lt', 'hu', 'nl',
+    'no', 'pl', 'pt-BR', 'ro', 'fi', 'sv-SE', 'vi', 'tr', 'cs', 'el', 'bg',
+    'ru', 'uk', 'hi', 'th', 'zh-CN', 'ja', 'zh-TW', 'ko'
+]
+
+
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
 
 
@@ -26,7 +36,9 @@ class ChatInputCommandData(TypedDict):
     application_id: Snowflake
     guild_id: NotRequired[Snowflake]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     options: List[ApplicationCommandOptionData]
     default_permission: NotRequired[bool]
     version: Snowflake
@@ -39,7 +51,9 @@ class ContextMenuCommandData(TypedDict):
     application_id: Snowflake
     guild_id: NotRequired[Snowflake]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     default_permission: NotRequired[bool]
     version: Snowflake
 
@@ -63,7 +77,9 @@ ApplicationCommandTypes = Literal[1, 2, 3]
 class SubcommandOptionData(TypedDict):
     type: Literal[1]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     options: NotRequired[List[ApplicationCommandOptionData]]
 
 
@@ -71,7 +87,9 @@ class SubcommandOptionData(TypedDict):
 class SubcommandGroupOptionData(TypedDict):
     type: Literal[2]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     options: List[SubcommandOptionData]
 
 
@@ -79,7 +97,9 @@ class SubcommandGroupOptionData(TypedDict):
 class ChoicesStringOptionData(TypedDict):
     type: Literal[3]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     choices: NotRequired[List[StrCommandOptionChoiceData]]
 
@@ -88,7 +108,9 @@ class ChoicesStringOptionData(TypedDict):
 class AutocompleteStringOptionData(TypedDict):
     type: Literal[3]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     autocomplete: NotRequired[bool]
 
@@ -97,7 +119,9 @@ class AutocompleteStringOptionData(TypedDict):
 class ChoicesIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     choices: NotRequired[List[IntCommandOptionChoiceData]]
 
@@ -106,7 +130,9 @@ class ChoicesIntegerCommandOptionData(TypedDict):
 class MinMaxIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     min_value: NotRequired[int]
     max_value: NotRequired[int]
@@ -116,7 +142,9 @@ class MinMaxIntegerCommandOptionData(TypedDict):
 class AutocompleteIntegerOptionData(TypedDict):
     type: Literal[4]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     autocomplete: NotRequired[bool]
 
@@ -125,7 +153,9 @@ class AutocompleteIntegerOptionData(TypedDict):
 class BooleanOptionData(TypedDict):
     type: Literal[5]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
 
 
@@ -133,7 +163,9 @@ class BooleanOptionData(TypedDict):
 class UserOptionData(TypedDict):
     type: Literal[6]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
 
 
@@ -141,7 +173,9 @@ class UserOptionData(TypedDict):
 class ChannelOptionData(TypedDict):
     type: Literal[7]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     channel_types: NotRequired[List[Literal[0, 2, 4, 5, 6, 13]]]
 
@@ -150,7 +184,9 @@ class ChannelOptionData(TypedDict):
 class RoleOptionData(TypedDict):
     type: Literal[8]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
 
 
@@ -158,7 +194,9 @@ class RoleOptionData(TypedDict):
 class MentionableOptionData(TypedDict):
     type: Literal[9]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
 
 
@@ -166,7 +204,9 @@ class MentionableOptionData(TypedDict):
 class ChoicesNumberCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     choices: NotRequired[List[NumberCommandOptionChoiceData]]
 
@@ -175,7 +215,9 @@ class ChoicesNumberCommandOptionData(TypedDict):
 class MinMaxNumberCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     min_value: NotRequired[Union[int, float]]
     max_value: NotRequired[Union[int, float]]
@@ -185,7 +227,9 @@ class MinMaxNumberCommandOptionData(TypedDict):
 class AutocompleteNumberOptionData(TypedDict):
     type: Literal[4]
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
     autocomplete: NotRequired[bool]
 
@@ -217,19 +261,25 @@ ApplicationCommandOptionTypes = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 @final
 class StrCommandOptionChoiceData(TypedDict):
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     value: str
 
 
 @final
 class IntCommandOptionChoiceData(TypedDict):
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     value: int
 
 
 @final
 class NumberCommandOptionChoiceData(TypedDict):
     name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     value: Union[int, float]
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure
 
 
 @final
