@@ -26,7 +26,9 @@ ComponentTypes = Literal[1, 2, 3, 4]
 @final
 class ActionRowData(TypedDict):
     type: Literal[1]
-    components: List[Union[ButtonComponentData, SelectMenuComponentData]]
+    components: List[Union[
+        ButtonComponentData, SelectMenuComponentData, TextInputComponentData
+    ]]
 
 
 # https://discord.com/developers/docs/interactions/message-components#button-object-button-structure
