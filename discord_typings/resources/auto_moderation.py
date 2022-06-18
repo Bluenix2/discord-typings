@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import List, Literal, Union
+from typing import List, Union
 
-from typing_extensions import TypedDict, final
+from typing_extensions import Literal, TypedDict, final
 
 from ..shared import Snowflake
 
