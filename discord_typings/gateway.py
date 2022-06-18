@@ -41,16 +41,11 @@ class IdentifyData(TypedDict):
     intents: int
 
 
-# The leading dollar sign makes this an invalid attribute in Python so we need
-# to use this way of defining typed dicts.
-IdentifyConnectionProperties = final(TypedDict(
-    'IdentifyConnectionProperties',
-    {
-        '$os': str,
-        '$browser': str,
-        '$device': str
-    }
-))
+@final
+class IdentifyConnectionProperties(TypedDict):
+    os: str
+    browser: str
+    device: str
 
 
 @final
