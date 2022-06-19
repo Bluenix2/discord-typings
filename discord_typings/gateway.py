@@ -15,7 +15,8 @@ if TYPE_CHECKING:
         ApplicationCommandPermissionsData, InteractionData
     )
     from .resources import (  # noqa: F401
-        ApplicationData, CategoryChannelData, EmojiData, GuildData,
+        ApplicationData, AutoModerationActionData, AutoModerationRuleData,
+        AutoModerationTriggerTypes, CategoryChannelData, EmojiData, GuildData,
         GuildFeaturesData, GuildMemberData, GuildScheduledEventData,
         MessageData, NewsChannelData, RoleData, StageInstanceData, StickerData,
         TextChannelData, ThreadChannelData, ThreadMemberData, ThreadMetadata,
@@ -311,6 +312,66 @@ ApplicationCommandPermissionsUpdateData: TypeAlias = 'ApplicationCommandPermissi
 ApplicationCommandPermissionsUpdateEvent = GenericDispatchEvent[
     Literal['APPLICATION_COMMAND_PERMISSIONS_UPDATE'],
     ApplicationCommandPermissionsUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create
+
+
+AutoModerationRuleCreateData: TypeAlias = 'AutoModerationRuleData'
+
+
+AutoModerationRuleCreateEvent = GenericDispatchEvent[
+    Literal['AUTO_MODERATION_RULE_CREATE'],
+    AutoModerationRuleCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update
+
+
+AutoModerationRuleUpdateData: TypeAlias = 'AutoModerationRuleData'
+
+
+AutoModerationRuleUpdateEvent = GenericDispatchEvent[
+    Literal['AUTO_MODERATION_RULE_UPDATE'],
+    AutoModerationRuleUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete
+
+
+AutoModerationRuleDeleteData: TypeAlias = 'AutoModerationRuleData'
+
+
+AutoModerationRuleDeleteEvent = GenericDispatchEvent[
+    Literal['AUTO_MODERATION_RULE_DELETE'],
+    AutoModerationRuleDeleteData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution
+
+
+@final
+class AutoModerationActionExecutionData(TypedDict):
+    guild_id: Snowflake
+    action: AutoModerationActionData
+    rule_id: Snowflake
+    rule_trigger_type: AutoModerationTriggerTypes
+    user_id: Snowflake
+    channel_id: NotRequired[Snowflake]
+    message_id: NotRequired[Snowflake]
+    alert_system_message_id: NotRequired[Snowflake]
+    content: str
+    matched_keyword: Optional[str]
+    matched_content: Optional[str]
+
+
+AutoModerationActionExecutionEvent = GenericDispatchEvent[
+    Literal['AUTO_MODERATION_ACTION_EXECUTION'],
+    AutoModerationActionExecutionData
 ]
 
 
