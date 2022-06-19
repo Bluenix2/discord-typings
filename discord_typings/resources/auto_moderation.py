@@ -7,9 +7,9 @@ from typing_extensions import Literal, TypedDict, final
 from ..shared import Snowflake
 
 __all__ = [
-    'AutomoderationRuleData', 'AutoModerationTriggerTypes',
+    'AutoModerationRuleData', 'AutoModerationTriggerTypes',
     'AutoModerationTriggerMetadataData', 'AutoModerationKeywordPresetTypes',
-    'AutoModerationEventTypes', 'AutoModerationActionTypes',
+    'AutoModerationEventTypes', 'AutoModerationActionData', 'AutoModerationActionTypes',
 
 ]
 
@@ -62,7 +62,7 @@ class HarmfulLinkSpamAutoModerationRuleData(TypedDict):
     exempt_channels: List[Snowflake]
 
 
-AutomoderationRuleData = Union[
+AutoModerationRuleData = Union[
     KeywordAutoModerationRuleData, KeywordPresetAutoModerationRuleData,
     HarmfulLinkSpamAutoModerationRuleData
 ]
