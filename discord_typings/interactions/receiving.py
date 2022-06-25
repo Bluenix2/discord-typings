@@ -196,6 +196,7 @@ class SelectComponentInteractionDataData(TypedDict):
 @final
 class ModalComponentInteractionDataData(TypedDict):
     custom_id: str
+    component_type: Literal[4]
     components: List[TextInputComponentData]
 
 
