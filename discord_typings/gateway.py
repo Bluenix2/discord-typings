@@ -23,7 +23,7 @@ if TYPE_CHECKING:
         UnavailableGuildData, UserData, VoiceChannelData, VoiceStateData,
         WelcomeScreenData
     )
-    from .shared import Snowflake
+    from .reference import Snowflake
 
 __all__ = (
     'HeartbeatACKEvent', 'IdentifyData', 'IdentifyConnectionProperties', 'IdentifyCommand',

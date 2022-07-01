@@ -9,7 +9,7 @@ if TYPE_CHECKING:
         AllowedMentionsData, AttachmentData, EmbedData, GuildMemberData,
         MessageData, PartialChannelData, RoleData, UserData
     )
-    from ..shared import Snowflake
+    from ..reference import Snowflake
     from .commands import (
         ApplicationCommandOptionInteractionData, AutocompleteOptionData,
         SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
