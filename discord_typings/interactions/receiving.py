@@ -5,11 +5,11 @@ from typing import TYPE_CHECKING, Dict, List, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
+    from ..reference import Snowflake
     from ..resources import (
         AllowedMentionsData, AttachmentData, EmbedData, GuildMemberData,
         MessageData, PartialChannelData, RoleData, UserData
     )
-    from ..reference import Snowflake
     from .commands import (
         ApplicationCommandOptionInteractionData, AutocompleteOptionData,
         SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData

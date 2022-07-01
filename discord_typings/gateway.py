@@ -14,6 +14,7 @@ if TYPE_CHECKING:
     from .interactions import (  # noqa: F401
         ApplicationCommandPermissionsData, InteractionData
     )
+    from .reference import Snowflake
     from .resources import (  # noqa: F401
         ApplicationData, AutoModerationActionData, AutoModerationRuleData,
         AutoModerationTriggerTypes, CategoryChannelData, EmojiData, GuildData,
@@ -23,7 +24,6 @@ if TYPE_CHECKING:
         UnavailableGuildData, UserData, VoiceChannelData, VoiceStateData,
         WelcomeScreenData
     )
-    from .reference import Snowflake
 
 __all__ = (
     'HeartbeatACKEvent', 'IdentifyData', 'IdentifyConnectionProperties', 'IdentifyCommand',
