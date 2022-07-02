@@ -71,6 +71,7 @@ class ModalGuildInteractionData(GuildInteractionData):
 @final
 class AutocompleteGuildInteractionData(GuildInteractionData):
     type: Literal[4]
+    data: ApplicationCommandInteractionDataData
 
 
 class ChannelInteractionData(TypedDict):
@@ -109,6 +110,7 @@ class ModalChannelInteractionData(ChannelInteractionData):
 @final
 class AutocompleteChannelInteractionData(ChannelInteractionData):
     type: Literal[4]
+    data: ApplicationCommandInteractionDataData
 
 
 class UserCommandInteractionBase(TypedDict):
