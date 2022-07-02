@@ -18,8 +18,22 @@ __all__ = (
     'GuildMemberData', 'StreamingIntegrationData', 'DiscordIntegrationData', 'IntegrationData',
     'IntegrationExpireBehaviors', 'IntegrationAccountData', 'IntegrationApplicationData',
     'BanData', 'WelcomeScreenData', 'WelcomeChannelData', 'ChannelPositionData',
-    'ListThreadsData', 'RolePositionData', 'RoleData', 'RoleTagsData'
+    'ListThreadsData', 'RolePositionData', 'RoleData', 'RoleTagsData',
+    'PartialGuildData'
 )
+
+
+# https://discord.com/developers/docs/resources/user#get-current-user-guilds
+
+
+@final
+class PartialGuildData(TypedDict):
+    id: Snowflake
+    name: str
+    icon: Optional[str]
+    owner: bool
+    permissions: str
+    features: List[GuildFeaturesData]
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object-guild-structure
