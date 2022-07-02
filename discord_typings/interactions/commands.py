@@ -246,6 +246,16 @@ class AutocompleteNumberOptionData(TypedDict):
     autocomplete: NotRequired[bool]
 
 
+@final
+class AttachmentOptionData(TypedDict):
+    type: Literal[10]
+    name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    required: NotRequired[bool]
+
+
 AutocompleteOptionData = Union[
     AutocompleteStringOptionData, AutocompleteIntegerOptionData,
     AutocompleteNumberOptionData
@@ -257,7 +267,7 @@ ApplicationCommandOptionData = Union[
     MinMaxIntegerCommandOptionData, MinMaxStringOptionData, BooleanOptionData,
     UserOptionData, ChannelOptionData, RoleOptionData, MentionableOptionData,
     ChoicesNumberCommandOptionData, MinMaxNumberCommandOptionData,
-    AutocompleteOptionData, SubcommandOptionData
+    AutocompleteOptionData, SubcommandOptionData, AttachmentOptionData,
 ]
 
 
@@ -367,11 +377,18 @@ class NumberInteractionData(TypedDict):
     focused: NotRequired[bool]
 
 
+@final
+class AttachmentInteractionData(TypedDict):
+    name: str
+    type: Literal[10]
+    value: str
+
+
 ApplicationCommandOptionInteractionData = Union[
     SubcommandOptionInteractionData, SubcommandGroupOptionInteractionData,
     StringOptionInteractionData, IntegerOptionInteractionData, BooleanOptionInteractionData,
     UserOptionInteractionData, ChannelOptionInteractionData, RoleOptionInteractionData,
-    MentionableInteractionData, NumberInteractionData,
+    MentionableInteractionData, NumberInteractionData, AttachmentInteractionData,
 ]
 
 
