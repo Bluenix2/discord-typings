@@ -116,6 +116,18 @@ class AutocompleteStringOptionData(TypedDict):
 
 
 @final
+class MinMaxStringOptionData(TypedDict):
+    type: Literal[3]
+    name: str
+    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description: str
+    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    required: NotRequired[bool]
+    min_length: NotRequired[int]
+    max_length: NotRequired[int]
+
+
+@final
 class ChoicesIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
@@ -242,7 +254,7 @@ AutocompleteOptionData = Union[
 
 ApplicationCommandOptionData = Union[
     ChoicesStringOptionData, ChoicesIntegerCommandOptionData,
-    MinMaxIntegerCommandOptionData, BooleanOptionData,
+    MinMaxIntegerCommandOptionData, MinMaxStringOptionData, BooleanOptionData,
     UserOptionData, ChannelOptionData, RoleOptionData, MentionableOptionData,
     ChoicesNumberCommandOptionData, MinMaxNumberCommandOptionData,
     AutocompleteOptionData, SubcommandOptionData
