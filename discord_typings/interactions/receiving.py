@@ -15,7 +15,8 @@ if TYPE_CHECKING:
         SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
     )
     from .components import (
-        ComponentData, SelectMenuOptionData, TextInputComponentData
+        ComponentData, SelectMenuComponentData, SelectMenuOptionData,
+        TextInputComponentData
     )
 
 __all__ = (
@@ -206,7 +207,7 @@ class SelectComponentInteractionDataData(TypedDict):
 class ModalComponentInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[4]
-    components: List[TextInputComponentData]
+    components: List[Union[TextInputComponentData, SelectMenuComponentData]]
 
 
 ComponentInteractionDataData = Union[
