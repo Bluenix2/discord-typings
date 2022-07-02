@@ -1176,5 +1176,5 @@ GatewayEvent = Union[
 
 GatewayCommand = Union[
     IdentifyCommand, ResumeCommand, HeartbeatCommand, RequestGuildMembersCommand,
-    VoiceUpdateCommand
+    UpdateVoiceStateCommand
 ]
