@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Optional
 from typing_extensions import TypedDict, final
 
 if TYPE_CHECKING:
-    from ..shared import Snowflake
+    from ..reference import Snowflake
     from .guild import GuildData
     from .user import UserData
 

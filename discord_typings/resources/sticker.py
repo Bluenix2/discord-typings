@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, List, Optional
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..shared import Snowflake
+    from ..reference import Snowflake
     from .user import UserData
 
 __all__ = [

@@ -8,7 +8,7 @@ from .user import UserBase  # Subclassed for UserMentionData
 
 if TYPE_CHECKING:
     from ..interactions import ComponentData, MessageInteractionData
-    from ..shared import Snowflake
+    from ..reference import Snowflake
     from .application import ApplicationData
     from .emoji import EmojiData
     from .guild import GuildMemberData
