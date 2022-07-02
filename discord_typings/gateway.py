@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 __all__ = (
     'HeartbeatACKEvent', 'IdentifyData', 'IdentifyConnectionProperties', 'IdentifyCommand',
     'ResumeData', 'ResumeCommand', 'HeartbeatCommand', 'RequestGuildMembersData',
-    'RequestGuildMembersCommand', 'VoiceUpdateData', 'VoiceUpdateCommand',
+    'RequestGuildMembersCommand', 'UpdateVoiceStateData', 'UpdateVoiceStateCommand',
     'PartialActivityData', 'UpdatePresenceData', 'UpdatePresenceCommand', 'HelloData',
     'HelloEvent', 'PartialApplicationData', 'ReadyData', 'ReadyEvent', 'ResumedData',
     'ResumedEvent', 'ReconnectEvent', 'InvalidSessionEvent',
@@ -189,7 +189,7 @@ class RequestGuildMembersCommand(TypedDict):
 
 
 @final
-class VoiceUpdateData(TypedDict):
+class UpdateVoiceStateData(TypedDict):
     guild_id: Snowflake
     channel_id: Optional[Snowflake]
     self_mute: bool
@@ -197,9 +197,9 @@ class VoiceUpdateData(TypedDict):
 
 
 @final
-class VoiceUpdateCommand(TypedDict):
+class UpdateVoiceStateCommand(TypedDict):
     op: Literal[4]
-    d: VoiceUpdateData
+    d: UpdateVoiceStateData
 
 
 # https://discord.com/developers/docs/topics/gateway#update-presence
