@@ -214,7 +214,7 @@ class MentionableOptionData(TypedDict):
 
 @final
 class ChoicesNumberCommandOptionData(TypedDict):
-    type: Literal[4]
+    type: Literal[10]
     name: str
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
@@ -225,7 +225,7 @@ class ChoicesNumberCommandOptionData(TypedDict):
 
 @final
 class MinMaxNumberCommandOptionData(TypedDict):
-    type: Literal[4]
+    type: Literal[10]
     name: str
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
@@ -237,7 +237,7 @@ class MinMaxNumberCommandOptionData(TypedDict):
 
 @final
 class AutocompleteNumberOptionData(TypedDict):
-    type: Literal[4]
+    type: Literal[10]
     name: str
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
