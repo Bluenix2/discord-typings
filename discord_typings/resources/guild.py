@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
+    from ..interactions import Locales
     from ..reference import Snowflake
     from .channel import ChannelData, ThreadChannelData, ThreadMemberData
     from .emoji import EmojiData
@@ -72,7 +73,7 @@ class GuildData(TypedDict):
     banner: Optional[str]
     premium_tier: PremiumTiers
     premium_subscription_count: NotRequired[int]
-    preferred_locale: str
+    preferred_locale: Locales
     public_updates_channel_id: Optional[str]
     max_video_channel_users: NotRequired[int]
     approximate_member_count: NotRequired[int]

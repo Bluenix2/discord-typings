@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 __all__ = ('UserData', 'UserPremiumTypes')
 
+if TYPE_CHECKING:
+    from ..interactions import Locales
 
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
 
@@ -20,7 +22,7 @@ class UserBase(TypedDict):
     mfa_enabled: NotRequired[bool]
     banner: NotRequired[Optional[str]]
     accent_color: NotRequired[Optional[int]]
-    locale: NotRequired[str]
+    locale: NotRequired[Locales]
     verified: NotRequired[bool]
     email: NotRequired[Optional[bool]]
     flags: NotRequired[int]

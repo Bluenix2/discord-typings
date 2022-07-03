@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     # inside of strings (not annotations) for the type aliases, so we have to
     # disable the check.
     from .interactions import (  # noqa: F401
-        ApplicationCommandPermissionsData, InteractionData
+        ApplicationCommandPermissionsData, InteractionData, Locales
     )
     from .reference import Snowflake
     from .resources import (  # noqa: F401
@@ -553,7 +553,7 @@ class GuildCreateData(TypedDict):
     banner: Optional[str]
     premium_tier: Literal[0, 1, 2, 3]
     premium_subscription_count: NotRequired[int]
-    preferred_locale: str
+    preferred_locale: Locales
     public_updates_channel_id: Optional[str]
     max_video_channel_users: NotRequired[int]
     approximate_member_count: NotRequired[int]

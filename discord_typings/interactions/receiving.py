@@ -12,7 +12,8 @@ if TYPE_CHECKING:
     )
     from .commands import (
         ApplicationCommandOptionInteractionData, AutocompleteOptionData,
-        SubcommandGroupOptionInteractionData, SubcommandOptionInteractionData
+        Locales, SubcommandGroupOptionInteractionData,
+        SubcommandOptionInteractionData
     )
     from .components import (
         ComponentData, SelectMenuComponentData, SelectMenuOptionData,
@@ -42,8 +43,8 @@ class GuildInteractionData(TypedDict):
     member: GuildMemberData
     token: str
     version: int
-    locale: str
-    guild_locale: str
+    locale: Locales
+    guild_locale: Locales
 
 
 @final
@@ -82,7 +83,7 @@ class ChannelInteractionData(TypedDict):
     user: UserData
     token: str
     version: int
-    locale: str
+    locale: Locales
 
 
 @final
@@ -121,14 +122,14 @@ class UserCommandInteractionBase(TypedDict):
     data: ContextMenuInteractionDataData
     token: str
     version: int
-    locale: str
+    locale: Locales
     app_permissions: str
 
 
 @final
 class GuildUserCommandInteractionData(UserCommandInteractionBase):
     member: GuildMemberData
-    guild_locale: str
+    guild_locale: Locales
 
 
 @final
