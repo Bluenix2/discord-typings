@@ -12,7 +12,7 @@ __all__ = (
     'SubcommandGroupOptionData', 'AutocompleteOptionData', 'ApplicationCommandOptionData',
     'ApplicationCommandOptionInteractionData', 'GuildApplicationCommandPermissionData',
     'ApplicationCommandPermissionsData', 'ApplicationCommandPayload',
-    'BatchEditApplicationCommandPermissionsData'
+    'BatchEditApplicationCommandPermissionsData', 'Locales'
 )
 
 

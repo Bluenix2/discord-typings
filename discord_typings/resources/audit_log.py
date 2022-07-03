@@ -12,7 +12,8 @@ if TYPE_CHECKING:
     from .webhook import WebhookData
 
 __all__ = (
-    'AuditLogData', 'AuditLogEntryData', 'OptionalAuditLogEntryData', 'AuditLogChangeData'
+    'AuditLogData', 'AuditLogEntryData', 'OptionalAuditLogEntryData',
+    'AuditLogChangeData', 'AuditLogEvents'
 )
 
 
