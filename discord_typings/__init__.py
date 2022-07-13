@@ -4,5 +4,6 @@ __version__ = "1.0.0"
 
 from .gateway import *
 from .interactions import *
+from .oauth import *
 from .reference import *
 from .resources import *
