@@ -19,10 +19,11 @@ if TYPE_CHECKING:
         ApplicationData, AutoModerationActionData, AutoModerationRuleData,
         AutoModerationTriggerTypes, CategoryChannelData, EmojiData, GuildData,
         GuildFeaturesData, GuildMemberData, GuildScheduledEventData,
-        MessageData, NewsChannelData, RoleData, StageInstanceData, StickerData,
-        TextChannelData, ThreadChannelData, ThreadMemberData, ThreadMetadata,
-        UnavailableGuildData, UserData, VoiceChannelData, VoiceStateData,
-        WelcomeScreenData
+        IntegrationAccountData, IntegrationApplicationData,
+        IntegrationExpireBehaviors, MessageData, NewsChannelData, RoleData,
+        StageInstanceData, StickerData, TextChannelData, ThreadChannelData,
+        ThreadMemberData, ThreadMetadata, UnavailableGuildData, UserData,
+        VoiceChannelData, VoiceStateData, WelcomeScreenData
     )
 
 __all__ = (
@@ -53,6 +54,8 @@ __all__ = (
     'GuildScheduledEventDeleteData', 'GuildScheduledEventDeleteEvent',
     'GuildScheduledEventUserAddData', 'GuildScheduledEventUserAddEvent',
     'GuildScheduledEventUserRemoveData', 'GuildScheduledEventUserRemoveEvent',
+    'IntegrationCreateData', 'IntegrationCreateEvent', 'IntegrationUpdateData',
+    'IntegrationUpdateEvent', 'IntegrationDeleteData', 'IntegrationDeleteEvent',
     'InviteCreateData', 'InviteCreateEvent', 'InviteDeleteData', 'InviteDeleteEvent',
     'MessageCreateData', 'MessageCreateEvent', 'MessageUpdateData', 'MessageUpdateEvent',
     'MessageDeleteData', 'MessageDeleteEvent', 'MessageDeleteBulkData',
@@ -62,13 +65,13 @@ __all__ = (
     'MessageReactionRemoveEmojiEvent', 'PresenceUpdateData', 'ClientStatusData',
     'ActivityData', 'ActivityTimestampsData', 'ActivityEmojiData', 'ActivityPartyData',
     'ActivityAssetsData', 'ActivitySecretsData', 'ActivityButtonData', 'TypingStartData',
-    'TypingStartEvent', 'VoiceStateUpdateData', 'VoiceStateUpdateEvent',
-    'VoiceServerUpdateData', 'VoiceServerUpdateEvent', 'WebhooksUpdateData',
-    'WebhooksUpdateEvent', 'InteractionCreateData', 'InteractionCreateEvent',
-    'StageInstanceCreateData', 'StageInstanceCreateEvent', 'StageInstanceUpdateData',
-    'StageInstanceUpdateEvent', 'StageInstanceDeleteData', 'StageInstanceDeleteEvent',
-    'GetGatewayData', 'GetGatewayBotData', 'SessionStartLimitData', 'DispatchEvent',
-    'GatewayEvent'
+    'TypingStartEvent', 'UserUpdateData', 'UserUpdateEvent', 'VoiceStateUpdateData',
+    'VoiceStateUpdateEvent', 'VoiceServerUpdateData', 'VoiceServerUpdateEvent',
+    'WebhooksUpdateData', 'WebhooksUpdateEvent', 'InteractionCreateData',
+    'InteractionCreateEvent', 'StageInstanceCreateData', 'StageInstanceCreateEvent',
+    'StageInstanceUpdateData', 'StageInstanceUpdateEvent', 'StageInstanceDeleteData',
+    'StageInstanceDeleteEvent', 'GetGatewayData', 'GetGatewayBotData',
+    'SessionStartLimitData', 'DispatchEvent', 'GatewayEvent'
 )
 
 
@@ -830,6 +833,78 @@ GuildScheduledEventUserRemoveEvent = GenericDispatchEvent[
 ]
 
 
+# https://discord.com/developers/docs/topics/gateway#integrations
+
+
+@final
+class _StreamingIntegrationGuildData(TypedDict):
+    id: Snowflake
+    name: str
+    type: Literal['twitch', 'youtube', 'discord']
+    enabled: bool
+    syncing: bool
+    role_id: NotRequired[Snowflake]
+    enable_emoticons: bool
+    expire_behavior: IntegrationExpireBehaviors
+    expire_grace_period: int
+    user: UserData
+    account: IntegrationAccountData
+    synced_at: str
+    subscriber_count: int
+    revoked: bool
+    application: IntegrationApplicationData
+
+    guild_id: Snowflake
+
+
+@final
+class _DiscordIntegrationGuildData(TypedDict):
+    id: Snowflake
+    name: str
+    type: Literal['discord']
+    enabled: bool
+    account: IntegrationAccountData
+    application: NotRequired[IntegrationApplicationData]
+
+    guild_id: Snowflake
+
+
+# Integration object, with an additional guild_id field
+_IntegrationGuildData = Union[_StreamingIntegrationGuildData, _DiscordIntegrationGuildData]
+
+# https://discord.com/developers/docs/topics/gateway#integration-create
+
+
+IntegrationCreateData: TypeAlias = '_IntegrationGuildData'
+IntegrationCreateEvent = GenericDispatchEvent[
+    Literal['INTEGRATION_CREATE'], IntegrationCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#integration-update
+
+
+IntegrationUpdateData: TypeAlias = '_IntegrationGuildData'
+IntegrationUpdateEvent = GenericDispatchEvent[
+    Literal['INTEGRATION_UPDATE'], IntegrationUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway#integration-delete
+
+
+@final
+class IntegrationDeleteData(TypedDict):
+    id: Snowflake
+    guild_id: Snowflake
+    application_id: NotRequired[Snowflake]
+
+
+IntegrationDeleteEvent = GenericDispatchEvent[
+    Literal['INTEGRATION_DELETE'], IntegrationDeleteData
+]
+
+
 # https://discord.com/developers/docs/topics/gateway#invite-create
 
 
@@ -1067,6 +1142,13 @@ class TypingStartData(TypedDict):
 
 
 TypingStartEvent = GenericDispatchEvent[Literal['TYPING_START'], TypingStartData]
+
+
+# https://discord.com/developers/docs/topics/gateway#user-update
+
+
+UserUpdateData: TypeAlias = 'UserData'
+UserUpdateEvent = GenericDispatchEvent[Literal['USER_UPDATE'], UserUpdateData]
 
 
 # https://discord.com/developers/docs/topics/gateway#voice-state-update
