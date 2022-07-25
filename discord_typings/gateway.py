@@ -367,9 +367,9 @@ class AutoModerationActionExecutionData(TypedDict):
     channel_id: NotRequired[Snowflake]
     message_id: NotRequired[Snowflake]
     alert_system_message_id: NotRequired[Snowflake]
-    content: str
+    content: NotRequired[str]
     matched_keyword: Optional[str]
-    matched_content: Optional[str]
+    matched_content: NotRequired[Optional[str]]
 
 
 AutoModerationActionExecutionEvent = GenericDispatchEvent[
