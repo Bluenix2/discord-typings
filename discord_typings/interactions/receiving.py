@@ -90,7 +90,6 @@ class ChannelInteractionData(TypedDict):
 class ApplicationCommandChannelInteractionData(ChannelInteractionData):
     type: Literal[2]
     data: ApplicationCommandInteractionDataData
-    app_permissions: str
 
 
 @final
@@ -98,7 +97,6 @@ class ComponentChannelInteractionData(ChannelInteractionData):
     type: Literal[3]
     data: ComponentInteractionDataData
     message: MessageData
-    app_permissions: str
 
 
 @final
@@ -106,7 +104,6 @@ class ModalChannelInteractionData(ChannelInteractionData):
     type: Literal[5]
     data: ModalComponentInteractionDataData
     message: MessageData
-    app_permissions: str
 
 
 @final
@@ -123,13 +120,13 @@ class UserCommandInteractionBase(TypedDict):
     token: str
     version: int
     locale: Locales
-    app_permissions: str
 
 
 @final
 class GuildUserCommandInteractionData(UserCommandInteractionBase):
     member: GuildMemberData
     guild_locale: Locales
+    app_permissions: str
 
 
 @final
