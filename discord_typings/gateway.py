@@ -260,6 +260,7 @@ class ReadyData(TypedDict):
     user: UserData
     guilds: List[UnavailableGuildData]
     session_id: str
+    resume_gateway_url: str
     shard: NotRequired[Union[Tuple[int, int], List[int]]]
     application: PartialApplicationData
 
