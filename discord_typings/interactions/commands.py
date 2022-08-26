@@ -380,7 +380,7 @@ class NumberInteractionData(TypedDict):
 @final
 class AttachmentInteractionData(TypedDict):
     name: str
-    type: Literal[10]
+    type: Literal[11]
     value: str
 
 
