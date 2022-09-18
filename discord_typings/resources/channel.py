@@ -26,7 +26,8 @@ __all__ = (
     'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData',
     'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData',
     'PartialAttachmentData', 'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData',
-    'ChannelMentionData', 'MessageReactionData',
+    'ChannelMentionData', 'MessageReactionData', 'DefaultReactionData',
+    'ForumTagData', 'ForumChannelData'
 )
 
 
@@ -45,6 +46,7 @@ class PartialChannelData(TypedDict):
 class TextChannelData(TypedDict):
     id: Snowflake
     type: Literal[0]
+    flags: int
     guild_id: NotRequired[Snowflake]  # May be missing during guild dispatches
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -62,6 +64,7 @@ class TextChannelData(TypedDict):
 class NewsChannelData(TypedDict):
     id: Snowflake
     type: Literal[5]
+    flags: int
     guild_id: NotRequired[Snowflake]  # May be missing during guild dispatches
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -78,6 +81,7 @@ class NewsChannelData(TypedDict):
 class DMChannelData(TypedDict):
     id: Snowflake
     type: Literal[1]
+    flags: int
     last_message_id: Optional[Snowflake]
     recipients: List[UserData]
     last_pin_timestamp: NotRequired[Optional[str]]
@@ -87,6 +91,7 @@ class DMChannelData(TypedDict):
 class GroupDMChannelData(TypedDict):
     id: Snowflake
     type: Literal[3]
+    flags: int
     name: str
     last_message_id: Optional[Snowflake]
     recipients: List[UserData]
@@ -100,6 +105,7 @@ class GroupDMChannelData(TypedDict):
 class ThreadChannelData(TypedDict):
     id: Snowflake
     type: Literal[10, 11, 12]
+    flags: int
     guild_id: NotRequired[Snowflake]
     name: str
     last_message_id: Optional[Snowflake]
@@ -107,6 +113,7 @@ class ThreadChannelData(TypedDict):
     owner_id: Snowflake
     parent_id: Optional[Snowflake]
     last_pin_timestamp: NotRequired[Optional[str]]
+    applied_tags: NotRequired[List[Snowflake]]
     message_count: int
     member_count: int
     thread_metadata: ThreadMetadata
@@ -117,6 +124,7 @@ class ThreadChannelData(TypedDict):
 class VoiceChannelData(TypedDict):
     id: Snowflake
     type: Literal[2, 13]
+    flags: int
     guild_id: NotRequired[Snowflake]
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -134,6 +142,7 @@ class VoiceChannelData(TypedDict):
 class CategoryChannelData(TypedDict):
     id: Snowflake
     type: Literal[4]
+    flags: int
     guild_id: NotRequired[Snowflake]
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -142,9 +151,27 @@ class CategoryChannelData(TypedDict):
     parent_id: Optional[Snowflake]
 
 
+@final
+class ForumChannelData(TypedDict):
+    id: Snowflake
+    type: Literal[15]
+    flags: int
+    guild_id: NotRequired[Snowflake]
+    position: int
+    permission_overwrites: List[PermissionOverwriteData]
+    name: str
+    topic: Optional[str]
+    nsfw: bool
+    last_message_id: Optional[Snowflake]
+    rate_limit_per_user: int
+    default_thread_rate_limit_per_user: int
+    available_tags: List[ForumTagData]
+    default_reaction_emoji: Optional[DefaultReactionData]
+
+
 ChannelData = Union[
     TextChannelData, NewsChannelData, DMChannelData, GroupDMChannelData,
-    ThreadChannelData, VoiceChannelData, CategoryChannelData
+    ThreadChannelData, VoiceChannelData, CategoryChannelData, ForumChannelData
 ]
 
 
@@ -300,6 +327,27 @@ class ThreadMemberData(TypedDict):
     user_id: NotRequired[Snowflake]
     join_timestamp: str
     flags: int
+
+
+# https://discord.com/developers/docs/resources/channel#default-reaction-object-default-reaction-structure
+
+
+@final
+class DefaultReactionData(TypedDict):
+    emoji_name: Optional[str]
+    emoji_id: Optional[Snowflake]
+
+
+# https://discord.com/developers/docs/resources/channel#forum-tag-object-forum-tag-structure
+
+
+@final
+class ForumTagData(TypedDict):
+    id: Snowflake
+    name: str
+    moderated: bool
+    emoji_id: Optional[Snowflake]
+    emoji_name: Optional[Snowflake]
 
 
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-structure
