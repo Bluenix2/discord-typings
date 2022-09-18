@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import List, final
+from typing import List
 
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict, final
 
 from .resources.application import ApplicationData
 from .resources.user import UserData
 
-__all__ = ('AccessTokenResponseData', 'AuthorizationInformation')
+__all__ = ('AccessTokenResponseData', 'AuthorizationInformationData')
 
 
 # https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-access-token-response
@@ -25,7 +25,8 @@ class AccessTokenResponseData(TypedDict):
 # https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information
 
 
-class AuthorizationInformation(TypedDict):
+@final
+class AuthorizationInformationData(TypedDict):
     application: ApplicationData
     scopes: List[str]
     user: NotRequired[UserData]
