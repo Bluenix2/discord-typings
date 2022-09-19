@@ -400,7 +400,7 @@ class GuildApplicationCommandPermissionData(TypedDict):
     id: Snowflake
     application_id: Snowflake
     guild_id: Snowflake
-    permissions: ApplicationCommandPermissionsData
+    permissions: List[ApplicationCommandPermissionsData]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure
