@@ -158,6 +158,7 @@ class GuildPreviewData(TypedDict):
     approximate_member_count: int
     approximate_presence_count: int
     description: Optional[str]
+    stickers: List[StickerData]
 
 
 # https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure
