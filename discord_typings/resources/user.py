@@ -24,7 +24,7 @@ class UserBase(TypedDict):
     accent_color: NotRequired[Optional[int]]
     locale: NotRequired[Locales]
     verified: NotRequired[bool]
-    email: NotRequired[Optional[bool]]
+    email: NotRequired[Optional[str]]
     flags: NotRequired[int]
     premium_type: NotRequired[UserPremiumTypes]
     public_flags: NotRequired[int]
