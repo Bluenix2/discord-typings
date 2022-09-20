@@ -27,7 +27,7 @@ class VoiceStateData(TypedDict):
     self_mute: bool
     self_stream: NotRequired[bool]
     self_video: bool
-    seppress: bool
+    suppress: bool
     request_to_speak_timestamp: Optional[str]
 
 
