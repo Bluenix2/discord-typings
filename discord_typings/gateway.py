@@ -706,7 +706,7 @@ GuildMemberRemoveEvent = GenericDispatchEvent[
 class GuildMemberUpdateData(TypedDict):
     guild_id: Snowflake
     roles: List[Snowflake]
-    user: List[UserData]
+    user: UserData
     nick: NotRequired[Optional[str]]
     avatar: Optional[str]
     joined_at: Optional[str]
