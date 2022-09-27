@@ -40,6 +40,8 @@ class ChatInputCommandData(TypedDict):
     description: str
     description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     options: List[ApplicationCommandOptionData]
+    default_member_permissions: Optional[str]
+    dm_permission: NotRequired[bool]
     default_permission: NotRequired[bool]
     version: Snowflake
 
