@@ -42,7 +42,6 @@ class ChatInputCommandData(TypedDict):
     options: List[ApplicationCommandOptionData]
     default_member_permissions: Optional[str]
     dm_permission: NotRequired[bool]
-    default_permission: NotRequired[bool]
     version: Snowflake
 
 
