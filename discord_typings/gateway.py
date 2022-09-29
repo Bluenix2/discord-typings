@@ -22,7 +22,7 @@ if TYPE_CHECKING:
         IntegrationAccountData, IntegrationApplicationData,
         IntegrationExpireBehaviors, MessageData, NewsChannelData, RoleData,
         StageInstanceData, StickerData, TextChannelData, ThreadChannelData,
-        ThreadMemberData, ThreadMetadata, UnavailableGuildData, UserData,
+        ThreadMemberData, ThreadMetadataData, UnavailableGuildData, UserData,
         VoiceChannelData, VoiceStateData, WelcomeScreenData
     )
 
@@ -425,7 +425,7 @@ class ThreadCreateData(TypedDict):
     last_pin_timestamp: NotRequired[Optional[str]]
     message_count: int
     member_count: int
-    thread_metadata: ThreadMetadata
+    thread_metadata: ThreadMetadataData
     member: NotRequired[ThreadMemberData]
 
     newly_created: bool  # Extra THREAD_CREATE field
