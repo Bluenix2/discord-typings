@@ -40,7 +40,8 @@ class ChatInputCommandData(TypedDict):
     description: str
     description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     options: List[ApplicationCommandOptionData]
-    default_permission: NotRequired[bool]
+    default_member_permissions: Optional[str]
+    dm_permission: NotRequired[bool]
     version: Snowflake
 
 
@@ -54,7 +55,8 @@ class ContextMenuCommandData(TypedDict):
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
     description_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    default_permission: NotRequired[bool]
+    default_member_permissions: Optional[str]
+    dm_permission: NotRequired[bool]
     version: Snowflake
 
 
@@ -427,7 +429,8 @@ class ApplicationCommandPayload(TypedDict):
     name: str
     description: str
     options: NotRequired[List[ApplicationCommandOptionData]]
-    default_permission: NotRequired[bool]
+    default_member_permissions: Optional[str]
+    dm_permission: NotRequired[bool]
     type: NotRequired[Literal[1, 2, 3]]
 
 
