@@ -316,6 +316,7 @@ class ThreadMetadataData(TypedDict):
     archive_timestamp: str
     locked: bool
     invitable: NotRequired[bool]
+    create_timestamp: NotRequired[Optional[str]]
 
 
 # https://discord.com/developers/docs/resources/channel#thread-member-object-thread-member-structure
