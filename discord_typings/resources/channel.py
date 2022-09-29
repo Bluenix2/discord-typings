@@ -22,7 +22,7 @@ __all__ = (
     'GuildMessageData', 'MessageData', 'UserMentionData', 'MessageTypes',
     'MessageActivityData', 'MessageActivityTypes', 'PermissionOverwriteData',
     'ThreadChannelData', 'MessageReferenceData', 'FollowedChannelData',
-    'PermissionOverwriteData', 'ThreadMetadata', 'ThreadMemberData', 'EmbedData',
+    'PermissionOverwriteData', 'ThreadMetadataData', 'ThreadMemberData', 'EmbedData',
     'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData',
     'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData',
     'PartialAttachmentData', 'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData',
@@ -116,7 +116,7 @@ class ThreadChannelData(TypedDict):
     applied_tags: NotRequired[List[Snowflake]]
     message_count: int
     member_count: int
-    thread_metadata: ThreadMetadata
+    thread_metadata: ThreadMetadataData
     member: NotRequired[ThreadMemberData]
 
 
@@ -310,7 +310,7 @@ class PermissionOverwriteData(TypedDict):
 
 
 @final
-class ThreadMetadata(TypedDict):
+class ThreadMetadataData(TypedDict):
     archived: bool
     auto_archive_duration: int
     archive_timestamp: str
