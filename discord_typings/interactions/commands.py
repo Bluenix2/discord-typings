@@ -429,7 +429,7 @@ class ApplicationCommandPayload(TypedDict):
     name: str
     description: str
     options: NotRequired[List[ApplicationCommandOptionData]]
-    default_member_permissions: Optional[str]
+    default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[bool]
     type: NotRequired[Literal[1, 2, 3]]
 
