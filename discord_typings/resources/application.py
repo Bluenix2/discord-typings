@@ -18,6 +18,7 @@ class InstallParams(TypedDict):
     scopes: List[str]
     permissions: str
 
+
 @final
 class ApplicationData(TypedDict):
     id: Snowflake
