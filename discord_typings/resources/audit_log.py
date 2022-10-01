@@ -5,14 +5,14 @@ from typing import TYPE_CHECKING, Any, List, Optional
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
+    from ..interactions.commands import ApplicationCommandData
     from ..reference import Snowflake
+    from .auto_moderation import AutoModerationRuleData
     from .channel import ThreadChannelData
     from .guild import IntegrationAccountData
+    from .guild_scheduled_events import GuildScheduledEventData
     from .user import UserData
     from .webhook import WebhookData
-    from .auto_moderation import AutoModerationRuleData
-    from .guild_scheduled_events import GuildScheduledEventData
-    from ..interactions.commands import ApplicationCommandData
 
 __all__ = (
     'AuditLogData', 'AuditLogEntryData', 'OptionalAuditLogEntryData',
