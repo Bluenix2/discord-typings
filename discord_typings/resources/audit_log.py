@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .guild import IntegrationAccountData
     from .user import UserData
     from .webhook import WebhookData
+    from .auto_moderation import AutoModerationRuleData
     from .guild_scheduled_events import GuildScheduledEventData
     from ..interactions.commands import ApplicationCommandData
 
