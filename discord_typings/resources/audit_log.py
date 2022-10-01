@@ -10,6 +10,8 @@ if TYPE_CHECKING:
     from .guild import IntegrationAccountData
     from .user import UserData
     from .webhook import WebhookData
+    from .guild_scheduled_events import GuildScheduledEventData
+    from ..interactions.commands import ApplicationCommandData
 
 __all__ = (
     'AuditLogData', 'AuditLogEntryData', 'OptionalAuditLogEntryData',
@@ -22,7 +24,10 @@ __all__ = (
 
 @final
 class AuditLogData(TypedDict):
+    application_commands: List[ApplicationCommandData]
     audit_log_entries: List[AuditLogEntryData]
+    auto_moderation_rules: List[AutoModerationRuleData]
+    guild_scheduled_events: List[GuildScheduledEventData]
     integrations: List[PartialIntegrationData]
     threads: List[ThreadChannelData]
     users: List[UserData]
