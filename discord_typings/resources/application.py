@@ -8,11 +8,15 @@ if TYPE_CHECKING:
     from ..reference import Snowflake
     from .user import UserData
 
-__all__ = ('ApplicationData', 'TeamData', 'TeamMemberData')
+__all__ = ('ApplicationData', 'TeamData', 'TeamMemberData', 'InstallParams')
 
 
 # https://discord.com/developers/docs/resources/application#application-object-application-structure
 
+@final
+class InstallParams(TypedDict):
+    scopes: List[str]
+    permissions: str
 
 @final
 class ApplicationData(TypedDict):
@@ -34,6 +38,9 @@ class ApplicationData(TypedDict):
     slug: NotRequired[str]
     cover_image: NotRequired[str]
     flags: NotRequired[int]
+    tags: NotRequired[List[str]]
+    install_params: NotRequired[InstallParams]
+    custom_install_url: NotRequired[str]
 
 
 # https://discord.com/developers/docs/topics/teams#data-models-team-object
