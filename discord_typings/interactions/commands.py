@@ -6,6 +6,7 @@ from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
     from ..reference import Snowflake
+    from ..resources import ChannelTypes
 
 __all__ = (
     'ApplicationCommandData', 'ApplicationCommandTypes', 'SubcommandOptionData',
@@ -191,7 +192,7 @@ class ChannelOptionData(TypedDict):
     description: str
     description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     required: NotRequired[bool]
-    channel_types: NotRequired[List[Literal[0, 2, 4, 5, 6, 13]]]
+    channel_types: NotRequired[List[ChannelTypes]]
 
 
 @final
