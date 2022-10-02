@@ -27,7 +27,7 @@ __all__ = (
     'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData',
     'PartialAttachmentData', 'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData',
     'ChannelMentionData', 'MessageReactionData', 'DefaultReactionData',
-    'ForumTagData', 'ForumChannelData'
+    'ForumTagData', 'ForumChannelData', 'SortOrderTypes'
 )
 
 
@@ -46,7 +46,6 @@ class PartialChannelData(TypedDict):
 class TextChannelData(TypedDict):
     id: Snowflake
     type: Literal[0]
-    flags: int
     guild_id: NotRequired[Snowflake]  # May be missing during guild dispatches
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -58,13 +57,13 @@ class TextChannelData(TypedDict):
     parent_id: Optional[Snowflake]
     last_pin_timestamp: NotRequired[Optional[str]]
     default_auto_archive_duration: NotRequired[int]
+    flags: int
 
 
 @final
 class NewsChannelData(TypedDict):
     id: Snowflake
     type: Literal[5]
-    flags: int
     guild_id: NotRequired[Snowflake]  # May be missing during guild dispatches
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -75,23 +74,23 @@ class NewsChannelData(TypedDict):
     parent_id: Optional[Snowflake]
     last_pin_timestamp: NotRequired[Optional[str]]
     default_auto_archive_duration: NotRequired[int]
+    flags: int
 
 
 @final
 class DMChannelData(TypedDict):
     id: Snowflake
     type: Literal[1]
-    flags: int
     last_message_id: Optional[Snowflake]
     recipients: List[UserData]
     last_pin_timestamp: NotRequired[Optional[str]]
+    flags: int
 
 
 @final
 class GroupDMChannelData(TypedDict):
     id: Snowflake
     type: Literal[3]
-    flags: int
     name: str
     last_message_id: Optional[Snowflake]
     recipients: List[UserData]
@@ -99,13 +98,13 @@ class GroupDMChannelData(TypedDict):
     owner_id: Snowflake
     application_id: NotRequired[Snowflake]
     last_pin_timestamp: NotRequired[Optional[str]]
+    flags: int
 
 
 @final
 class ThreadChannelData(TypedDict):
     id: Snowflake
     type: Literal[10, 11, 12]
-    flags: int
     guild_id: NotRequired[Snowflake]
     name: str
     last_message_id: Optional[Snowflake]
@@ -113,49 +112,50 @@ class ThreadChannelData(TypedDict):
     owner_id: Snowflake
     parent_id: Optional[Snowflake]
     last_pin_timestamp: NotRequired[Optional[str]]
-    applied_tags: NotRequired[List[Snowflake]]
     message_count: int
     member_count: int
     thread_metadata: ThreadMetadataData
     member: NotRequired[ThreadMemberData]
+    flags: int
+    total_messages_sent: int
+    applied_tags: NotRequired[List[Snowflake]]
 
 
 @final
 class VoiceChannelData(TypedDict):
     id: Snowflake
     type: Literal[2, 13]
-    flags: int
     guild_id: NotRequired[Snowflake]
     position: int
     permission_overwrites: List[PermissionOverwriteData]
     name: str
     nsfw: bool
-    last_message_id: NotRequired[None]
+    last_message_id: NotRequired[Optional[Snowflake]]
     bitrate: int
     user_limit: int
     parent_id: Optional[Snowflake]
+    last_pin_timestamp: NotRequired[Optional[str]]
     rtc_region: Optional[str]
     video_quality_mode: NotRequired[VideoQualityModes]
+    flags: int
 
 
 @final
 class CategoryChannelData(TypedDict):
     id: Snowflake
     type: Literal[4]
-    flags: int
     guild_id: NotRequired[Snowflake]
     position: int
     permission_overwrites: List[PermissionOverwriteData]
     name: str
     nsfw: bool
-    parent_id: Optional[Snowflake]
+    flags: int
 
 
 @final
 class ForumChannelData(TypedDict):
     id: Snowflake
     type: Literal[15]
-    flags: int
     guild_id: NotRequired[Snowflake]
     position: int
     permission_overwrites: List[PermissionOverwriteData]
@@ -164,9 +164,12 @@ class ForumChannelData(TypedDict):
     nsfw: bool
     last_message_id: Optional[Snowflake]
     rate_limit_per_user: int
-    default_thread_rate_limit_per_user: int
+    default_auto_archive_duration: NotRequired[int]
+    flags: int
     available_tags: List[ForumTagData]
     default_reaction_emoji: Optional[DefaultReactionData]
+    default_thread_rate_limit_per_user: int
+    default_sort_order: Optional[SortOrderTypes]
 
 
 ChannelData = Union[
@@ -185,6 +188,12 @@ ChannelTypes = Literal[0, 1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 15]
 
 
 VideoQualityModes = Literal[1, 2]
+
+
+# https://discord.com/developers/docs/resources/channel#channel-object-sort-order-types
+
+
+SortOrderTypes = Literal[0, 1]
 
 
 # https://discord.com/developers/docs/resources/channel#message-object-message-structure
@@ -219,6 +228,7 @@ class MessageBase(TypedDict):
     thread: NotRequired[ThreadChannelData]
     components: NotRequired[List[ComponentData]]
     sticker_items: NotRequired[List[StickerItemData]]
+    position: NotRequired[int]
 
 
 @final
