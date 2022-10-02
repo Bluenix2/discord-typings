@@ -13,7 +13,7 @@ __all__ = (
     'SubcommandGroupOptionData', 'AutocompleteOptionData', 'ApplicationCommandOptionData',
     'ApplicationCommandOptionInteractionData', 'GuildApplicationCommandPermissionData',
     'ApplicationCommandPermissionsData', 'ApplicationCommandPayload',
-    'BatchEditApplicationCommandPermissionsData', 'Locales'
+    'EditApplicationCommandPermissionsData', 'Locales'
 )
 
 
@@ -439,6 +439,6 @@ class ApplicationCommandPayload(TypedDict):
 
 
 @final
-class BatchEditApplicationCommandPermissionsData(TypedDict):
+class EditApplicationCommandPermissionsData(TypedDict):
     id: Snowflake
     permissions: ApplicationCommandPermissionsData
