@@ -20,13 +20,12 @@ class ApplicationData(TypedDict):
     name: str
     icon: Optional[str]
     description: str
-    rpc_origins: List[str]
+    rpc_origins: NotRequired[List[str]]
     bot_public: bool
     bot_require_code_grant: bool
     terms_of_service_url: NotRequired[str]
     privacy_policy_url: NotRequired[str]
     owner: NotRequired[UserData]
-    summary: str
     verify_key: str
     team: Optional[TeamData]
     guild_id: NotRequired[Snowflake]
@@ -37,6 +36,15 @@ class ApplicationData(TypedDict):
     tags: NotRequired[List[str]]
     install_params: NotRequired[InstallParams]
     custom_install_url: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/application#install-params-object-install-params-structure
+
+
+@final
+class InstallParams(TypedDict):
+    scopes: List[str]
+    permissions: str
 
 
 # https://discord.com/developers/docs/topics/teams#data-models-team-object
@@ -60,12 +68,3 @@ class TeamMemberData(TypedDict):
     permissions: List[str]
     team_id: Snowflake
     user: UserData
-
-
-# https://discord.com/developers/docs/resources/application#install-params-object-install-params-structure
-
-
-@final
-class InstallParams(TypedDict):
-    scopes: List[str]
-    permissions: str
