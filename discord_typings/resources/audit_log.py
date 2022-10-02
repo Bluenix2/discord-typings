@@ -41,6 +41,7 @@ class PartialIntegrationData(TypedDict):
     name: str
     type: Literal['twitch', 'youtube', 'discord']
     account: IntegrationAccountData
+    application_id: Snowflake
 
 
 # https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure
@@ -81,14 +82,17 @@ AuditLogEvents = Literal[
 
 @final
 class OptionalAuditLogEntryData(TypedDict):
+    application_id: NotRequired[Snowflake]
+    auto_moderation_rule_name: NotRequired[str]
+    auto_moderation_trigger_type: NotRequired[str]  # AutoModerationTriggerTypes
     channel_id: NotRequired[Snowflake]
     count: NotRequired[str]
     delete_member_days: NotRequired[str]
     id: NotRequired[Snowflake]
     members_removed: NotRequired[str]
-    message_id: NotRequired[str]
+    message_id: NotRequired[Snowflake]
     role_name: NotRequired[str]
-    type: NotRequired[str]
+    type: NotRequired[Literal['0', '1']]
 
 
 # https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
