@@ -28,7 +28,8 @@ __all__ = (
     'InteractionMessageCallbackData', 'InteractionAutocompleteCallbackData',
     'InteractionModalCallbackData', 'InteractionMessageResponseData',
     'InteractionAutocompleteResponseData', 'InteractionModalResponseData',
-    'InteractionNodataResponseData', 'ModalInteractionData'
+    'InteractionNodataResponseData', 'ModalInteractionData',
+    'ApplicationCommandOptionInteractionData'
 )
 
 
@@ -218,6 +219,97 @@ class ResolvedInteractionDataData(TypedDict):
     channels: NotRequired[Dict[Snowflake, PartialChannelData]]
     messages: NotRequired[Dict[Snowflake, MessageData]]
     attachments: NotRequired[Dict[Snowflake, AttachmentData]]
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure
+
+
+@final
+class SubcommandOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[1]
+    options: List[ApplicationCommandOptionInteractionData]
+
+
+@final
+class SubcommandGroupOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[2]
+    options: List[SubcommandOptionInteractionData]
+
+
+@final
+class StringOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[3]
+    value: str
+    focused: NotRequired[bool]
+
+
+@final
+class IntegerOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[4]
+    value: int
+    focused: NotRequired[bool]
+
+
+@final
+class BooleanOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[5]
+    value: bool
+
+
+@final
+class UserOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[6]
+    value: Snowflake
+
+
+@final
+class ChannelOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[7]
+    value: Snowflake
+
+
+@final
+class RoleOptionInteractionData(TypedDict):
+    name: str
+    type: Literal[8]
+    value: Snowflake
+
+
+@final
+class MentionableInteractionData(TypedDict):
+    name: str
+    type: Literal[9]
+    value: Snowflake
+
+
+@final
+class NumberInteractionData(TypedDict):
+    name: str
+    type: Literal[10]
+    value: Union[int, float]
+    focused: NotRequired[bool]
+
+
+@final
+class AttachmentInteractionData(TypedDict):
+    name: str
+    type: Literal[11]
+    value: str
+
+
+ApplicationCommandOptionInteractionData = Union[
+    SubcommandOptionInteractionData, SubcommandGroupOptionInteractionData,
+    StringOptionInteractionData, IntegerOptionInteractionData, BooleanOptionInteractionData,
+    UserOptionInteractionData, ChannelOptionInteractionData, RoleOptionInteractionData,
+    MentionableInteractionData, NumberInteractionData, AttachmentInteractionData,
+]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
