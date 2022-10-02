@@ -373,7 +373,7 @@ class InteractionMessageCallbackData(TypedDict):
     allowed_mentions: NotRequired[AllowedMentionsData]
     flags: NotRequired[int]
     components: NotRequired[List[ComponentData]]
-    attachments: NotRequired[List[AttachmentData]]
+    attachments: NotRequired[List[PartialAttachmentData]]
 
 
 @final
