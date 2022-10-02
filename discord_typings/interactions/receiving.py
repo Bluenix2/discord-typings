@@ -8,17 +8,11 @@ if TYPE_CHECKING:
     from ..reference import Snowflake
     from ..resources import (
         AllowedMentionsData, AttachmentData, EmbedData, GuildMemberData,
-        MessageData, PartialChannelData, RoleData, UserData
+        MessageData, PartialAttachmentData, PartialChannelData, RoleData,
+        UserData
     )
-    from .commands import (
-        ApplicationCommandOptionInteractionData, AutocompleteOptionData,
-        Locales, SubcommandGroupOptionInteractionData,
-        SubcommandOptionInteractionData
-    )
-    from .components import (
-        ComponentData, SelectMenuComponentData, SelectMenuOptionData,
-        TextInputComponentData
-    )
+    from .commands import AutocompleteOptionData, Locales
+    from .components import ActionRowData, ComponentData, SelectMenuOptionData
 
 __all__ = (
     'InteractionData', 'InteractionType', 'ResolvedInteractionDataData',
