@@ -217,6 +217,7 @@ class ResolvedInteractionDataData(TypedDict):
     roles: NotRequired[Dict[Snowflake, RoleData]]
     channels: NotRequired[Dict[Snowflake, PartialChannelData]]
     messages: NotRequired[Dict[Snowflake, MessageData]]
+    attachments: NotRequired[Dict[Snowflake, AttachmentData]]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
