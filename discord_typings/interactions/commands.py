@@ -251,7 +251,7 @@ class AutocompleteNumberOptionData(TypedDict):
 
 @final
 class AttachmentOptionData(TypedDict):
-    type: Literal[10]
+    type: Literal[11]
     name: str
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     description: str
