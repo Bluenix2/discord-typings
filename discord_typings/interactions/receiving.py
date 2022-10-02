@@ -63,17 +63,17 @@ class ComponentGuildInteractionData(GuildInteractionData):
 
 
 @final
+class AutocompleteGuildInteractionData(GuildInteractionData):
+    type: Literal[4]
+    data: ApplicationCommandInteractionDataData
+
+
+@final
 class ModalGuildInteractionData(GuildInteractionData):
     type: Literal[5]
     data: ModalComponentInteractionDataData
     message: MessageData
     app_permissions: str
-
-
-@final
-class AutocompleteGuildInteractionData(GuildInteractionData):
-    type: Literal[4]
-    data: ApplicationCommandInteractionDataData
 
 
 class ChannelInteractionData(TypedDict):
@@ -309,7 +309,7 @@ class InteractionAutocompleteCallbackData(TypedDict):
 class InteractionModalCallbackData(TypedDict):
     custom_id: str
     title: str
-    components: List[ComponentData]
+    components: List[ActionRowData]
 
 
 InteractionCallbackData = Union[
