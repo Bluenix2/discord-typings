@@ -33,6 +33,21 @@ class KeywordAutoModerationRuleData(TypedDict):
 
 
 @final
+class SpamAutoModerationRuleData(TypedDict):
+    id: Snowflake
+    guild_id: Snowflake
+    name: str
+    creator_id: Snowflake
+    event_type: AutoModerationEventTypes
+    trigger_type: Literal[3]
+    trigger_metadata: EmptyTriggerMetadataData
+    actions: List[AutoModerationActionData]
+    enabled: bool
+    exempt_roles: List[Snowflake]
+    exempt_channels: List[Snowflake]
+
+
+@final
 class KeywordPresetAutoModerationRuleData(TypedDict):
     id: Snowflake
     guild_id: Snowflake
@@ -48,14 +63,13 @@ class KeywordPresetAutoModerationRuleData(TypedDict):
 
 
 @final
-class HarmfulLinkSpamAutoModerationRuleData(TypedDict):
+class MentionSpamAutoModerationRuleData(TypedDict):
     id: Snowflake
     guild_id: Snowflake
     name: str
     creator_id: Snowflake
-    event_type: AutoModerationEventTypes
-    trigger_type: Literal[2, 3]
-    trigger_metadata: EmptyTriggerMetadataData
+    event_type: Literal[5]
+    trigger_metadata: MentionSpamTriggerMetadataData
     actions: List[AutoModerationActionData]
     enabled: bool
     exempt_roles: List[Snowflake]
@@ -64,7 +78,7 @@ class HarmfulLinkSpamAutoModerationRuleData(TypedDict):
 
 AutoModerationRuleData = Union[
     KeywordAutoModerationRuleData, KeywordPresetAutoModerationRuleData,
-    HarmfulLinkSpamAutoModerationRuleData
+    SpamAutoModerationRuleData, MentionSpamAutoModerationRuleData
 ]
 
 
@@ -88,13 +102,18 @@ class KeywordPresetTriggerMetadataData(TypedDict):
 
 
 @final
+class MentionSpamTriggerMetadataData(TypedDict):
+    mention_total_limit: int
+
+
+@final
 class EmptyTriggerMetadataData(TypedDict):
     ...
 
 
 AutoModerationTriggerMetadataData = Union[
     KeywordTriggerMetadataData, KeywordPresetTriggerMetadataData,
-    EmptyTriggerMetadataData
+    MentionSpamTriggerMetadataData, EmptyTriggerMetadataData
 ]
 
 
