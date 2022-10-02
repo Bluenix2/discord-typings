@@ -236,6 +236,11 @@ class MessageInteractionData(TypedDict):
 
 
 @final
+class InteractionNodataResponseData(TypedDict):
+    type: Literal[1, 5, 6]
+
+
+@final
 class InteractionMessageResponseData(TypedDict):
     type: Literal[4, 7]
     data: InteractionMessageCallbackData
@@ -253,14 +258,9 @@ class InteractionModalResponseData(TypedDict):
     data: InteractionModalCallbackData
 
 
-@final
-class InteractionNodataResponseData(TypedDict):
-    type: Literal[1, 5, 6]
-
-
 InteractionResponseData = Union[
-    InteractionMessageResponseData, InteractionAutocompleteResponseData,
-    InteractionModalResponseData, InteractionNodataResponseData
+    InteractionNodataResponseData, InteractionMessageResponseData,
+    InteractionAutocompleteResponseData, InteractionModalResponseData,
 ]
 
 
