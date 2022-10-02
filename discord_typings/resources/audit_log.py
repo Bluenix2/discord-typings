@@ -54,7 +54,7 @@ class AuditLogEntryData(TypedDict):
     user_id: Optional[Snowflake]
     id: Snowflake
     action_type: AuditLogEvents
-    options: NotRequired[Optional[AuditLogEntryData]]
+    options: NotRequired[OptionalAuditLogEntryData]
     reason: NotRequired[str]
 
 
