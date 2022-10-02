@@ -13,11 +13,6 @@ __all__ = ('ApplicationData', 'TeamData', 'TeamMemberData', 'InstallParams')
 
 # https://discord.com/developers/docs/resources/application#application-object-application-structure
 
-@final
-class InstallParams(TypedDict):
-    scopes: List[str]
-    permissions: str
-
 
 @final
 class ApplicationData(TypedDict):
@@ -65,3 +60,12 @@ class TeamMemberData(TypedDict):
     permissions: List[str]
     team_id: Snowflake
     user: UserData
+
+
+# https://discord.com/developers/docs/resources/application#install-params-object-install-params-structure
+
+
+@final
+class InstallParams(TypedDict):
+    scopes: List[str]
+    permissions: str
