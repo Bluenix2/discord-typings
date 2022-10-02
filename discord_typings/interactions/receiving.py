@@ -89,7 +89,7 @@ class ChannelInteractionData(TypedDict):
 @final
 class ApplicationCommandChannelInteractionData(ChannelInteractionData):
     type: Literal[2]
-    data: ApplicationCommandInteractionDataData
+    data: Union[ApplicationCommandInteractionDataData, ContextMenuInteractionDataData]
 
 
 @final
@@ -112,23 +112,6 @@ class AutocompleteChannelInteractionData(ChannelInteractionData):
     data: ApplicationCommandInteractionDataData
 
 
-class UserCommandInteractionBase(TypedDict):
-    id: Snowflake
-    application_id: Snowflake
-    type: Literal[2]
-    data: ContextMenuInteractionDataData
-    token: str
-    version: int
-    locale: Locales
-
-
-@final
-class GuildUserCommandInteractionData(UserCommandInteractionBase):
-    member: GuildMemberData
-    guild_locale: Locales
-    app_permissions: str
-
-
 @final
 class ChannelUserCommandInteractionData(UserCommandInteractionBase):
     user: UserData
@@ -136,7 +119,6 @@ class ChannelUserCommandInteractionData(UserCommandInteractionBase):
 
 ApplicationCommandInteractionData = Union[
     ApplicationCommandGuildInteractionData, ApplicationCommandChannelInteractionData,
-    GuildUserCommandInteractionData, ChannelUserCommandInteractionData
 ]
 
 
