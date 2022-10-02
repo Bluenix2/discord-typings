@@ -71,7 +71,7 @@ class AutocompleteGuildInteractionData(GuildInteractionData):
 @final
 class ModalGuildInteractionData(GuildInteractionData):
     type: Literal[5]
-    data: ModalComponentInteractionDataData
+    data: ModalSubmitInteractionDataData
     message: MessageData
     app_permissions: str
 
@@ -100,21 +100,16 @@ class ComponentChannelInteractionData(ChannelInteractionData):
 
 
 @final
-class ModalChannelInteractionData(ChannelInteractionData):
-    type: Literal[5]
-    data: ModalComponentInteractionDataData
-    message: MessageData
-
-
-@final
 class AutocompleteChannelInteractionData(ChannelInteractionData):
     type: Literal[4]
     data: ApplicationCommandInteractionDataData
 
 
 @final
-class ChannelUserCommandInteractionData(UserCommandInteractionBase):
-    user: UserData
+class ModalChannelInteractionData(ChannelInteractionData):
+    type: Literal[5]
+    data: ModalSubmitInteractionDataData
+    message: MessageData
 
 
 ApplicationCommandInteractionData = Union[
@@ -148,26 +143,35 @@ InteractionData = Union[
 InteractionType = Literal[1, 2, 3, 4, 5]
 
 
-# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure
-
-
-class ApplicationCommandInteractionDataBase(TypedDict):
-    id: Snowflake
-    name: str
-    type: Literal[1, 2, 3]
-    resolved: NotRequired[ResolvedInteractionDataData]
-    options: NotRequired[
-        List[Union[
-            SubcommandOptionInteractionData,
-            SubcommandGroupOptionInteractionData,
-            ApplicationCommandOptionInteractionData
-        ]]
-    ]
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-data-structure
 
 
 @final
-class ApplicationCommandInteractionDataData(ApplicationCommandInteractionDataBase):
-    pass
+class ChatInputCommandInteractionDataData(TypedDict):
+    id: Snowflake
+    name: str
+    type: Literal[1]
+    resolved: NotRequired[ResolvedInteractionDataData]
+    options: NotRequired[ApplicationCommandOptionInteractionData]
+    guild_id: NotRequired[Snowflake]
+
+
+@final
+class ContextMenuInteractionDataData(TypedDict):
+    id: Snowflake
+    name: str
+    type: Literal[2, 3]
+    resolved: NotRequired[ResolvedInteractionDataData]
+    guild_id: NotRequired[Snowflake]
+    target_id: Snowflake
+
+
+ApplicationCommandInteractionDataData = Union[
+    ChatInputCommandInteractionDataData, ContextMenuInteractionDataData
+]
+
+
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-message-component-data-structure
 
 
 @final
@@ -177,33 +181,29 @@ class ButtonComponentInteractionDataData(TypedDict):
 
 
 @final
-class SelectComponentInteractionDataData(TypedDict):
+class SelectMenuComponentInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[3]
     values: List[SelectMenuOptionData]
 
 
-@final
-class ModalComponentInteractionDataData(TypedDict):
-    custom_id: str
-    component_type: Literal[4]
-    components: List[Union[TextInputComponentData, SelectMenuComponentData]]
-
-
 ComponentInteractionDataData = Union[
-    ButtonComponentInteractionDataData, SelectComponentInteractionDataData,
-    ModalComponentInteractionDataData
+    ButtonComponentInteractionDataData, SelectMenuComponentInteractionDataData
 ]
 
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-modal-submit-data-structure
+
 
 @final
-class ContextMenuInteractionDataData(ApplicationCommandInteractionDataBase):
-    target_id: Snowflake
+class ModalSubmitInteractionDataData(TypedDict):
+    custom_id: str
+    component_type: Literal[4]
+    components: List[ActionRowData]
 
 
 InteractionDataData = Union[
-    ApplicationCommandInteractionDataData, ButtonComponentInteractionDataData,
-    SelectComponentInteractionDataData, ContextMenuInteractionDataData
+    ApplicationCommandInteractionDataData, ComponentInteractionDataData,
+    ModalSubmitInteractionDataData
 ]
 
 
