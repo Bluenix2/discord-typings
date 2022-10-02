@@ -5,9 +5,12 @@ from typing import TYPE_CHECKING, Any, List, Optional
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
+    from ..interactions.commands import ApplicationCommandData
     from ..reference import Snowflake
+    from .auto_moderation import AutoModerationRuleData
     from .channel import ThreadChannelData
     from .guild import IntegrationAccountData
+    from .guild_scheduled_events import GuildScheduledEventData
     from .user import UserData
     from .webhook import WebhookData
 
@@ -22,7 +25,10 @@ __all__ = (
 
 @final
 class AuditLogData(TypedDict):
+    application_commands: List[ApplicationCommandData]
     audit_log_entries: List[AuditLogEntryData]
+    auto_moderation_rules: List[AutoModerationRuleData]
+    guild_scheduled_events: List[GuildScheduledEventData]
     integrations: List[PartialIntegrationData]
     threads: List[ThreadChannelData]
     users: List[UserData]
