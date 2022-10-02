@@ -229,6 +229,7 @@ class MessageInteractionData(TypedDict):
     type: Literal[2, 3, 4]
     name: str
     user: UserData
+    member: NotRequired[GuildMemberData]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure
