@@ -42,19 +42,19 @@ class PartialGuildData(TypedDict):
 
 @final
 class GuildData(TypedDict):
-    id: str
+    id: Snowflake
     name: str
     icon: Optional[str]
     icon_hash: NotRequired[Optional[str]]
     splash: Optional[str]
     discovery_splash: Optional[str]
     owner: NotRequired[bool]
-    owner_id: str
+    owner_id: Snowflake
     permissions: NotRequired[str]
-    afk_channel_id: Optional[str]
+    afk_channel_id: Optional[Snowflake]
     afk_timeout: int
     widget_enabled: NotRequired[bool]
-    widget_channel_id: NotRequired[Optional[str]]
+    widget_channel_id: NotRequired[Optional[Snowflake]]
     verification_level: VerificationLevels
     default_message_notifications: DefaultMessageNotificationLevels
     explicit_content_filter: ExplicitContentFilterLevels
@@ -63,9 +63,9 @@ class GuildData(TypedDict):
     features: List[GuildFeaturesData]
     mfa_level: MFALevels
     application_id: Optional[str]
-    system_channel_id: Optional[str]
+    system_channel_id: Optional[Snowflake]
     system_channel_flags: int
-    rules_channel_id: Optional[str]
+    rules_channel_id: Optional[Snowflake]
     max_presences: NotRequired[Optional[int]]
     max_members: NotRequired[int]
     vanity_url_code: Optional[str]
@@ -74,7 +74,7 @@ class GuildData(TypedDict):
     premium_tier: PremiumTiers
     premium_subscription_count: NotRequired[int]
     preferred_locale: Locales
-    public_updates_channel_id: Optional[str]
+    public_updates_channel_id: Optional[Snowflake]
     max_video_channel_users: NotRequired[int]
     approximate_member_count: NotRequired[int]
     approximate_presence_count: NotRequired[int]
