@@ -17,7 +17,7 @@ __all__ = ('InviteData', 'InviteTargetTypes', 'InviteMetadata')
 # https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
 
 
-class InviteBase(TypedDict):
+class _InviteBase(TypedDict):
     code: str
     guild: NotRequired[GuildData]
     channel: PartialChannelData
@@ -33,7 +33,7 @@ class InviteBase(TypedDict):
 
 
 @final
-class InviteData(InviteBase):
+class InviteData(_InviteBase):
     pass
 
 
@@ -47,7 +47,7 @@ InviteTargetTypes = Literal[1, 2]
 
 
 @final
-class InviteMetadata(InviteBase):
+class InviteMetadata(_InviteBase):
     uses: int
     max_uses: int
     max_age: int

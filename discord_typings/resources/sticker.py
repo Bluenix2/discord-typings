@@ -19,14 +19,14 @@ __all__ = [
 
 # Because of inheritance, this class comes first even though that is not the
 # order in the documentation.
-class StickerItemBase(TypedDict):
+class _StickerItemBase(TypedDict):
     id: Snowflake
     name: str
     format_type: StickerFormatTypes
 
 
 @final
-class StickerItemData(StickerItemBase):
+class StickerItemData(_StickerItemBase):
     pass
 
 
@@ -46,7 +46,7 @@ StickerFormatTypes = Literal[1, 2, 3]
 
 
 @final
-class StickerData(StickerItemBase):
+class StickerData(_StickerItemBase):
     pack_id: NotRequired[Snowflake]
     description: Optional[str]
     tags: str
