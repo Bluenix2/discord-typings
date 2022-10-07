@@ -19,7 +19,7 @@ class VoiceStateData(TypedDict):
     guild_id: NotRequired[Snowflake]
     channel_id: Optional[Snowflake]
     user_id: Snowflake
-    member: GuildMemberData
+    member: NotRequired[GuildMemberData]
     session_id: str
     deaf: bool
     mute: bool

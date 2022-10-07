@@ -24,7 +24,7 @@ class GuildScheduledEventBase(TypedDict):
     guild_id: Snowflake
     creator_id: Snowflake
     name: str
-    description: NotRequired[str]
+    description: NotRequired[Optional[str]]
     scheduled_start_time: str
     privacy_level: GuildScheduledEventPrivacyLevels
     status: GuildScheduledEventStatus
@@ -32,6 +32,7 @@ class GuildScheduledEventBase(TypedDict):
     entity_id: Optional[Snowflake]
     creator: UserData
     user_count: NotRequired[int]
+    image: NotRequired[Optional[str]]
 
 
 @final

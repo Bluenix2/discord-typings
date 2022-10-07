@@ -22,7 +22,7 @@ class _InviteBase(TypedDict):
     guild: NotRequired[GuildData]
     channel: PartialChannelData
     inviter: NotRequired[UserData]
-    target_type: InviteTargetTypes
+    target_type: NotRequired[InviteTargetTypes]
     target_user: NotRequired[UserData]
     target_application: NotRequired[ApplicationData]
     approximate_presence_count: NotRequired[int]

@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
+    from ..oauth import OAuth2Scopes
     from ..interactions import Locales
     from ..reference import Snowflake
     from .channel import ChannelData, ThreadChannelData, ThreadMemberData
@@ -236,6 +237,7 @@ class StreamingIntegrationData(TypedDict):
     subscriber_count: int
     revoked: bool
     application: IntegrationApplicationData
+    scopes: NotRequired[List[OAuth2Scopes]]
 
 
 @final
@@ -243,9 +245,9 @@ class DiscordIntegrationData(TypedDict):
     id: Snowflake
     name: str
     type: Literal['discord']
-    enabled: bool
     account: IntegrationAccountData
     application: NotRequired[IntegrationApplicationData]
+    scopes: NotRequired[List[OAuth2Scopes]]
 
 
 IntegrationData = Union[StreamingIntegrationData, DiscordIntegrationData]
@@ -273,10 +275,10 @@ class IntegrationAccountData(TypedDict):
 class IntegrationApplicationData(TypedDict):
     id: Snowflake
     name: str
-    icon: NotRequired[str]
+    icon: Optional[str]
     description: str
     summary: str
-    bot: Optional[UserData]
+    bot: NotRequired[Optional[UserData]]
 
 
 # https://discord.com/developers/docs/resources/guild#ban-object-ban-structure
@@ -326,7 +328,6 @@ class ChannelPositionData(TypedDict):
 class ListThreadsData(TypedDict):
     threads: List[ThreadChannelData]
     members: List[ThreadMemberData]
-    has_more: bool
 
 
 # https://discord.com/developers/docs/resources/guild#modify-guild-role-positions-json-params

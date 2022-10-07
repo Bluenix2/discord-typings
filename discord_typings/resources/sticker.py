@@ -68,4 +68,4 @@ class StickerPackData(TypedDict):
     sku_id: Snowflake
     cover_sticker_id: NotRequired[Snowflake]
     description: str
-    banner_asset_id: Snowflake
+    banner_asset_id: NotRequired[Snowflake]

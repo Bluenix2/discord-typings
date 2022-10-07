@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from typing_extensions import Literal, TypedDict, final
 
@@ -21,6 +21,7 @@ class StageInstanceData(TypedDict):
     topic: str
     privacy_level: StageInstancePrivacyLevels
     discoverable_disabled: bool
+    guild_scheduled_event_id: Optional[Snowflake]
 
 
 # https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level
