@@ -1,13 +1,47 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Literal
 
 from typing_extensions import NotRequired, TypedDict, final
 
 from .resources.application import ApplicationData
 from .resources.user import UserData
 
-__all__ = ('AccessTokenResponseData', 'AuthorizationInformationData')
+__all__ = ('OAuth2Scopes', 'AccessTokenResponseData', 'AuthorizationInformationData')
+
+
+# https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
+
+
+OAuth2Scopes = Literal[
+    'activities.read',
+    'activities.write',
+    'applications.builds.read',
+    'applications.build.upload',
+    'applications.commands',
+    'applications.commands.update',
+    'applications.commands.permissions.update',
+    'application.entitlements',
+    'applications.store.update',
+    'bot',
+    'connections',
+    'dm_channels.read',
+    'email',
+    'gdm.join',
+    'guilds',
+    'guilds.join',
+    'guilds.members.read',
+    'identify',
+    'messages.read',
+    'relationships.read',
+    'rpc',
+    'rpc.activities.write',
+    'rpc.notifications.read',
+    'rpc.voice.read',
+    'rpc.voice.write',
+    'voice',
+    'webhook.incoming',
+]
 
 
 # https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-access-token-response
