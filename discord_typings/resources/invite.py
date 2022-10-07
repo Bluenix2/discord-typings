@@ -7,7 +7,7 @@ from typing_extensions import Literal, NotRequired, TypedDict, final
 if TYPE_CHECKING:
     from .application import ApplicationData
     from .channel import PartialChannelData
-    from .guild import GuildData, GuildMemberData
+    from .guild import GuildMemberData, PartialGuildData
     from .guild_scheduled_events import GuildScheduledEventData
     from .user import UserData
 
@@ -19,8 +19,8 @@ __all__ = ('InviteData', 'InviteTargetTypes', 'InviteMetadata')
 
 class _InviteBase(TypedDict):
     code: str
-    guild: NotRequired[GuildData]
-    channel: PartialChannelData
+    guild: NotRequired[PartialGuildData]
+    channel: Optional[PartialChannelData]
     inviter: NotRequired[UserData]
     target_type: NotRequired[InviteTargetTypes]
     target_user: NotRequired[UserData]
