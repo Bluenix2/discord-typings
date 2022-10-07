@@ -8,12 +8,13 @@ __all__ = ('UserData', 'UserPremiumTypes')
 
 if TYPE_CHECKING:
     from ..interactions import Locales
+    from ..reference import Snowflake
 
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
 
 
 class UserBase(TypedDict):
-    id: str
+    id: Snowflake
     username: str
     discriminator: str
     avatar: Optional[str]
