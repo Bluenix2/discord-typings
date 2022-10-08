@@ -54,7 +54,7 @@ class ConnectionData(TypedDict):
     name: str
     type: Literal["battlenet", "ebay", "epicgames", "facebook", "github", "leagueoflegends", "paypal", "playstation", "reddit", "riotgames", "spotify", "skype", "steam", "twitch", "twitter", "xbox", "youtube"]
     revoked: NotRequired[bool]
-    integrations: NotRequired[List[IntegrationAccountData]]
+    integrations: NotRequired[List[IntegrationData]]
     verified: bool
     friend_sync: bool
     show_activity: bool
