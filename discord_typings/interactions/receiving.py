@@ -23,7 +23,8 @@ __all__ = (
     'InteractionModalCallbackData', 'InteractionMessageResponseData',
     'InteractionAutocompleteResponseData', 'InteractionModalResponseData',
     'InteractionNodataResponseData', 'ModalInteractionData',
-    'ApplicationCommandOptionInteractionData', "SelectMenuComponentInteractionDataData"
+    'ApplicationCommandOptionInteractionData', 'SelectMenuComponentInteractionDataData',
+    'ButtonComponentInteractionDataData'
 )
 
 
