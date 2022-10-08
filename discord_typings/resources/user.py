@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional, List
+from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
+from discord_typings import IntegrationAccountData
 
 __all__ = ('UserData', 'UserPremiumTypes')
 
 if TYPE_CHECKING:
     from ..interactions import Locales
     from ..reference import Snowflake
-    from ..guild import IntegrationData
 
 
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
