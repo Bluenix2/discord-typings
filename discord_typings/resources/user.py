@@ -4,8 +4,6 @@ from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-from discord_typings import IntegrationAccountData
-
 __all__ = ('UserData', 'UserPremiumTypes')
 
 if TYPE_CHECKING:
