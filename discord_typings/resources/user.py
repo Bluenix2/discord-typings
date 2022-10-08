@@ -52,7 +52,11 @@ UserPremiumTypes = Literal[0, 1, 2]
 class ConnectionData(TypedDict):
     id: str
     name: str
-    type: Literal["battlenet", "ebay", "epicgames", "facebook", "github", "leagueoflegends", "paypal", "playstation", "reddit", "riotgames", "spotify", "skype", "steam", "twitch", "twitter", "xbox", "youtube"]
+    type: Literal["battlenet", "ebay", "epicgames", "facebook",
+                  "github", "leagueoflegends", "paypal",
+                  "playstation", "reddit", "riotgames",
+                  "spotify", "skype", "steam",
+                  "twitch", "twitter", "xbox", "youtube"]
     revoked: NotRequired[bool]
     integrations: NotRequired[List[IntegrationData]]
     verified: bool
