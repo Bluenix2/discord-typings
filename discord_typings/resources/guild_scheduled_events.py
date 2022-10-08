@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 __all__ = (
     'GuildScheduledEventData', 'GuildScheduledEventPrivacyLevels', 'GuildScheduledEventStatus',
-    'GuildScheduledEventEntityTypes', 'GuildScheduledEventEntityMetadata',
+    'GuildScheduledEventEntityTypes', 'GuildScheduledEventEntityMetadataData',
     'GuildScheduledEventUserData'
 )
 
