@@ -52,7 +52,7 @@ class VoiceGuildScheduledEventData(GuildScheduledEventBase):
 @final
 class ExternalGuildScheduledEventData(GuildScheduledEventBase):
     channel_id: None
-    entity_metadata: GuildScheduledEventEntityMetadata
+    entity_metadata: GuildScheduledEventEntityMetadataData
     scheduled_end_time: str
 
 
