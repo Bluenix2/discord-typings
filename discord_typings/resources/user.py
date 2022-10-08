@@ -11,6 +11,8 @@ if TYPE_CHECKING:
     from ..interactions import Locales
     from ..reference import Snowflake
     from ..guild import IntegrationData
+
+
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
 
 
