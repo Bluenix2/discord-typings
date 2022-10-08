@@ -85,7 +85,7 @@ GuildScheduledEventStatus = Literal[1, 2, 3, 4]
 
 
 @final
-class GuildScheduledEventEntityMetadata(TypedDict):
+class GuildScheduledEventEntityMetadataData(TypedDict):
     location: NotRequired[str]
 
 
