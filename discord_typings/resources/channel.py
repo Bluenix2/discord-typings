@@ -223,7 +223,7 @@ class MessageBase(TypedDict):
     application_id: NotRequired[Snowflake]
     message_reference: NotRequired[MessageReferenceData]
     flags: NotRequired[int]
-    references_message: NotRequired[Optional[MessageData]]
+    referenced_message: NotRequired[Optional[MessageData]]
     interaction: NotRequired[MessageInteractionData]
     thread: NotRequired[ThreadChannelData]
     components: NotRequired[List[ComponentData]]
