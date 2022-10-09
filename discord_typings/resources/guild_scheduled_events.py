@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 __all__ = (
     'GuildScheduledEventData', 'GuildScheduledEventPrivacyLevels', 'GuildScheduledEventStatus',
-    'GuildScheduledEventEntityTypes', 'GuildScheduledEventEntityMetadata',
+    'GuildScheduledEventEntityTypes', 'GuildScheduledEventEntityMetadataData',
     'GuildScheduledEventUserData'
 )
 
@@ -52,7 +52,7 @@ class VoiceGuildScheduledEventData(GuildScheduledEventBase):
 @final
 class ExternalGuildScheduledEventData(GuildScheduledEventBase):
     channel_id: None
-    entity_metadata: GuildScheduledEventEntityMetadata
+    entity_metadata: GuildScheduledEventEntityMetadataData
     scheduled_end_time: str
 
 
@@ -85,7 +85,7 @@ GuildScheduledEventStatus = Literal[1, 2, 3, 4]
 
 
 @final
-class GuildScheduledEventEntityMetadata(TypedDict):
+class GuildScheduledEventEntityMetadataData(TypedDict):
     location: NotRequired[str]
 
 
