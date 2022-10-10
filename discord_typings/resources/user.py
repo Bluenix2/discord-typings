@@ -7,9 +7,9 @@ from typing_extensions import Literal, NotRequired, TypedDict, final
 __all__ = ("UserData", "UserPremiumTypes", "ConnectionData", "ConnectionTypes")
 
 if TYPE_CHECKING:
-    from .guild import IntegrationData
     from ..interactions import Locales
     from ..reference import Snowflake
+    from .guild import IntegrationData
 
 
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
