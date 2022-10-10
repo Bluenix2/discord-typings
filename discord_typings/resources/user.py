@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-__all__ = ('UserData', 'UserPremiumTypes')
+__all__ = ('UserData', 'UserPremiumTypes', "ConnectionData", "ConnectionTypes")
 
 if TYPE_CHECKING:
     from ..interactions import Locales
@@ -46,15 +46,18 @@ UserPremiumTypes = Literal[0, 1, 2]
 # https://discord.com/developers/docs/resources/user#connection-object
 
 
+ConnectionTypes = Literal[
+                  "battlenet", "ebay", "epicgames", "facebook",
+                  "github", "leagueoflegends", "paypal", "playstation",
+                  "reddit", "riotgames", "spotify", "skype",
+                  "steam", "twitch", "twitter", "xbox", "youtube"
+                  ]
+
 @final
 class ConnectionData(TypedDict):
     id: str
     name: str
-    type: Literal["battlenet", "ebay", "epicgames", "facebook",
-                  "github", "leagueoflegends", "paypal",
-                  "playstation", "reddit", "riotgames",
-                  "spotify", "skype", "steam",
-                  "twitch", "twitter", "xbox", "youtube"]
+    type: ConnectionType
     revoked: NotRequired[bool]
     integrations: NotRequired[List[IntegrationData]]
     verified: bool
