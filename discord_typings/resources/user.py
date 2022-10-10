@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-__all__ = ("UserData", "UserPremiumTypes", "ConnectionData", "ConnectionTypes")
+__all__ = ('UserData', 'UserPremiumTypes', 'ConnectionData', 'ConnectionTypes')
 
 if TYPE_CHECKING:
     from ..interactions import Locales
