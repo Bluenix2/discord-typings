@@ -9,6 +9,7 @@ __all__ = ('UserData', 'UserPremiumTypes', "ConnectionData", "ConnectionTypes")
 if TYPE_CHECKING:
     from ..interactions import Locales
     from ..reference import Snowflake
+    from ..guild import IntegrationData
 
 
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
@@ -57,7 +58,7 @@ ConnectionTypes = Literal[
 class ConnectionData(TypedDict):
     id: str
     name: str
-    type: ConnectionType
+    type: ConnectionTypes
     revoked: NotRequired[bool]
     integrations: NotRequired[List[IntegrationData]]
     verified: bool
