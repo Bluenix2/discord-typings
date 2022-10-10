@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-__all__ = ('UserData', 'UserPremiumTypes', "ConnectionData", "ConnectionTypes")
+__all__ = ("UserData", "UserPremiumTypes", "ConnectionData", "ConnectionTypes")
 
 if TYPE_CHECKING:
     from ..interactions import Locales
@@ -48,11 +48,25 @@ UserPremiumTypes = Literal[0, 1, 2]
 
 
 ConnectionTypes = Literal[
-                  "battlenet", "ebay", "epicgames", "facebook",
-                  "github", "leagueoflegends", "paypal", "playstation",
-                  "reddit", "riotgames", "spotify", "skype",
-                  "steam", "twitch", "twitter", "xbox", "youtube"
-                  ]
+    "battlenet",
+    "ebay",
+    "epicgames",
+    "facebook",
+    "github",
+    "leagueoflegends",
+    "paypal",
+    "playstation",
+    "reddit",
+    "riotgames",
+    "spotify",
+    "skype",
+    "steam",
+    "twitch",
+    "twitter",
+    "xbox",
+    "youtube",
+]
+
 
 @final
 class ConnectionData(TypedDict):
