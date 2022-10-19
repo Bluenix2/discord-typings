@@ -2,8 +2,8 @@
 
 __version__ = "1.0.0"
 
-from .gateway import *
-from .interactions import *
-from .oauth import *
-from .reference import *
-from .resources import *
+from ._gateway import *
+from ._interactions import *
+from ._oauth import *
+from ._reference import *
+from ._resources import *

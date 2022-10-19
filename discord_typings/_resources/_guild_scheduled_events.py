@@ -5,9 +5,9 @@ from typing import TYPE_CHECKING, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
-    from .guild import GuildMemberData
-    from .user import UserData
+    from .._reference import Snowflake
+    from ._guild import GuildMemberData
+    from ._user import UserData
 
 __all__ = (
     'GuildScheduledEventData', 'GuildScheduledEventPrivacyLevels', 'GuildScheduledEventStatus',

@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, List, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..resources import EmojiData
+    from .._resources import EmojiData
 
 __all__ = (
     'ComponentTypes', 'ActionRowData', 'ButtonComponentData', 'ButtonStyles',

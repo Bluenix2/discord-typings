@@ -4,16 +4,16 @@ from typing import TYPE_CHECKING, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-from .user import UserBase  # Subclassed for UserMentionData
+from ._user import UserBase  # Subclassed for UserMentionData
 
 if TYPE_CHECKING:
-    from ..interactions import ComponentData, MessageInteractionData
-    from ..reference import Snowflake
-    from .application import ApplicationData
-    from .emoji import EmojiData
-    from .guild import GuildMemberData
-    from .sticker import StickerItemData
-    from .user import UserData
+    from .._interactions import ComponentData, MessageInteractionData
+    from .._reference import Snowflake
+    from ._application import ApplicationData
+    from ._emoji import EmojiData
+    from ._guild import GuildMemberData
+    from ._sticker import StickerItemData
+    from ._user import UserData
 
 __all__ = (
     'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',

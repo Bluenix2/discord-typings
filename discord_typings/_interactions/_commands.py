@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
-    from ..resources import ChannelTypes
+    from .._reference import Snowflake
+    from .._resources import ChannelTypes
 
 __all__ = (
     'ApplicationCommandData', 'ApplicationCommandTypes', 'SubcommandOptionData',

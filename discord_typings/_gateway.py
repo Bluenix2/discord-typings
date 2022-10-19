@@ -11,11 +11,11 @@ if TYPE_CHECKING:
     # Flake8 complains about some of these imports where they are only used
     # inside of strings (not annotations) for the type aliases, so we have to
     # disable the check.
-    from .interactions import (  # noqa: F401
+    from ._interactions import (  # noqa: F401
         ApplicationCommandPermissionsData, InteractionData, Locales
     )
-    from .reference import Snowflake
-    from .resources import (  # noqa: F401
+    from ._reference import Snowflake
+    from ._resources import (  # noqa: F401
         ApplicationData, AutoModerationActionData, AutoModerationRuleData,
         AutoModerationTriggerTypes, CategoryChannelData, EmojiData, GuildData,
         GuildFeaturesData, GuildMemberData, GuildScheduledEventData,

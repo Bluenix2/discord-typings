@@ -5,13 +5,13 @@ from typing import TYPE_CHECKING, List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..interactions import Locales
-    from ..oauth import OAuth2Scopes
-    from ..reference import Snowflake
-    from .channel import ChannelData, ThreadChannelData, ThreadMemberData
-    from .emoji import EmojiData
-    from .sticker import StickerData
-    from .user import UserData
+    from .._interactions import Locales
+    from .._oauth import OAuth2Scopes
+    from .._reference import Snowflake
+    from ._channel import ChannelData, ThreadChannelData, ThreadMemberData
+    from ._emoji import EmojiData
+    from ._sticker import StickerData
+    from ._user import UserData
 
 __all__ = (
     'GuildData', 'DefaultMessageNotificationLevels', 'ExplicitContentFilterLevels',

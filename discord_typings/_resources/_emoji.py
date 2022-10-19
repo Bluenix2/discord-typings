@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, List, Optional
 from typing_extensions import NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
-    from .user import UserData
+    from .._reference import Snowflake
+    from ._user import UserData
 
 __all__ = ('EmojiData',)
 

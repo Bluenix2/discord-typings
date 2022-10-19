@@ -5,14 +5,14 @@ from typing import TYPE_CHECKING, Dict, List, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
-    from ..resources import (
+    from .._reference import Snowflake
+    from .._resources import (
         AllowedMentionsData, AttachmentData, EmbedData, GuildMemberData,
         MessageData, PartialAttachmentData, PartialChannelData, RoleData,
         UserData
     )
-    from .commands import AutocompleteOptionData, Locales
-    from .components import ActionRowData, ComponentData, SelectMenuOptionData
+    from ._commands import AutocompleteOptionData, Locales
+    from ._components import ActionRowData, ComponentData, SelectMenuOptionData
 
 __all__ = (
     'InteractionData', 'InteractionType', 'ResolvedInteractionDataData',

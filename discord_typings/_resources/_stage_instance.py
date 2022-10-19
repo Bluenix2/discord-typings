@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Optional
 from typing_extensions import Literal, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
+    from .._reference import Snowflake
 
 __all__ = ('StageInstanceData', 'StageInstancePrivacyLevels')
 

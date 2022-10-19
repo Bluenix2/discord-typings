@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, Optional
 from typing_extensions import NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
-    from .guild import GuildMemberData
+    from .._reference import Snowflake
+    from ._guild import GuildMemberData
 
 __all__ = ('VoiceStateData', 'VoiceRegionData')
 

@@ -4,7 +4,7 @@ from typing import List, Union
 
 from typing_extensions import Literal, TypedDict, final
 
-from ..reference import Snowflake
+from .._reference import Snowflake
 
 __all__ = [
     'AutoModerationRuleData', 'AutoModerationTriggerTypes',

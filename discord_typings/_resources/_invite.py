@@ -5,11 +5,11 @@ from typing import TYPE_CHECKING, List, Optional
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from .application import ApplicationData
-    from .channel import PartialChannelData
-    from .guild import GuildMemberData, PartialGuildData
-    from .guild_scheduled_events import GuildScheduledEventData
-    from .user import UserData
+    from ._application import ApplicationData
+    from ._channel import PartialChannelData
+    from ._guild import GuildMemberData, PartialGuildData
+    from ._guild_scheduled_events import GuildScheduledEventData
+    from ._user import UserData
 
 __all__ = ('InviteData', 'InviteTargetTypes', 'InviteMetadata')
 

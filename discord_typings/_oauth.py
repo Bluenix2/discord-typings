@@ -4,8 +4,7 @@ from typing import List
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-from .resources.application import ApplicationData
-from .resources.user import UserData
+from ._resources import ApplicationData, UserData
 
 __all__ = ('OAuth2Scopes', 'AccessTokenResponseData', 'AuthorizationInformationData')
 

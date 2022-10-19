@@ -5,10 +5,10 @@ from typing import TYPE_CHECKING, Optional
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from ..reference import Snowflake
-    from .channel import PartialChannelData
-    from .guild import GuildData
-    from .user import UserData
+    from .._reference import Snowflake
+    from ._channel import PartialChannelData
+    from ._guild import GuildData
+    from ._user import UserData
 
 __all__ = ('WebhookData', 'WebhookTypes')
 
