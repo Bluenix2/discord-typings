@@ -179,8 +179,9 @@ class ButtonComponentInteractionDataData(TypedDict):
 @final
 class SelectMenuComponentInteractionDataData(TypedDict):
     custom_id: str
-    component_type: Literal[3]
-    values: List[SelectMenuOptionData]
+    component_type: Literal[3, 5, 6, 7, 8]
+    values: NotRequired[List[SelectMenuOptionData]]
+    resolved: NotRequired[ResolvedInteractionDataData]
 
 
 ComponentInteractionDataData = Union[
