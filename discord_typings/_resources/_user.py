@@ -40,7 +40,7 @@ class UserData(UserBase):
 # https://discord.com/developers/docs/resources/user#user-object-premium-types
 
 
-UserPremiumTypes = Literal[0, 1, 2]
+UserPremiumTypes = Literal[0, 1, 2, 3]
 
 
 # https://discord.com/developers/docs/resources/user#connection-object
