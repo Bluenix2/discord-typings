@@ -53,8 +53,6 @@ class ContextMenuCommandData(TypedDict):
     guild_id: NotRequired[Snowflake]
     name: str
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
     default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[bool]
     version: Snowflake
@@ -336,7 +334,7 @@ ApplicationCommandPermissionTypes = Literal[1, 2, 3]
 @final
 class ApplicationCommandPayload(TypedDict):
     name: str
-    description: str
+    description: NotRequired[str]
     options: NotRequired[List[ApplicationCommandOptionData]]
     default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[bool]
