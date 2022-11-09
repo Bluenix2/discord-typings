@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from ._guild_scheduled_events import GuildScheduledEventData
     from ._user import UserData
 
-__all__ = ('InviteData', 'InviteTargetTypes', 'InviteMetadata')
+__all__ = ('InviteData', 'InviteTargetTypes', 'InviteMetadata', 'InviteStageInstanceData')
 
 
 # https://discord.com/developers/docs/resources/invite#invite-object-invite-structure
