@@ -170,6 +170,7 @@ class ForumChannelData(TypedDict):
     default_reaction_emoji: Optional[DefaultReactionData]
     default_thread_rate_limit_per_user: int
     default_sort_order: Optional[SortOrderTypes]
+    default_forum_layout: ForumLayoutTypes
 
 
 ChannelData = Union[
@@ -194,6 +195,12 @@ VideoQualityModes = Literal[1, 2]
 
 
 SortOrderTypes = Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types
+
+
+ForumLayoutTypes = Literal[0, 1, 2]
 
 
 # https://discord.com/developers/docs/resources/channel#message-object-message-structure

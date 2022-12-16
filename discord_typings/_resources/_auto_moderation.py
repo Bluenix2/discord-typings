@@ -94,6 +94,9 @@ AutoModerationTriggerTypes = Literal[1, 2, 3, 4]
 @final
 class KeywordTriggerMetadataData(TypedDict):
     keyword_filter: List[str]
+    allow_list: List[str]
+
+    regex_patterns: List[str]
 
 
 @final

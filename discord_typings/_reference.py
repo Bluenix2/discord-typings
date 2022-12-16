@@ -1,10 +1,10 @@
 from typing import Dict, List, Union
 
-from typing_extensions import TypedDict, final
+from typing_extensions import Literal, TypedDict, final
 
 __all__ = [
     'Snowflake', 'HTTPErrorData', 'InnerHTTPErrorsData', 'NestedHTTPErrorsData',
-    'HTTPErrorResponseData',
+    'HTTPErrorResponseData', 'Literal'
 ]
 
 
@@ -42,3 +42,41 @@ class HTTPErrorResponseData(TypedDict):
     code: int
     errors: NestedHTTPErrorsData
     message: str
+
+
+# https://discord.com/developers/docs/reference#locales
+
+
+Locales = Literal[
+    'id',
+    'da',
+    'de',
+    'en-GB',
+    'en-US',
+    'en-ES',
+    'fr',
+    'hr',
+    'it',
+    'lt',
+    'hu',
+    'nl',
+    'no',
+    'pl',
+    'pt-BR',
+    'ro',
+    'fi',
+    'sv-SE',
+    'vi',
+    'tr',
+    'cs',
+    'el',
+    'bg',
+    'ru',
+    'uk',
+    'hi',
+    'th',
+    'zh-CN',
+    'ja',
+    'zh-TW',
+    'ko',
+]
