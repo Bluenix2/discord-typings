@@ -4,7 +4,7 @@ from typing_extensions import Literal, TypedDict, final
 
 __all__ = [
     'Snowflake', 'HTTPErrorData', 'InnerHTTPErrorsData', 'NestedHTTPErrorsData',
-    'HTTPErrorResponseData', 'Literal'
+    'HTTPErrorResponseData', 'Locales'
 ]
 
 
