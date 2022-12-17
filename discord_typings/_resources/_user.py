@@ -1,14 +1,19 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
-__all__ = ('UserData', 'UserPremiumTypes', 'ConnectionData', 'ConnectionTypes')
+__all__ = (
+    'UserData',
+    'UserPremiumTypes',
+    'ConnectionData',
+    'ConnectionTypes',
+    'ApplicationRoleConnectionData',
+)
 
 if TYPE_CHECKING:
-    from .._interactions import Locales
-    from .._reference import Snowflake
+    from .._reference import Locales, Snowflake
     from ._guild import IntegrationData
 
 # https://discord.com/developers/docs/resources/user#user-object-user-structure
@@ -79,3 +84,13 @@ class ConnectionData(TypedDict):
     show_activity: bool
     two_way_link: bool
     visibility: Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/user#application-role-connection-object
+
+
+@final
+class ApplicationRoleConnectionData(TypedDict):
+    platform_name: Optional[str]
+    platform_username: Optional[str]
+    metadata: Dict[str, str]

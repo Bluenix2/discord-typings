@@ -12,9 +12,9 @@ if TYPE_CHECKING:
     # inside of strings (not annotations) for the type aliases, so we have to
     # disable the check.
     from ._interactions import (  # noqa: F401
-        ApplicationCommandPermissionsData, InteractionData, Locales
+        ApplicationCommandPermissionsData, InteractionData
     )
-    from ._reference import Snowflake
+    from ._reference import Locales, Snowflake
     from ._resources import (  # noqa: F401
         ApplicationData, AutoModerationActionData, AutoModerationRuleData,
         AutoModerationTriggerTypes, CategoryChannelData, EmojiData, GuildData,

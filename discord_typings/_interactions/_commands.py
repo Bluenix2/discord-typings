@@ -5,25 +5,15 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from .._reference import Snowflake
+    from .._reference import Locales, Snowflake
     from .._resources import ChannelTypes
 
 __all__ = (
     'ApplicationCommandData', 'ApplicationCommandTypes', 'SubcommandOptionData',
     'SubcommandGroupOptionData', 'AutocompleteOptionData', 'ApplicationCommandOptionData',
     'GuildApplicationCommandPermissionData', 'ApplicationCommandPermissionsData',
-    'ApplicationCommandPayload', 'EditApplicationCommandPermissionsData', 'Locales'
+    'ApplicationCommandPayload', 'EditApplicationCommandPermissionsData'
 )
-
-
-# https://discord.com/developers/docs/reference#locales
-
-
-Locales = Literal[
-    'da', 'de', 'en-GB', 'en-US', 'en-ES', 'fr', 'hr', 'it', 'lt', 'hu', 'nl',
-    'no', 'pl', 'pt-BR', 'ro', 'fi', 'sv-SE', 'vi', 'tr', 'cs', 'el', 'bg',
-    'ru', 'uk', 'hi', 'th', 'zh-CN', 'ja', 'zh-TW', 'ko'
-]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
@@ -42,6 +32,7 @@ class ChatInputCommandData(TypedDict):
     options: List[ApplicationCommandOptionData]
     default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[bool]
+    nsfw: NotRequired[bool]
     version: Snowflake
 
 
@@ -55,6 +46,7 @@ class ContextMenuCommandData(TypedDict):
     name_localizations: NotRequired[Optional[Dict[Locales, str]]]
     default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[bool]
+    nsfw: NotRequired[bool]
     version: Snowflake
 
 
@@ -339,6 +331,7 @@ class ApplicationCommandPayload(TypedDict):
     default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[bool]
     type: NotRequired[Literal[1, 2, 3]]
+    nsfw: NotRequired[bool]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#batch-edit-application-command-permissions-example

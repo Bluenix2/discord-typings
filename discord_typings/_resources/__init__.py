@@ -7,6 +7,7 @@ from ._guild import *
 from ._guild_scheduled_events import *
 from ._guild_template import *
 from ._invite import *
+from ._role_connection_metadata import *
 from ._stage_instance import *
 from ._sticker import *
 from ._user import *

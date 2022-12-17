@@ -5,9 +5,8 @@ from typing import TYPE_CHECKING, List, Optional, Union
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
 if TYPE_CHECKING:
-    from .._interactions import Locales
     from .._oauth import OAuth2Scopes
-    from .._reference import Snowflake
+    from .._reference import Locales, Snowflake
     from ._channel import ChannelData, ThreadChannelData, ThreadMemberData
     from ._emoji import EmojiData
     from ._sticker import StickerData
@@ -127,9 +126,11 @@ PremiumTiers = Literal[0, 1, 2, 3]
 GuildFeaturesData = Literal[
     'ANIMATED_BANNER',
     'ANIMATED_ICON',
+    'APPLICATION_COMMAND_PERMISSIONS_V2',
     'AUTO_MODERATION',
     'BANNER',
     'COMMUNITY',
+    'DEVELOPER_SUPPORT_SERVER',
     'DISCOVERABLE',
     'FEATUREABLE',
     'INVITES_DISABLED',
@@ -140,7 +141,6 @@ GuildFeaturesData = Literal[
     'NEWS',
     'PARTNERED',
     'PREVIEW_ENABLED',
-    'PRIVATE_THREADS',
     'ROLE_ICONS',
     'TICKETED_EVENTS_ENABLED',
     'VANITY_URL',
