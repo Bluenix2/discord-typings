@@ -212,6 +212,7 @@ class GuildMemberData(TypedDict):
     premium_since: NotRequired[Optional[str]]
     deaf: bool
     mute: bool
+    flags: int
     pending: NotRequired[bool]
     permissions: NotRequired[str]
     communication_disabled_until: NotRequired[Optional[str]]
