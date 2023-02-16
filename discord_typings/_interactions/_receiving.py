@@ -25,7 +25,7 @@ __all__ = (
     'InteractionNodataResponseData', 'ModalInteractionData',
     'ApplicationCommandOptionInteractionData', 'SelectMenuComponentInteractionDataData',
     'ButtonComponentInteractionDataData', 'ChatInputCommandInteractionDataData',
-    'ContextMenuInteractionDataData',
+    'ContextMenuInteractionDataData', 'ComponentInteractionDataData'
 )
 
 
