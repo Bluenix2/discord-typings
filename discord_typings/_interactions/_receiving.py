@@ -150,7 +150,7 @@ class ChatInputCommandInteractionDataData(TypedDict):
     name: str
     type: Literal[1]
     resolved: NotRequired[ResolvedInteractionDataData]
-    options: NotRequired[ApplicationCommandOptionInteractionData]
+    options: NotRequired[List[ApplicationCommandOptionInteractionData]]
     guild_id: NotRequired[Snowflake]
 
 
@@ -219,7 +219,7 @@ class ResolvedInteractionDataData(TypedDict):
     attachments: NotRequired[Dict[Snowflake, AttachmentData]]
 
 
-# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure
 
 
 @final

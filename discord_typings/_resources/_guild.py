@@ -136,12 +136,13 @@ GuildFeaturesData = Literal[
     'INVITES_DISABLED',
     'INVITE_SPLASH',
     'MEMBER_VERIFICATION_GATE_ENABLED',
-    'MONETIZATION_ENABLED',
     'MORE_STICKERS',
     'NEWS',
     'PARTNERED',
     'PREVIEW_ENABLED',
     'ROLE_ICONS',
+    'ROLE_SUBSCRIPTIONS_AVAILABLE_FOR_PURCHASE',
+    'ROLE_SUBSCRIPTIONS_ENABLED',
     'TICKETED_EVENTS_ENABLED',
     'VANITY_URL',
     'VERIFIED',
@@ -232,7 +233,7 @@ class StreamingIntegrationData(TypedDict):
     enable_emoticons: bool
     expire_behavior: IntegrationExpireBehaviors
     expire_grace_period: int
-    user: UserData
+    user: NotRequired[UserData]
     account: IntegrationAccountData
     synced_at: str
     subscriber_count: int
@@ -246,6 +247,8 @@ class DiscordIntegrationData(TypedDict):
     id: Snowflake
     name: str
     type: Literal['discord']
+    enabled: bool
+    user: NotRequired[UserData]
     account: IntegrationAccountData
     application: NotRequired[IntegrationApplicationData]
     scopes: NotRequired[List[OAuth2Scopes]]
@@ -366,3 +369,6 @@ class RoleTagsData(TypedDict):
     bot_id: NotRequired[Snowflake]
     integration_id: NotRequired[Snowflake]
     premium_subscriber: NotRequired[None]
+    subscription_listing_id: NotRequired[Snowflake]
+    available_for_purchase: NotRequired[None]
+    guild_connections: NotRequired[None]

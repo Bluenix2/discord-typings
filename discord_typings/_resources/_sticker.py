@@ -39,7 +39,7 @@ StickerTypes = Literal[1, 2]
 # https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-format-types
 
 
-StickerFormatTypes = Literal[1, 2, 3]
+StickerFormatTypes = Literal[1, 2, 3, 4]
 
 
 # https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure

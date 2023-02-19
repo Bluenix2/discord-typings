@@ -33,6 +33,7 @@ OAuth2Scopes = Literal[
     'identify',
     'messages.read',
     'relationships.read',
+    'role_connections.write',
     'rpc',
     'rpc.activities.write',
     'rpc.notifications.read',

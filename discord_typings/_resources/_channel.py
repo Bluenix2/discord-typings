@@ -27,7 +27,7 @@ __all__ = (
     'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData',
     'PartialAttachmentData', 'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData',
     'ChannelMentionData', 'MessageReactionData', 'DefaultReactionData',
-    'ForumTagData', 'ForumChannelData', 'SortOrderTypes'
+    'ForumTagData', 'ForumChannelData', 'SortOrderTypes', 'RoleSubscriptionData',
 )
 
 
@@ -97,6 +97,7 @@ class GroupDMChannelData(TypedDict):
     icon: Optional[str]
     owner_id: Snowflake
     application_id: NotRequired[Snowflake]
+    managed: bool
     last_pin_timestamp: NotRequired[Optional[str]]
     flags: int
 
@@ -236,6 +237,7 @@ class MessageBase(TypedDict):
     components: NotRequired[List[ComponentData]]
     sticker_items: NotRequired[List[StickerItemData]]
     position: NotRequired[int]
+    role_subscription_data: NotRequired[RoleSubscriptionData]
 
 
 @final
@@ -262,7 +264,7 @@ class UserMentionData(UserBase):
 
 MessageTypes = Literal[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
 ]
 
 
@@ -343,6 +345,7 @@ class ThreadMetadataData(TypedDict):
 class ThreadMemberData(TypedDict):
     id: NotRequired[Snowflake]
     user_id: NotRequired[Snowflake]
+    member: NotRequired[GuildMemberData]
     join_timestamp: str
     flags: int
 
@@ -505,6 +508,17 @@ class AllowedMentionsData(TypedDict):
     roles: NotRequired[List[Snowflake]]
     users: NotRequired[List[Snowflake]]
     replied_user: NotRequired[bool]
+
+
+# https://discord.com/developers/docs/resources/channel#role-subscription-data-object-role-subscription-data-object-structure
+
+
+@final
+class RoleSubscriptionData(TypedDict):
+    role_subscription_listing_id: Snowflake
+    tier_name: str
+    total_months_subscribed: int
+    is_renewal: bool
 
 
 # https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body

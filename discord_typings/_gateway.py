@@ -16,9 +16,9 @@ if TYPE_CHECKING:
     )
     from ._reference import Locales, Snowflake
     from ._resources import (  # noqa: F401
-        ApplicationData, AutoModerationActionData, AutoModerationRuleData,
-        AutoModerationTriggerTypes, CategoryChannelData, EmojiData, GuildData,
-        GuildFeaturesData, GuildMemberData, GuildScheduledEventData,
+        ApplicationData, AuditLogEntryData, AutoModerationActionData,
+        AutoModerationRuleData, AutoModerationTriggerTypes, CategoryChannelData,
+        EmojiData, GuildData, GuildFeaturesData, GuildMemberData, GuildScheduledEventData,
         IntegrationAccountData, IntegrationApplicationData,
         IntegrationExpireBehaviors, MessageData, NewsChannelData, RoleData,
         StageInstanceData, StickerData, TextChannelData, ThreadChannelData,
@@ -71,7 +71,8 @@ __all__ = (
     'InteractionCreateEvent', 'StageInstanceCreateData', 'StageInstanceCreateEvent',
     'StageInstanceUpdateData', 'StageInstanceUpdateEvent', 'StageInstanceDeleteData',
     'StageInstanceDeleteEvent', 'GetGatewayData', 'GetGatewayBotData',
-    'SessionStartLimitData', 'DispatchEvent', 'GatewayEvent'
+    'SessionStartLimitData', 'DispatchEvent', 'GatewayEvent',
+    'GuildAuditLogEntryCreateData', 'GuildAuditLogEntryCreateEvent'
 )
 
 
@@ -596,6 +597,16 @@ GuildUpdateEvent = GenericDispatchEvent[Literal['GUILD_UPDATE'], GuildUpdateData
 
 GuildDeleteData: TypeAlias = 'UnavailableGuildData'
 GuildDeleteEvent = GenericDispatchEvent[Literal['GUILD_DELETE'], 'GuildDeleteData']
+
+
+# https://discord.com/developers/docs/topics/gateway-events#guild-audit-log-entry-create
+
+
+GuildAuditLogEntryCreateData: TypeAlias = 'AuditLogEntryData'
+GuildAuditLogEntryCreateEvent = GenericDispatchEvent[
+    Literal['GUILD_AUDIT_LOG_ENTRY_CREATE'],
+    AuditLogEntryData
+]
 
 
 # https://discord.com/developers/docs/topics/gateway#guild-ban-add
