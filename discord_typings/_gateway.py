@@ -98,7 +98,7 @@ class GenericDispatchEvent(TypedDict, Generic[_T, _D]):
     t: _T
 
 
-# https://discord.com/developers/docs/topics/gateway#heartbeating-example-gateway-heartbeat-ack
+# https://discord.com/developers/docs/topics/gateway#heartbeat-interval
 
 
 @final
@@ -106,7 +106,7 @@ class HeartbeatACKEvent(TypedDict):
     op: Literal[11]
 
 
-# https://discord.com/developers/docs/topics/gateway#identify
+# https://discord.com/developers/docs/topics/gateway-events#identify
 
 
 @final
@@ -132,8 +132,7 @@ class IdentifyCommand(TypedDict):
     op: Literal[2]
     d: IdentifyData
 
-
-# https://discord.com/developers/docs/topics/gateway#resume
+# https://discord.com/developers/docs/topics/gateway-events#resume
 
 
 @final
@@ -149,7 +148,7 @@ class ResumeCommand(TypedDict):
     d: ResumeData
 
 
-# https://discord.com/developers/docs/topics/gateway#heartbeat
+# https://discord.com/developers/docs/topics/gateway-events#heartbeat
 
 
 @final
@@ -158,7 +157,7 @@ class HeartbeatCommand(TypedDict):
     d: Optional[int]
 
 
-# https://discord.com/developers/docs/topics/gateway#request-guild-members
+# https://discord.com/developers/docs/topics/gateway-events#request-guild-members
 
 
 @final
@@ -189,7 +188,7 @@ class RequestGuildMembersCommand(TypedDict):
     d: RequestGuildMembersData
 
 
-# https://discord.com/developers/docs/topics/gateway#update-voice-state
+# https://discord.com/developers/docs/topics/gateway-events#update-voice-state
 
 
 @final
@@ -206,7 +205,7 @@ class UpdateVoiceStateCommand(TypedDict):
     d: UpdateVoiceStateData
 
 
-# https://discord.com/developers/docs/topics/gateway#update-presence
+# https://discord.com/developers/docs/topics/gateway-events#update-presence
 
 
 @final
@@ -230,7 +229,7 @@ class UpdatePresenceCommand(TypedDict):
     d: UpdatePresenceData
 
 
-# https://discord.com/developers/docs/topics/gateway#hello
+# https://discord.com/developers/docs/topics/gateway-events#hello
 
 
 @final
@@ -246,7 +245,7 @@ class HelloEvent(TypedDict):
     t: None
 
 
-# https://discord.com/developers/docs/topics/gateway#ready
+# https://discord.com/developers/docs/topics/gateway-events#ready
 
 
 @final
@@ -269,7 +268,7 @@ class ReadyData(TypedDict):
 ReadyEvent = GenericDispatchEvent[Literal['READY'], ReadyData]
 
 
-# https://discord.com/developers/docs/topics/gateway#resumed
+# https://discord.com/developers/docs/topics/gateway-events#resumed
 
 
 @final
@@ -280,7 +279,7 @@ class ResumedData(TypedDict):
 ResumedEvent = GenericDispatchEvent[Literal['RESUMED'], ResumedData]
 
 
-# https://discord.com/developers/docs/topics/gateway#reconnect
+# https://discord.com/developers/docs/topics/gateway-events#reconnect
 
 
 @final
@@ -291,7 +290,7 @@ class ReconnectEvent(TypedDict):
     t: None
 
 
-# https://discord.com/developers/docs/topics/gateway#invalid-session
+# https://discord.com/developers/docs/topics/gateway-events#invalid-session
 
 
 @final
@@ -301,14 +300,14 @@ class InvalidSessionEvent(TypedDict):
     s: None
     t: None
 
-# https://discord.com/developers/docs/topics/gateway#get-gateway-example-response
+# https://discord.com/developers/docs/topics/gateway-events#get-gateway-example-response
 
 
 @final
 class GetGatewayData(TypedDict):
     url: str
 
-# https://discord.com/developers/docs/topics/gateway#application-command-permissions-update
+# https://discord.com/developers/docs/topics/gateway-events#application-command-permissions-update
 
 
 ApplicationCommandPermissionsUpdateData: TypeAlias = 'ApplicationCommandPermissionsData'
@@ -320,7 +319,7 @@ ApplicationCommandPermissionsUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create
+# https://discord.com/developers/docs/topics/gateway-events#auto-moderation-rule-create
 
 
 AutoModerationRuleCreateData: TypeAlias = 'AutoModerationRuleData'
@@ -332,7 +331,7 @@ AutoModerationRuleCreateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update
+# https://discord.com/developers/docs/topics/gateway-events#auto-moderation-rule-update
 
 
 AutoModerationRuleUpdateData: TypeAlias = 'AutoModerationRuleData'
@@ -344,7 +343,7 @@ AutoModerationRuleUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete
+# https://discord.com/developers/docs/topics/gateway-events#auto-moderation-rule-delete
 
 
 AutoModerationRuleDeleteData: TypeAlias = 'AutoModerationRuleData'
@@ -356,7 +355,7 @@ AutoModerationRuleDeleteEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution
+# https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution
 
 
 @final
@@ -380,7 +379,7 @@ AutoModerationActionExecutionEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#channels
+# https://discord.com/developers/docs/topics/gateway-events#channels
 
 
 # Utility for the events below
@@ -389,28 +388,28 @@ _GuildChannelData = Union[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#channel-create
+# https://discord.com/developers/docs/topics/gateway-events#channel-create
 
 
 ChannelCreateData = _GuildChannelData
 ChannelCreateEvent = GenericDispatchEvent[Literal['CHANNEL_CREATE'], ChannelCreateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#channel-update
+# https://discord.com/developers/docs/topics/gateway-events#channel-update
 
 
 ChannelUpdateData = _GuildChannelData
 ChannelUpdateEvent = GenericDispatchEvent[Literal['CHANNEL_UPDATE'], ChannelUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#channel-delete
+# https://discord.com/developers/docs/topics/gateway-events#channel-delete
 
 
 ChannelDeleteData = _GuildChannelData
 ChannelDeleteEvent = GenericDispatchEvent[Literal['CHANNEl_DELETE'], ChannelDeleteData]
 
 
-# https://discord.com/developers/docs/topics/gateway#thread-create
+# https://discord.com/developers/docs/topics/gateway-events#thread-create
 
 
 @final
@@ -435,14 +434,14 @@ class ThreadCreateData(TypedDict):
 ThreadCreateEvent = GenericDispatchEvent[Literal['THREAD_CREATE'], ThreadCreateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#thread-update
+# https://discord.com/developers/docs/topics/gateway-events#thread-update
 
 
 ThreadUpdateData: TypeAlias = 'ThreadChannelData'
 ThreadUpdateEvent = GenericDispatchEvent[Literal['THREAD_UPDATE'], ThreadUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#thread-delete
+# https://discord.com/developers/docs/topics/gateway-events#thread-delete
 
 
 @final
@@ -456,7 +455,7 @@ class ThreadDeleteData(TypedDict):
 ThreadDeleteEvent = GenericDispatchEvent[Literal['THREAD_DELETE'], ThreadDeleteData]
 
 
-# https://discord.com/developers/docs/topics/gateway#thread-list-sync
+# https://discord.com/developers/docs/topics/gateway-events#thread-list-sync
 
 
 @final
@@ -470,7 +469,7 @@ class ThreadListSyncData(TypedDict):
 ThreadListSyncEvent = GenericDispatchEvent[Literal['THREAD_LIST_SYNC'], ThreadListSyncData]
 
 
-# https://discord.com/developers/docs/topics/gateway#thread-member-update
+# https://discord.com/developers/docs/topics/gateway-events#thread-member-update
 
 
 @final
@@ -490,7 +489,7 @@ ThreadMemberUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#thread-members-update
+# https://discord.com/developers/docs/topics/gateway-events#thread-members-update
 
 
 @final
@@ -507,7 +506,7 @@ ThreadMembersUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#channel-pins-update
+# https://discord.com/developers/docs/topics/gateway-events#channel-pins-update
 
 
 @final
@@ -522,7 +521,7 @@ ChannelPinsUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-create
+# https://discord.com/developers/docs/topics/gateway-events#guild-create
 
 
 @final
@@ -585,14 +584,14 @@ class GuildCreateData(TypedDict):
 GuildCreateEvent = GenericDispatchEvent[Literal['GUILD_CREATE'], GuildCreateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-update
 
 
 GuildUpdateData: TypeAlias = 'GuildData'
 GuildUpdateEvent = GenericDispatchEvent[Literal['GUILD_UPDATE'], GuildUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-delete
+# https://discord.com/developers/docs/topics/gateway-events#guild-delete
 
 
 GuildDeleteData: TypeAlias = 'UnavailableGuildData'
@@ -609,7 +608,7 @@ GuildAuditLogEntryCreateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-ban-add
+# https://discord.com/developers/docs/topics/gateway-events#guild-ban-add
 
 
 @final
@@ -621,7 +620,7 @@ class GuildBanAddData(TypedDict):
 GuildBanAddEvent = GenericDispatchEvent[Literal['GUILD_BAN_ADD'], GuildBanAddData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-ban-remove
+# https://discord.com/developers/docs/topics/gateway-events#guild-ban-remove
 
 
 @final
@@ -633,7 +632,7 @@ class GuildBanRemoveData(TypedDict):
 GuildBanRemoveEvent = GenericDispatchEvent[Literal['GUILD_BAN_REMOVE'], GuildBanRemoveData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-emojis-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-emojis-update
 
 
 @final
@@ -647,7 +646,7 @@ GuildEmojisUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-stickers-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-stickers-update
 
 
 @final
@@ -661,7 +660,7 @@ GuildStickersUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-integrations-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-integrations-update
 
 
 @final
@@ -674,7 +673,7 @@ GuildIntergrationsUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-member-add
+# https://discord.com/developers/docs/topics/gateway-events#guild-member-add
 
 
 @final
@@ -696,7 +695,7 @@ class GuildMemberAddData(TypedDict):
 GuildMemberAddEvent = GenericDispatchEvent[Literal['GUILD_MEMBER_ADD'], GuildMemberAddData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-member-remove
+# https://discord.com/developers/docs/topics/gateway-events#guild-member-remove
 
 
 @final
@@ -710,7 +709,7 @@ GuildMemberRemoveEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-member-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-member-update
 
 
 @final
@@ -733,7 +732,7 @@ GuildMemberUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-members-chunk
+# https://discord.com/developers/docs/topics/gateway-events#guild-members-chunk
 
 
 @final
@@ -752,7 +751,7 @@ GuildMembersChunkEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-role-create
+# https://discord.com/developers/docs/topics/gateway-events#guild-role-create
 
 
 @final
@@ -764,7 +763,7 @@ class GuildRoleCreateData(TypedDict):
 GuildRoleCreateEvent = GenericDispatchEvent[Literal['GUILD_ROLE_CREATE'], GuildRoleCreateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-role-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-role-update
 
 
 @final
@@ -776,7 +775,7 @@ class GuildRoleUpdateData(TypedDict):
 GuildRoleUpdateEvent = GenericDispatchEvent[Literal['GUILD_ROLE_UPDATE'], GuildRoleUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-role-delete
+# https://discord.com/developers/docs/topics/gateway-events#guild-role-delete
 
 
 @final
@@ -788,7 +787,7 @@ class GuildRoleDeleteData(TypedDict):
 GuildRoleDeleteEvent = GenericDispatchEvent[Literal['GUILD_ROLE_DELETE'], GuildRoleDeleteData]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create
+# https://discord.com/developers/docs/topics/gateway-events#guild-scheduled-event-create
 
 
 GuildScheduledEventCreateData: TypeAlias = 'GuildScheduledEventData'
@@ -797,7 +796,7 @@ GuildScheduledEventCreateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update
+# https://discord.com/developers/docs/topics/gateway-events#guild-scheduled-event-update
 
 
 GuildScheduledEventUpdateData: TypeAlias = 'GuildScheduledEventData'
@@ -806,7 +805,7 @@ GuildScheduledEventUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete
+# https://discord.com/developers/docs/topics/gateway-events#guild-scheduled-event-delete
 
 
 GuildScheduledEventDeleteData: TypeAlias = 'GuildScheduledEventData'
@@ -815,7 +814,7 @@ GuildScheduledEventDeleteEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add
+# https://discord.com/developers/docs/topics/gateway-events#guild-scheduled-event-user-add
 
 
 @final
@@ -830,7 +829,7 @@ GuildScheduledEventUserAddEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove
+# https://discord.com/developers/docs/topics/gateway-events#guild-scheduled-event-user-remove
 
 
 @final
@@ -845,7 +844,7 @@ GuildScheduledEventUserRemoveEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#integrations
+# https://discord.com/developers/docs/topics/gateway-events#integrations
 
 
 @final
@@ -884,7 +883,7 @@ class _DiscordIntegrationGuildData(TypedDict):
 # Integration object, with an additional guild_id field
 _IntegrationGuildData = Union[_StreamingIntegrationGuildData, _DiscordIntegrationGuildData]
 
-# https://discord.com/developers/docs/topics/gateway#integration-create
+# https://discord.com/developers/docs/topics/gateway-events#integration-create
 
 
 IntegrationCreateData: TypeAlias = '_IntegrationGuildData'
@@ -893,7 +892,7 @@ IntegrationCreateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#integration-update
+# https://discord.com/developers/docs/topics/gateway-events#integration-update
 
 
 IntegrationUpdateData: TypeAlias = '_IntegrationGuildData'
@@ -902,7 +901,7 @@ IntegrationUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#integration-delete
+# https://discord.com/developers/docs/topics/gateway-events#integration-delete
 
 
 @final
@@ -917,7 +916,7 @@ IntegrationDeleteEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#invite-create
+# https://discord.com/developers/docs/topics/gateway-events#invite-create
 
 
 @final
@@ -939,7 +938,7 @@ class InviteCreateData(TypedDict):
 InviteCreateEvent = GenericDispatchEvent[Literal['INVITE_CREATE'], InviteCreateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#invite-delete
+# https://discord.com/developers/docs/topics/gateway-events#invite-delete
 
 
 @final
@@ -952,21 +951,21 @@ class InviteDeleteData(TypedDict):
 InviteDeleteEvent = GenericDispatchEvent[Literal['INVITE_DELETE'], InviteDeleteData]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-create
+# https://discord.com/developers/docs/topics/gateway-events#message-create
 
 
 MessageCreateData: TypeAlias = 'MessageData'
 MessageCreateEvent = GenericDispatchEvent[Literal['MESSAGE_CREATE'], MessageCreateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-update
+# https://discord.com/developers/docs/topics/gateway-events#message-update
 
 
 MessageUpdateData: TypeAlias = 'MessageData'
 MessageUpdateEvent = GenericDispatchEvent[Literal['MESSAGE_UPDATE'], MessageUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-delete
+# https://discord.com/developers/docs/topics/gateway-events#message-delete
 
 
 @final
@@ -979,7 +978,7 @@ class MessageDeleteData(TypedDict):
 MessageDeleteEvent = GenericDispatchEvent[Literal['MESSAGE_DELETE'], MessageDeleteData]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-delete-bulk
+# https://discord.com/developers/docs/topics/gateway-events#message-delete-bulk
 
 
 @final
@@ -994,7 +993,7 @@ MessageDeleteBulkEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-reaction-add
+# https://discord.com/developers/docs/topics/gateway-events#message-reaction-add
 
 
 @final
@@ -1012,7 +1011,7 @@ MessageReactionAddEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-reaction-remove
+# https://discord.com/developers/docs/topics/gateway-events#message-reaction-remove
 
 
 @final
@@ -1029,7 +1028,7 @@ MessageReactionRemoveEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all
+# https://discord.com/developers/docs/topics/gateway-events#message-reaction-remove-all
 
 
 @final
@@ -1044,7 +1043,7 @@ MessageReactionRemoveAllEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji
+# https://discord.com/developers/docs/topics/gateway-events#message-reaction-remove-emoji
 
 
 @final
@@ -1060,7 +1059,7 @@ MessageReactionRemoveEmojiEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#presence-update
+# https://discord.com/developers/docs/topics/gateway-events#presence-update
 
 
 @final
@@ -1079,7 +1078,7 @@ class ClientStatusData(TypedDict):
     web: NotRequired[str]
 
 
-# https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure
+# https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-structure
 
 
 @final
@@ -1141,7 +1140,7 @@ class ActivityButtonData(TypedDict):
     url: str
 
 
-# https://discord.com/developers/docs/topics/gateway#typing-start
+# https://discord.com/developers/docs/topics/gateway-events#typing-start
 
 
 @final
@@ -1156,14 +1155,14 @@ class TypingStartData(TypedDict):
 TypingStartEvent = GenericDispatchEvent[Literal['TYPING_START'], TypingStartData]
 
 
-# https://discord.com/developers/docs/topics/gateway#user-update
+# https://discord.com/developers/docs/topics/gateway-events#user-update
 
 
 UserUpdateData: TypeAlias = 'UserData'
 UserUpdateEvent = GenericDispatchEvent[Literal['USER_UPDATE'], UserUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#voice-state-update
+# https://discord.com/developers/docs/topics/gateway-events#voice-state-update
 
 
 VoiceStateUpdateData: TypeAlias = 'VoiceStateData'
@@ -1172,7 +1171,7 @@ VoiceStateUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#voice-server-update
+# https://discord.com/developers/docs/topics/gateway-events#voice-server-update
 
 
 @final
@@ -1187,7 +1186,7 @@ VoiceServerUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#webhooks-update
+# https://discord.com/developers/docs/topics/gateway-events#webhooks-update
 
 
 @final
@@ -1199,7 +1198,7 @@ class WebhooksUpdateData(TypedDict):
 WebhooksUpdateEvent = GenericDispatchEvent[Literal['WEBHOOKS_UPDATE'], WebhooksUpdateData]
 
 
-# https://discord.com/developers/docs/topics/gateway#interaction-create
+# https://discord.com/developers/docs/topics/gateway-events#interaction-create
 
 
 InteractionCreateData: TypeAlias = 'InteractionData'
@@ -1208,7 +1207,7 @@ InteractionCreateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#stage-instance-create
+# https://discord.com/developers/docs/topics/gateway-events#stage-instance-create
 
 
 StageInstanceCreateData: TypeAlias = 'StageInstanceData'
@@ -1217,7 +1216,7 @@ StageInstanceCreateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#stage-instance-update
+# https://discord.com/developers/docs/topics/gateway-events#stage-instance-update
 
 
 StageInstanceUpdateData: TypeAlias = 'StageInstanceData'
@@ -1226,7 +1225,7 @@ StageInstanceUpdateEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#stage-instance-delete
+# https://discord.com/developers/docs/topics/gateway-events#stage-instance-delete
 
 
 StageInstanceDeleteData: TypeAlias = 'StageInstanceData'
@@ -1235,7 +1234,7 @@ StageInstanceDeleteEvent = GenericDispatchEvent[
 ]
 
 
-# https://discord.com/developers/docs/topics/gateway#get-gateway-bot-json-response
+# https://discord.com/developers/docs/topics/gateway-events#get-gateway-bot-json-response
 
 
 @final
@@ -1245,7 +1244,7 @@ class GetGatewayBotData(TypedDict):
     session_start_limit: SessionStartLimitData
 
 
-# https://discord.com/developers/docs/topics/gateway#session-start-limit-object-session-start-limit-structure
+# https://discord.com/developers/docs/topics/gateway#session-start-limit-object
 
 
 @final
