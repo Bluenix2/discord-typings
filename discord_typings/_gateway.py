@@ -604,7 +604,7 @@ GuildDeleteEvent = GenericDispatchEvent[Literal['GUILD_DELETE'], 'GuildDeleteDat
 GuildAuditLogEntryCreateData: TypeAlias = 'AuditLogEntryData'
 GuildAuditLogEntryCreateEvent = GenericDispatchEvent[
     Literal['GUILD_AUDIT_LOG_ENTRY_CREATE'],
-    AuditLogEntryData
+    'AuditLogEntryData'
 ]
 
 
