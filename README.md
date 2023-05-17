@@ -66,3 +66,26 @@ over the gateway. `Data` is used for any general objects like `UserData`.
 To differentiate between the data for complete application commands, and the
 data Discord expects to receive to create an application command, there is
 a special-cased `ApplicationCommandPayload`.
+
+## Codestyle and Contributing
+
+Discord-typings is a relatively simple library with little code, but
+unfortunately needs to be constantly maintained with Discord's API.
+The purpose of this library is for this to be a community effort;
+any help with maintenance is greatly appreciated.
+
+### Structure
+
+The library follows the API docs both in terms of naming, structure, and order
+inside of individual files. This should hopefully make it easier to find the
+code to change when you have the documentation entry at hand.
+
+All internal imports should be done by importing the entire module, then
+accessing the typing as an attribute. If `from ... import ...`, or specific
+things are imported, that is likely to create complicated circular imports.
+Inside of annotations, wrap the attribute access (`discord_typings.X`) in
+quotes to make it a string and defer its evaluation.
+
+All typings which directly represent a Discord payload (excluding typings
+created for the purpose of a `Union`) should be added to the file's `__all__`,
+then be added to the module's `__init__` and its `__all__`.
