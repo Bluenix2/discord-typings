@@ -17,13 +17,14 @@ if TYPE_CHECKING:
     from ._reference import Locales, Snowflake
     from ._resources import (  # noqa: F401
         ApplicationData, AuditLogEntryData, AutoModerationActionData,
-        AutoModerationRuleData, AutoModerationTriggerTypes, CategoryChannelData,
-        EmojiData, GuildData, GuildFeaturesData, GuildMemberData, GuildScheduledEventData,
-        IntegrationAccountData, IntegrationApplicationData,
-        IntegrationExpireBehaviors, MessageData, NewsChannelData, RoleData,
-        StageInstanceData, StickerData, TextChannelData, ThreadChannelData,
-        ThreadMemberData, ThreadMetadataData, UnavailableGuildData, UserData,
-        VoiceChannelData, VoiceStateData, WelcomeScreenData
+        AutoModerationRuleData, AutoModerationTriggerTypes,
+        CategoryChannelData, EmojiData, GuildData, GuildFeaturesData,
+        GuildMemberData, GuildScheduledEventData, IntegrationAccountData,
+        IntegrationApplicationData, IntegrationExpireBehaviors, MessageData,
+        NewsChannelData, RoleData, StageInstanceData, StickerData,
+        TextChannelData, ThreadChannelData, ThreadMemberData,
+        ThreadMetadataData, UnavailableGuildData, UserData, VoiceChannelData,
+        VoiceStateData, WelcomeScreenData
     )
 
 __all__ = (
