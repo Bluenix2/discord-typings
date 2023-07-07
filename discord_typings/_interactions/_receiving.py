@@ -38,6 +38,7 @@ class GuildInteractionData(TypedDict):
     application_id: Snowflake
     guild_id: Snowflake
     channel_id: Snowflake
+    channel: PartialChannelData
     member: GuildMemberData
     token: str
     version: int
@@ -78,6 +79,7 @@ class ChannelInteractionData(TypedDict):
     id: Snowflake
     application_id: Snowflake
     channel_id: Snowflake
+    channel: PartialChannelData
     user: UserData
     token: str
     version: int

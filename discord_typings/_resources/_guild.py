@@ -82,6 +82,7 @@ class GuildData(TypedDict):
     nsfw_level: GuildNSFWLevels
     stickers: NotRequired[List[StickerData]]
     premium_progress_bar_enabled: bool
+    safety_alerts_channel_id: Optional[Snowflake]
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
@@ -140,6 +141,7 @@ GuildFeaturesData = Literal[
     'NEWS',
     'PARTNERED',
     'PREVIEW_ENABLED',
+    'RAID_ALERTS_DISABLED',
     'ROLE_ICONS',
     'ROLE_SUBSCRIPTIONS_AVAILABLE_FOR_PURCHASE',
     'ROLE_SUBSCRIPTIONS_ENABLED',

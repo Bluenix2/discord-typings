@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict, final
 
@@ -22,7 +22,8 @@ if TYPE_CHECKING:
 class UserBase(TypedDict):
     id: Snowflake
     username: str
-    discriminator: str
+    global_name: Optional[str]
+    discriminator: Union[str, Literal["0"]]
     avatar: Optional[str]
     bot: NotRequired[bool]
     system: NotRequired[bool]

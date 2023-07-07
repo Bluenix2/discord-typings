@@ -107,6 +107,7 @@ class KeywordPresetTriggerMetadataData(TypedDict):
 @final
 class MentionSpamTriggerMetadataData(TypedDict):
     mention_total_limit: int
+    mention_raid_protection_enabled: bool
 
 
 @final
@@ -138,6 +139,7 @@ AutoModerationEventTypes = Literal[1]
 @final
 class BlockMessageAutoModerationActionData(TypedDict):
     type: Literal[1]
+    metadata: BlockMessageAutoModerationActionMetadataData
 
 
 @final
@@ -177,6 +179,12 @@ class TimeoutAutoModerationActionMetadataData(TypedDict):
     duration_seconds: int
 
 
+@final
+class BlockMessageAutoModerationActionMetadataData(TypedDict, total=False):
+    custom_message: str
+
+
 AutoModerationActionMetadataData = Union[
-    SendAlertMessageAutoModerationActionMetadataData, TimeoutAutoModerationActionMetadataData
+    SendAlertMessageAutoModerationActionMetadataData, TimeoutAutoModerationActionMetadataData,
+    BlockMessageAutoModerationActionMetadataData
 ]
