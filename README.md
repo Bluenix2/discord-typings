@@ -89,3 +89,34 @@ quotes to make it a string and defer its evaluation.
 All typings which directly represent a Discord payload (excluding typings
 created for the purpose of a `Union`) should be added to the file's `__all__`,
 then be added to the module's `__init__` and its `__all__`.
+
+## Version Guarantees
+
+Once discord-typings releases its `v1.0` release, it will follow strict
+semantic versioning guarantees. Keep in mind that this *only applies*
+to the Python interface - such as `TypeDict`s, top-level unions, and
+other aliases.
+
+Due to Discord's frequent API updates, it is not guaranteed that code
+which type-checks in one minor version will do so in another one. This
+is because code which does not type-check will not have an effect on
+runtime for users.
+
+As a reminder of semantic versioning, and a summary of the above:
+
+| Release Type | Upgrade | Downgrade | Comment                                           |
+| ------------ | ------- | --------- | ------------------------------------------------- |
+| **Major**    |         |           | Only type of release with breaking Python changes |
+| **Minor**    |    X    |           | May add new features, can break type-checking     |
+| **Patch**    |    X    |     X     | Only intended for bugs                            |
+
+> **Note**
+> Patch versions will be used to rectify any accidental breaking changes
+> or unintended bugs / behaviour, therefore you should **always** use
+> the latest patch version.
+
+> **Note**
+> Because patch versions may change previous behaviour, they *could* be
+> considered breaking, however the intention is always to fix unintended
+> behaviour or previous breaking changes which should not have been.
+> In those cases, the previous version will be pulled from PyPI.
