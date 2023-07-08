@@ -1,11 +1,15 @@
 from typing import Dict, List, Union
 
-from typing_extensions import Literal, TypedDict, final
+from typing_extensions import Literal, TypedDict
 
-__all__ = [
-    'Snowflake', 'HTTPErrorData', 'InnerHTTPErrorsData', 'NestedHTTPErrorsData',
-    'HTTPErrorResponseData', 'Locales'
-]
+__all__ = (
+    'Snowflake',
+    'HTTPErrorData',
+    'InnerHTTPErrorsData',
+    'NestedHTTPErrorsData',
+    'HTTPErrorResponseData',
+    'Locales',
+)
 
 
 # Somewhat useless but good to distinguish the difference, perhaps in the
@@ -20,13 +24,11 @@ Snowflake = Union[str, int]
 # https://discord.com/developers/docs/reference#error-messages
 
 
-@final
 class HTTPErrorData(TypedDict):
     code: str
     message: str
 
 
-@final
 class InnerHTTPErrorsData(TypedDict):
     _errors: List[HTTPErrorData]
 
@@ -37,7 +39,6 @@ NestedHTTPErrorsData = Union[
 ]
 
 
-@final
 class HTTPErrorResponseData(TypedDict):
     code: int
     errors: NestedHTTPErrorsData

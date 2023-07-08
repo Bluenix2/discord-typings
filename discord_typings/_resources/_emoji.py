@@ -1,25 +1,20 @@
-from __future__ import annotations
+from typing import List, Optional
 
-from typing import TYPE_CHECKING, List, Optional
+from typing_extensions import NotRequired, TypedDict
 
-from typing_extensions import NotRequired, TypedDict, final
-
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from ._user import UserData
+import discord_typings
 
 __all__ = ('EmojiData',)
 
 
-# https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure
+# https://discord.com/developers/docs/resources/emoji#emoji-object
 
 
-@final
 class EmojiData(TypedDict):
-    id: Optional[Snowflake]
+    id: Optional['discord_typings.Snowflake']
     name: Optional[str]
-    roles: NotRequired[List[Snowflake]]
-    user: NotRequired[UserData]
+    roles: NotRequired[List['discord_typings.Snowflake']]
+    user: NotRequired['discord_typings.UserData']
     require_colons: NotRequired[bool]
     managed: NotRequired[bool]
     animated: NotRequired[bool]

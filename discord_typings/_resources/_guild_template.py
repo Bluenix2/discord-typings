@@ -1,30 +1,24 @@
-from __future__ import annotations
+from typing import Optional
 
-from typing import TYPE_CHECKING, Optional
+from typing_extensions import TypedDict
 
-from typing_extensions import TypedDict, final
-
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from ._guild import GuildData
-    from ._user import UserData
+import discord_typings
 
 __all__ = ('GuildTemplateData',)
 
 
-# https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure
+# https://discord.com/developers/docs/resources/guild-template#guild-template-object
 
 
-@final
 class GuildTemplateData(TypedDict):
     code: str
     name: str
     description: Optional[str]
     usage_count: int
-    creator_id: Snowflake
-    creator: UserData
+    creator_id: 'discord_typings.Snowflake'
+    creator: 'discord_typings.UserData'
     created_at: str
     updated_at: str
-    source_guild_id: Snowflake
-    serialized_source_guild: GuildData
+    source_guild_id: 'discord_typings.Snowflake'
+    serialized_source_guild: 'discord_typings.GuildData'
     is_dirty: Optional[bool]

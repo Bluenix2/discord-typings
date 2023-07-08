@@ -1,33 +1,27 @@
-from __future__ import annotations
+from typing import List, Optional
 
-from typing import TYPE_CHECKING, List, Optional
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
+import discord_typings
 
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from ._user import UserData
-
-__all__ = [
-    'StickerItemData', 'StickerTypes', 'StickerFormatTypes', 'StickerData',
+__all__ = (
+    'StickerItemData',
+    'StickerTypes',
+    'StickerFormatTypes',
+    'StickerData',
     'StickerPackData',
-]
+)
 
 
-# https://discord.com/developers/docs/resources/sticker#sticker-item-object-sticker-item-structure
+# https://discord.com/developers/docs/resources/sticker#sticker-item-object
 
 
 # Because of inheritance, this class comes first even though that is not the
 # order in the documentation.
-class _StickerItemBase(TypedDict):
-    id: Snowflake
+class StickerItemData(TypedDict):
+    id: 'discord_typings.Snowflake'
     name: str
-    format_type: StickerFormatTypes
-
-
-@final
-class StickerItemData(_StickerItemBase):
-    pass
+    format_type: 'discord_typings.StickerFormatTypes'
 
 
 # https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-types
@@ -45,27 +39,25 @@ StickerFormatTypes = Literal[1, 2, 3, 4]
 # https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure
 
 
-@final
-class StickerData(_StickerItemBase):
-    pack_id: NotRequired[Snowflake]
+class StickerData(StickerItemData):
+    pack_id: NotRequired['discord_typings.Snowflake']
     description: Optional[str]
     tags: str
     type: StickerTypes
     available: NotRequired[bool]
-    guild_id: NotRequired[Snowflake]
-    user: NotRequired[UserData]
+    guild_id: NotRequired['discord_typings.Snowflake']
+    user: NotRequired['discord_typings.UserData']
     sort_value: NotRequired[int]
 
 
-# https://discord.com/developers/docs/resources/sticker#sticker-pack-object-sticker-pack-structure
+# https://discord.com/developers/docs/resources/sticker#sticker-pack-object
 
 
-@final
 class StickerPackData(TypedDict):
-    id: Snowflake
-    stickers: List[StickerData]
+    id: 'discord_typings.Snowflake'
+    stickers: List['discord_typings.StickerData']
     name: str
-    sku_id: Snowflake
-    cover_sticker_id: NotRequired[Snowflake]
+    sku_id: 'discord_typings.Snowflake'
+    cover_sticker_id: NotRequired['discord_typings.Snowflake']
     description: str
-    banner_asset_id: NotRequired[Snowflake]
+    banner_asset_id: NotRequired['discord_typings.Snowflake']

@@ -1,58 +1,58 @@
-from __future__ import annotations
+from typing import Optional, Union
 
-from typing import TYPE_CHECKING, Optional, Union
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
-
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from ._guild import GuildMemberData
-    from ._user import UserData
+import discord_typings
 
 __all__ = (
-    'GuildScheduledEventData', 'GuildScheduledEventPrivacyLevels', 'GuildScheduledEventStatus',
-    'GuildScheduledEventEntityTypes', 'GuildScheduledEventEntityMetadataData',
-    'GuildScheduledEventUserData'
+    'StageGuildScheduledEventData',
+    'VoiceGuildScheduledEventData',
+    'ExternalGuildScheduledEventData',
+    'GuildScheduledEventData',
+    'GuildScheduledEventPrivacyLevels',
+    'GuildScheduledEventStatus',
+    'GuildScheduledEventEntityTypes',
+    'GuildScheduledEventEntityMetadataData',
+    'GuildScheduledEventUserData',
 )
 
 
 # https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-structure
 
 
-class GuildScheduledEventBase(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
-    creator_id: Snowflake
+class _GuildScheduledEventData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
+    creator_id: 'discord_typings.Snowflake'
     name: str
     description: NotRequired[Optional[str]]
     scheduled_start_time: str
-    privacy_level: GuildScheduledEventPrivacyLevels
-    status: GuildScheduledEventStatus
-    entity_type: GuildScheduledEventEntityTypes
-    entity_id: Optional[Snowflake]
-    creator: UserData
+    privacy_level: 'discord_typings.GuildScheduledEventPrivacyLevels'
+    status: 'discord_typings.GuildScheduledEventStatus'
+    entity_id: Optional['discord_typings.Snowflake']
+    creator: 'discord_typings.UserData'
     user_count: NotRequired[int]
     image: NotRequired[Optional[str]]
 
 
-@final
-class StageGuildScheduledEventData(GuildScheduledEventBase):
-    channel_id: Snowflake
+class StageGuildScheduledEventData(_GuildScheduledEventData):
+    entity_type: Literal[1]
+    channel_id: 'discord_typings.Snowflake'
     entity_metadata: None
     scheduled_end_time: NotRequired[str]
 
 
-@final
-class VoiceGuildScheduledEventData(GuildScheduledEventBase):
-    channel_id: Snowflake
+class VoiceGuildScheduledEventData(_GuildScheduledEventData):
+    entity_type: Literal[2]
+    channel_id: 'discord_typings.Snowflake'
     entity_metadata: None
     scheduled_end_time: NotRequired[str]
 
 
-@final
-class ExternalGuildScheduledEventData(GuildScheduledEventBase):
+class ExternalGuildScheduledEventData(_GuildScheduledEventData):
+    entity_type: Literal[3]
     channel_id: None
-    entity_metadata: GuildScheduledEventEntityMetadataData
+    entity_metadata: 'discord_typings.GuildScheduledEventEntityMetadataData'
     scheduled_end_time: str
 
 
@@ -84,16 +84,14 @@ GuildScheduledEventStatus = Literal[1, 2, 3, 4]
 # https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata
 
 
-@final
 class GuildScheduledEventEntityMetadataData(TypedDict):
     location: NotRequired[str]
 
 
-# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object
 
 
-@final
 class GuildScheduledEventUserData(TypedDict):
-    guild_scheduled_event_id: Snowflake
-    user: UserData
-    member: NotRequired[GuildMemberData]
+    guild_scheduled_event_id: 'discord_typings.Snowflake'
+    user: 'discord_typings.UserData'
+    member: NotRequired['discord_typings.GuildMemberData']

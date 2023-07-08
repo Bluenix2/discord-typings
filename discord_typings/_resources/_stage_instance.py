@@ -1,27 +1,26 @@
-from __future__ import annotations
+from typing import Optional
 
-from typing import TYPE_CHECKING, Optional
+from typing_extensions import Literal, TypedDict
 
-from typing_extensions import Literal, TypedDict, final
+import discord_typings
 
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-
-__all__ = ('StageInstanceData', 'StageInstancePrivacyLevels')
+__all__ = (
+    'StageInstanceData',
+    'StageInstancePrivacyLevels',
+)
 
 
 # https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-stage-instance-structure
 
 
-@final
 class StageInstanceData(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
-    channel_id: Snowflake
+    id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
+    channel_id: 'discord_typings.Snowflake'
     topic: str
-    privacy_level: StageInstancePrivacyLevels
+    privacy_level: 'discord_typings.StageInstancePrivacyLevels'
     discoverable_disabled: bool
-    guild_scheduled_event_id: Optional[Snowflake]
+    guild_scheduled_event_id: Optional['discord_typings.Snowflake']
 
 
 # https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level

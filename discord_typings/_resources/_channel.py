@@ -1,177 +1,186 @@
-from __future__ import annotations
+from typing import List, Optional, Union
 
-from typing import TYPE_CHECKING, List, Optional, Union
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
-
-from ._user import UserBase  # Subclassed for UserMentionData
-
-if TYPE_CHECKING:
-    from .._interactions import ComponentData, MessageInteractionData
-    from .._reference import Snowflake
-    from ._application import ApplicationData
-    from ._emoji import EmojiData
-    from ._guild import GuildMemberData
-    from ._sticker import StickerItemData
-    from ._user import UserData
+import discord_typings
 
 __all__ = (
-    'PartialChannelData', 'TextChannelData', 'NewsChannelData', 'DMChannelData',
-    'GroupDMChannelData', 'VoiceChannelData', 'CategoryChannelData',
-    'ChannelData', 'ChannelTypes', 'VideoQualityModes', 'ChannelMessageData',
-    'GuildMessageData', 'MessageData', 'UserMentionData', 'MessageTypes',
-    'MessageActivityData', 'MessageActivityTypes', 'PermissionOverwriteData',
-    'ThreadChannelData', 'MessageReferenceData', 'FollowedChannelData',
-    'PermissionOverwriteData', 'ThreadMetadataData', 'ThreadMemberData', 'EmbedData',
-    'EmbedThumbnailData', 'EmbedVideoData', 'EmbedImageData',
-    'EmbedProviderData', 'EmbedAuthorData', 'EmbedFieldData', 'EmbedFooterData',
-    'PartialAttachmentData', 'AttachmentData', 'AllowedMentionsData', 'HasMoreListThreadsData',
-    'ChannelMentionData', 'MessageReactionData', 'DefaultReactionData',
-    'ForumTagData', 'ForumChannelData', 'SortOrderTypes', 'RoleSubscriptionData',
+    'PartialChannelData',
+    'TextChannelData',
+    'NewsChannelData',
+    'DMChannelData',
+    'GroupDMChannelData',
+    'ThreadChannelData',
+    'VoiceChannelData',
+    'CategoryChannelData',
+    'ForumChannelData',
+    'ChannelData',
+    'ChannelTypes',
+    'VideoQualityModes',
+    'SortOrderTypes',
+    'ForumLayoutTypes',
+    'MessageData',
+    'UserMentionData',
+    'MessageTypes',
+    'MessageActivityData',
+    'MessageActivityTypes',
+    'MessageReferenceData',
+    'FollowedChannelData',
+    'MessageReactionData',
+    'PermissionOverwriteData',
+    'ThreadMetadataData',
+    'ThreadMemberData',
+    'DefaultReactionData',
+    'ForumTagData',
+    'EmbedData',
+    'EmbedThumbnailData',
+    'EmbedVideoData',
+    'EmbedImageData',
+    'EmbedProviderData',
+    'EmbedAuthorData',
+    'EmbedFooterData',
+    'EmbedFieldData',
+    'PartialAttachmentData',
+    'AttachmentData',
+    'ChannelMentionData',
+    'AllowedMentionsData',
+    'RoleSubscriptionData',
+    'HasMoreListThreadsData',
 )
 
 
 # https://discord.com/developers/docs/resources/channel#channel-object-channel-structure
 
 
-@final
 class PartialChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     name: str
     type: Literal[0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13]
     permissions: NotRequired[str]
 
 
-@final
 class TextChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[0]
-    guild_id: NotRequired[Snowflake]  # May be missing during guild dispatches
+    guild_id: NotRequired['discord_typings.Snowflake']
     position: int
-    permission_overwrites: List[PermissionOverwriteData]
+    permission_overwrites: List['discord_typings.PermissionOverwriteData']
     name: str
     topic: Optional[str]
     nsfw: bool
-    last_message_id: Optional[Snowflake]
+    last_message_id: Optional['discord_typings.Snowflake']
     rate_limit_per_user: int
-    parent_id: Optional[Snowflake]
+    parent_id: Optional['discord_typings.Snowflake']
     last_pin_timestamp: NotRequired[Optional[str]]
     default_auto_archive_duration: NotRequired[int]
     flags: int
 
 
-@final
 class NewsChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[5]
-    guild_id: NotRequired[Snowflake]  # May be missing during guild dispatches
+    guild_id: NotRequired['discord_typings.Snowflake']
     position: int
-    permission_overwrites: List[PermissionOverwriteData]
+    permission_overwrites: List['discord_typings.PermissionOverwriteData']
     name: str
     topic: Optional[str]
     nsfw: bool
-    last_message_id: Optional[Snowflake]
-    parent_id: Optional[Snowflake]
+    last_message_id: Optional['discord_typings.Snowflake']
+    parent_id: Optional['discord_typings.Snowflake']
     last_pin_timestamp: NotRequired[Optional[str]]
     default_auto_archive_duration: NotRequired[int]
     flags: int
 
 
-@final
 class DMChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[1]
-    last_message_id: Optional[Snowflake]
-    recipients: List[UserData]
+    last_message_id: Optional['discord_typings.Snowflake']
+    recipients: List['discord_typings.UserData']
     last_pin_timestamp: NotRequired[Optional[str]]
     flags: int
 
 
-@final
 class GroupDMChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[3]
     name: str
-    last_message_id: Optional[Snowflake]
-    recipients: List[UserData]
+    last_message_id: Optional['discord_typings.Snowflake']
+    recipients: List['discord_typings.UserData']
     icon: Optional[str]
-    owner_id: Snowflake
-    application_id: NotRequired[Snowflake]
+    owner_id: 'discord_typings.Snowflake'
+    application_id: NotRequired['discord_typings.Snowflake']
     managed: bool
     last_pin_timestamp: NotRequired[Optional[str]]
     flags: int
 
 
-@final
 class ThreadChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[10, 11, 12]
-    guild_id: NotRequired[Snowflake]
+    guild_id: NotRequired['discord_typings.Snowflake']
     name: str
-    last_message_id: Optional[Snowflake]
+    last_message_id: Optional['discord_typings.Snowflake']
     rate_limit_per_user: int
-    owner_id: Snowflake
-    parent_id: Optional[Snowflake]
+    owner_id: 'discord_typings.Snowflake'
+    parent_id: Optional['discord_typings.Snowflake']
     last_pin_timestamp: NotRequired[Optional[str]]
     message_count: int
     member_count: int
-    thread_metadata: ThreadMetadataData
-    member: NotRequired[ThreadMemberData]
+    thread_metadata: 'discord_typings.ThreadMetadataData'
+    member: NotRequired['discord_typings.ThreadMemberData']
     flags: int
     total_messages_sent: int
-    applied_tags: NotRequired[List[Snowflake]]
+    applied_tags: NotRequired[List['discord_typings.Snowflake']]
 
 
-@final
 class VoiceChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[2, 13]
-    guild_id: NotRequired[Snowflake]
+    guild_id: NotRequired['discord_typings.Snowflake']
     position: int
-    permission_overwrites: List[PermissionOverwriteData]
+    permission_overwrites: List['discord_typings.PermissionOverwriteData']
     name: str
     nsfw: bool
-    last_message_id: NotRequired[Optional[Snowflake]]
+    last_message_id: NotRequired[Optional['discord_typings.Snowflake']]
     bitrate: int
     user_limit: int
-    parent_id: Optional[Snowflake]
+    parent_id: Optional['discord_typings.Snowflake']
     last_pin_timestamp: NotRequired[Optional[str]]
     rtc_region: Optional[str]
-    video_quality_mode: NotRequired[VideoQualityModes]
+    video_quality_mode: NotRequired['discord_typings.VideoQualityModes']
     flags: int
 
 
-@final
 class CategoryChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[4]
-    guild_id: NotRequired[Snowflake]
+    guild_id: NotRequired['discord_typings.Snowflake']
     position: int
-    permission_overwrites: List[PermissionOverwriteData]
+    permission_overwrites: List['discord_typings.PermissionOverwriteData']
     name: str
     nsfw: bool
     flags: int
 
 
-@final
 class ForumChannelData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[15]
-    guild_id: NotRequired[Snowflake]
+    guild_id: NotRequired['discord_typings.Snowflake']
     position: int
-    permission_overwrites: List[PermissionOverwriteData]
+    permission_overwrites: List['discord_typings.PermissionOverwriteData']
     name: str
     topic: Optional[str]
     nsfw: bool
-    last_message_id: Optional[Snowflake]
+    last_message_id: Optional['discord_typings.Snowflake']
     rate_limit_per_user: int
     default_auto_archive_duration: NotRequired[int]
     flags: int
-    available_tags: List[ForumTagData]
-    default_reaction_emoji: Optional[DefaultReactionData]
+    available_tags: List['discord_typings.ForumTagData']
+    default_reaction_emoji: Optional['discord_typings.DefaultReactionData']
     default_thread_rate_limit_per_user: int
-    default_sort_order: Optional[SortOrderTypes]
-    default_forum_layout: ForumLayoutTypes
+    default_sort_order: Optional['discord_typings.SortOrderTypes']
+    default_forum_layout: 'discord_typings.ForumLayoutTypes'
 
 
 ChannelData = Union[
@@ -207,56 +216,49 @@ ForumLayoutTypes = Literal[0, 1, 2]
 # https://discord.com/developers/docs/resources/channel#message-object-message-structure
 
 
-class MessageBase(TypedDict):
-    id: Snowflake
-    channel_id: Snowflake
-    author: UserData
+class _ChannelMessageData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    channel_id: 'discord_typings.Snowflake'
+    author: 'discord_typings.UserData'
     content: str
     timestamp: str
     edited_timestamp: Optional[str]
     tts: bool
     mention_everyone: bool
-    mentions: Union[List[UserData], List[UserMentionData]]
-    mention_roles: List[Snowflake]
-    mention_channels: NotRequired[List[ChannelMentionData]]
-    attachments: List[AttachmentData]
-    embeds: List[EmbedData]
-    reactions: NotRequired[List[MessageReactionData]]
+    mentions: Union[List['discord_typings.UserData'], List['discord_typings.UserMentionData']]
+    mention_roles: List['discord_typings.Snowflake']
+    mention_channels: NotRequired[List['discord_typings.ChannelMentionData']]
+    attachments: List['discord_typings.AttachmentData']
+    embeds: List['discord_typings.EmbedData']
+    reactions: NotRequired[List['discord_typings.MessageReactionData']]
     nonce: NotRequired[Union[int, str]]
     pinned: bool
-    webhook_id: NotRequired[Snowflake]
-    type: MessageTypes
-    activity: NotRequired[MessageActivityData]
-    application: NotRequired[ApplicationData]
-    application_id: NotRequired[Snowflake]
-    message_reference: NotRequired[MessageReferenceData]
+    webhook_id: NotRequired['discord_typings.Snowflake']
+    type: 'discord_typings.MessageTypes'
+    activity: NotRequired['discord_typings.MessageActivityData']
+    application: NotRequired['discord_typings.ApplicationData']
+    application_id: NotRequired['discord_typings.Snowflake']
+    message_reference: NotRequired['discord_typings.MessageReferenceData']
     flags: NotRequired[int]
-    referenced_message: NotRequired[Optional[MessageData]]
-    interaction: NotRequired[MessageInteractionData]
-    thread: NotRequired[ThreadChannelData]
-    components: NotRequired[List[ComponentData]]
-    sticker_items: NotRequired[List[StickerItemData]]
+    referenced_message: NotRequired[Optional['discord_typings.MessageData']]
+    interaction: NotRequired['discord_typings.MessageInteractionData']
+    thread: NotRequired['discord_typings.ThreadChannelData']
+    components: NotRequired[List['discord_typings.ComponentData']]
+    sticker_items: NotRequired[List['discord_typings.StickerItemData']]
     position: NotRequired[int]
-    role_subscription_data: NotRequired[RoleSubscriptionData]
+    role_subscription_data: NotRequired['discord_typings.RoleSubscriptionData']
 
 
-@final
-class ChannelMessageData(MessageBase):
-    pass
+class _GuildMessageData(_ChannelMessageData):
+    guild_id: 'discord_typings.Snowflake'
+    member: 'discord_typings.GuildMemberData'
 
 
-@final
-class GuildMessageData(MessageBase):
-    guild_id: Snowflake
-    member: GuildMemberData
+MessageData = Union[_ChannelMessageData, _GuildMessageData]
 
 
-MessageData = Union[ChannelMessageData, GuildMessageData]
-
-
-@final
-class UserMentionData(UserBase):
-    member: GuildMemberData
+class UserMentionData(discord_typings.UserData):
+    member: 'discord_typings.GuildMemberData'
 
 
 # https://discord.com/developers/docs/resources/channel#message-object-message-types
@@ -271,9 +273,8 @@ MessageTypes = Literal[
 # https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
 
 
-@final
 class MessageActivityData(TypedDict):
-    type: MessageActivityTypes
+    type: 'discord_typings.MessageActivityTypes'
     party_id: NotRequired[str]
 
 
@@ -286,40 +287,36 @@ MessageActivityTypes = Literal[1, 2, 3, 5]
 # https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
 
 
-@final
 class MessageReferenceData(TypedDict):
-    message_id: NotRequired[Snowflake]
+    message_id: NotRequired['discord_typings.Snowflake']
     # Note: This will always be sent when receiving a message reference.
-    channel_id: NotRequired[Snowflake]
-    guild_id: NotRequired[Snowflake]
+    channel_id: NotRequired['discord_typings.Snowflake']
+    guild_id: NotRequired['discord_typings.Snowflake']
     fail_if_not_exists: NotRequired[bool]
 
 
 # https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure
 
 
-@final
 class FollowedChannelData(TypedDict):
-    channel_id: Snowflake
-    webhook_id: Snowflake
+    channel_id: 'discord_typings.Snowflake'
+    webhook_id: 'discord_typings.Snowflake'
 
 
 # https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure
 
 
-@final
 class MessageReactionData(TypedDict):
     count: int
     me: bool
-    emoji: EmojiData
+    emoji: 'discord_typings.EmojiData'
 
 
 # https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure
 
 
-@final
 class PermissionOverwriteData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[0, 1]
     allow: str
     deny: str
@@ -328,7 +325,6 @@ class PermissionOverwriteData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#thread-metadata-object-thread-metadata-structure
 
 
-@final
 class ThreadMetadataData(TypedDict):
     archived: bool
     auto_archive_duration: int
@@ -341,11 +337,10 @@ class ThreadMetadataData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#thread-member-object-thread-member-structure
 
 
-@final
 class ThreadMemberData(TypedDict):
-    id: NotRequired[Snowflake]
-    user_id: NotRequired[Snowflake]
-    member: NotRequired[GuildMemberData]
+    id: NotRequired['discord_typings.Snowflake']
+    user_id: NotRequired['discord_typings.Snowflake']
+    member: NotRequired['discord_typings.GuildMemberData']
     join_timestamp: str
     flags: int
 
@@ -353,28 +348,25 @@ class ThreadMemberData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#default-reaction-object-default-reaction-structure
 
 
-@final
 class DefaultReactionData(TypedDict):
     emoji_name: Optional[str]
-    emoji_id: Optional[Snowflake]
+    emoji_id: Optional['discord_typings.Snowflake']
 
 
 # https://discord.com/developers/docs/resources/channel#forum-tag-object-forum-tag-structure
 
 
-@final
 class ForumTagData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     name: str
     moderated: bool
-    emoji_id: Optional[Snowflake]
-    emoji_name: Optional[Snowflake]
+    emoji_id: Optional['discord_typings.Snowflake']
+    emoji_name: Optional['discord_typings.Snowflake']
 
 
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-structure
 
 
-@final
 class EmbedData(TypedDict):
     title: NotRequired[str]
     type: NotRequired[Literal['rich', 'image', 'video', 'gifv', 'article', 'link']]
@@ -382,19 +374,18 @@ class EmbedData(TypedDict):
     url: NotRequired[str]
     timestamp: NotRequired[str]
     color: NotRequired[int]
-    footer: NotRequired[EmbedFooterData]
-    image: NotRequired[EmbedImageData]
-    thumbnail: NotRequired[EmbedThumbnailData]
-    video: NotRequired[EmbedVideoData]
-    provider: NotRequired[EmbedProviderData]
-    author: NotRequired[EmbedAuthorData]
-    fields: NotRequired[List[EmbedFieldData]]
+    footer: NotRequired['discord_typings.EmbedFooterData']
+    image: NotRequired['discord_typings.EmbedImageData']
+    thumbnail: NotRequired['discord_typings.EmbedThumbnailData']
+    video: NotRequired['discord_typings.EmbedVideoData']
+    provider: NotRequired['discord_typings.EmbedProviderData']
+    author: NotRequired['discord_typings.EmbedAuthorData']
+    fields: NotRequired[List['discord_typings.EmbedFieldData']]
 
 
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
 
 
-@final
 class EmbedThumbnailData(TypedDict):
     url: str
     proxy_url: NotRequired[str]
@@ -405,7 +396,6 @@ class EmbedThumbnailData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
 
 
-@final
 class EmbedVideoData(TypedDict):
     url: NotRequired[str]
     proxy_url: NotRequired[str]
@@ -416,7 +406,6 @@ class EmbedVideoData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
 
 
-@final
 class EmbedImageData(TypedDict):
     url: str
     proxy_url: NotRequired[str]
@@ -427,7 +416,6 @@ class EmbedImageData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
 
 
-@final
 class EmbedProviderData(TypedDict):
     name: NotRequired[str]
     url: NotRequired[str]
@@ -436,7 +424,6 @@ class EmbedProviderData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
 
 
-@final
 class EmbedAuthorData(TypedDict):
     name: str
     url: NotRequired[str]
@@ -447,7 +434,6 @@ class EmbedAuthorData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
 
 
-@final
 class EmbedFooterData(TypedDict):
     text: str
     icon_url: NotRequired[str]
@@ -457,7 +443,6 @@ class EmbedFooterData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
 
 
-@final
 class EmbedFieldData(TypedDict):
     name: str
     value: str
@@ -467,16 +452,14 @@ class EmbedFieldData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure
 
 
-@final
 class PartialAttachmentData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     filename: NotRequired[str]
     description: NotRequired[str]
 
 
-@final
 class AttachmentData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     filename: str
     description: NotRequired[str]
     content_type: NotRequired[str]
@@ -486,15 +469,16 @@ class AttachmentData(TypedDict):
     height: NotRequired[Optional[int]]
     width: NotRequired[Optional[int]]
     ephemeral: NotRequired[bool]
+    duration_secs: NotRequired[float]
+    waveform: NotRequired[str]
 
 
 # https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure
 
 
-@final
 class ChannelMentionData(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
+    id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
     type: Literal[0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13]
     name: str
 
@@ -502,20 +486,18 @@ class ChannelMentionData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure
 
 
-@final
 class AllowedMentionsData(TypedDict):
     parse: NotRequired[List[Literal['roles', 'users', 'everyone']]]
-    roles: NotRequired[List[Snowflake]]
-    users: NotRequired[List[Snowflake]]
+    roles: NotRequired[List['discord_typings.Snowflake']]
+    users: NotRequired[List['discord_typings.Snowflake']]
     replied_user: NotRequired[bool]
 
 
 # https://discord.com/developers/docs/resources/channel#role-subscription-data-object-role-subscription-data-object-structure
 
 
-@final
 class RoleSubscriptionData(TypedDict):
-    role_subscription_listing_id: Snowflake
+    role_subscription_listing_id: 'discord_typings.Snowflake'
     tier_name: str
     total_months_subscribed: int
     is_renewal: bool
@@ -524,7 +506,6 @@ class RoleSubscriptionData(TypedDict):
 # https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body
 
 
-@final
 class HasMoreListThreadsData(TypedDict):
     threads: List[ThreadChannelData]
     members: List[ThreadMemberData]
