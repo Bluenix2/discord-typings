@@ -1,34 +1,30 @@
-from __future__ import annotations
+from typing import Optional
 
-from typing import TYPE_CHECKING, Optional
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
+import discord_typings
 
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from ._channel import PartialChannelData
-    from ._guild import GuildData
-    from ._user import UserData
-
-__all__ = ('WebhookData', 'WebhookTypes')
+__all__ = (
+    'WebhookData',
+    'WebhookTypes',
+)
 
 
 # https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure
 
 
-@final
 class WebhookData(TypedDict):
-    id: Snowflake
-    type: WebhookTypes
-    guild_id: NotRequired[Optional[Snowflake]]
-    channel_id: Optional[Snowflake]
-    user: NotRequired[UserData]
+    id: 'discord_typings.Snowflake'
+    type: 'discord_typings.WebhookTypes'
+    guild_id: NotRequired[Optional['discord_typings.Snowflake']]
+    channel_id: Optional['discord_typings.Snowflake']
+    user: NotRequired['discord_typings.UserData']
     name: Optional[str]
     avatar: Optional[str]
     token: NotRequired[str]
-    application_id: Optional[Snowflake]
-    source_guild: NotRequired[GuildData]
-    source_channel: NotRequired[PartialChannelData]
+    application_id: Optional['discord_typings.Snowflake']
+    source_guild: NotRequired['discord_typings.GuildData']
+    source_channel: NotRequired['discord_typings.PartialChannelData']
     url: NotRequired[str]
 
 

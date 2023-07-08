@@ -1,18 +1,24 @@
-from __future__ import annotations
+from typing import List, Union
 
-from typing import TYPE_CHECKING, List, Union
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
-
-if TYPE_CHECKING:
-    from .._resources import ChannelTypes, EmojiData
+import discord_typings
 
 __all__ = (
-    'ComponentTypes', 'ActionRowData', 'ButtonComponentData', 'ButtonStyles',
-    'StringSelectMenuComponentData', 'UserSelectMenuComponentData',
-    'RoleSelectMenuComponentData', 'MentionableSelectMenuComponentData',
-    'ChannelSelectMenuComponentData', 'SelectMenuComponentData',
-    'SelectMenuOptionData', 'TextInputComponentData', 'ComponentData',
+    'ComponentTypes',
+    'ActionRowData',
+    'ButtonComponentData',
+    'ButtonStyles',
+    'StringSelectMenuComponentData',
+    'UserSelectMenuComponentData',
+    'RoleSelectMenuComponentData',
+    'MentionableSelectMenuComponentData',
+    'ChannelSelectMenuComponentData',
+    'SelectMenuComponentData',
+    'SelectMenuOptionData',
+    'TextInputComponentData',
+    'TextInputStyles',
+    'ComponentData',
 )
 
 
@@ -25,11 +31,12 @@ ComponentTypes = Literal[1, 2, 3, 4, 5, 6, 7, 8]
 # https://discord.com/developers/docs/interactions/message-components#action-rows
 
 
-@final
 class ActionRowData(TypedDict):
     type: Literal[1]
     components: List[Union[
-        ButtonComponentData, SelectMenuComponentData, TextInputComponentData
+        'discord_typings.ButtonComponentData',
+        'discord_typings.SelectMenuComponentData',
+        'discord_typings.TextInputComponentData',
     ]]
 
 
@@ -38,27 +45,25 @@ class ActionRowData(TypedDict):
 
 # The whole button object itself is split into NonLinkButtonComponent and
 # LinkButtonComponent because link buttons need to have the link-style.
-@final
-class NonLinkButtonComponentData(TypedDict):
+class _NonLinkButtonComponentData(TypedDict):
     type: Literal[2]
     style: Literal[1, 2, 3, 4]
     label: NotRequired[str]
-    emoji: NotRequired[EmojiData]
+    emoji: NotRequired['discord_typings.EmojiData']
     custom_id: str
     disabled: NotRequired[bool]
 
 
-@final
-class LinkButtonComponentData(TypedDict):
+class _LinkButtonComponentData(TypedDict):
     type: Literal[2]
     style: Literal[5]
     label: NotRequired[str]
-    emoji: NotRequired[EmojiData]
+    emoji: NotRequired['discord_typings.EmojiData']
     url: str
     disabled: NotRequired[bool]
 
 
-ButtonComponentData = Union[NonLinkButtonComponentData, LinkButtonComponentData]
+ButtonComponentData = Union[_NonLinkButtonComponentData, _LinkButtonComponentData]
 
 # https://discord.com/developers/docs/interactions/message-components#button-object-button-styles
 
@@ -69,18 +74,16 @@ ButtonStyles = Literal[1, 2, 3, 4, 5]
 # https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-menu-structure
 
 
-@final
 class StringSelectMenuComponentData(TypedDict):
     type: Literal[3]
     custom_id: str
-    options: List[SelectMenuOptionData]
+    options: List['discord_typings.SelectMenuOptionData']
     placeholder: NotRequired[str]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
     disabled: NotRequired[bool]
 
 
-@final
 class UserSelectMenuComponentData(TypedDict):
     type: Literal[5]
     custom_id: str
@@ -90,7 +93,6 @@ class UserSelectMenuComponentData(TypedDict):
     disabled: NotRequired[bool]
 
 
-@final
 class RoleSelectMenuComponentData(TypedDict):
     type: Literal[6]
     custom_id: str
@@ -100,7 +102,6 @@ class RoleSelectMenuComponentData(TypedDict):
     disabled: NotRequired[bool]
 
 
-@final
 class MentionableSelectMenuComponentData(TypedDict):
     type: Literal[7]
     custom_id: str
@@ -110,11 +111,10 @@ class MentionableSelectMenuComponentData(TypedDict):
     disabled: NotRequired[bool]
 
 
-@final
 class ChannelSelectMenuComponentData(TypedDict):
     type: Literal[8]
     custom_id: str
-    channel_types: List[ChannelTypes]
+    channel_types: List['discord_typings.ChannelTypes']
     placeholder: NotRequired[str]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
@@ -131,23 +131,21 @@ SelectMenuComponentData = Union[
 # https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-option-structure
 
 
-@final
 class SelectMenuOptionData(TypedDict):
     label: str
     value: str
     description: NotRequired[str]
-    emoji: NotRequired[EmojiData]
+    emoji: NotRequired['discord_typings.EmojiData']
     default: NotRequired[bool]
 
 
 # https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-structure
 
 
-@final
 class TextInputComponentData(TypedDict):
     type: Literal[4]
     custom_id: str
-    style: TextInputStyles
+    style: 'discord_typings.TextInputStyles'
     label: str
     min_length: NotRequired[int]
     max_length: NotRequired[int]

@@ -1,56 +1,61 @@
-from __future__ import annotations
+from typing import Dict, Generic, List, Optional, TypeVar, Union
 
-from typing import TYPE_CHECKING, Dict, List, Optional, Union
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
-
-if TYPE_CHECKING:
-    from .._reference import Locales, Snowflake
-    from .._resources import ChannelTypes
+import discord_typings
 
 __all__ = (
-    'ApplicationCommandData', 'ApplicationCommandTypes', 'SubcommandOptionData',
-    'SubcommandGroupOptionData', 'AutocompleteOptionData', 'ApplicationCommandOptionData',
-    'GuildApplicationCommandPermissionData', 'ApplicationCommandPermissionsData',
-    'ApplicationCommandPayload', 'EditApplicationCommandPermissionsData'
+    'ApplicationCommandData',
+    'ApplicationCommandTypes',
+    'SubcommandOptionData',
+    'SubcommandGroupOptionData',
+    'ApplicationCommandOptionData',
+    'ApplicationCommandOptionTypes',
+    'CommandOptionChoiceData',
+    'GuildApplicationCommandPermissionData',
+    'ApplicationCommandPermissionsData',
+    'ApplicationCommandPermissionTypes',
+    'ApplicationCommandPayload',
 )
 
 
-# https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
+_T = TypeVar('_T')
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object
 
 
-@final
-class ChatInputCommandData(TypedDict):
-    id: Snowflake
+class _ChatInputCommandData(TypedDict):
+    id: 'discord_typings.Snowflake'
     type: NotRequired[Literal[1]]
-    application_id: Snowflake
-    guild_id: NotRequired[Snowflake]
+    application_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    options: List[ApplicationCommandOptionData]
-    default_member_permissions: NotRequired[Optional[str]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    options: List['discord_typings.ApplicationCommandOptionData']
+    default_member_permissions: Optional[str]
     dm_permission: NotRequired[bool]
     nsfw: NotRequired[bool]
-    version: Snowflake
+    version: 'discord_typings.Snowflake'
 
 
-@final
-class ContextMenuCommandData(TypedDict):
-    id: Snowflake
+class _ContextMenuCommandData(TypedDict):
+    id: 'discord_typings.Snowflake'
     type: NotRequired[Literal[2, 3]]
-    application_id: Snowflake
-    guild_id: NotRequired[Snowflake]
+    application_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    default_member_permissions: NotRequired[Optional[str]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    description: str
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    default_member_permissions: Optional[str]
     dm_permission: NotRequired[bool]
     nsfw: NotRequired[bool]
-    version: Snowflake
+    version: 'discord_typings.Snowflake'
 
 
-ApplicationCommandData = Union[ChatInputCommandData, ContextMenuCommandData]
+ApplicationCommandData = Union[_ChatInputCommandData, _ContextMenuCommandData]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
@@ -60,206 +65,198 @@ ApplicationCommandTypes = Literal[1, 2, 3]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure
-# The variations and overloads of options are huge, but we want to provide
-# extremely accurate typing - this is gonna be a huge Union with a lot of
-# TypedDict subclasses...
+
+# The variations and overloads of options are huge, but we want to allow
+# type narrowing. As a result, this becomes a very large union.
+
+# While Discord only documents a "full" ApplicationCommandOptionData,
+# due to the nature of subcommand options those are also exposed
 
 
-@final
 class SubcommandOptionData(TypedDict):
     type: Literal[1]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    options: NotRequired[List[ApplicationCommandOptionData]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    options: NotRequired[List['discord_typings.ApplicationCommandOptionData']]
 
 
-@final
 class SubcommandGroupOptionData(TypedDict):
     type: Literal[2]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    options: List[SubcommandOptionData]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    options: List['discord_typings.SubcommandOptionData']
 
 
-@final
-class ChoicesStringOptionData(TypedDict):
+class _ChoicesStringOptionData(TypedDict):
     type: Literal[3]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
-    choices: NotRequired[List[StrCommandOptionChoiceData]]
+    choices: NotRequired[List['discord_typings.CommandOptionChoiceData[str]']]
 
 
-@final
-class AutocompleteStringOptionData(TypedDict):
+class _AutocompleteStringOptionData(TypedDict):
     type: Literal[3]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
     autocomplete: NotRequired[bool]
 
 
-@final
-class MinMaxStringOptionData(TypedDict):
+class _MinMaxStringOptionData(TypedDict):
     type: Literal[3]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
     min_length: NotRequired[int]
     max_length: NotRequired[int]
 
 
-@final
-class ChoicesIntegerCommandOptionData(TypedDict):
+class _ChoicesIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
-    choices: NotRequired[List[IntCommandOptionChoiceData]]
+    choices: NotRequired[List['discord_typings.CommandOptionChoiceData[int]']]
 
 
-@final
-class MinMaxIntegerCommandOptionData(TypedDict):
+class _MinMaxIntegerCommandOptionData(TypedDict):
     type: Literal[4]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
     min_value: NotRequired[int]
     max_value: NotRequired[int]
 
 
-@final
-class AutocompleteIntegerOptionData(TypedDict):
+class _AutocompleteIntegerOptionData(TypedDict):
     type: Literal[4]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
     autocomplete: NotRequired[bool]
 
 
-@final
-class BooleanOptionData(TypedDict):
+class _BooleanOptionData(TypedDict):
     type: Literal[5]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
 
 
-@final
-class UserOptionData(TypedDict):
+class _UserOptionData(TypedDict):
     type: Literal[6]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
 
 
-@final
-class ChannelOptionData(TypedDict):
+class _ChannelOptionData(TypedDict):
     type: Literal[7]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
-    channel_types: NotRequired[List[ChannelTypes]]
+    channel_types: NotRequired[List['discord_typings.ChannelTypes']]
 
 
-@final
-class RoleOptionData(TypedDict):
+class _RoleOptionData(TypedDict):
     type: Literal[8]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
 
 
-@final
-class MentionableOptionData(TypedDict):
+class _MentionableOptionData(TypedDict):
     type: Literal[9]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
 
 
-@final
-class ChoicesNumberCommandOptionData(TypedDict):
+class _ChoicesNumberCommandOptionData(TypedDict):
     type: Literal[10]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
-    choices: NotRequired[List[NumberCommandOptionChoiceData]]
+    choices: NotRequired[List['discord_typings.CommandOptionChoiceData[Union[int, float]]']]
 
 
-@final
-class MinMaxNumberCommandOptionData(TypedDict):
+class _MinMaxNumberCommandOptionData(TypedDict):
     type: Literal[10]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
     min_value: NotRequired[Union[int, float]]
     max_value: NotRequired[Union[int, float]]
 
 
-@final
-class AutocompleteNumberOptionData(TypedDict):
+class _AutocompleteNumberOptionData(TypedDict):
     type: Literal[10]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
     autocomplete: NotRequired[bool]
 
 
-@final
-class AttachmentOptionData(TypedDict):
+class _AttachmentOptionData(TypedDict):
     type: Literal[11]
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     required: NotRequired[bool]
 
 
-AutocompleteOptionData = Union[
-    AutocompleteStringOptionData, AutocompleteIntegerOptionData,
-    AutocompleteNumberOptionData
-]
-
-
 ApplicationCommandOptionData = Union[
-    ChoicesStringOptionData, ChoicesIntegerCommandOptionData,
-    MinMaxIntegerCommandOptionData, MinMaxStringOptionData, BooleanOptionData,
-    UserOptionData, ChannelOptionData, RoleOptionData, MentionableOptionData,
-    ChoicesNumberCommandOptionData, MinMaxNumberCommandOptionData,
-    AutocompleteOptionData, SubcommandOptionData, AttachmentOptionData,
+    SubcommandOptionData,
+    SubcommandGroupOptionData,
+    _ChoicesStringOptionData,
+    _AutocompleteStringOptionData,
+    _MinMaxStringOptionData,
+    _ChoicesIntegerCommandOptionData,
+    _MinMaxIntegerCommandOptionData,
+    _AutocompleteIntegerOptionData,
+    _BooleanOptionData,
+    _UserOptionData,
+    _ChannelOptionData,
+    _RoleOptionData,
+    _MentionableOptionData,
+    _ChoicesNumberCommandOptionData,
+    _MinMaxNumberCommandOptionData,
+    _AutocompleteNumberOptionData,
+    _AttachmentOptionData,
 ]
 
 
@@ -272,45 +269,28 @@ ApplicationCommandOptionTypes = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-choice-structure
 
 
-@final
-class StrCommandOptionChoiceData(TypedDict):
+class CommandOptionChoiceData(TypedDict, Generic[_T]):
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    value: str
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    value: _T
 
 
-@final
-class IntCommandOptionChoiceData(TypedDict):
-    name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    value: int
+# https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object
 
 
-@final
-class NumberCommandOptionChoiceData(TypedDict):
-    name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
-    value: Union[int, float]
-
-
-# https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-guild-application-command-permissions-structure
-
-
-@final
 class GuildApplicationCommandPermissionData(TypedDict):
-    id: Snowflake
-    application_id: Snowflake
-    guild_id: Snowflake
-    permissions: List[ApplicationCommandPermissionsData]
+    id: 'discord_typings.Snowflake'
+    application_id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
+    permissions: List['discord_typings.ApplicationCommandPermissionsData']
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure
 
 
-@final
 class ApplicationCommandPermissionsData(TypedDict):
-    id: Snowflake
-    type: ApplicationCommandPermissionTypes
+    id: 'discord_typings.Snowflake'
+    type: 'discord_typings.ApplicationCommandPermissionTypes'
     permission: bool
 
 
@@ -323,21 +303,13 @@ ApplicationCommandPermissionTypes = Literal[1, 2, 3]
 # https://discord.com/developers/docs/interactions/application-commands#create-global-application-command-json-params
 
 
-@final
 class ApplicationCommandPayload(TypedDict):
     name: str
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: NotRequired[str]
-    options: NotRequired[List[ApplicationCommandOptionData]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    options: NotRequired[List['discord_typings.ApplicationCommandOptionData']]
     default_member_permissions: NotRequired[Optional[str]]
-    dm_permission: NotRequired[bool]
-    type: NotRequired[Literal[1, 2, 3]]
+    dm_permission: NotRequired[Optional[bool]]
+    type: NotRequired['discord_typings.ApplicationCommandTypes']
     nsfw: NotRequired[bool]
-
-
-# https://discord.com/developers/docs/interactions/application-commands#batch-edit-application-command-permissions-example
-
-
-@final
-class EditApplicationCommandPermissionsData(TypedDict):
-    id: Snowflake
-    permissions: ApplicationCommandPermissionsData

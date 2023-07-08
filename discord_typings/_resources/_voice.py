@@ -1,25 +1,23 @@
-from __future__ import annotations
+from typing import Optional
 
-from typing import TYPE_CHECKING, Optional
+from typing_extensions import NotRequired, TypedDict
 
-from typing_extensions import NotRequired, TypedDict, final
+import discord_typings
 
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from ._guild import GuildMemberData
-
-__all__ = ('VoiceStateData', 'VoiceRegionData')
+__all__ = (
+    'VoiceStateData',
+    'VoiceRegionData',
+)
 
 
 # https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure
 
 
-@final
 class VoiceStateData(TypedDict):
-    guild_id: NotRequired[Snowflake]
-    channel_id: Optional[Snowflake]
-    user_id: Snowflake
-    member: NotRequired[GuildMemberData]
+    guild_id: NotRequired['discord_typings.Snowflake']
+    channel_id: Optional['discord_typings.Snowflake']
+    user_id: 'discord_typings.Snowflake'
+    member: NotRequired['discord_typings.GuildMemberData']
     session_id: str
     deaf: bool
     mute: bool
@@ -34,7 +32,6 @@ class VoiceStateData(TypedDict):
 # https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure
 
 
-@final
 class VoiceRegionData(TypedDict):
     id: str
     name: str

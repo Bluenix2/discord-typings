@@ -1,79 +1,68 @@
-from __future__ import annotations
-
 from typing import List, Union
 
-from typing_extensions import Literal, TypedDict, final
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from .._reference import Snowflake
+import discord_typings
 
-__all__ = [
-    'AutoModerationRuleData', 'AutoModerationTriggerTypes',
-    'AutoModerationTriggerMetadataData', 'AutoModerationKeywordPresetTypes',
-    'AutoModerationEventTypes', 'AutoModerationActionData', 'AutoModerationActionTypes',
-
-]
+__all__ = (
+    'KeywordAutoModerationRuleData',
+    'SpamAutoModerationRuleData',
+    'KeywordPresetAutoModerationRuleData',
+    'MentionSpamAutoModerationRuleData',
+    'AutoModerationRuleData',
+    'AutoModerationTriggerTypes',
+    'KeywordAutoModerationTriggerMetadata',
+    'KeywordPresetAutoModerationTriggerMetadataData',
+    'MentionSpamAutoModerationTriggerMetadataData',
+    'EmptyAutoModerationTriggerMetadataData',
+    'AutoModerationTriggerMetadataData',
+    'AutoModerationKeywordPresetTypes',
+    'AutoModerationEventTypes',
+    'BlockMessageAutoModerationActionData',
+    'SendAlertMessageAutoModerationActionData',
+    'TimeoutAutoModerationActionData',
+    'AutoModerationActionData',
+    'AutoModerationActionTypes',
+    'BlockmessageAutoModerationActionMetadataData',
+    'SendAlertMessageAutoModerationActionMetadataData',
+    'TimeoutAutoModerationActionMetadataData',
+    'AutoModerationActionMetadataData',
+)
 
 
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-auto-moderation-rule-structure
 
 
-@final
-class KeywordAutoModerationRuleData(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
+class _AutoModerationRuleData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
     name: str
-    creator_id: Snowflake
-    event_type: AutoModerationEventTypes
+    creator_id: 'discord_typings.Snowflake'
+    event_type: 'discord_typings.AutoModerationEventTypes'
+    actions: List['discord_typings.AutoModerationActionData']
+    enabled: bool
+    exempt_roles: List['discord_typings.Snowflake']
+    exempt_channels: List['discord_typings.Snowflake']
+
+
+class KeywordAutoModerationRuleData(_AutoModerationRuleData):
     trigger_type: Literal[1]
-    trigger_metadata: KeywordTriggerMetadataData
-    actions: List[AutoModerationActionData]
-    enabled: bool
-    exempt_roles: List[Snowflake]
-    exempt_channels: List[Snowflake]
+    trigger_metadata: 'discord_typings.KeywordAutoModerationTriggerMetadata'
 
 
-@final
-class SpamAutoModerationRuleData(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
-    name: str
-    creator_id: Snowflake
-    event_type: AutoModerationEventTypes
+class SpamAutoModerationRuleData(_AutoModerationRuleData):
     trigger_type: Literal[3]
-    trigger_metadata: EmptyTriggerMetadataData
-    actions: List[AutoModerationActionData]
-    enabled: bool
-    exempt_roles: List[Snowflake]
-    exempt_channels: List[Snowflake]
+    trigger_metadata: 'discord_typings.EmptyAutoModerationTriggerMetadataData'
 
 
-@final
-class KeywordPresetAutoModerationRuleData(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
-    name: str
-    creator_id: Snowflake
-    event_type: AutoModerationEventTypes
+class KeywordPresetAutoModerationRuleData(_AutoModerationRuleData):
     trigger_type: Literal[4]
-    trigger_metadata: KeywordPresetTriggerMetadataData
-    actions: List[AutoModerationActionData]
-    enabled: bool
-    exempt_roles: List[Snowflake]
-    exempt_channels: List[Snowflake]
+    trigger_metadata: 'discord_typings.KeywordPresetAutoModerationTriggerMetadataData'
 
 
-@final
-class MentionSpamAutoModerationRuleData(TypedDict):
-    id: Snowflake
-    guild_id: Snowflake
-    name: str
-    creator_id: Snowflake
-    event_type: Literal[5]
-    trigger_metadata: MentionSpamTriggerMetadataData
-    actions: List[AutoModerationActionData]
-    enabled: bool
-    exempt_roles: List[Snowflake]
-    exempt_channels: List[Snowflake]
+class MentionSpamAutoModerationRuleData(_AutoModerationRuleData):
+    trigger_type: Literal[5]
+    trigger_metadata: 'discord_typings.MentionSpamAutoModerationTriggerMetadataData'
 
 
 AutoModerationRuleData = Union[
@@ -91,33 +80,31 @@ AutoModerationTriggerTypes = Literal[1, 2, 3, 4]
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-metadata
 
 
-@final
-class KeywordTriggerMetadataData(TypedDict):
+class KeywordAutoModerationTriggerMetadata(TypedDict):
     keyword_filter: List[str]
-    allow_list: List[str]
-
     regex_patterns: List[str]
 
-
-@final
-class KeywordPresetTriggerMetadataData(TypedDict):
-    presets: List[AutoModerationKeywordPresetTypes]
+    allow_list: List[str]
 
 
-@final
-class MentionSpamTriggerMetadataData(TypedDict):
+class KeywordPresetAutoModerationTriggerMetadataData(TypedDict):
+    presets: List['discord_typings.AutoModerationKeywordPresetTypes']
+
+
+class MentionSpamAutoModerationTriggerMetadataData(TypedDict):
     mention_total_limit: int
     mention_raid_protection_enabled: bool
 
 
-@final
-class EmptyTriggerMetadataData(TypedDict):
+class EmptyAutoModerationTriggerMetadataData(TypedDict):
     ...
 
 
 AutoModerationTriggerMetadataData = Union[
-    KeywordTriggerMetadataData, KeywordPresetTriggerMetadataData,
-    MentionSpamTriggerMetadataData, EmptyTriggerMetadataData
+    KeywordAutoModerationTriggerMetadata,
+    KeywordPresetAutoModerationTriggerMetadataData,
+    MentionSpamAutoModerationTriggerMetadataData,
+    EmptyAutoModerationTriggerMetadataData,
 ]
 
 
@@ -136,22 +123,19 @@ AutoModerationEventTypes = Literal[1]
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-auto-moderation-action-structure
 
 
-@final
 class BlockMessageAutoModerationActionData(TypedDict):
     type: Literal[1]
-    metadata: BlockMessageAutoModerationActionMetadataData
+    metadata: NotRequired['discord_typings.BlockmessageAutoModerationActionMetadataData']
 
 
-@final
 class SendAlertMessageAutoModerationActionData(TypedDict):
     type: Literal[2]
-    metadata: SendAlertMessageAutoModerationActionMetadataData
+    metadata: 'discord_typings.SendAlertMessageAutoModerationActionMetadataData'
 
 
-@final
 class TimeoutAutoModerationActionData(TypedDict):
     type: Literal[3]
-    metadata: TimeoutAutoModerationActionMetadataData
+    metadata: 'discord_typings.TimeoutAutoModerationActionMetadataData'
 
 
 AutoModerationActionData = Union[
@@ -169,22 +153,20 @@ AutoModerationActionTypes = Literal[1, 2, 3]
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-metadata
 
 
-@final
+class BlockmessageAutoModerationActionMetadataData(TypedDict):
+    custom_message: NotRequired[str]
+
+
 class SendAlertMessageAutoModerationActionMetadataData(TypedDict):
-    channel_id: Snowflake
+    channel_id: 'discord_typings.Snowflake'
 
 
-@final
 class TimeoutAutoModerationActionMetadataData(TypedDict):
     duration_seconds: int
 
 
-@final
-class BlockMessageAutoModerationActionMetadataData(TypedDict, total=False):
-    custom_message: str
-
-
 AutoModerationActionMetadataData = Union[
-    SendAlertMessageAutoModerationActionMetadataData, TimeoutAutoModerationActionMetadataData,
-    BlockMessageAutoModerationActionMetadataData
+    BlockmessageAutoModerationActionMetadataData,
+    SendAlertMessageAutoModerationActionMetadataData,
+    TimeoutAutoModerationActionMetadataData,
 ]

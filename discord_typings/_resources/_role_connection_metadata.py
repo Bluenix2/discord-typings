@@ -1,11 +1,8 @@
-from __future__ import annotations
+from typing import Dict, Optional
 
-from typing import TYPE_CHECKING, Dict, Optional
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
-
-if TYPE_CHECKING:
-    from .._reference import Locales
+import discord_typings
 
 __all__ = (
     'ApplicationRoleConnectionMetadataData',
@@ -16,14 +13,13 @@ __all__ = (
 # https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object
 
 
-@final
 class ApplicationRoleConnectionMetadataData(TypedDict):
-    type: ApplicationRoleConnectionMetadataTypes
+    type: 'discord_typings.ApplicationRoleConnectionMetadataTypes'
     key: str
     name: str
-    name_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     description: str
-    description_localizations: NotRequired[Optional[Dict[Locales, str]]]
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
 
 
 # https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-type

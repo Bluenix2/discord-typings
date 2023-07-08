@@ -1,133 +1,133 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Union
+from typing import Dict, Generic, List, TypeVar, Union
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
+from typing_extensions import Literal, NotRequired, TypedDict
 
-if TYPE_CHECKING:
-    from .._reference import Snowflake
-    from .._resources import (
-        AllowedMentionsData, AttachmentData, EmbedData, GuildMemberData,
-        MessageData, PartialAttachmentData, PartialChannelData, RoleData,
-        UserData
-    )
-    from ._commands import AutocompleteOptionData, Locales
-    from ._components import ActionRowData, ComponentData, SelectMenuOptionData
+import discord_typings
 
 __all__ = (
-    'InteractionData', 'InteractionType', 'ResolvedInteractionDataData',
-    'MessageInteractionData', 'InteractionResponseData', 'InteractionCallbackTypes',
-    'InteractionCallbackData', 'ApplicationCommandInteractionData',
-    'ComponentInteractionData', 'AutocompleteInteractionData', 'InteractionData',
-    'InteractionMessageCallbackData', 'InteractionAutocompleteCallbackData',
-    'InteractionModalCallbackData', 'InteractionMessageResponseData',
-    'InteractionAutocompleteResponseData', 'InteractionModalResponseData',
-    'InteractionNodataResponseData', 'ModalInteractionData',
-    'ApplicationCommandOptionInteractionData', 'SelectMenuComponentInteractionDataData',
-    'ButtonComponentInteractionDataData', 'ChatInputCommandInteractionDataData',
-    'ContextMenuInteractionDataData', 'ComponentInteractionDataData',
-    'InteractionDataData'
+    'PingInteractionData',
+    'ApplicationCommandInteractionData',
+    'ComponentInteractionData',
+    'AutocompleteInteractionData',
+    'ModalInteractionData',
+    'InteractionData',
+    'InteractionType',
+    'ApplicationCommandInteractionDataData',
+    'ComponentInteractionDataData',
+    'ModalSubmitInteractionDataData',
+    'InteractionDataData',
+    'ResolvedInteractionDataData',
+    'ApplicationCommandOptionInteractionData',
+    'MessageInteractionData',
+    'InteractionResponseData',
+    'InteractionCallbackTypes',
+    'InteractionMessageCallbackData',
+    'InteractionAutocompleteCallbackData',
+    'InteractionModalCallbackData',
+    'InteractionCallbackData',
 )
 
 
-# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure
+_T = TypeVar('_T')
 
 
-class GuildInteractionData(TypedDict):
-    id: Snowflake
-    application_id: Snowflake
-    guild_id: Snowflake
-    channel_id: Snowflake
-    channel: PartialChannelData
-    member: GuildMemberData
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
+
+
+class PingInteractionData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    application_id: 'discord_typings.Snowflake'
+    type: Literal[1]
+    user: 'discord_typings.UserData'
+    version: int
+
+
+class _GuildInteractionData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    application_id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
+    channel: 'discord_typings.PartialChannelData'
+    channel_id: 'discord_typings.Snowflake'
+    member: 'discord_typings.GuildMemberData'
     token: str
     version: int
-    locale: Locales
-    guild_locale: Locales
-
-
-@final
-class ApplicationCommandGuildInteractionData(GuildInteractionData):
-    type: Literal[2]
-    data: ApplicationCommandInteractionDataData
     app_permissions: str
+    locale: 'discord_typings.Locales'
+    guild_locale: 'discord_typings.Locales'
 
 
-@final
-class ComponentGuildInteractionData(GuildInteractionData):
+class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
+    type: Literal[2]
+    data: 'discord_typings.ApplicationCommandInteractionDataData'
+
+
+class _ComponentGuildInteractionData(_GuildInteractionData):
     type: Literal[3]
     data: ComponentInteractionDataData
-    message: MessageData
-    app_permissions: str
+    message: 'discord_typings.MessageData'
 
 
-@final
-class AutocompleteGuildInteractionData(GuildInteractionData):
+class _AutocompleteGuildInteractionData(_GuildInteractionData):
     type: Literal[4]
-    data: ApplicationCommandInteractionDataData
+    data: 'discord_typings.ApplicationCommandInteractionDataData'
 
 
-@final
-class ModalGuildInteractionData(GuildInteractionData):
+class _ModalGuildInteractionData(_GuildInteractionData):
     type: Literal[5]
-    data: ModalSubmitInteractionDataData
-    message: MessageData
-    app_permissions: str
+    data: 'discord_typings.ModalSubmitInteractionDataData'
 
 
-class ChannelInteractionData(TypedDict):
-    id: Snowflake
-    application_id: Snowflake
-    channel_id: Snowflake
-    channel: PartialChannelData
-    user: UserData
+class _ChannelInteractionData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    application_id: 'discord_typings.Snowflake'
+    channel: 'discord_typings.PartialChannelData'
+    channel_id: 'discord_typings.Snowflake'
+    user: 'discord_typings.UserData'
     token: str
     version: int
-    locale: Locales
+    locale: 'discord_typings.Locales'
 
 
-@final
-class ApplicationCommandChannelInteractionData(ChannelInteractionData):
+class _ApplicationCommandChannelInteractionData(_ChannelInteractionData):
     type: Literal[2]
-    data: Union[ApplicationCommandInteractionDataData, ContextMenuInteractionDataData]
+    data: 'discord_typings.ApplicationCommandInteractionDataData'
 
 
-@final
-class ComponentChannelInteractionData(ChannelInteractionData):
+class _ComponentChannelInteractionData(_ChannelInteractionData):
     type: Literal[3]
-    data: ComponentInteractionDataData
-    message: MessageData
+    data: 'discord_typings.ComponentInteractionDataData'
+    message: 'discord_typings.MessageData'
 
 
-@final
-class AutocompleteChannelInteractionData(ChannelInteractionData):
+class _AutocompleteChannelInteractionData(_ChannelInteractionData):
     type: Literal[4]
-    data: ApplicationCommandInteractionDataData
+    data: 'discord_typings.ApplicationCommandInteractionDataData'
 
 
-@final
-class ModalChannelInteractionData(ChannelInteractionData):
+class _ModalChannelInteractionData(_ChannelInteractionData):
     type: Literal[5]
-    data: ModalSubmitInteractionDataData
-    message: MessageData
+    data: 'discord_typings.ModalSubmitInteractionDataData'
 
 
 ApplicationCommandInteractionData = Union[
-    ApplicationCommandGuildInteractionData, ApplicationCommandChannelInteractionData,
+    _ApplicationCommandGuildInteractionData, _ApplicationCommandChannelInteractionData,
 ]
 
 
 ComponentInteractionData = Union[
-    ComponentGuildInteractionData, ComponentChannelInteractionData
+    _ComponentGuildInteractionData, _ComponentChannelInteractionData
+]
+
+
+AutocompleteInteractionData = Union[
+    _AutocompleteGuildInteractionData, _AutocompleteChannelInteractionData
 ]
 
 
 ModalInteractionData = Union[
-    ModalGuildInteractionData, ModalChannelInteractionData
-]
-
-AutocompleteInteractionData = Union[
-    AutocompleteGuildInteractionData, AutocompleteChannelInteractionData
+    _ModalGuildInteractionData, _ModalChannelInteractionData
 ]
 
 
@@ -146,60 +146,56 @@ InteractionType = Literal[1, 2, 3, 4, 5]
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-data-structure
 
 
-@final
-class ChatInputCommandInteractionDataData(TypedDict):
-    id: Snowflake
+class _ChatInputCommandInteractionDataData(TypedDict):
+    id: 'discord_typings.Snowflake'
     name: str
     type: Literal[1]
     resolved: NotRequired[ResolvedInteractionDataData]
     options: NotRequired[List[ApplicationCommandOptionInteractionData]]
-    guild_id: NotRequired[Snowflake]
+    guild_id: NotRequired['discord_typings.Snowflake']
 
 
-@final
-class ContextMenuInteractionDataData(TypedDict):
-    id: Snowflake
+class _ContextMenuInteractionDataData(TypedDict):
+    id: 'discord_typings.Snowflake'
     name: str
     type: Literal[2, 3]
     resolved: NotRequired[ResolvedInteractionDataData]
-    guild_id: NotRequired[Snowflake]
-    target_id: Snowflake
+    guild_id: NotRequired['discord_typings.Snowflake']
+    target_id: 'discord_typings.Snowflake'
 
 
 ApplicationCommandInteractionDataData = Union[
-    ChatInputCommandInteractionDataData, ContextMenuInteractionDataData
+    _ChatInputCommandInteractionDataData, _ContextMenuInteractionDataData
 ]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-message-component-data-structure
 
 
-@final
-class ButtonComponentInteractionDataData(TypedDict):
+class _ButtonComponentInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[2]
 
 
-@final
-class SelectMenuComponentInteractionDataData(TypedDict):
+class _SelectMenuComponentInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[3, 5, 6, 7, 8]
-    values: NotRequired[List[SelectMenuOptionData]]
+    values: NotRequired[List['discord_typings.SelectMenuOptionData']]
     resolved: NotRequired[ResolvedInteractionDataData]
 
 
 ComponentInteractionDataData = Union[
-    ButtonComponentInteractionDataData, SelectMenuComponentInteractionDataData
+    _ButtonComponentInteractionDataData, _SelectMenuComponentInteractionDataData
 ]
+
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-modal-submit-data-structure
 
 
-@final
 class ModalSubmitInteractionDataData(TypedDict):
     custom_id: str
     component_type: Literal[4]
-    components: List[ActionRowData]
+    components: List['discord_typings.ActionRowData']
 
 
 InteractionDataData = Union[
@@ -211,148 +207,143 @@ InteractionDataData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure
 
 
-@final
 class ResolvedInteractionDataData(TypedDict):
-    users: NotRequired[Dict[Snowflake, UserData]]
-    members: NotRequired[Dict[Snowflake, GuildMemberData]]
-    roles: NotRequired[Dict[Snowflake, RoleData]]
-    channels: NotRequired[Dict[Snowflake, PartialChannelData]]
-    messages: NotRequired[Dict[Snowflake, MessageData]]
-    attachments: NotRequired[Dict[Snowflake, AttachmentData]]
+    users: NotRequired[
+        Dict['discord_typings.Snowflake', 'discord_typings.UserData']
+    ]
+    members: NotRequired[
+        Dict['discord_typings.Snowflake', 'discord_typings.GuildMemberData']
+    ]
+    roles: NotRequired[
+        Dict['discord_typings.Snowflake', 'discord_typings.RoleData']
+    ]
+    channels: NotRequired[
+        Dict['discord_typings.Snowflake', 'discord_typings.PartialChannelData']
+    ]
+    messages: NotRequired[
+        Dict['discord_typings.Snowflake', 'discord_typings.MessageData']
+    ]
+    attachments: NotRequired[
+        Dict['discord_typings.Snowflake', 'discord_typings.AttachmentData']
+    ]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure
 
 
-@final
-class SubcommandOptionInteractionData(TypedDict):
+class _SubcommandOptionInteractionData(TypedDict):
     name: str
     type: Literal[1]
-    options: List[ApplicationCommandOptionInteractionData]
+    options: List['discord_typings.ApplicationCommandOptionInteractionData']
 
 
-@final
-class SubcommandGroupOptionInteractionData(TypedDict):
+class _SubcommandGroupOptionInteractionData(TypedDict):
     name: str
     type: Literal[2]
-    options: List[SubcommandOptionInteractionData]
+    options: List['discord_typings.ApplicationCommandOptionInteractionData']
 
 
-@final
-class StringOptionInteractionData(TypedDict):
+class _StringOptionInteractionData(TypedDict):
     name: str
     type: Literal[3]
     value: str
     focused: NotRequired[bool]
 
 
-@final
-class IntegerOptionInteractionData(TypedDict):
+class _IntegerOptionInteractionData(TypedDict):
     name: str
     type: Literal[4]
     value: int
     focused: NotRequired[bool]
 
 
-@final
-class BooleanOptionInteractionData(TypedDict):
+class _BooleanOptionInteractionData(TypedDict):
     name: str
     type: Literal[5]
     value: bool
 
 
-@final
-class UserOptionInteractionData(TypedDict):
+class _UserOptionInteractionData(TypedDict):
     name: str
     type: Literal[6]
-    value: Snowflake
+    value: 'discord_typings.Snowflake'
 
 
-@final
-class ChannelOptionInteractionData(TypedDict):
+class _ChannelOptionInteractionData(TypedDict):
     name: str
     type: Literal[7]
-    value: Snowflake
+    value: 'discord_typings.Snowflake'
 
 
-@final
-class RoleOptionInteractionData(TypedDict):
+class _RoleOptionInteractionData(TypedDict):
     name: str
     type: Literal[8]
-    value: Snowflake
+    value: 'discord_typings.Snowflake'
 
 
-@final
-class MentionableInteractionData(TypedDict):
+class _MentionableInteractionData(TypedDict):
     name: str
     type: Literal[9]
-    value: Snowflake
+    value: 'discord_typings.Snowflake'
 
 
-@final
-class NumberInteractionData(TypedDict):
+class _NumberInteractionData(TypedDict):
     name: str
     type: Literal[10]
     value: Union[int, float]
     focused: NotRequired[bool]
 
 
-@final
-class AttachmentInteractionData(TypedDict):
+class _AttachmentInteractionData(TypedDict):
     name: str
     type: Literal[11]
     value: str
 
 
 ApplicationCommandOptionInteractionData = Union[
-    SubcommandOptionInteractionData, SubcommandGroupOptionInteractionData,
-    StringOptionInteractionData, IntegerOptionInteractionData, BooleanOptionInteractionData,
-    UserOptionInteractionData, ChannelOptionInteractionData, RoleOptionInteractionData,
-    MentionableInteractionData, NumberInteractionData, AttachmentInteractionData,
+    _SubcommandOptionInteractionData, _SubcommandGroupOptionInteractionData,
+    _StringOptionInteractionData, _IntegerOptionInteractionData, _BooleanOptionInteractionData,
+    _UserOptionInteractionData, _ChannelOptionInteractionData, _RoleOptionInteractionData,
+    _MentionableInteractionData, _NumberInteractionData, _AttachmentInteractionData,
 ]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
 
 
-@final
 class MessageInteractionData(TypedDict):
-    id: Snowflake
+    id: 'discord_typings.Snowflake'
     type: Literal[2, 3, 4]
     name: str
-    user: UserData
-    member: NotRequired[GuildMemberData]
+    user: 'discord_typings.UserData'
+    member: NotRequired['discord_typings.GuildMemberData']
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure
 
 
-@final
-class InteractionNodataResponseData(TypedDict):
+class _InteractionNodataResponseData(TypedDict):
     type: Literal[1, 5, 6]
 
 
-@final
-class InteractionMessageResponseData(TypedDict):
+class _InteractionMessageResponseData(TypedDict):
     type: Literal[4, 7]
-    data: InteractionMessageCallbackData
+    data: 'discord_typings.InteractionMessageCallbackData'
 
 
-@final
-class InteractionAutocompleteResponseData(TypedDict):
+class _InteractionAutocompleteResponseData(TypedDict):
     type: Literal[8]
-    data: InteractionAutocompleteCallbackData
+    data: 'discord_typings.InteractionAutocompleteCallbackData[Union[str, int, float]]'
 
 
-@final
-class InteractionModalResponseData(TypedDict):
+class _InteractionModalResponseData(TypedDict):
     type: Literal[9]
-    data: InteractionModalCallbackData
+    data: 'discord_typings.InteractionModalCallbackData'
 
 
 InteractionResponseData = Union[
-    InteractionNodataResponseData, InteractionMessageResponseData,
-    InteractionAutocompleteResponseData, InteractionModalResponseData,
+    _InteractionNodataResponseData, _InteractionMessageResponseData,
+    _InteractionAutocompleteResponseData, _InteractionModalResponseData,
 ]
 
 
@@ -365,30 +356,28 @@ InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9]
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure
 
 
-@final
 class InteractionMessageCallbackData(TypedDict):
     tts: NotRequired[bool]
     content: NotRequired[str]
-    embeds: NotRequired[List[EmbedData]]
-    allowed_mentions: NotRequired[AllowedMentionsData]
+    embeds: NotRequired[List['discord_typings.EmbedData']]
+    allowed_mentions: NotRequired['discord_typings.AllowedMentionsData']
     flags: NotRequired[int]
-    components: NotRequired[List[ComponentData]]
-    attachments: NotRequired[List[PartialAttachmentData]]
+    components: NotRequired[List['discord_typings.ComponentData']]
+    attachments: NotRequired[List['discord_typings.PartialAttachmentData']]
 
 
-@final
-class InteractionAutocompleteCallbackData(TypedDict):
-    choices: List[AutocompleteOptionData]
+class InteractionAutocompleteCallbackData(TypedDict, Generic[_T]):
+    choices: List['discord_typings.CommandOptionChoiceData[_T]']
 
 
-@final
 class InteractionModalCallbackData(TypedDict):
     custom_id: str
     title: str
-    components: List[ActionRowData]
+    components: List['discord_typings.ComponentData']
 
 
 InteractionCallbackData = Union[
-    InteractionMessageCallbackData, InteractionAutocompleteCallbackData,
-    InteractionModalCallbackData
+    InteractionMessageCallbackData,
+    InteractionAutocompleteCallbackData[Union[str, int, float]],
+    InteractionModalCallbackData,
 ]

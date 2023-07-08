@@ -1,12 +1,14 @@
-from __future__ import annotations
-
 from typing import List
 
-from typing_extensions import Literal, NotRequired, TypedDict, final
+from typing_extensions import Literal, NotRequired, TypedDict
 
-from ._resources import ApplicationData, UserData
+import discord_typings
 
-__all__ = ('OAuth2Scopes', 'AccessTokenResponseData', 'AuthorizationInformationData')
+__all__ = (
+    'OAuth2Scopes',
+    'AccessTokenResponseData',
+    'AuthorizationInformationData',
+)
 
 
 # https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
@@ -47,7 +49,6 @@ OAuth2Scopes = Literal[
 # https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-access-token-response
 
 
-@final
 class AccessTokenResponseData(TypedDict):
     access_token: str
     token_type: str
@@ -59,9 +60,8 @@ class AccessTokenResponseData(TypedDict):
 # https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information
 
 
-@final
 class AuthorizationInformationData(TypedDict):
-    application: ApplicationData
+    application: 'discord_typings.ApplicationData'
     scopes: List[str]
-    user: NotRequired[UserData]
+    user: NotRequired['discord_typings.UserData']
     expires: str
