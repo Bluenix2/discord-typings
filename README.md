@@ -110,7 +110,7 @@ As a reminder of semantic versioning, and a summary of the above:
 | **Minor**    |    X    |           | May add new features, can break type-checking     |
 | **Patch**    |    X    |     X     | Only intended for bugs                            |
 
-> **Note**
+> **Warn**
 > Patch versions will be used to rectify any accidental breaking changes
 > or unintended bugs / behaviour, therefore you should **always** use
 > the latest patch version.
@@ -120,3 +120,9 @@ As a reminder of semantic versioning, and a summary of the above:
 > considered breaking, however the intention is always to fix unintended
 > behaviour or previous breaking changes which should not have been.
 > In those cases, the previous version will be pulled from PyPI.
+
+## Links and Feedback
+
+* [PyPI Package](https://pypi.org/project/discord-typings)
+* [Discord API Docs](https://discord.com/developers/docs/intro)
+* [Wumpy Project Discord Server](https://discord.gg/ZWpjYdKKTF)
