@@ -1021,6 +1021,7 @@ class MessageReactionAddData(TypedDict):
     guild_id: NotRequired['discord_typings.Snowflake']
     member: NotRequired['discord_typings.GuildMemberData']
     emoji: 'discord_typings.EmojiData'
+    message_author_id: NotRequired['discord_typings.Snowflake']
 
 
 MessageReactionAddEvent = GenericDispatchEvent[
