@@ -31,6 +31,7 @@ __all__ = (
     'GuildOnboardingData',
     'GuildOnboardingPromptsData',
     'GuildOnboardingPromptOptionData',
+    'GuildOnboardingModes',
     'GuildOnboardingPromptTypes',
     'ChannelPositionData',
     'ListThreadsData',
@@ -330,6 +331,7 @@ class GuildOnboardingData(TypedDict):
     prompts: List['discord_typings.GuildOnboardingPromptsData']
     default_channel_ids: List['discord_typings.Snowflake']
     enabled: bool
+    mode: 'discord_typings.GuildOnboardingModes'
 
 
 # https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure
@@ -355,6 +357,12 @@ class GuildOnboardingPromptOptionData(TypedDict):
     emoji: 'discord_typings.EmojiData'
     title: str
     description: Optional[str]
+
+
+# https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-mode
+
+
+GuildOnboardingModes = Literal[0, 1]
 
 
 # https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types
@@ -404,6 +412,7 @@ class RoleData(TypedDict):
     managed: bool
     mentionable: bool
     tags: NotRequired['discord_typings.RoleTagsData']
+    flags: int
 
 
 # https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure
