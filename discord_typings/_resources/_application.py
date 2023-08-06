@@ -29,6 +29,7 @@ class ApplicationData(TypedDict):
     verify_key: str
     team: Optional['discord_typings.TeamData']
     guild_id: NotRequired['discord_typings.Snowflake']
+    guild: NotRequired['discord_typings.PartialGuildData']
     primary_sku_id: NotRequired['discord_typings.Snowflake']
     slug: NotRequired[str]
     cover_image: NotRequired[str]
