@@ -493,6 +493,7 @@ class AttachmentData(TypedDict):
     ephemeral: NotRequired[bool]
     duration_secs: NotRequired[float]
     waveform: NotRequired[str]
+    flags: NotRequired[int]
 
 
 # https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure
