@@ -33,6 +33,7 @@ class UserData(TypedDict):
     flags: NotRequired[int]
     premium_type: NotRequired['discord_typings.UserPremiumTypes']
     public_flags: NotRequired[int]
+    avatar_decoration: NotRequired[Optional[str]]
 
 
 # https://discord.com/developers/docs/resources/user#user-object-premium-types
