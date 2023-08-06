@@ -477,6 +477,8 @@ _GuildChannelData = Union[
     'discord_typings.NewsChannelData',
     'discord_typings.VoiceChannelData',
     'discord_typings.CategoryChannelData',
+    'discord_typings.ForumChannelData',
+    'discord_typings.MediaChannelData',
 ]
 
 

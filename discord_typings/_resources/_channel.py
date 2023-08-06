@@ -14,6 +14,7 @@ __all__ = (
     'VoiceChannelData',
     'CategoryChannelData',
     'ForumChannelData',
+    'MediaChannelData',
     'ChannelData',
     'ChannelTypes',
     'VideoQualityModes',
@@ -55,7 +56,7 @@ __all__ = (
 class PartialChannelData(TypedDict):
     id: 'discord_typings.Snowflake'
     name: str
-    type: Literal[0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13]
+    type: Literal[0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
     permissions: NotRequired[str]
 
 
@@ -183,9 +184,30 @@ class ForumChannelData(TypedDict):
     default_forum_layout: 'discord_typings.ForumLayoutTypes'
 
 
+class MediaChannelData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    type: Literal[16]
+    guild_id: NotRequired['discord_typings.Snowflake']
+    position: int
+    permission_overwrites: List['discord_typings.PermissionOverwriteData']
+    name: str
+    topic: Optional[str]
+    nsfw: bool
+    last_message_id: Optional['discord_typings.Snowflake']
+    rate_limit_per_user: int
+    default_auto_archive_duration: NotRequired[int]
+    flags: int
+    available_tags: List['discord_typings.ForumTagData']
+    default_reaction_emoji: Optional['discord_typings.DefaultReactionData']
+    default_thread_rate_limit_per_user: int
+    default_sort_order: Optional['discord_typings.SortOrderTypes']
+    default_forum_layout: 'discord_typings.ForumLayoutTypes'
+
+
 ChannelData = Union[
     TextChannelData, NewsChannelData, DMChannelData, GroupDMChannelData,
-    ThreadChannelData, VoiceChannelData, CategoryChannelData, ForumChannelData
+    ThreadChannelData, VoiceChannelData, CategoryChannelData, ForumChannelData,
+    MediaChannelData,
 ]
 
 
