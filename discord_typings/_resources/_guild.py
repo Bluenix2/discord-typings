@@ -52,6 +52,8 @@ class PartialGuildData(TypedDict):
     owner: bool
     permissions: str
     features: List['discord_typings.GuildFeatures']
+    approximate_member_count: NotRequired[int]
+    approximate_presence_count: NotRequired[int]
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object

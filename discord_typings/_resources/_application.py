@@ -33,6 +33,7 @@ class ApplicationData(TypedDict):
     slug: NotRequired[str]
     cover_image: NotRequired[str]
     flags: NotRequired[int]
+    approximate_guild_count: NotRequired[int]
     tags: NotRequired[List[str]]
     install_params: NotRequired['discord_typings.InstallParams']
     custom_install_url: NotRequired[str]
