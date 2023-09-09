@@ -1097,6 +1097,7 @@ class ClientStatusData(TypedDict):
 class PartialActivityData(TypedDict):
     name: str
     type: 'discord_typings.ActivityTypes'
+    state: NotRequired[Optional[str]]
     url: NotRequired[str]
 
 
