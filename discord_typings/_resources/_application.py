@@ -1,12 +1,13 @@
 from typing import List, Optional
 
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Literal, NotRequired, TypedDict
 
 import discord_typings
 
 __all__ = (
     'ApplicationData',
     'InstallParams',
+    'TeamMemberRoleTypes',
     'TeamData',
     'TeamMemberData',
 )
@@ -49,6 +50,12 @@ class InstallParams(TypedDict):
     permissions: str
 
 
+# https://discord.com/developers/docs/topics/teams#team-member-roles
+
+
+TeamMemberRoleTypes = Literal['', 'admin', 'developer', 'read_only']
+
+
 # https://discord.com/developers/docs/topics/teams#data-models-team-object
 
 
@@ -65,6 +72,6 @@ class TeamData(TypedDict):
 
 class TeamMemberData(TypedDict):
     membership_state: int
-    permissions: List[str]
     team_id: 'discord_typings.Snowflake'
     user: 'discord_typings.UserData'
+    role: str
