@@ -28,6 +28,7 @@ __all__ = (
     'MessageReferenceData',
     'FollowedChannelData',
     'MessageReactionData',
+    'ReactionCountDetailsData',
     'PermissionOverwriteData',
     'ThreadMetadataData',
     'ThreadMemberData',
@@ -330,8 +331,19 @@ class FollowedChannelData(TypedDict):
 
 class MessageReactionData(TypedDict):
     count: int
+    count_details: 'discord_typings.ReactionCountDetailsData'
     me: bool
+    me_burst: bool
     emoji: 'discord_typings.EmojiData'
+    burst_colors: List[str]
+
+
+# https://discord.com/developers/docs/resources/channel#reaction-count-details-object
+
+
+class ReactionCountDetailsData(TypedDict):
+    burst: int
+    normal: int
 
 
 # https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure
