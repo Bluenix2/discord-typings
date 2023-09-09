@@ -86,6 +86,7 @@ class OptionalAuditLogEntryData(TypedDict):
     message_id: NotRequired['discord_typings.Snowflake']
     role_name: NotRequired[str]
     type: NotRequired[Literal['0', '1']]
+    integration_type: str
 
 
 # https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
