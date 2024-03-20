@@ -235,6 +235,7 @@ class GuildMemberData(TypedDict):
     pending: NotRequired[bool]
     permissions: NotRequired[str]
     communication_disabled_until: NotRequired[Optional[str]]
+    source_invite_code: str
 
 
 # https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
