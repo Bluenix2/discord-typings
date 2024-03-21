@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
@@ -25,6 +25,7 @@ __all__ = (
     'MessageTypes',
     'MessageActivityData',
     'MessageActivityTypes',
+    'MessageInteractionMetadataData',
     'MessageReferenceData',
     'FollowedChannelData',
     'MessageReactionData',
@@ -264,12 +265,14 @@ class _ChannelMessageData(TypedDict):
     message_reference: NotRequired['discord_typings.MessageReferenceData']
     flags: NotRequired[int]
     referenced_message: NotRequired[Optional['discord_typings.MessageData']]
+    interaction_metadata: NotRequired['discord_typings.MessageInteractionMetadataData']
     interaction: NotRequired['discord_typings.MessageInteractionData']
     thread: NotRequired['discord_typings.ThreadChannelData']
     components: NotRequired[List['discord_typings.ComponentData']]
     sticker_items: NotRequired[List['discord_typings.StickerItemData']]
     position: NotRequired[int]
     role_subscription_data: NotRequired['discord_typings.RoleSubscriptionData']
+    resolved: NotRequired['discord_typings.ResolvedInteractionDataData']
 
 
 class _GuildMessageData(_ChannelMessageData):
@@ -305,6 +308,22 @@ class MessageActivityData(TypedDict):
 
 
 MessageActivityTypes = Literal[1, 2, 3, 5]
+
+
+# https://discord.com/developers/docs/resources/channel#message-interaction-metadata-object
+
+
+class MessageInteractionMetadataData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    type: 'discord_typings.InteractionTypes'
+    user_id: 'discord_typings.Snowflake'
+    authorizing_integration_owners: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.Snowflake'
+    ]
+    original_response_message_id: NotRequired['discord_typings.Snowflake']
+    interacted_message_id: NotRequired['discord_typings.Snowflake']
+    triggering_interaction_metadata: NotRequired['MessageInteractionMetadataData']
 
 
 # https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
