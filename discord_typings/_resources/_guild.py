@@ -356,7 +356,10 @@ class GuildOnboardingPromptOptionData(TypedDict):
     id: 'discord_typings.Snowflake'
     channel_ids: List['discord_typings.Snowflake']
     role_ids: List['discord_typings.Snowflake']
-    emoji: 'discord_typings.EmojiData'
+    emoji: NotRequired['discord_typings.EmojiData']
+    emoji_id: NotRequired['discord_typings.Snowflake']
+    emoji_name: NotRequired[str]
+    emoji_animated: NotRequired[bool]
     title: str
     description: Optional[str]
 
