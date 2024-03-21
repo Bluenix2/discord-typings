@@ -10,6 +10,7 @@ from ._resources._user import *
 from ._interactions._commands import *
 from ._interactions._components import *
 from ._interactions._receiving import *
+from ._monetization._entitlements import *
 from ._oauth import *
 from ._reference import *
 from ._resources._application import *
