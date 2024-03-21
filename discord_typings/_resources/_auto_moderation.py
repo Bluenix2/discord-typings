@@ -89,6 +89,7 @@ class KeywordAutoModerationTriggerMetadata(TypedDict):
 
 class KeywordPresetAutoModerationTriggerMetadataData(TypedDict):
     presets: List['discord_typings.AutoModerationKeywordPresetTypes']
+    allow_list: List[str]
 
 
 class MentionSpamAutoModerationTriggerMetadataData(TypedDict):
