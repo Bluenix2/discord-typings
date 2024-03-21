@@ -65,7 +65,7 @@ class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
 
 class _ComponentGuildInteractionData(_GuildInteractionData):
     type: Literal[3]
-    data: ComponentInteractionDataData
+    data: 'discord_typings.ComponentInteractionDataData'
     message: 'discord_typings.MessageData'
 
 

@@ -16,6 +16,8 @@ __all__ = (
     'ChannelSelectMenuComponentData',
     'SelectMenuComponentData',
     'SelectMenuOptionData',
+    'SelectMenuDefaultValueData',
+    'SelectMenuDefaultValueTypes',
     'TextInputComponentData',
     'TextInputStyles',
     'ComponentData',
@@ -88,6 +90,7 @@ class UserSelectMenuComponentData(TypedDict):
     type: Literal[5]
     custom_id: str
     placeholder: NotRequired[str]
+    default_values: NotRequired[List['discord_typings.SelectMenuDefaultValueData']]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
     disabled: NotRequired[bool]
@@ -97,6 +100,7 @@ class RoleSelectMenuComponentData(TypedDict):
     type: Literal[6]
     custom_id: str
     placeholder: NotRequired[str]
+    default_values: NotRequired[List['discord_typings.SelectMenuDefaultValueData']]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
     disabled: NotRequired[bool]
@@ -106,6 +110,7 @@ class MentionableSelectMenuComponentData(TypedDict):
     type: Literal[7]
     custom_id: str
     placeholder: NotRequired[str]
+    default_values: NotRequired[List['discord_typings.SelectMenuDefaultValueData']]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
     disabled: NotRequired[bool]
@@ -116,6 +121,7 @@ class ChannelSelectMenuComponentData(TypedDict):
     custom_id: str
     channel_types: List['discord_typings.ChannelTypes']
     placeholder: NotRequired[str]
+    default_values: NotRequired[List['discord_typings.SelectMenuDefaultValueData']]
     min_values: NotRequired[int]
     max_values: NotRequired[int]
     disabled: NotRequired[bool]
@@ -137,6 +143,17 @@ class SelectMenuOptionData(TypedDict):
     description: NotRequired[str]
     emoji: NotRequired['discord_typings.EmojiData']
     default: NotRequired[bool]
+
+
+# https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure
+
+
+class SelectMenuDefaultValueData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    type: 'discord_typings.SelectMenuDefaultValueTypes'
+
+
+SelectMenuDefaultValueTypes = Literal['user', 'roles', 'channel']
 
 
 # https://discord.com/developers/docs/interactions/message-components#text-inputs-text-input-structure
