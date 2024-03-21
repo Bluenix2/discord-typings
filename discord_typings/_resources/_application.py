@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
@@ -6,6 +6,8 @@ import discord_typings
 
 __all__ = (
     'ApplicationData',
+    'ApplicationIntegrationTypes',
+    'ApplicationIntegrationTypeConfigurationData',
     'InstallParams',
     'TeamMemberRoleTypes',
     'TeamData',
@@ -36,10 +38,32 @@ class ApplicationData(TypedDict):
     cover_image: NotRequired[str]
     flags: NotRequired[int]
     approximate_guild_count: NotRequired[int]
+    redirect_urls: NotRequired[List[str]]
+    interactions_endpoint_url: NotRequired[str]
+    role_connections_verification_url: NotRequired[str]
     tags: NotRequired[List[str]]
     install_params: NotRequired['discord_typings.InstallParams']
+    integration_types_config: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.ApplicationIntegrationTypeConfigurationData'
+    ]
     custom_install_url: NotRequired[str]
-    role_connections_verification_url: NotRequired[str]
+
+
+# https://discord.com/developers/docs/resources/application#application-object-application-integration-types
+
+
+ApplicationIntegrationTypes = Literal[
+    0,
+    1,
+]
+
+
+# https://discord.com/developers/docs/resources/application#application-object-application-integration-type-configuration-object
+
+
+class ApplicationIntegrationTypeConfigurationData(TypedDict):
+    oauth2_install_params: 'discord_typings.InstallParams'
 
 
 # https://discord.com/developers/docs/resources/application#install-params-object-install-params-structure
