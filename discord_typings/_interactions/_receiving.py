@@ -14,6 +14,8 @@ __all__ = (
     'ModalInteractionData',
     'InteractionData',
     'InteractionType',
+    'InteractionTypes',
+    'InteractionContextTypes',
     'ApplicationCommandInteractionDataData',
     'ComponentInteractionDataData',
     'ModalSubmitInteractionDataData',
@@ -57,6 +59,11 @@ class _GuildInteractionData(TypedDict):
     locale: 'discord_typings.Locales'
     guild_locale: 'discord_typings.Locales'
     entitlements: NotRequired[List['discord_typings.EntitlementData']]
+    authorizing_integration_owners: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.Snowflake'
+    ]
+    context: Literal[0]
 
 
 class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
@@ -90,6 +97,11 @@ class _ChannelInteractionData(TypedDict):
     version: int
     locale: 'discord_typings.Locales'
     entitlements: NotRequired[List['discord_typings.EntitlementData']]
+    authorizing_integration_owners: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.Snowflake'
+    ]
+    context: Literal[1, 2]
 
 
 class _ApplicationCommandChannelInteractionData(_ChannelInteractionData):
@@ -143,6 +155,13 @@ InteractionData = Union[
 
 
 InteractionType = Literal[1, 2, 3, 4, 5]
+InteractionTypes = InteractionType  # Alias
+
+
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types
+
+
+InteractionContextTypes = Literal[0, 1, 2]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-data-structure
