@@ -56,6 +56,7 @@ class _GuildInteractionData(TypedDict):
     app_permissions: str
     locale: 'discord_typings.Locales'
     guild_locale: 'discord_typings.Locales'
+    entitlements: NotRequired[List['discord_typings.EntitlementData']]
 
 
 class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
@@ -88,6 +89,7 @@ class _ChannelInteractionData(TypedDict):
     token: str
     version: int
     locale: 'discord_typings.Locales'
+    entitlements: NotRequired[List['discord_typings.EntitlementData']]
 
 
 class _ApplicationCommandChannelInteractionData(_ChannelInteractionData):

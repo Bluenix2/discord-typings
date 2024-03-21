@@ -60,6 +60,12 @@ __all__ = (
     'ThreadMemberUpdateEvent',
     'ThreadMembersUpdateData',
     'ThreadMembersUpdateEvent',
+    'EntitlementCreateData',
+    'EntitlementCreateEvent',
+    'EntitlementUpdateData',
+    'EntitlementUpdateEvent',
+    'EntitlementDeleteData',
+    'EntitlementDeleteEvent',
     'ChannelPinsUpdateData',
     'ChannelPinsUpdateEvent',
     'GuildCreateData',
@@ -579,6 +585,33 @@ class ThreadMembersUpdateData(TypedDict):
 
 ThreadMembersUpdateEvent = GenericDispatchEvent[
     Literal['THREAD_MEMBERS_UPDATE'], ThreadMembersUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#entitlement-create
+
+
+EntitlementCreateData: TypeAlias = 'discord_typings.EntitlementData'
+EntitlementCreateEvent = GenericDispatchEvent[
+    Literal['ENTITLEMENT_CREATE'], EntitlementCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#entitlement-update
+
+
+EntitlementUpdateData: TypeAlias = 'discord_typings.EntitlementData'
+EntitlementUpdateEvent = GenericDispatchEvent[
+    Literal['ENTITLEMENT_UPDATE'], EntitlementUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#entitlement-delete
+
+
+EntitlementDeleteData: TypeAlias = 'discord_typings.EntitlementData'
+EntitlementDeleteEvent = GenericDispatchEvent[
+    Literal['ENTITLEMENT_DELETE'], EntitlementDeleteData
 ]
 
 
