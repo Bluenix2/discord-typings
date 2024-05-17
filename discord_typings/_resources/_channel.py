@@ -273,6 +273,7 @@ class _ChannelMessageData(TypedDict):
     position: NotRequired[int]
     role_subscription_data: NotRequired['discord_typings.RoleSubscriptionData']
     resolved: NotRequired['discord_typings.ResolvedInteractionDataData']
+    poll: NotRequired['discord_typings.PollCreateRequestData']
 
 
 class _GuildMessageData(_ChannelMessageData):

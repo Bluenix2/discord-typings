@@ -385,6 +385,7 @@ class InteractionMessageCallbackData(TypedDict):
     flags: NotRequired[int]
     components: NotRequired[List['discord_typings.ComponentData']]
     attachments: NotRequired[List['discord_typings.PartialAttachmentData']]
+    poll: NotRequired['discord_typings.PollCreateRequestData']
 
 
 class InteractionAutocompleteCallbackData(TypedDict, Generic[_T]):
