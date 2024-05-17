@@ -7,7 +7,7 @@ import discord_typings
 __all__ = (
     'PollData',
     'PollCreateRequestData',
-    'PollLayoutTypes',
+    'PollLayoutType',
     'PollMediaData',
     'PollAnswerData',
     'PollResultsData',
@@ -23,7 +23,7 @@ class PollData(TypedDict):
     answers: List['discord_typings.PollAnswerData']
     expiry: Optional[str]
     allow_multiselect: bool
-    layout_type: 'discord_typings.PollLayoutTypes'
+    layout_type: 'discord_typings.PollLayoutType'
     results: NotRequired['discord_typings.PollResultsData']
 
 
@@ -35,13 +35,13 @@ class PollCreateRequestData(TypedDict):
     answers: List['discord_typings.PollAnswerData']
     duration: int
     allow_multiselect: bool
-    layout_type: NotRequired['discord_typings.PollLayoutTypes']
+    layout_type: NotRequired['discord_typings.PollLayoutType']
 
 
 # https://discord.com/developers/docs/resources/poll#layout-type
 
 
-PollLayoutTypes = Literal[1]
+PollLayoutType = Literal[1]
 
 
 # https://discord.com/developers/docs/resources/poll#poll-media-object-poll-media-object-structure
