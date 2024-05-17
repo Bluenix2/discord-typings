@@ -165,6 +165,10 @@ __all__ = (
     'StageInstanceUpdateEvent',
     'StageInstanceDeleteData',
     'StageInstanceDeleteEvent',
+    'MessagePollVoteAddData',
+    'MessagePollVoteAddEvent',
+    'MessagePollVoteRemoveData',
+    'MessagePollVoteRemoveEvent',
     'DispatchEvent',
     'GatewayCommand',
     'GatewayEvent',
@@ -1298,6 +1302,38 @@ StageInstanceUpdateEvent = GenericDispatchEvent[
 StageInstanceDeleteData: TypeAlias = 'discord_typings.StageInstanceData'
 StageInstanceDeleteEvent = GenericDispatchEvent[
     Literal['STAGE_INSTANCE_DELETE'], StageInstanceDeleteData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add
+
+
+class MessagePollVoteAddData(TypedDict):
+    user_id: 'discord_typings.Snowflake'
+    channel_id: 'discord_typings.Snowflake'
+    message_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
+    answer_id: int
+
+
+MessagePollVoteAddEvent = GenericDispatchEvent[
+    Literal['MESSAGE_POLL_VOTE_ADD'], MessagePollVoteAddData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove
+
+
+class MessagePollVoteRemoveData(TypedDict):
+    user_id: 'discord_typings.Snowflake'
+    channel_id: 'discord_typings.Snowflake'
+    message_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
+    answer_id: int
+
+
+MessagePollVoteRemoveEvent = GenericDispatchEvent[
+    Literal['MESSAGE_POLL_VOTE_REMOVE'], MessagePollVoteRemoveData
 ]
 
 
