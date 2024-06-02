@@ -5,6 +5,7 @@ from typing_extensions import Literal, NotRequired, TypedDict
 __all__ = (
     'UserData',
     'UserPremiumTypes',
+    'AvatarDecorationDataData',
     'ConnectionData',
     'ConnectionTypes',
     'ConnectionVisibilityTypes',
@@ -33,13 +34,21 @@ class UserData(TypedDict):
     flags: NotRequired[int]
     premium_type: NotRequired['discord_typings.UserPremiumTypes']
     public_flags: NotRequired[int]
-    avatar_decoration: NotRequired[Optional[str]]
+    avatar_decoration_data: NotRequired[Optional['discord_typings.AvatarDecorationDataData']]
 
 
 # https://discord.com/developers/docs/resources/user#user-object-premium-types
 
 
 UserPremiumTypes = Literal[0, 1, 2, 3]
+
+
+# https://discord.com/developers/docs/resources/user#avatar-decoration-data-object
+
+
+class AvatarDecorationDataData(TypedDict):
+    asset: str
+    sku_id: 'discord_typings.Snowflake'
 
 
 # https://discord.com/developers/docs/resources/user#connection-object
@@ -63,6 +72,8 @@ class ConnectionData(TypedDict):
 
 ConnectionTypes = Literal[
     'battlenet',
+    'bungie',
+    'domain',
     'ebay',
     'epicgames',
     'facebook',
