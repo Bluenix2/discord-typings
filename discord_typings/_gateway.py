@@ -1059,6 +1059,9 @@ class MessageReactionAddData(TypedDict):
     member: NotRequired['discord_typings.GuildMemberData']
     emoji: 'discord_typings.EmojiData'
     message_author_id: NotRequired['discord_typings.Snowflake']
+    burst: bool
+    burst_colors: NotRequired[List[str]]
+    type: 'discord_typings.ReactionTypes'
 
 
 MessageReactionAddEvent = GenericDispatchEvent[
@@ -1075,6 +1078,8 @@ class MessageReactionRemoveData(TypedDict):
     message_id: 'discord_typings.Snowflake'
     guild_id: NotRequired['discord_typings.Snowflake']
     emoji: 'discord_typings.EmojiData'
+    burst: bool
+    type: 'discord_typings.ReactionTypes'
 
 
 MessageReactionRemoveEvent = GenericDispatchEvent[
