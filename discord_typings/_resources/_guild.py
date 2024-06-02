@@ -236,6 +236,7 @@ class GuildMemberData(TypedDict):
     pending: NotRequired[bool]
     permissions: NotRequired[str]
     communication_disabled_until: NotRequired[Optional[str]]
+    avatar_decoration_data: NotRequired[Optional['discord_typings.AvatarDecorationDataData']]
 
 
 # https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
