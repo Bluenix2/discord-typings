@@ -9,11 +9,13 @@ __all__ = (
     'SpamAutoModerationRuleData',
     'KeywordPresetAutoModerationRuleData',
     'MentionSpamAutoModerationRuleData',
+    'MemberProfileAutoModerationRuleData',
     'AutoModerationRuleData',
     'AutoModerationTriggerTypes',
     'KeywordAutoModerationTriggerMetadata',
     'KeywordPresetAutoModerationTriggerMetadataData',
     'MentionSpamAutoModerationTriggerMetadataData',
+    'MemberProfileAutoModerationTriggerMetadataData',
     'EmptyAutoModerationTriggerMetadataData',
     'AutoModerationTriggerMetadataData',
     'AutoModerationKeywordPresetTypes',
@@ -65,16 +67,22 @@ class MentionSpamAutoModerationRuleData(_AutoModerationRuleData):
     trigger_metadata: 'discord_typings.MentionSpamAutoModerationTriggerMetadataData'
 
 
+class MemberProfileAutoModerationRuleData(_AutoModerationRuleData):
+    trigger_type: Literal[6]
+    trigger_metadata: 'discord_typings.MemberProfileAutoModerationTriggerMetadataData'
+
+
 AutoModerationRuleData = Union[
     KeywordAutoModerationRuleData, KeywordPresetAutoModerationRuleData,
-    SpamAutoModerationRuleData, MentionSpamAutoModerationRuleData
+    SpamAutoModerationRuleData, MentionSpamAutoModerationRuleData,
+    MemberProfileAutoModerationRuleData
 ]
 
 
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types
 
 
-AutoModerationTriggerTypes = Literal[1, 2, 3, 4]
+AutoModerationTriggerTypes = Literal[1, 2, 3, 4, 5, 6]
 
 
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-metadata
@@ -97,6 +105,13 @@ class MentionSpamAutoModerationTriggerMetadataData(TypedDict):
     mention_raid_protection_enabled: bool
 
 
+class MemberProfileAutoModerationTriggerMetadataData(TypedDict):
+    keyword_filter: List[str]
+    regex_patterns: List[str]
+
+    allow_list: List[str]
+
+
 class EmptyAutoModerationTriggerMetadataData(TypedDict):
     ...
 
@@ -105,6 +120,7 @@ AutoModerationTriggerMetadataData = Union[
     KeywordAutoModerationTriggerMetadata,
     KeywordPresetAutoModerationTriggerMetadataData,
     MentionSpamAutoModerationTriggerMetadataData,
+    MemberProfileAutoModerationTriggerMetadataData,
     EmptyAutoModerationTriggerMetadataData,
 ]
 
@@ -118,7 +134,7 @@ AutoModerationKeywordPresetTypes = Literal[1, 2, 3]
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types
 
 
-AutoModerationEventTypes = Literal[1]
+AutoModerationEventTypes = Literal[1, 2]
 
 
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-auto-moderation-action-structure
@@ -148,7 +164,7 @@ AutoModerationActionData = Union[
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types
 
 
-AutoModerationActionTypes = Literal[1, 2, 3]
+AutoModerationActionTypes = Literal[1, 2, 3, 4]
 
 
 # https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-metadata
