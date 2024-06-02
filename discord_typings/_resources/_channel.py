@@ -26,6 +26,7 @@ __all__ = (
     'MessageActivityData',
     'MessageActivityTypes',
     'MessageInteractionMetadataData',
+    'MessageCallData',
     'MessageReferenceData',
     'FollowedChannelData',
     'MessageReactionData',
@@ -275,6 +276,7 @@ class _ChannelMessageData(TypedDict):
     role_subscription_data: NotRequired['discord_typings.RoleSubscriptionData']
     resolved: NotRequired['discord_typings.ResolvedInteractionDataData']
     poll: NotRequired['discord_typings.PollCreateRequestData']
+    call: NotRequired['discord_typings.MessageCallData']
 
 
 class _GuildMessageData(_ChannelMessageData):
@@ -326,6 +328,14 @@ class MessageInteractionMetadataData(TypedDict):
     original_response_message_id: NotRequired['discord_typings.Snowflake']
     interacted_message_id: NotRequired['discord_typings.Snowflake']
     triggering_interaction_metadata: NotRequired['MessageInteractionMetadataData']
+
+
+# https://discord.com/developers/docs/resources/channel#message-call-object
+
+
+class MessageCallData(TypedDict):
+    participants: List['discord_typings.Snowflake']
+    ended_timestamp: NotRequired[Optional[str]]
 
 
 # https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
