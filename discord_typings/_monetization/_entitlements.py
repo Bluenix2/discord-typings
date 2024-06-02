@@ -21,9 +21,19 @@ class EntitlementData(TypedDict):
     starts_at: NotRequired[str]
     ends_at: NotRequired[str]
     guild_id: NotRequired['discord_typings.Snowflake']
+    consumed: NotRequired[bool]
 
 
 # https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types
 
 
-EntitlementTypes = Literal[8]
+EntitlementTypes = Literal[
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+]
