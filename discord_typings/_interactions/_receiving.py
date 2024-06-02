@@ -50,6 +50,7 @@ class _GuildInteractionData(TypedDict):
     id: 'discord_typings.Snowflake'
     application_id: 'discord_typings.Snowflake'
     guild_id: 'discord_typings.Snowflake'
+    guild: 'discord_typings.PartialGuildData'
     channel: 'discord_typings.PartialChannelData'
     channel_id: 'discord_typings.Snowflake'
     member: 'discord_typings.GuildMemberData'
