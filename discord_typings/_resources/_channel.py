@@ -48,6 +48,7 @@ __all__ = (
     'ChannelMentionData',
     'AllowedMentionsData',
     'RoleSubscriptionData',
+    'ReactionTypes',
     'HasMoreListThreadsData',
 )
 
@@ -556,6 +557,12 @@ class RoleSubscriptionData(TypedDict):
     tier_name: str
     total_months_subscribed: int
     is_renewal: bool
+
+
+# https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types
+
+
+ReactionTypes = Literal[0, 1]
 
 
 # https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body
