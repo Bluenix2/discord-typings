@@ -35,6 +35,7 @@ __all__ = (
     'GuildOnboardingPromptTypes',
     'ChannelPositionData',
     'ListThreadsData',
+    'BulkBanData',
     'RolePositionData',
     'RoleData',
     'RoleTagsData',
@@ -392,6 +393,14 @@ class ChannelPositionData(TypedDict):
 class ListThreadsData(TypedDict):
     threads: List['discord_typings.ThreadChannelData']
     members: List['discord_typings.ThreadMemberData']
+
+
+# https://discord.com/developers/docs/resources/guild#bulk-guild-ban-bulk-ban-response
+
+
+class BulkBanData(TypedDict):
+    banned_users: List['discord_typings.Snowflake']
+    failed_users: List['discord_typings.Snowflake']
 
 
 # https://discord.com/developers/docs/resources/guild#modify-guild-role-positions-json-params
