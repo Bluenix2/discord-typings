@@ -22,7 +22,7 @@ from ._resources._guild import *
 from ._resources._guild_scheduled_events import *
 from ._resources._guild_template import *
 from ._resources._invite import *
-from ._resources._polls import *
+from ._resources._poll import *
 from ._resources._role_connection_metadata import *
 from ._resources._stage_instance import *
 from ._resources._sticker import *
