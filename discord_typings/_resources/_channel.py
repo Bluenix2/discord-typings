@@ -320,7 +320,7 @@ MessageActivityTypes = Literal[1, 2, 3, 5]
 class MessageInteractionMetadataData(TypedDict):
     id: 'discord_typings.Snowflake'
     type: 'discord_typings.InteractionTypes'
-    user_id: 'discord_typings.Snowflake'
+    user: 'discord_typings.UserData'
     authorizing_integration_owners: Dict[
         'discord_typings.ApplicationIntegrationTypes',
         'discord_typings.Snowflake'
