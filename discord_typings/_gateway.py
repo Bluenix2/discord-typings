@@ -671,7 +671,10 @@ GuildDeleteEvent = GenericDispatchEvent[Literal['GUILD_DELETE'], 'GuildDeleteDat
 # https://discord.com/developers/docs/topics/gateway-events#guild-audit-log-entry-create
 
 
-GuildAuditLogEntryCreateData: TypeAlias = 'discord_typings.AuditLogEntryData'
+class GuildAuditLogEntryCreateData(discord_typings.AuditLogEntryData):
+    guild_id: 'discord_typings.Snowflake'  # Extra field
+
+
 GuildAuditLogEntryCreateEvent = GenericDispatchEvent[
     Literal['GUILD_AUDIT_LOG_ENTRY_CREATE'],
     GuildAuditLogEntryCreateData
