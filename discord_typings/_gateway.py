@@ -793,6 +793,8 @@ class GuildMemberUpdateData(TypedDict):
     mute: NotRequired[bool]
     pending: NotRequired[bool]
     communication_disabled_until: NotRequired[Optional[str]]
+    flags: NotRequired[int]
+    avatar_decoration_data: NotRequired[Optional['discord_typings.AvatarDecorationDataData']]
 
 
 GuildMemberUpdateEvent = GenericDispatchEvent[
