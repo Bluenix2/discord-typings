@@ -543,6 +543,7 @@ class PartialAttachmentData(TypedDict):
 class AttachmentData(TypedDict):
     id: 'discord_typings.Snowflake'
     filename: str
+    title: NotRequired[str]
     description: NotRequired[str]
     content_type: NotRequired[str]
     size: int
