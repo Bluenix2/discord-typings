@@ -28,6 +28,8 @@ __all__ = (
     'MessageInteractionMetadataData',
     'MessageCallData',
     'MessageReferenceData',
+    'MessageReferenceTypes',
+    'MessageSnapshotData',
     'FollowedChannelData',
     'MessageReactionData',
     'ReactionCountDetailsData',
@@ -264,8 +266,9 @@ class _ChannelMessageData(TypedDict):
     activity: NotRequired['discord_typings.MessageActivityData']
     application: NotRequired['discord_typings.ApplicationData']
     application_id: NotRequired['discord_typings.Snowflake']
-    message_reference: NotRequired['discord_typings.MessageReferenceData']
     flags: NotRequired[int]
+    message_reference: NotRequired['discord_typings.MessageReferenceData']
+    message_snapshots: NotRequired[List['discord_typings.MessageSnapshotData']]
     referenced_message: NotRequired[Optional['discord_typings.MessageData']]
     interaction_metadata: NotRequired['discord_typings.MessageInteractionMetadataData']
     interaction: NotRequired['discord_typings.MessageInteractionData']
@@ -342,11 +345,25 @@ class MessageCallData(TypedDict):
 
 
 class MessageReferenceData(TypedDict):
+    type: NotRequired['discord_typings.MessageReferenceTypes']
     message_id: NotRequired['discord_typings.Snowflake']
     # Note: This will always be sent when receiving a message reference.
     channel_id: NotRequired['discord_typings.Snowflake']
     guild_id: NotRequired['discord_typings.Snowflake']
     fail_if_not_exists: NotRequired[bool]
+
+
+# https://discord.com/developers/docs/resources/channel#message-reference-types
+
+
+MessageReferenceTypes = Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/channel#message-snapshot-object
+
+
+class MessageSnapshotData(TypedDict):
+    message: 'discord_typings.MessageData'
 
 
 # https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure
