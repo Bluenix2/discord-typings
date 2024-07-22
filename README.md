@@ -87,8 +87,11 @@ Inside of annotations, wrap the attribute access (`discord_typings.X`) in
 quotes to make it a string and defer its evaluation.
 
 All typings which directly represent a Discord payload (excluding typings
-created for the purpose of a `Union`) should be added to the file's `__all__`,
-then be added to the module's `__init__` and its `__all__`.
+created for the purpose of a `Union`) should be added to the file's `__all__`.
+
+Files should be created with an underscore prefix, as direct imports should be
+avoided. Instead, only the top-level namespace `discord_typings` should be
+used. This means that each file should have a line in the module's `__init__`.
 
 ## Version Guarantees
 
