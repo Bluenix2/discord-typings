@@ -65,12 +65,24 @@ class _LinkButtonComponentData(TypedDict):
     disabled: NotRequired[bool]
 
 
-ButtonComponentData = Union[_NonLinkButtonComponentData, _LinkButtonComponentData]
+class _PremiumButtonComponentData(TypedDict):
+    type: Literal[2]
+    style: Literal[6]
+    sku_id: 'discord_typings.Snowflake'
+    disabled: bool
+
+
+ButtonComponentData = Union[
+    _NonLinkButtonComponentData,
+    _LinkButtonComponentData,
+    _PremiumButtonComponentData
+]
+
 
 # https://discord.com/developers/docs/interactions/message-components#button-object-button-styles
 
 
-ButtonStyles = Literal[1, 2, 3, 4, 5]
+ButtonStyles = Literal[1, 2, 3, 4, 5, 6]
 
 
 # https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-menu-structure

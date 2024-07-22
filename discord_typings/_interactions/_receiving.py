@@ -345,6 +345,7 @@ class MessageInteractionData(TypedDict):
 
 
 class _InteractionNodataResponseData(TypedDict):
+    # NOTE: PREMIUM_REQUIRED (10) is deprecateds
     type: Literal[1, 5, 6, 10]
 
 
@@ -372,6 +373,7 @@ InteractionResponseData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
 
 
+# NOTE: PREMIUM_REQUIRED (10) is deprecated.
 InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9, 10]
 
 
