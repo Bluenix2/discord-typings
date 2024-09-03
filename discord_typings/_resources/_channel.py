@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
@@ -25,7 +25,11 @@ __all__ = (
     'MessageTypes',
     'MessageActivityData',
     'MessageActivityTypes',
+    'MessageInteractionMetadataData',
+    'MessageCallData',
     'MessageReferenceData',
+    'MessageReferenceTypes',
+    'MessageSnapshotData',
     'FollowedChannelData',
     'MessageReactionData',
     'ReactionCountDetailsData',
@@ -47,6 +51,7 @@ __all__ = (
     'ChannelMentionData',
     'AllowedMentionsData',
     'RoleSubscriptionData',
+    'ReactionTypes',
     'HasMoreListThreadsData',
 )
 
@@ -261,15 +266,20 @@ class _ChannelMessageData(TypedDict):
     activity: NotRequired['discord_typings.MessageActivityData']
     application: NotRequired['discord_typings.ApplicationData']
     application_id: NotRequired['discord_typings.Snowflake']
-    message_reference: NotRequired['discord_typings.MessageReferenceData']
     flags: NotRequired[int]
+    message_reference: NotRequired['discord_typings.MessageReferenceData']
+    message_snapshots: NotRequired[List['discord_typings.MessageSnapshotData']]
     referenced_message: NotRequired[Optional['discord_typings.MessageData']]
+    interaction_metadata: NotRequired['discord_typings.MessageInteractionMetadataData']
     interaction: NotRequired['discord_typings.MessageInteractionData']
     thread: NotRequired['discord_typings.ThreadChannelData']
     components: NotRequired[List['discord_typings.ComponentData']]
     sticker_items: NotRequired[List['discord_typings.StickerItemData']]
     position: NotRequired[int]
     role_subscription_data: NotRequired['discord_typings.RoleSubscriptionData']
+    resolved: NotRequired['discord_typings.ResolvedInteractionDataData']
+    poll: NotRequired['discord_typings.PollCreateRequestData']
+    call: NotRequired['discord_typings.MessageCallData']
 
 
 class _GuildMessageData(_ChannelMessageData):
@@ -307,15 +317,53 @@ class MessageActivityData(TypedDict):
 MessageActivityTypes = Literal[1, 2, 3, 5]
 
 
+# https://discord.com/developers/docs/resources/channel#message-interaction-metadata-object
+
+
+class MessageInteractionMetadataData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    type: 'discord_typings.InteractionTypes'
+    user: 'discord_typings.UserData'
+    authorizing_integration_owners: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.Snowflake'
+    ]
+    original_response_message_id: NotRequired['discord_typings.Snowflake']
+    interacted_message_id: NotRequired['discord_typings.Snowflake']
+    triggering_interaction_metadata: NotRequired['MessageInteractionMetadataData']
+
+
+# https://discord.com/developers/docs/resources/channel#message-call-object
+
+
+class MessageCallData(TypedDict):
+    participants: List['discord_typings.Snowflake']
+    ended_timestamp: NotRequired[Optional[str]]
+
+
 # https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
 
 
 class MessageReferenceData(TypedDict):
+    type: NotRequired['discord_typings.MessageReferenceTypes']
     message_id: NotRequired['discord_typings.Snowflake']
     # Note: This will always be sent when receiving a message reference.
     channel_id: NotRequired['discord_typings.Snowflake']
     guild_id: NotRequired['discord_typings.Snowflake']
     fail_if_not_exists: NotRequired[bool]
+
+
+# https://discord.com/developers/docs/resources/channel#message-reference-types
+
+
+MessageReferenceTypes = Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/channel#message-snapshot-object
+
+
+class MessageSnapshotData(TypedDict):
+    message: 'discord_typings.MessageData'
 
 
 # https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure
@@ -495,6 +543,7 @@ class PartialAttachmentData(TypedDict):
 class AttachmentData(TypedDict):
     id: 'discord_typings.Snowflake'
     filename: str
+    title: NotRequired[str]
     description: NotRequired[str]
     content_type: NotRequired[str]
     size: int
@@ -536,6 +585,12 @@ class RoleSubscriptionData(TypedDict):
     tier_name: str
     total_months_subscribed: int
     is_renewal: bool
+
+
+# https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types
+
+
+ReactionTypes = Literal[0, 1]
 
 
 # https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body

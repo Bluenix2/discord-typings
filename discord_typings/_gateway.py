@@ -60,6 +60,12 @@ __all__ = (
     'ThreadMemberUpdateEvent',
     'ThreadMembersUpdateData',
     'ThreadMembersUpdateEvent',
+    'EntitlementCreateData',
+    'EntitlementCreateEvent',
+    'EntitlementUpdateData',
+    'EntitlementUpdateEvent',
+    'EntitlementDeleteData',
+    'EntitlementDeleteEvent',
     'ChannelPinsUpdateData',
     'ChannelPinsUpdateEvent',
     'GuildCreateData',
@@ -159,6 +165,10 @@ __all__ = (
     'StageInstanceUpdateEvent',
     'StageInstanceDeleteData',
     'StageInstanceDeleteEvent',
+    'MessagePollVoteAddData',
+    'MessagePollVoteAddEvent',
+    'MessagePollVoteRemoveData',
+    'MessagePollVoteRemoveEvent',
     'DispatchEvent',
     'GatewayCommand',
     'GatewayEvent',
@@ -582,6 +592,33 @@ ThreadMembersUpdateEvent = GenericDispatchEvent[
 ]
 
 
+# https://discord.com/developers/docs/topics/gateway-events#entitlement-create
+
+
+EntitlementCreateData: TypeAlias = 'discord_typings.EntitlementData'
+EntitlementCreateEvent = GenericDispatchEvent[
+    Literal['ENTITLEMENT_CREATE'], EntitlementCreateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#entitlement-update
+
+
+EntitlementUpdateData: TypeAlias = 'discord_typings.EntitlementData'
+EntitlementUpdateEvent = GenericDispatchEvent[
+    Literal['ENTITLEMENT_UPDATE'], EntitlementUpdateData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#entitlement-delete
+
+
+EntitlementDeleteData: TypeAlias = 'discord_typings.EntitlementData'
+EntitlementDeleteEvent = GenericDispatchEvent[
+    Literal['ENTITLEMENT_DELETE'], EntitlementDeleteData
+]
+
+
 # https://discord.com/developers/docs/topics/gateway-events#channel-pins-update
 
 
@@ -634,7 +671,10 @@ GuildDeleteEvent = GenericDispatchEvent[Literal['GUILD_DELETE'], 'GuildDeleteDat
 # https://discord.com/developers/docs/topics/gateway-events#guild-audit-log-entry-create
 
 
-GuildAuditLogEntryCreateData: TypeAlias = 'discord_typings.AuditLogEntryData'
+class GuildAuditLogEntryCreateData(discord_typings.AuditLogEntryData):
+    guild_id: 'discord_typings.Snowflake'  # Extra field
+
+
 GuildAuditLogEntryCreateEvent = GenericDispatchEvent[
     Literal['GUILD_AUDIT_LOG_ENTRY_CREATE'],
     GuildAuditLogEntryCreateData
@@ -753,6 +793,8 @@ class GuildMemberUpdateData(TypedDict):
     mute: NotRequired[bool]
     pending: NotRequired[bool]
     communication_disabled_until: NotRequired[Optional[str]]
+    flags: NotRequired[int]
+    avatar_decoration_data: NotRequired[Optional['discord_typings.AvatarDecorationDataData']]
 
 
 GuildMemberUpdateEvent = GenericDispatchEvent[
@@ -1022,6 +1064,9 @@ class MessageReactionAddData(TypedDict):
     member: NotRequired['discord_typings.GuildMemberData']
     emoji: 'discord_typings.EmojiData'
     message_author_id: NotRequired['discord_typings.Snowflake']
+    burst: bool
+    burst_colors: NotRequired[List[str]]
+    type: 'discord_typings.ReactionTypes'
 
 
 MessageReactionAddEvent = GenericDispatchEvent[
@@ -1038,6 +1083,8 @@ class MessageReactionRemoveData(TypedDict):
     message_id: 'discord_typings.Snowflake'
     guild_id: NotRequired['discord_typings.Snowflake']
     emoji: 'discord_typings.EmojiData'
+    burst: bool
+    type: 'discord_typings.ReactionTypes'
 
 
 MessageReactionRemoveEvent = GenericDispatchEvent[
@@ -1265,6 +1312,38 @@ StageInstanceUpdateEvent = GenericDispatchEvent[
 StageInstanceDeleteData: TypeAlias = 'discord_typings.StageInstanceData'
 StageInstanceDeleteEvent = GenericDispatchEvent[
     Literal['STAGE_INSTANCE_DELETE'], StageInstanceDeleteData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add
+
+
+class MessagePollVoteAddData(TypedDict):
+    user_id: 'discord_typings.Snowflake'
+    channel_id: 'discord_typings.Snowflake'
+    message_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
+    answer_id: int
+
+
+MessagePollVoteAddEvent = GenericDispatchEvent[
+    Literal['MESSAGE_POLL_VOTE_ADD'], MessagePollVoteAddData
+]
+
+
+# https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove
+
+
+class MessagePollVoteRemoveData(TypedDict):
+    user_id: 'discord_typings.Snowflake'
+    channel_id: 'discord_typings.Snowflake'
+    message_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
+    answer_id: int
+
+
+MessagePollVoteRemoveEvent = GenericDispatchEvent[
+    Literal['MESSAGE_POLL_VOTE_REMOVE'], MessagePollVoteRemoveData
 ]
 
 

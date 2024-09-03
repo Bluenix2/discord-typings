@@ -35,6 +35,7 @@ __all__ = (
     'GuildOnboardingPromptTypes',
     'ChannelPositionData',
     'ListThreadsData',
+    'BulkBanData',
     'RolePositionData',
     'RoleData',
     'RoleTagsData',
@@ -245,6 +246,7 @@ class GuildMemberData(TypedDict):
     pending: NotRequired[bool]
     permissions: NotRequired[str]
     communication_disabled_until: NotRequired[Optional[str]]
+    avatar_decoration_data: NotRequired[Optional['discord_typings.AvatarDecorationDataData']]
 
 class SupplementalGuildMemberData(GuildMemberData):
     source_invite_code: Optional[str]
@@ -370,7 +372,10 @@ class GuildOnboardingPromptOptionData(TypedDict):
     id: 'discord_typings.Snowflake'
     channel_ids: List['discord_typings.Snowflake']
     role_ids: List['discord_typings.Snowflake']
-    emoji: 'discord_typings.EmojiData'
+    emoji: NotRequired['discord_typings.EmojiData']
+    emoji_id: NotRequired['discord_typings.Snowflake']
+    emoji_name: NotRequired[str]
+    emoji_animated: NotRequired[bool]
     title: str
     description: Optional[str]
 
@@ -403,6 +408,14 @@ class ChannelPositionData(TypedDict):
 class ListThreadsData(TypedDict):
     threads: List['discord_typings.ThreadChannelData']
     members: List['discord_typings.ThreadMemberData']
+
+
+# https://discord.com/developers/docs/resources/guild#bulk-guild-ban-bulk-ban-response
+
+
+class BulkBanData(TypedDict):
+    banned_users: List['discord_typings.Snowflake']
+    failed_users: List['discord_typings.Snowflake']
 
 
 # https://discord.com/developers/docs/resources/guild#modify-guild-role-positions-json-params

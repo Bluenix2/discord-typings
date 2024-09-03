@@ -43,7 +43,7 @@ class Data:
     value: Any
 ```
 
-> **Note**
+> [!NOTE]
 > It is not recommended to import the library this way, as it does not allow
 > you to introspect the annotations in other code. It is merely pointed out
 > for completeness.
@@ -87,8 +87,11 @@ Inside of annotations, wrap the attribute access (`discord_typings.X`) in
 quotes to make it a string and defer its evaluation.
 
 All typings which directly represent a Discord payload (excluding typings
-created for the purpose of a `Union`) should be added to the file's `__all__`,
-then be added to the module's `__init__` and its `__all__`.
+created for the purpose of a `Union`) should be added to the file's `__all__`.
+
+Files should be created with an underscore prefix, as direct imports should be
+avoided. Instead, only the top-level namespace `discord_typings` should be
+used. This means that each file should have a line in the module's `__init__`.
 
 ## Version Guarantees
 
@@ -110,12 +113,12 @@ As a reminder of semantic versioning, and a summary of the above:
 | **Minor**    |    X    |           | May add new features, can break type-checking     |
 | **Patch**    |    X    |     X     | Only intended for bugs                            |
 
-> **Warn**
+> [!WARNING]
 > Patch versions will be used to rectify any accidental breaking changes
 > or unintended bugs / behaviour, therefore you should **always** use
 > the latest patch version.
 
-> **Note**
+> [!NOTE]
 > Because patch versions may change previous behaviour, they *could* be
 > considered breaking, however the intention is always to fix unintended
 > behaviour or previous breaking changes which should not have been.

@@ -37,6 +37,8 @@ class _ChatInputCommandData(TypedDict):
     default_member_permissions: Optional[str]
     dm_permission: NotRequired[bool]
     nsfw: NotRequired[bool]
+    integration_types: NotRequired[List['discord_typings.ApplicationIntegrationTypes']]
+    contexts: NotRequired[List['discord_typings.InteractionContextTypes']]
     version: 'discord_typings.Snowflake'
 
 
@@ -52,6 +54,8 @@ class _ContextMenuCommandData(TypedDict):
     default_member_permissions: Optional[str]
     dm_permission: NotRequired[bool]
     nsfw: NotRequired[bool]
+    integration_types: NotRequired[List['discord_typings.ApplicationIntegrationTypes']]
+    contexts: NotRequired[List['discord_typings.InteractionContextTypes']]
     version: 'discord_typings.Snowflake'
 
 
@@ -311,5 +315,7 @@ class ApplicationCommandPayload(TypedDict):
     options: NotRequired[List['discord_typings.ApplicationCommandOptionData']]
     default_member_permissions: NotRequired[Optional[str]]
     dm_permission: NotRequired[Optional[bool]]
+    integration_types: NotRequired[List['discord_typings.ApplicationIntegrationTypes']]
+    contexts: NotRequired[List['discord_typings.InteractionContextTypes']]
     type: NotRequired['discord_typings.ApplicationCommandTypes']
     nsfw: NotRequired[bool]

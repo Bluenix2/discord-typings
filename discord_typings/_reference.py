@@ -55,6 +55,7 @@ Locales = Literal[
     'en-GB',
     'en-US',
     'en-ES',
+    'es-419',
     'fr',
     'hr',
     'it',
