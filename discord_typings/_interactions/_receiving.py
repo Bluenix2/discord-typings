@@ -14,6 +14,8 @@ __all__ = (
     'ModalInteractionData',
     'InteractionData',
     'InteractionType',
+    'InteractionTypes',
+    'InteractionContextTypes',
     'ApplicationCommandInteractionDataData',
     'ComponentInteractionDataData',
     'ModalSubmitInteractionDataData',
@@ -48,6 +50,7 @@ class _GuildInteractionData(TypedDict):
     id: 'discord_typings.Snowflake'
     application_id: 'discord_typings.Snowflake'
     guild_id: 'discord_typings.Snowflake'
+    guild: 'discord_typings.PartialGuildData'
     channel: 'discord_typings.PartialChannelData'
     channel_id: 'discord_typings.Snowflake'
     member: 'discord_typings.GuildMemberData'
@@ -56,6 +59,12 @@ class _GuildInteractionData(TypedDict):
     app_permissions: str
     locale: 'discord_typings.Locales'
     guild_locale: 'discord_typings.Locales'
+    entitlements: NotRequired[List['discord_typings.EntitlementData']]
+    authorizing_integration_owners: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.Snowflake'
+    ]
+    context: Literal[0]
 
 
 class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
@@ -65,7 +74,7 @@ class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
 
 class _ComponentGuildInteractionData(_GuildInteractionData):
     type: Literal[3]
-    data: ComponentInteractionDataData
+    data: 'discord_typings.ComponentInteractionDataData'
     message: 'discord_typings.MessageData'
 
 
@@ -88,6 +97,12 @@ class _ChannelInteractionData(TypedDict):
     token: str
     version: int
     locale: 'discord_typings.Locales'
+    entitlements: NotRequired[List['discord_typings.EntitlementData']]
+    authorizing_integration_owners: Dict[
+        'discord_typings.ApplicationIntegrationTypes',
+        'discord_typings.Snowflake'
+    ]
+    context: Literal[1, 2]
 
 
 class _ApplicationCommandChannelInteractionData(_ChannelInteractionData):
@@ -141,6 +156,13 @@ InteractionData = Union[
 
 
 InteractionType = Literal[1, 2, 3, 4, 5]
+InteractionTypes = InteractionType  # Alias
+
+
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types
+
+
+InteractionContextTypes = Literal[0, 1, 2]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-data-structure
@@ -323,7 +345,8 @@ class MessageInteractionData(TypedDict):
 
 
 class _InteractionNodataResponseData(TypedDict):
-    type: Literal[1, 5, 6]
+    # NOTE: PREMIUM_REQUIRED (10) is deprecateds
+    type: Literal[1, 5, 6, 10]
 
 
 class _InteractionMessageResponseData(TypedDict):
@@ -350,7 +373,8 @@ InteractionResponseData = Union[
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
 
 
-InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9]
+# NOTE: PREMIUM_REQUIRED (10) is deprecated.
+InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9, 10]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure
@@ -364,6 +388,7 @@ class InteractionMessageCallbackData(TypedDict):
     flags: NotRequired[int]
     components: NotRequired[List['discord_typings.ComponentData']]
     attachments: NotRequired[List['discord_typings.PartialAttachmentData']]
+    poll: NotRequired['discord_typings.PollCreateRequestData']
 
 
 class InteractionAutocompleteCallbackData(TypedDict, Generic[_T]):

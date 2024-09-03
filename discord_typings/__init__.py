@@ -10,6 +10,8 @@ from ._resources._user import *
 from ._interactions._commands import *
 from ._interactions._components import *
 from ._interactions._receiving import *
+from ._monetization._entitlements import *
+from ._monetization._skus import *
 from ._oauth import *
 from ._reference import *
 from ._resources._application import *
@@ -21,6 +23,7 @@ from ._resources._guild import *
 from ._resources._guild_scheduled_events import *
 from ._resources._guild_template import *
 from ._resources._invite import *
+from ._resources._poll import *
 from ._resources._role_connection_metadata import *
 from ._resources._stage_instance import *
 from ._resources._sticker import *

@@ -6,6 +6,7 @@ import discord_typings
 
 __all__ = (
     'InviteData',
+    'InviteTypes',
     'InviteTargetTypes',
     'InviteMetadata',
     'InviteStageInstanceData',
@@ -16,6 +17,7 @@ __all__ = (
 
 
 class InviteData(TypedDict):
+    type: 'discord_typings.InviteTypes'
     code: str
     guild: NotRequired['discord_typings.PartialGuildData']
     channel: Optional['discord_typings.PartialChannelData']
@@ -28,6 +30,12 @@ class InviteData(TypedDict):
     expires_at: NotRequired[Optional[str]]
     stage_instance: NotRequired['discord_typings.InviteStageInstanceData']
     guild_scheduled_event: NotRequired['discord_typings.GuildScheduledEventData']
+
+
+# https://discord.com/developers/docs/resources/invite#invite-object-invite-types
+
+
+InviteTypes = Literal[0, 1, 2]
 
 
 # https://discord.com/developers/docs/resources/invite#invite-object-invite-target-types
