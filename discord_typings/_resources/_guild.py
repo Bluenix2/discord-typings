@@ -219,9 +219,18 @@ class GuildWidgetData(TypedDict):
     presence_count: int
 
 
+# https://github.com/discord/discord-api-docs/pull/7068/files#diff-6a43fc10e10de61f31b90ab22421ef0612d0ea75e3cd53891c6393a6fb84872dR408-R419
+class JoinSourceType:
+    UNSPECIFIED = 0, 
+    BOT = 1, 
+    INTEGRATION = 2, 
+    DISCOVERY = 3, 
+    HUB = 4, 
+    INVITE = 5, 
+    VANITY_URL = 6, 
+    MANUAL_MEMBER_VERIFICATION = 7
+
 # https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
-
-
 class GuildMemberData(TypedDict):
     user: NotRequired['discord_typings.UserData']
     nick: NotRequired[Optional[str]]
@@ -235,7 +244,9 @@ class GuildMemberData(TypedDict):
     pending: NotRequired[bool]
     permissions: NotRequired[str]
     communication_disabled_until: NotRequired[Optional[str]]
-    source_invite_code: NotRequired[Optional[str]]
+    source_invite_code: str
+    join_source_type: JoinSourceType[int]
+    inviter_id: 'discord_typings.Snowflake'
 
 
 # https://discord.com/developers/docs/resources/guild#integration-object-integration-structure
