@@ -748,6 +748,7 @@ class GuildMemberAddData(TypedDict):
     user: 'discord_typings.UserData'  # Always present in GUILD_MEMBER_ADD events
     nick: NotRequired[Optional[str]]
     avatar: NotRequired[Optional[str]]
+    banner: NotRequired[Optional[str]]
     roles: List['discord_typings.Snowflake']
     joined_at: str
     premium_since: NotRequired[Optional[str]]
@@ -787,6 +788,7 @@ class GuildMemberUpdateData(TypedDict):
     user: 'discord_typings.UserData'
     nick: NotRequired[Optional[str]]
     avatar: Optional[str]
+    banner: Optional[str]
     joined_at: Optional[str]
     premium_since: NotRequired[Optional[str]]
     deaf: NotRequired[bool]
