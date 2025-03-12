@@ -227,6 +227,7 @@ class GuildMemberData(TypedDict):
     user: NotRequired['discord_typings.UserData']
     nick: NotRequired[Optional[str]]
     avatar: NotRequired[Optional[str]]
+    banner: NotRequired[Optional[str]]
     roles: List['discord_typings.Snowflake']
     joined_at: str
     premium_since: NotRequired[Optional[str]]
