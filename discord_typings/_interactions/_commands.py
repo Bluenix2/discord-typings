@@ -12,6 +12,7 @@ __all__ = (
     'ApplicationCommandOptionData',
     'ApplicationCommandOptionTypes',
     'CommandOptionChoiceData',
+    'EntryPointCommandHandlerTypes',
     'GuildApplicationCommandPermissionData',
     'ApplicationCommandPermissionsData',
     'ApplicationCommandPermissionTypes',
@@ -44,7 +45,7 @@ class _ChatInputCommandData(TypedDict):
 
 class _ContextMenuCommandData(TypedDict):
     id: 'discord_typings.Snowflake'
-    type: NotRequired[Literal[2, 3]]
+    type: Literal[2, 3]
     application_id: 'discord_typings.Snowflake'
     guild_id: NotRequired['discord_typings.Snowflake']
     name: str
@@ -59,13 +60,35 @@ class _ContextMenuCommandData(TypedDict):
     version: 'discord_typings.Snowflake'
 
 
-ApplicationCommandData = Union[_ChatInputCommandData, _ContextMenuCommandData]
+class _PrimaryEntryPointCommandData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    type: Literal[4]
+    application_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired['discord_typings.Snowflake']
+    name: str
+    name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    description: str
+    description_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
+    default_member_permissions: Optional[str]
+    dm_permission: NotRequired[bool]
+    nsfw: NotRequired[bool]
+    integration_types: NotRequired[List['discord_typings.ApplicationIntegrationTypes']]
+    contexts: NotRequired[List['discord_typings.InteractionContextTypes']]
+    version: 'discord_typings.Snowflake'
+    handler: NotRequired['discord_typings.EntryPointCommandHandlerTypes']
+
+
+ApplicationCommandData = Union[
+    _ChatInputCommandData,
+    _ContextMenuCommandData,
+    _PrimaryEntryPointCommandData
+]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types
 
 
-ApplicationCommandTypes = Literal[1, 2, 3]
+ApplicationCommandTypes = Literal[1, 2, 3, 4]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure
@@ -277,6 +300,12 @@ class CommandOptionChoiceData(TypedDict, Generic[_T]):
     name: str
     name_localizations: NotRequired[Optional[Dict['discord_typings.Locales', str]]]
     value: _T
+
+
+# https://discord.com/developers/docs/interactions/application-commands#application-command-object-entry-point-command-handler-types
+
+
+EntryPointCommandHandlerTypes = Literal[1, 2]
 
 
 # https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object

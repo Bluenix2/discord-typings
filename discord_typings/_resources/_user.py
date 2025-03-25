@@ -71,8 +71,11 @@ class ConnectionData(TypedDict):
 
 
 ConnectionTypes = Literal[
+    'amazon-music'
     'battlenet',
     'bungie',
+    'bluesky',
+    'crunchyroll',
     'domain',
     'ebay',
     'epicgames',
@@ -80,6 +83,7 @@ ConnectionTypes = Literal[
     'github',
     'instagram',
     'leagueoflegends',
+    'mastodon',
     'paypal',
     'playstation',
     'reddit',

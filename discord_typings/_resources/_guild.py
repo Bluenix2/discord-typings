@@ -33,6 +33,7 @@ __all__ = (
     'GuildOnboardingPromptOptionData',
     'GuildOnboardingModes',
     'GuildOnboardingPromptTypes',
+    'IncidentsDataData',
     'ChannelPositionData',
     'ListThreadsData',
     'BulkBanData',
@@ -103,6 +104,7 @@ class GuildData(TypedDict):
     stickers: NotRequired[List['discord_typings.StickerData']]
     premium_progress_bar_enabled: bool
     safety_alerts_channel_id: Optional['discord_typings.Snowflake']
+    incidents_data: Optional['discord_typings.IncidentsDataData']
 
 
 # https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
@@ -159,6 +161,7 @@ GuildFeatures = Literal[
     'INVITES_DISABLED',
     'INVITE_SPLASH',
     'MEMBER_VERIFICATION_GATE_ENABLED',
+    'MORE_SOUNDBOARD',
     'MORE_STICKERS',
     'NEWS',
     'PARTNERED',
@@ -167,6 +170,7 @@ GuildFeatures = Literal[
     'ROLE_ICONS',
     'ROLE_SUBSCRIPTIONS_AVAILABLE_FOR_PURCHASE',
     'ROLE_SUBSCRIPTIONS_ENABLED',
+    'SOUNDBOARD',
     'TICKETED_EVENTS_ENABLED',
     'VANITY_URL',
     'VERIFIED',
@@ -377,6 +381,16 @@ GuildOnboardingModes = Literal[0, 1]
 
 
 GuildOnboardingPromptTypes = Literal[0, 1]
+
+
+# https://discord.com/developers/docs/resources/guild#incidents-data-object
+
+
+class IncidentsDataData(TypedDict):
+    invites_disabled_until: Optional[str]
+    dms_disabled_until: Optional[str]
+    dm_spam_detected_at: NotRequired[Optional[str]]
+    raid_detected_at: NotRequired[Optional[str]]
 
 
 # https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions-json-params
