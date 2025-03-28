@@ -5,3 +5,4 @@
 # subclassing forcing imports to be in a certain order
 
 from ._reference import *
+from ._models import *

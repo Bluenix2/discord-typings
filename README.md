@@ -48,6 +48,40 @@ class Data:
 > you to introspect the annotations in other code. It is merely pointed out
 > for completeness.
 
+## Code Generated Naming
+
+The typings are automatically generated from the Discord's OpenAPI
+specification, and naming closely follows the name of their schema **with an**
+**`API` prefix**.
+
+* `UserResponse` -> `APIUserResponse`
+* `WidgetMember` -> `APIWidgetMember`
+* `ScheduledEventResponse` -> `APIScheduledEventResponse`
+
+This was chosen over the previous `Data` suffix, because it complicated code
+when the object itself ended with 'data' such as `TriggerMetadata` which would
+then have to become `TriggerMetadataData`.
+
+The library now also provides aliases for the REST API, compared to the
+previous assumption where the user had to figure out the correct models
+themselves. These typings instead use a `REST` prefix:
+
+* `GET /gateway/bot` (`get_bot_gateway`)
+  * Response: `RESTGetBotGatewayResult`
+* `PATCH /guilds/{guild_id}/auto-moderation/rules/{rule_id}` (`update_auto_moderation_rule`)
+  * Request (JSON): `RESTUpdateAutoModerationRuleJSONBody`
+  * Response: `RESTUpdateModerationRuleResult`
+
+The gateway has also received prefixes, now being found as `Gateway`. In the
+case of common dispatch events, they are suffixed by `Dispatch`.
+
+* `CHANNEL_CREATE` -> `GatewayChannelCreateDispatch`
+* `GUILD_ROLE_CREATE` -> `GatewayGuildRoleCreateDispatch`
+
+> [!NOTE]
+> This naming was taken from [`discord-api-types`](https://github.com/discordjs/discord-api-types)
+> as it is otherwise seen as the standard for Discord API types.
+
 ## Naming and Usage
 
 There is no documentation or API reference as this provides no value on top of
@@ -101,9 +135,9 @@ to the Python interface - such as `TypeDict`s, top-level unions, and
 other aliases.
 
 Due to Discord's frequent API updates, it is not guaranteed that code
-which type-checks in one minor version will do so in another one. This
-is because code which does not type-check will not have an effect on
-runtime for users.
+which type-checks in one minor version will do so in another one. This is
+because code that does not type-check will still run. The promise refers to
+the importable interface of the library.
 
 As a reminder of semantic versioning, and a summary of the above:
 
