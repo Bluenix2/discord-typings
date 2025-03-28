@@ -1,14 +1,15 @@
-from typing import Dict, List, Union
+from typing import Union
 
-from typing_extensions import Literal, TypedDict
+from typing_extensions import TypedDict
+
+import discord_typings
 
 __all__ = (
-    'Snowflake',
-    'HTTPErrorData',
-    'InnerHTTPErrorsData',
-    'NestedHTTPErrorsData',
-    'HTTPErrorResponseData',
-    'Locales',
+    'APISnowflake',
+    'APIError',
+    'APIInnerErrors',
+    'APIErrorDetails',
+    'APIErrorResponse',
 )
 
 
@@ -18,67 +19,26 @@ __all__ = (
 # Discord handles integers on endpoints but all snowflakes received by the API
 # will be strings.
 # https://discord.com/developers/docs/reference#snowflakes
-Snowflake = Union[str, int]
+APISnowflake = Union[str, int]
 
 
 # https://discord.com/developers/docs/reference#error-messages
 
 
-class HTTPErrorData(TypedDict):
-    code: str
-    message: str
-
-
-class InnerHTTPErrorsData(TypedDict):
-    _errors: List[HTTPErrorData]
-
-
-NestedHTTPErrorsData = Union[
-    Dict[str, 'NestedHTTPErrorsData'],
-    InnerHTTPErrorsData
-]
-
-
-class HTTPErrorResponseData(TypedDict):
+class APIError(TypedDict):
     code: int
-    errors: NestedHTTPErrorsData
     message: str
 
 
-# https://discord.com/developers/docs/reference#locales
+class APIInnerErrors(TypedDict):
+    _errors: list['discord_typings.APIError']
 
 
-Locales = Literal[
-    'id',
-    'da',
-    'de',
-    'en-GB',
-    'en-US',
-    'en-ES',
-    'es-419',
-    'fr',
-    'hr',
-    'it',
-    'lt',
-    'hu',
-    'nl',
-    'no',
-    'pl',
-    'pt-BR',
-    'ro',
-    'fi',
-    'sv-SE',
-    'vi',
-    'tr',
-    'cs',
-    'el',
-    'bg',
-    'ru',
-    'uk',
-    'hi',
-    'th',
-    'zh-CN',
-    'ja',
-    'zh-TW',
-    'ko',
+APIErrorDetails = Union[
+    dict[str, 'discord_typings.APIErrorDetails'],
+    APIInnerErrors,
 ]
+
+
+class APIErrorResponse(APIError):
+    errors: APIErrorDetails
