@@ -68,6 +68,7 @@ class _GuildInteractionData(TypedDict):
         'discord_typings.Snowflake'
     ]
     context: Literal[0]
+    attachment_size_limit: int
 
 
 class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
@@ -106,6 +107,7 @@ class _ChannelInteractionData(TypedDict):
         'discord_typings.Snowflake'
     ]
     context: Literal[1, 2]
+    attachment_size_limit: int
 
 
 class _ApplicationCommandChannelInteractionData(_ChannelInteractionData):
