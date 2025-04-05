@@ -33,5 +33,6 @@ from ._resources._subscription import *
 from ._resources._voice import *
 from ._resources._webhook import *
 
-# Gateway imports several other things, so it is imported last
-from ._gateway import *
+# Gateway and events imports several other things, so it is imported last
+from ._events._gateway import *
+from ._events._webhook import *
