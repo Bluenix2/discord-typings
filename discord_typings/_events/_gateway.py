@@ -18,6 +18,8 @@ __all__ = (
     'HeartbeatCommand',
     'RequestGuildMembersData',
     'RequestGuildMembersCommand',
+    'RequestSoundboardSoundsData',
+    'RequestSoundboardSoundsCommand',
     'UpdateVoiceStateData',
     'UpdateVoiceStateCommand',
     'UpdatePresenceData',
@@ -110,6 +112,10 @@ __all__ = (
     'GuildScheduledEventUserAddEvent',
     'GuildScheduledEventUserRemoveData',
     'GuildScheduledEventUserRemoveEvent',
+    'GuildSoundboardSoundCreateData',
+    'GuildSoundboardSoundUpdateData',
+    'GuildSoundboardSoundDeleteData',
+    'GuildSoundboardSoundDeleteEvent',
     'IntegrationCreateData',
     'IntegrationCreateEvent',
     'IntegrationUpdateData',
@@ -151,6 +157,8 @@ __all__ = (
     'TypingStartEvent',
     'UserUpdateData',
     'UserUpdateEvent',
+    'VoiceChannelEffectSendData',
+    'VoiceChannelEffectSendEvent',
     'VoiceStateUpdateData',
     'VoiceStateUpdateEvent',
     'VoiceServerUpdateData',
@@ -165,6 +173,9 @@ __all__ = (
     'StageInstanceUpdateEvent',
     'StageInstanceDeleteData',
     'StageInstanceDeleteEvent',
+    'SubscriptionCreateData',
+    'SubscriptionUpdateData',
+    'SubscriptionDeleteData',
     'MessagePollVoteAddData',
     'MessagePollVoteAddEvent',
     'MessagePollVoteRemoveData',
@@ -300,6 +311,18 @@ RequestGuildMembersData = Union[_QueryRequestMembersCommand, _UserIDsRequestMemb
 class RequestGuildMembersCommand(TypedDict):
     op: Literal[8]
     d: RequestGuildMembersData
+
+
+# https://discord.com/developers/docs/events/gateway-events#request-soundboard-sounds
+
+
+class RequestSoundboardSoundsData(TypedDict):
+    guild_ids: List['discord_typings.Snowflake']
+
+
+class RequestSoundboardSoundsCommand(TypedDict):
+    op: Literal[31]
+    d: RequestSoundboardSoundsData
 
 
 # https://discord.com/developers/docs/topics/gateway-events#update-voice-state
@@ -910,6 +933,37 @@ GuildScheduledEventUserRemoveEvent = GenericDispatchEvent[
 ]
 
 
+# https://discord.com/developers/docs/events/gateway-events#guild-soundboard-sound-create
+
+
+GuildSoundboardSoundCreateData: TypeAlias = 'discord_typings.SoundboardSoundData'
+GuildSoundboardSoundCreateEvent = GenericDispatchEvent[
+    Literal['GUILD_SOUNDBOARD_SOUND_CREATE'], GuildSoundboardSoundCreateData
+]
+
+
+# https://discord.com/developers/docs/events/gateway-events#guild-soundboard-sound-update
+
+
+GuildSoundboardSoundUpdateData: TypeAlias = 'discord_typings.SoundboardSoundData'
+GuildSoundboardSoundUpdateEvent = GenericDispatchEvent[
+    Literal['GUILD_SOUNDBOARD_SOUND_UPDATE'], GuildSoundboardSoundCreateData
+]
+
+
+# https://discord.com/developers/docs/events/gateway-events#guild-soundboard-sound-delete
+
+
+class GuildSoundboardSoundDeleteData(TypedDict):
+    sound_id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
+
+
+GuildSoundboardSoundDeleteEvent = GenericDispatchEvent[
+    Literal['GUILD_SOUNDBOARD_SOUND_DELETE'], GuildSoundboardSoundDeleteData
+]
+
+
 # https://discord.com/developers/docs/topics/gateway-events#integrations
 
 
@@ -1247,6 +1301,26 @@ UserUpdateData: TypeAlias = 'discord_typings.UserData'
 UserUpdateEvent = GenericDispatchEvent[Literal['USER_UPDATE'], UserUpdateData]
 
 
+# https://discord.com/developers/docs/events/gateway-events#voice-channel-effect-send
+
+
+class VoiceChannelEffectSendData(TypedDict):
+    channel_id: 'discord_typings.Snowflake'
+    guild_id: 'discord_typings.Snowflake'
+    user_id: 'discord_typings.Snowflake'
+    emoji: NotRequired[Optional['discord_typings.EmojiData']]
+    animation_type: NotRequired[Optional[int]]
+    animation_id: NotRequired[int]
+    # Documented as "snowflake or integer"
+    sound_id: NotRequired[Union['discord_typings.Snowflake', int]]
+    sound_volume: NotRequired[float]
+
+
+VoiceChannelEffectSendEvent = GenericDispatchEvent[
+    Literal['VOICE_CHANNEL_EFFECT_SEND'], VoiceChannelEffectSendData
+]
+
+
 # https://discord.com/developers/docs/topics/gateway-events#voice-state-update
 
 
@@ -1314,6 +1388,33 @@ StageInstanceUpdateEvent = GenericDispatchEvent[
 StageInstanceDeleteData: TypeAlias = 'discord_typings.StageInstanceData'
 StageInstanceDeleteEvent = GenericDispatchEvent[
     Literal['STAGE_INSTANCE_DELETE'], StageInstanceDeleteData
+]
+
+
+# https://discord.com/developers/docs/events/gateway-events#subscription-create
+
+
+SubscriptionCreateData: TypeAlias = 'discord_typings.SubscriptionData'
+SubscriptionCreateEvent = GenericDispatchEvent[
+    Literal['SUBSCRIPTION_CREATE'], SubscriptionCreateData
+]
+
+
+# https://discord.com/developers/docs/events/gateway-events#subscription-update
+
+
+SubscriptionUpdateData: TypeAlias = 'discord_typings.SubscriptionData'
+SubscriptionUpdateEvent = GenericDispatchEvent[
+    Literal['SUBSCRIPTION_UPDATE'], SubscriptionUpdateData
+]
+
+
+# https://discord.com/developers/docs/events/gateway-events#subscription-delete
+
+
+SubscriptionDeleteData: TypeAlias = 'discord_typings.SubscriptionData'
+SubscriptionDeleteEvent = GenericDispatchEvent[
+    Literal['SUBSCRIPTION_DELETE'], SubscriptionDeleteData
 ]
 
 

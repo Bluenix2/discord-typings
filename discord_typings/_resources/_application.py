@@ -8,7 +8,11 @@ __all__ = (
     'ApplicationData',
     'ApplicationIntegrationTypes',
     'ApplicationIntegrationTypeConfigurationData',
+    'ApplicationEventWebhookStatus',
     'InstallParams',
+    'ActivityInstanceData',
+    'ActivityLocationData',
+    'ActivityLocationKindEnum',
     'TeamMemberRoleTypes',
     'TeamData',
     'TeamMemberData',
@@ -26,6 +30,7 @@ class ApplicationData(TypedDict):
     rpc_origins: NotRequired[List[str]]
     bot_public: bool
     bot_require_code_grant: bool
+    bot: NotRequired['discord_typings.UserData']
     terms_of_service_url: NotRequired[str]
     privacy_policy_url: NotRequired[str]
     owner: NotRequired['discord_typings.UserData']
@@ -38,9 +43,13 @@ class ApplicationData(TypedDict):
     cover_image: NotRequired[str]
     flags: NotRequired[int]
     approximate_guild_count: NotRequired[int]
-    redirect_urls: NotRequired[List[str]]
-    interactions_endpoint_url: NotRequired[str]
-    role_connections_verification_url: NotRequired[str]
+    approximate_user_install_count: NotRequired[int]
+    redirect_uris: NotRequired[List[str]]
+    interactions_endpoint_url: NotRequired[Optional[str]]
+    role_connections_verification_url: NotRequired[Optional[str]]
+    event_webhooks_url: NotRequired[Optional[str]]
+    event_webhooks_status: 'discord_typings.ApplicationEventWebhookStatus'
+    event_webhooks_types: NotRequired[List[str]]
     tags: NotRequired[List[str]]
     install_params: NotRequired['discord_typings.InstallParams']
     integration_types_config: Dict[
@@ -66,12 +75,49 @@ class ApplicationIntegrationTypeConfigurationData(TypedDict):
     oauth2_install_params: 'discord_typings.InstallParams'
 
 
+# https://discord.com/developers/docs/resources/application#application-object-application-event-webhook-status
+
+
+ApplicationEventWebhookStatus = Literal[
+    1,
+    2,
+    3,
+]
+
+
 # https://discord.com/developers/docs/resources/application#install-params-object-install-params-structure
 
 
 class InstallParams(TypedDict):
     scopes: List['discord_typings.OAuth2Scopes']
     permissions: str
+
+
+# https://discord.com/developers/docs/resources/application#get-application-activity-instance-activity-instance-object
+
+
+class ActivityInstanceData(TypedDict):
+    application_id: 'discord_typings.Snowflake'
+    instance_id: str
+    launch_id: 'discord_typings.Snowflake'
+    location: 'discord_typings.ActivityLocationData'
+    users: List['discord_typings.Snowflake']
+
+
+# https://discord.com/developers/docs/resources/application#get-application-activity-instance-activity-location-object
+
+
+class ActivityLocationData(TypedDict):
+    id: str
+    kind: 'discord_typings.ActivityLocationKindEnum'
+    channel_id: 'discord_typings.Snowflake'
+    guild_id: NotRequired[Optional['discord_typings.Snowflake']]
+
+
+# https://discord.com/developers/docs/resources/application#get-application-activity-instance-activity-location-kind-enum
+
+
+ActivityLocationKindEnum = Literal['gc', 'pc']
 
 
 # https://discord.com/developers/docs/topics/teams#team-member-roles

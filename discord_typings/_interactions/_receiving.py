@@ -29,6 +29,9 @@ __all__ = (
     'InteractionAutocompleteCallbackData',
     'InteractionModalCallbackData',
     'InteractionCallbackData',
+    'InteractionCallbackResponseData',
+    'InteractionCallbackInteractionData',
+    'InteractionCallbackResourceData',
 )
 
 
@@ -65,6 +68,7 @@ class _GuildInteractionData(TypedDict):
         'discord_typings.Snowflake'
     ]
     context: Literal[0]
+    attachment_size_limit: int
 
 
 class _ApplicationCommandGuildInteractionData(_GuildInteractionData):
@@ -103,6 +107,7 @@ class _ChannelInteractionData(TypedDict):
         'discord_typings.Snowflake'
     ]
     context: Literal[1, 2]
+    attachment_size_limit: int
 
 
 class _ApplicationCommandChannelInteractionData(_ChannelInteractionData):
@@ -186,8 +191,19 @@ class _ContextMenuInteractionDataData(TypedDict):
     target_id: 'discord_typings.Snowflake'
 
 
+class _PrimaryEntryPointInteractionDataData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    name: str
+    type: Literal[4]
+    resolved: NotRequired[ResolvedInteractionDataData]
+    guild_id: NotRequired['discord_typings.Snowflake']
+    target_id: 'discord_typings.Snowflake'
+
+
 ApplicationCommandInteractionDataData = Union[
-    _ChatInputCommandInteractionDataData, _ContextMenuInteractionDataData
+    _ChatInputCommandInteractionDataData,
+    _ContextMenuInteractionDataData,
+    _PrimaryEntryPointInteractionDataData
 ]
 
 
@@ -345,8 +361,8 @@ class MessageInteractionData(TypedDict):
 
 
 class _InteractionNodataResponseData(TypedDict):
-    # NOTE: PREMIUM_REQUIRED (10) is deprecateds
-    type: Literal[1, 5, 6, 10]
+    # NOTE: PREMIUM_REQUIRED (10) is deprecated
+    type: Literal[1, 5, 6, 10, 12]
 
 
 class _InteractionMessageResponseData(TypedDict):
@@ -374,7 +390,7 @@ InteractionResponseData = Union[
 
 
 # NOTE: PREMIUM_REQUIRED (10) is deprecated.
-InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9, 10]
+InteractionCallbackTypes = Literal[1, 4, 5, 6, 7, 8, 9, 10, 12]
 
 
 # https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure
@@ -406,3 +422,26 @@ InteractionCallbackData = Union[
     InteractionAutocompleteCallbackData[Union[str, int, float]],
     InteractionModalCallbackData,
 ]
+
+
+# https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-callback-interaction-callback-response-object
+
+
+class InteractionCallbackResponseData(TypedDict):
+    interaction: 'discord_typings.InteractionCallbackInteractionData'
+    resource: 'discord_typings.InteractionCallbackResourceData'
+
+
+class InteractionCallbackInteractionData(TypedDict):
+    id: 'discord_typings.Snowflake'
+    type: 'discord_typings.InteractionTypes'
+    activity_instance_id: NotRequired[str]
+    response_message_id: NotRequired['discord_typings.Snowflake']
+    response_message_loading: NotRequired[bool]
+    response_message_ephemeral: NotRequired[bool]
+
+
+class InteractionCallbackResourceData(TypedDict):
+    type: 'discord_typings.InteractionCallbackTypes'
+    activity_instance: NotRequired['discord_typings.ActivityInstanceData']
+    message: NotRequired['discord_typings.MessageData']

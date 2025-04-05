@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 from typing_extensions import Literal, NotRequired, TypedDict
 
@@ -14,6 +14,11 @@ __all__ = (
     'GuildScheduledEventEntityTypes',
     'GuildScheduledEventEntityMetadataData',
     'GuildScheduledEventUserData',
+    'GuildScheduledEventRecurrenceRuleData',
+    'GuildScheduledEventRecurrenceRuleFrequency',
+    'GuildScheduledEventRecurrenceRuleWeekday',
+    'GuildScheduledEventRecurrenceRuleNWeekdayData',
+    'GuildScheduledEventRecurrenceRuleMonth'
 )
 
 
@@ -33,6 +38,7 @@ class _GuildScheduledEventData(TypedDict):
     creator: 'discord_typings.UserData'
     user_count: NotRequired[int]
     image: NotRequired[Optional[str]]
+    recurrence_rule: Optional['discord_typings.GuildScheduledEventRecurrenceRuleData']
 
 
 class StageGuildScheduledEventData(_GuildScheduledEventData):
@@ -95,3 +101,43 @@ class GuildScheduledEventUserData(TypedDict):
     guild_scheduled_event_id: 'discord_typings.Snowflake'
     user: 'discord_typings.UserData'
     member: NotRequired['discord_typings.GuildMemberData']
+
+
+# https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object
+
+
+# Technically this could be done, such that it's possible to exclude invalid
+# combinations in the typing system, but it's too complicated I don't understand
+class GuildScheduledEventRecurrenceRuleData(TypedDict):
+    start: str
+    end: Optional[str]
+    frequency: 'discord_typings.GuildScheduledEventRecurrenceRuleFrequency'
+    interval: int
+    by_weekday: Optional[List['discord_typings.GuildScheduledEventRecurrenceRuleWeekday']]
+    by_n_weekday: Optional[
+        List['discord_typings.GuildScheduledEventRecurrenceRuleNWeekdayData']
+    ]
+    by_month: Optional[List['discord_typings.GuildScheduledEventRecurrenceRuleMonth']]
+    by_month_day: Optional[List[int]]
+    by_year_day: Optional[List[int]]
+    count: Optional[int]
+
+
+GuildScheduledEventRecurrenceRuleFrequency = Literal[
+    0, 1, 2, 3
+]
+
+
+GuildScheduledEventRecurrenceRuleWeekday = Literal[
+    0, 1, 2, 3, 4, 5, 6
+]
+
+
+class GuildScheduledEventRecurrenceRuleNWeekdayData(TypedDict):
+    n: int
+    day: 'discord_typings.GuildScheduledEventRecurrenceRuleWeekday'
+
+
+GuildScheduledEventRecurrenceRuleMonth = Literal[
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+]
